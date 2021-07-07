@@ -5,6 +5,8 @@ import {
   Animated,
   useWindowDimensions,
   StyleSheet,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import type { EmojiKeyboardProps } from './types';
 import { EmojiKeyboard } from './EmojiKeyboard';
@@ -26,20 +28,34 @@ export const EmojiPicker = ({
 
   return (
     <Modal visible={isOpen} animationType="slide" transparent={true}>
-      <SafeAreaView style={styles.modalContainer}>
-        <Knob height={height} offsetY={offsetY} onClose={onClose} />
-        <Animated.View style={{ height: Animated.subtract(height, offsetY) }}>
-          <EmojiKeyboard
-            onEmojiSelected={(emoji) => {
-              height.setValue(screenHeight * 0.4);
-              offsetY.setValue(0);
-              onEmojiSelected(emoji);
-              onClose();
-            }}
-            containerStyles={styles.container}
-          />
-        </Animated.View>
-      </SafeAreaView>
+      <TouchableOpacity
+        style={styles.modalContainer}
+        activeOpacity={1}
+        onPress={onClose}
+      >
+        <View style={[styles.modalContainer, styles.backdrop]}>
+          <SafeAreaView style={styles.modalContainer}>
+            <TouchableOpacity activeOpacity={1}>
+              <>
+                <Knob height={height} offsetY={offsetY} onClose={onClose} />
+                <Animated.View
+                  style={{ height: Animated.subtract(height, offsetY) }}
+                >
+                  <EmojiKeyboard
+                    onEmojiSelected={(emoji) => {
+                      height.setValue(screenHeight * 0.4);
+                      offsetY.setValue(0);
+                      onEmojiSelected(emoji);
+                      onClose();
+                    }}
+                    containerStyles={styles.container}
+                  />
+                </Animated.View>
+              </>
+            </TouchableOpacity>
+          </SafeAreaView>
+        </View>
+      </TouchableOpacity>
     </Modal>
   );
 };
@@ -54,16 +70,5 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 5,
   },
-  knob: {
-    height: 8,
-    width: 50,
-    backgroundColor: '#fff',
-    marginBottom: 10,
-    alignSelf: 'center',
-    borderRadius: 4,
-    shadowColor: 'black',
-    shadowOpacity: 0.15,
-    shadowOffset: { width: 0, height: 0 },
-    shadowRadius: 5,
-  },
+  backdrop: { backgroundColor: '#00000055' },
 });
