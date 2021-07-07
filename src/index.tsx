@@ -1,5 +1,6 @@
-export default {
-  multiply(a: number, b: number) {
-    return Promise.resolve(a * b);
-  },
-};
+import { EmojiKeyboard } from './EmojiKeyboard';
+import { EmojiPicker } from './EmojiPicker';
+
+export { EmojiKeyboard };
+
+export default EmojiPicker;

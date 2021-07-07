@@ -149,5 +149,9 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "react-native-gesture-handler": "^1.10.3",
+    "unicode-emoji-json": "^0.2.1"
   }
 }
