@@ -8,11 +8,7 @@ import {
 } from 'react-native';
 import type { EmojiKeyboardProps } from './types';
 import { EmojiKeyboard } from './EmojiKeyboard';
-import {
-  PanGestureHandler,
-  PanGestureHandlerGestureEvent,
-  State,
-} from 'react-native-gesture-handler';
+import { Knob } from './components/Knob';
 
 type EmojiPickerProps = {
   isOpen: boolean;
@@ -28,46 +24,10 @@ export const EmojiPicker = ({
   const offsetY = React.useRef(new Animated.Value(0)).current;
   const height = React.useRef(new Animated.Value(screenHeight * 0.4)).current;
 
-  const handleGesture = ({
-    nativeEvent: { translationY, state },
-  }: PanGestureHandlerGestureEvent) => {
-    if (state === State.ACTIVE) {
-      offsetY.setValue(translationY);
-    }
-    if (state === State.END) {
-      // reset offset => return to current position
-      Animated.spring(offsetY, {
-        useNativeDriver: false,
-        toValue: 0,
-      }).start();
-      // slide => expand/collapse keyboard
-      if (translationY < -30) {
-        Animated.spring(height, {
-          useNativeDriver: false,
-          toValue: screenHeight * 0.8,
-        }).start();
-      } else if (translationY > 100) {
-        height.setValue(screenHeight * 0.4);
-        offsetY.setValue(0);
-        onClose();
-      } else {
-        Animated.spring(height, {
-          useNativeDriver: false,
-          toValue: screenHeight * 0.4,
-        }).start();
-      }
-    }
-  };
-
   return (
     <Modal visible={isOpen} animationType="slide" transparent={true}>
       <SafeAreaView style={styles.modalContainer}>
-        <PanGestureHandler
-          onGestureEvent={handleGesture}
-          onHandlerStateChange={handleGesture}
-        >
-          <Animated.View style={styles.knob} />
-        </PanGestureHandler>
+        <Knob height={height} offsetY={offsetY} onClose={onClose} />
         <Animated.View style={{ height: Animated.subtract(height, offsetY) }}>
           <EmojiKeyboard
             onEmojiSelected={(emoji) => {
