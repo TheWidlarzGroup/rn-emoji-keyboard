@@ -6,8 +6,8 @@ import {
   FlatList,
   useWindowDimensions,
   Animated,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
+  // NativeSyntheticEvent,
+  // NativeScrollEvent,
 } from 'react-native';
 import { CATEGORIES, CategoryTypes } from './types';
 import { EmojiCategory } from './components/EmojiCategory';
@@ -20,7 +20,7 @@ export const EmojiKeyboard = () => {
 
   const flatListRef = React.useRef<FlatList>(null);
 
-  const scrollX = React.useRef(new Animated.Value(0)).current;
+  // const scrollX = React.useRef(new Animated.Value(0)).current;
   const scrollNav = React.useRef(new Animated.Value(0)).current;
 
   const getItemLayout = (
@@ -36,28 +36,36 @@ export const EmojiKeyboard = () => {
     (props) => <EmojiCategory {...props} />,
     []
   );
-  const onScroll = Animated.event(
-    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-    {
-      listener: ({
-        nativeEvent: {
-          contentOffset: { x },
-        },
-      }: NativeSyntheticEvent<NativeScrollEvent>) => {
-        Animated.spring(scrollNav, {
-          toValue: (x / width) * (28 + 9),
-          useNativeDriver: false,
-        }).start();
-      },
-      useNativeDriver: false,
-    }
-  );
+  // const onScroll = Animated.event(
+  //   [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+  //   {
+  //     listener: ({
+  //       nativeEvent: {
+  //         contentOffset: { x },
+  //       },
+  //     }: NativeSyntheticEvent<NativeScrollEvent>) => {
+  //       console.log(Math.round(x / width));
+  //       ctx.setActiveCategoryIndex(Math.round(x / width));
+  //       // Animated.spring(scrollNav, {
+  //       //   toValue: (x / width) * (28 + 9),
+  //       //   useNativeDriver: true,
+  //       // }).start();
+  //     },
+  //     useNativeDriver: true,
+  //   }
+  // );
+  React.useEffect(() => {
+    Animated.spring(scrollNav, {
+      toValue: ctx.activeCategoryIndex * (28 + 9),
+      useNativeDriver: true,
+    }).start();
+  }, [ctx, scrollNav]);
 
   return (
     <View style={[styles.container, ctx.containerStyles]}>
-      <FlatList
+      <Animated.FlatList
         data={CATEGORIES}
-        keyExtractor={(item) => item}
+        keyExtractor={(item: CategoryTypes) => item}
         renderItem={renderItem}
         removeClippedSubviews={true}
         ref={flatListRef}
@@ -68,7 +76,8 @@ export const EmojiKeyboard = () => {
         scrollEventThrottle={16}
         decelerationRate="fast"
         getItemLayout={getItemLayout}
-        onScroll={onScroll}
+        scrollEnabled={false}
+        // onScroll={onScroll}
       />
       <Categories flatListRef={flatListRef} scrollNav={scrollNav} />
     </View>

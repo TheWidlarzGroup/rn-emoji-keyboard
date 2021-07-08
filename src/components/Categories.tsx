@@ -33,7 +33,15 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
 
   const activeIndicator = React.useCallback(
     () => (
-      <Animated.View style={[styles.activeIndicator, { left: scrollNav }]} />
+      // <Animated.View style={[styles.activeIndicator, { left: scrollNav }]} />
+      <Animated.View
+        style={[
+          styles.activeIndicator,
+          {
+            transform: [{ translateX: scrollNav }],
+          },
+        ]}
+      />
     ),
     [scrollNav]
   );

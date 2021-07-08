@@ -10,6 +10,7 @@ export type KeyboardProps = {
   onEmojiSelected: (emoji: EmojiType) => void;
   emojiSize?: number;
   containerStyles?: ViewStyle;
+  isOpen?: boolean;
 };
 export type ContextValues = {
   activeCategoryIndex: number;

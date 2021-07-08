@@ -28,6 +28,15 @@ export const EmojiPicker = ({
   const { height: screenHeight } = useWindowDimensions();
   const offsetY = React.useRef(new Animated.Value(0)).current;
   const height = React.useRef(new Animated.Value(screenHeight * 0.4)).current;
+  // const backdropOpacity = React.useRef(new Animated.Value(0)).current;
+
+  // React.useEffect(() => {
+  //   Animated.timing(backdropOpacity, {
+  //     toValue: isOpen ? 1 : 0,
+  //     useNativeDriver: false,
+  //     duration: 2000,
+  //   }).start();
+  // }, [backdropOpacity, isOpen]);
 
   return (
     <KeyboardProvider
@@ -37,6 +46,7 @@ export const EmojiPicker = ({
         onEmojiSelected(emoji);
         onClose();
       }}
+      isOpen={isOpen}
       {...props}
     >
       <Modal visible={isOpen} animationType="slide" transparent={true}>
