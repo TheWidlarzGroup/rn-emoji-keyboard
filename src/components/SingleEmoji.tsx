@@ -16,7 +16,7 @@ export class SingleEmoji extends React.Component<{
         onPress={() => this.props.onPress(this.props.item)}
         style={styles.container}
       >
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <View style={styles.iconContainer}>
           <Text style={{ fontSize: this.props.emojiSize }}>
             {this.props.item.emoji}
           </Text>
@@ -26,26 +26,7 @@ export class SingleEmoji extends React.Component<{
   }
 }
 
-// export const SingleEmoji = ({
-//   item,
-//   onPress,
-//   emojiSize,
-// }: {
-//   item: EmojiType;
-//   onPress: (emojiObject: EmojiType) => void;
-//   emojiSize: number;
-// }) => {
-//   if (item.slug !== 'blank_emoji')
-//     return (
-//       <TouchableOpacity onPress={() => onPress(item)} style={styles.container}>
-//         <View>
-//           <Text style={{ fontSize: emojiSize }}>{item.emoji}</Text>
-//         </View>
-//       </TouchableOpacity>
-//     );
-//   else return <View style={styles.container} />;
-// };
-
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 8 },
+  iconContainer: { justifyContent: 'center', alignItems: 'center' },
 });
