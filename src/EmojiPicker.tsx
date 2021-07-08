@@ -13,6 +13,7 @@ import { Knob } from './components/Knob';
 import { KeyboardProvider } from './KeyboardProvider';
 import type { KeyboardProps } from './KeyboardContext';
 import type { EmojiType } from './types';
+import { ModalWithBackdrop } from './components/ModalWithBackdrop';
 
 type EmojiPickerProps = {
   isOpen: boolean;
@@ -28,52 +29,46 @@ export const EmojiPicker = ({
   const { height: screenHeight } = useWindowDimensions();
   const offsetY = React.useRef(new Animated.Value(0)).current;
   const height = React.useRef(new Animated.Value(screenHeight * 0.4)).current;
-  // const backdropOpacity = React.useRef(new Animated.Value(0)).current;
+  const translateY = React.useRef(new Animated.Value(0)).current;
 
-  // React.useEffect(() => {
-  //   Animated.timing(backdropOpacity, {
-  //     toValue: isOpen ? 1 : 0,
-  //     useNativeDriver: false,
-  //     duration: 2000,
-  //   }).start();
-  // }, [backdropOpacity, isOpen]);
+  React.useEffect(() => {
+    Animated.timing(translateY, {
+      toValue: isOpen ? 0 : screenHeight,
+      useNativeDriver: true,
+      duration: 500,
+    }).start();
+  }, [isOpen, screenHeight, translateY]);
+
+  const close = () => {
+    height.setValue(screenHeight * 0.4);
+    offsetY.setValue(0);
+    onClose();
+  };
 
   return (
     <KeyboardProvider
       onEmojiSelected={(emoji: EmojiType) => {
-        height.setValue(screenHeight * 0.4);
-        offsetY.setValue(0);
         onEmojiSelected(emoji);
-        onClose();
+        close();
       }}
       isOpen={isOpen}
       {...props}
     >
-      <Modal visible={isOpen} animationType="slide" transparent={true}>
-        <TouchableOpacity
-          style={styles.modalContainer}
-          activeOpacity={1}
-          onPress={onClose}
-        >
-          <View style={[styles.modalContainer, styles.backdrop]}>
-            <SafeAreaView style={styles.modalContainer}>
-              <TouchableOpacity activeOpacity={1}>
-                <>
-                  <Knob height={height} offsetY={offsetY} onClose={onClose} />
-                  <Animated.View
-                    style={[
-                      { height: Animated.subtract(height, offsetY) },
-                      styles.container,
-                    ]}
-                  >
-                    <EmojiKeyboard />
-                  </Animated.View>
-                </>
-              </TouchableOpacity>
-            </SafeAreaView>
-          </View>
-        </TouchableOpacity>
-      </Modal>
+      <ModalWithBackdrop isOpen={isOpen} backdropPress={close}>
+        <>
+          <Knob height={height} offsetY={offsetY} onClose={onClose} />
+          <Animated.View
+            style={[
+              {
+                height: Animated.subtract(height, offsetY),
+              },
+              styles.container,
+            ]}
+          >
+            <EmojiKeyboard />
+          </Animated.View>
+        </>
+      </ModalWithBackdrop>
     </KeyboardProvider>
   );
 };
