@@ -1,13 +1,5 @@
 import * as React from 'react';
-import {
-  SafeAreaView,
-  Modal,
-  Animated,
-  useWindowDimensions,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Animated, useWindowDimensions, StyleSheet } from 'react-native';
 import { EmojiKeyboard } from './EmojiKeyboard';
 import { Knob } from './components/Knob';
 import { KeyboardProvider } from './KeyboardProvider';
