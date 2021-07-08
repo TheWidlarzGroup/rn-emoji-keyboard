@@ -4,35 +4,36 @@ import {
   StyleSheet,
   View,
   FlatList,
-  ViewStyle,
   useWindowDimensions,
   Animated,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  ViewToken,
 } from 'react-native';
-import { CATEGORIES, CategoryTypes, EmojiType } from './types';
+import { CATEGORIES, CategoryTypes } from './types';
 import { EmojiCategory } from './components/EmojiCategory';
 import { KeyboardContext } from './KeyboardContext';
 import { Categories } from './components/Categories';
 
-type EmojiKeyboardProps = {
-  onEmojiSelected: (emoji: EmojiType) => void;
-  containerStyles?: ViewStyle;
-  numberOfColumns?: number;
-  emojiSize?: number;
-};
-
-export const EmojiKeyboard = ({
-  onEmojiSelected,
-  containerStyles,
-  numberOfColumns = 7,
-  emojiSize = 28,
-}: EmojiKeyboardProps) => {
+export const EmojiKeyboard = () => {
   const { width } = useWindowDimensions();
+  const ctx = React.useContext(KeyboardContext);
+
   const flatListRef = React.useRef<FlatList>(null);
 
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const scrollNav = React.useRef(new Animated.Value(0)).current;
+
+  const onViewableItemsChanged = React.useRef(
+    ({ viewableItems }: { viewableItems: Array<ViewToken> }) => {
+      if (viewableItems.length > 0 && viewableItems[0].index !== null) {
+        ctx?.setActiveCategoryIndex(viewableItems[0].index);
+      }
+    }
+  );
+  const viewabilityConfig = React.useRef({
+    viewAreaCoveragePercentThreshold: 60,
+  });
 
   const getItemLayout = (
     _: CategoryTypes[] | null | undefined,
@@ -63,33 +64,28 @@ export const EmojiKeyboard = ({
       useNativeDriver: false,
     }
   );
+
   return (
-    <KeyboardContext.Provider
-      value={{
-        onEmojiSelected,
-        numberOfColumns,
-        emojiSize,
-      }}
-    >
-      <View style={[styles.container, containerStyles]}>
-        <FlatList
-          data={CATEGORIES}
-          keyExtractor={(item) => item}
-          renderItem={renderItem}
-          removeClippedSubviews={true}
-          ref={flatListRef}
-          onScrollToIndexFailed={() => {}}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          pagingEnabled
-          scrollEventThrottle={16}
-          decelerationRate="fast"
-          getItemLayout={getItemLayout}
-          onScroll={onScroll}
-        />
-        <Categories flatListRef={flatListRef} scrollNav={scrollNav} />
-      </View>
-    </KeyboardContext.Provider>
+    <View style={[styles.container, ctx?.containerStyles]}>
+      <FlatList
+        data={CATEGORIES}
+        keyExtractor={(item) => item}
+        renderItem={renderItem}
+        removeClippedSubviews={true}
+        ref={flatListRef}
+        onScrollToIndexFailed={() => {}}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        pagingEnabled
+        scrollEventThrottle={16}
+        decelerationRate="fast"
+        getItemLayout={getItemLayout}
+        onScroll={onScroll}
+        onViewableItemsChanged={onViewableItemsChanged.current}
+        viewabilityConfig={viewabilityConfig.current}
+      />
+      <Categories flatListRef={flatListRef} scrollNav={scrollNav} />
+    </View>
   );
 };
 

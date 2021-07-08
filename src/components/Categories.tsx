@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, Animated, StyleSheet, FlatList } from 'react-native';
+import { KeyboardContext } from '../KeyboardContext';
 import { CATEGORIES, CATEGORIES_NAVIGATION, CategoryTypes } from '../types';
 import { CategoryItem } from './CategoryItem';
 
@@ -9,6 +10,7 @@ type CategoriesProps = {
 };
 
 export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
+  const ctx = React.useContext(KeyboardContext);
   const handleScrollToCategory = (category: CategoryTypes) => {
     flatListRef?.current?.scrollToIndex({
       index: CATEGORIES.indexOf(category),
@@ -20,9 +22,10 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
         <FlatList
           data={CATEGORIES_NAVIGATION}
           keyExtractor={(item) => item.category}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <CategoryItem
               item={item}
+              index={index}
               handleScrollToCategory={handleScrollToCategory}
             />
           )}
@@ -37,6 +40,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
               />
             );
           }}
+          extraData={ctx?.activeCategoryIndex}
         />
       </View>
     </View>

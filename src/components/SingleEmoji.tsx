@@ -7,11 +7,11 @@ export const SingleEmoji = ({ item }: { item: EmojiType }) => {
   const ctx = React.useContext(KeyboardContext);
   return (
     <TouchableOpacity
-      onPress={() => ctx.onEmojiSelected(item)}
+      onPress={() => ctx?.onEmojiSelected(item)}
       style={styles.container}
     >
       <View>
-        <Text style={{ fontSize: ctx.emojiSize }}>{item.emoji}</Text>
+        <Text style={{ fontSize: ctx?.emojiSize }}>{item.emoji}</Text>
       </View>
     </TouchableOpacity>
   );

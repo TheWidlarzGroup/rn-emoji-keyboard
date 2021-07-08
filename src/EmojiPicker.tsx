@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import type { EmojiKeyboardProps } from './types';
 import { EmojiKeyboard } from './EmojiKeyboard';
 import { Knob } from './components/Knob';
+import { KeyboardProvider } from './KeyboardProvider';
+import type { KeyboardProps } from './KeyboardContext';
+import type { EmojiType } from './types';
 
 type EmojiPickerProps = {
   isOpen: boolean;
@@ -21,42 +23,48 @@ export const EmojiPicker = ({
   onEmojiSelected,
   isOpen,
   onClose,
-}: EmojiPickerProps & EmojiKeyboardProps) => {
+  ...props
+}: EmojiPickerProps & KeyboardProps) => {
   const { height: screenHeight } = useWindowDimensions();
   const offsetY = React.useRef(new Animated.Value(0)).current;
   const height = React.useRef(new Animated.Value(screenHeight * 0.4)).current;
 
   return (
-    <Modal visible={isOpen} animationType="slide" transparent={true}>
-      <TouchableOpacity
-        style={styles.modalContainer}
-        activeOpacity={1}
-        onPress={onClose}
-      >
-        <View style={[styles.modalContainer, styles.backdrop]}>
-          <SafeAreaView style={styles.modalContainer}>
-            <TouchableOpacity activeOpacity={1}>
-              <>
-                <Knob height={height} offsetY={offsetY} onClose={onClose} />
-                <Animated.View
-                  style={{ height: Animated.subtract(height, offsetY) }}
-                >
-                  <EmojiKeyboard
-                    onEmojiSelected={(emoji) => {
-                      height.setValue(screenHeight * 0.4);
-                      offsetY.setValue(0);
-                      onEmojiSelected(emoji);
-                      onClose();
-                    }}
-                    containerStyles={styles.container}
-                  />
-                </Animated.View>
-              </>
-            </TouchableOpacity>
-          </SafeAreaView>
-        </View>
-      </TouchableOpacity>
-    </Modal>
+    <KeyboardProvider
+      onEmojiSelected={(emoji: EmojiType) => {
+        height.setValue(screenHeight * 0.4);
+        offsetY.setValue(0);
+        onEmojiSelected(emoji);
+        onClose();
+      }}
+      {...props}
+    >
+      <Modal visible={isOpen} animationType="slide" transparent={true}>
+        <TouchableOpacity
+          style={styles.modalContainer}
+          activeOpacity={1}
+          onPress={onClose}
+        >
+          <View style={[styles.modalContainer, styles.backdrop]}>
+            <SafeAreaView style={styles.modalContainer}>
+              <TouchableOpacity activeOpacity={1}>
+                <>
+                  <Knob height={height} offsetY={offsetY} onClose={onClose} />
+                  <Animated.View
+                    style={[
+                      { height: Animated.subtract(height, offsetY) },
+                      styles.container,
+                    ]}
+                  >
+                    <EmojiKeyboard />
+                  </Animated.View>
+                </>
+              </TouchableOpacity>
+            </SafeAreaView>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+    </KeyboardProvider>
   );
 };
 

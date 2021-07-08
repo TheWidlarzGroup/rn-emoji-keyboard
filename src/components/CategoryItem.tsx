@@ -1,22 +1,38 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { KeyboardContext } from '../KeyboardContext';
 import type { CategoryTypes } from '../types';
+import { Icon } from './Icon';
 
 type CategoryItemProps = {
   item: any;
+  index: number;
   handleScrollToCategory: (category: CategoryTypes) => void;
 };
 
 export const CategoryItem = ({
   item,
+  index,
   handleScrollToCategory,
-}: CategoryItemProps) => (
-  <TouchableOpacity onPress={() => handleScrollToCategory(item.category)}>
-    <View style={styles.container}>
-      <Text style={styles.icon}>{item.icon}</Text>
-    </View>
-  </TouchableOpacity>
-);
+}: CategoryItemProps) => {
+  const ctx = React.useContext(KeyboardContext);
+
+  return (
+    <TouchableOpacity
+      onPress={() => {
+        handleScrollToCategory(item.category);
+        ctx?.setActiveCategoryIndex(index);
+      }}
+    >
+      <View style={styles.container}>
+        <Icon
+          iconName={item.icon}
+          isActive={ctx?.activeCategoryIndex === index}
+        />
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

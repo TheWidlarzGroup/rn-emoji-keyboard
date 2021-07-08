@@ -1,5 +1,3 @@
-import type { ViewStyle } from 'react-native';
-
 export type EmojiType = {
   emoji: string;
   emoji_version: string;
@@ -38,20 +36,25 @@ type CategoryNavigationItem = {
 };
 
 export const CATEGORIES_NAVIGATION: CategoryNavigationItem[] = [
-  { icon: '😀', category: 'Smileys & Emotion' },
-  { icon: '👋', category: 'People & Body' },
-  { icon: '🐵', category: 'Animals & Nature' },
-  { icon: '🍇', category: 'Food & Drink' },
-  { icon: '🌍', category: 'Travel & Places' },
-  { icon: '🎃', category: 'Activities' },
-  { icon: '👓', category: 'Objects' },
-  { icon: '🏧', category: 'Symbols' },
-  { icon: '🏁', category: 'Flags' },
+  { icon: 'Smile', category: 'Smileys & Emotion' },
+  { icon: 'Users', category: 'People & Body' },
+  { icon: 'Trees', category: 'Animals & Nature' },
+  { icon: 'Pizza', category: 'Food & Drink' },
+  { icon: 'Plane', category: 'Travel & Places' },
+  { icon: 'Football', category: 'Activities' },
+  { icon: 'Lightbulb', category: 'Objects' },
+  { icon: 'Ban', category: 'Symbols' },
+  { icon: 'Flag', category: 'Flags' },
 ];
 
-export type EmojiKeyboardProps = {
-  onEmojiSelected: (emoji: EmojiType) => void;
-  containerStyles?: ViewStyle;
-  numberOfColumns?: number;
-  emojiSize?: number;
-};
+// export const CATEGORIES_NAVIGATION: CategoryNavigationItem[] = [
+//   { icon: '😀', category: 'Smileys & Emotion' },
+//   { icon: '👋', category: 'People & Body' },
+//   { icon: '🐵', category: 'Animals & Nature' },
+//   { icon: '🍇', category: 'Food & Drink' },
+//   { icon: '🌍', category: 'Travel & Places' },
+//   { icon: '🎃', category: 'Activities' },
+//   { icon: '👓', category: 'Objects' },
+//   { icon: '🏧', category: 'Symbols' },
+//   { icon: '🏁', category: 'Flags' },
+// ];
