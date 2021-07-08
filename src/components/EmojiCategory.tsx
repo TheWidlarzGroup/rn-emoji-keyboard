@@ -30,10 +30,6 @@ export const EmojiCategory = ({ item }: { item: CategoryTypes }) => {
   const [empty, setEmpty] = React.useState<EmojiType[]>([]);
 
   React.useEffect(() => {
-    console.log(
-      numberOfColumns.current -
-        (emojisByGroup[item].length % numberOfColumns.current)
-    );
     const fillWithEmpty = new Array(
       numberOfColumns.current -
         (emojisByGroup[item].length % numberOfColumns.current)

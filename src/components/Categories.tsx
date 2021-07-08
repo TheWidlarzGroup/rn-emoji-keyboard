@@ -33,7 +33,6 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
 
   const activeIndicator = React.useCallback(
     () => (
-      // <Animated.View style={[styles.activeIndicator, { left: scrollNav }]} />
       <Animated.View
         style={[
           styles.activeIndicator,
@@ -58,6 +57,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
           horizontal={true}
           onScrollToIndexFailed={(e) => console.log(e)}
           ListHeaderComponent={activeIndicator}
+          ListHeaderComponentStyle={styles.activeIndicatorContainer}
           extraData={ctx?.activeCategoryIndex}
         />
       </View>
@@ -90,5 +90,10 @@ const styles = StyleSheet.create({
     height: 28,
     backgroundColor: 'white',
     borderRadius: 6,
+  },
+  activeIndicatorContainer: {
+    position: 'absolute',
+    width: 28,
+    height: 28,
   },
 });
