@@ -25,7 +25,7 @@ export const EmojiCategory = ({ item }: { item: CategoryTypes }) => {
   const { width } = useWindowDimensions();
   const ctx = React.useContext(KeyboardContext);
   const numberOfColumns = React.useRef<number>(
-    Math.floor(width / (ctx.emojiSize + 20))
+    Math.floor(width / (ctx.emojiSize * 2))
   );
   const [empty, setEmpty] = React.useState<EmojiType[]>([]);
 
@@ -48,22 +48,6 @@ export const EmojiCategory = ({ item }: { item: CategoryTypes }) => {
   });
 
   const renderItem = React.useCallback(
-    // (props) => {
-    //   if (props.item.slug === 'blank_emoji')
-    //     return (
-    //       <View
-    //         {...props}
-    //         style={{ backgroundColor: 'blue', width: 10, height: 10 }}
-    //       />
-    //     );
-    //   else
-    //     return (
-    //       <View
-    //         {...props}
-    //         style={{ backgroundColor: 'red', width: 10, height: 10 }}
-    //       />
-    //     );
-    // },
     (props) => (
       <SingleEmoji
         {...props}

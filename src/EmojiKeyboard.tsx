@@ -79,7 +79,7 @@ export const EmojiKeyboard = () => {
         scrollEnabled={false}
         // onScroll={onScroll}
         initialNumToRender={1}
-        windowSize={7}
+        windowSize={1}
         maxToRenderPerBatch={1}
       />
       <Categories flatListRef={flatListRef} scrollNav={scrollNav} />
