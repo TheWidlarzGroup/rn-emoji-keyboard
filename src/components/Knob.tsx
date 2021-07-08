@@ -52,6 +52,7 @@ export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
     <PanGestureHandler
       onGestureEvent={handleGesture}
       onHandlerStateChange={handleGesture}
+      hitSlop={{ vertical: 20, horizontal: 40 }}
     >
       <Animated.View style={[styles.knob, ctx.knobStyles]} />
     </PanGestureHandler>

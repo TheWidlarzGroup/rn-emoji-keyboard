@@ -12,21 +12,33 @@ import type { CategoryTypes, EmojiType } from 'src/types';
 import { SingleEmoji } from './SingleEmoji';
 import { KeyboardContext } from '../KeyboardContext';
 
+const emptyEmoji = {
+  emoji: '',
+  name: 'blank emoji',
+  slug: 'blank_emoji',
+  skin_tone_support: false,
+  unicode_version: '0',
+  emoji_version: '0',
+};
+
 export const EmojiCategory = ({ item }: { item: CategoryTypes }) => {
   const { width } = useWindowDimensions();
   const ctx = React.useContext(KeyboardContext);
   const numberOfColumns = React.useRef<number>(
     Math.floor(width / (ctx.emojiSize + 20))
   );
-  const [data, setData] = React.useState<EmojiType[]>([]);
+  const [empty, setEmpty] = React.useState<EmojiType[]>([]);
 
   React.useEffect(() => {
-    const newData = emojisByGroup[item];
+    console.log(
+      numberOfColumns.current -
+        (emojisByGroup[item].length % numberOfColumns.current)
+    );
     const fillWithEmpty = new Array(
       numberOfColumns.current -
         (emojisByGroup[item].length % numberOfColumns.current)
-    ).fill('a');
-    setData([...newData, ...fillWithEmpty]);
+    ).fill(emptyEmoji);
+    setEmpty(fillWithEmpty);
   }, [item]);
 
   const getItemLayout = (_: EmojiType[] | null | undefined, index: number) => ({
@@ -36,8 +48,30 @@ export const EmojiCategory = ({ item }: { item: CategoryTypes }) => {
   });
 
   const renderItem = React.useCallback(
-    (props) => <SingleEmoji {...props} />,
-    []
+    // (props) => {
+    //   if (props.item.slug === 'blank_emoji')
+    //     return (
+    //       <View
+    //         {...props}
+    //         style={{ backgroundColor: 'blue', width: 10, height: 10 }}
+    //       />
+    //     );
+    //   else
+    //     return (
+    //       <View
+    //         {...props}
+    //         style={{ backgroundColor: 'red', width: 10, height: 10 }}
+    //       />
+    //     );
+    // },
+    (props) => (
+      <SingleEmoji
+        {...props}
+        onPress={() => ctx.onEmojiSelected(props.item)}
+        emojiSize={ctx.emojiSize}
+      />
+    ),
+    [ctx]
   );
 
   return (
@@ -46,7 +80,7 @@ export const EmojiCategory = ({ item }: { item: CategoryTypes }) => {
         <Text style={[styles.sectionTitle, ctx.headerStyles]}>{item}</Text>
       )}
       <FlatList
-        data={data}
+        data={[...emojisByGroup[item], ...empty]}
         keyExtractor={(emoji) => emoji.name}
         numColumns={numberOfColumns.current}
         renderItem={renderItem}

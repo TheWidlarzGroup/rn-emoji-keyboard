@@ -17,13 +17,18 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Result: {result}</Text>
       <TouchableOpacity onPress={() => setIsModalOpen(true)}>
-        <Text>Open</Text>
+        <Text style={styles.text}>Open</Text>
       </TouchableOpacity>
+
+      {/* //////////////////////////////////////////// */}
+
       <EmojiPicker
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
+
+      {/* //////////////////////////////////////////// */}
     </SafeAreaView>
   );
 }
@@ -36,11 +41,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 64,
     fontSize: 18,
-  },
-  containerStyles: {
-    backgroundColor: '#efefef',
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    elevation: 20,
   },
 });

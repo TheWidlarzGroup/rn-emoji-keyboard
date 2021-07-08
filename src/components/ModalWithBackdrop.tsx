@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { KeyboardContext } from '../KeyboardContext';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 type ModalWithBackdropProps = {
   isOpen: boolean;
@@ -35,30 +36,32 @@ export const ModalWithBackdrop = ({
 
   return (
     <Modal visible={isOpen} animationType="fade" transparent={true}>
-      <TouchableOpacity
-        style={styles.modalContainer}
-        activeOpacity={1}
-        onPress={backdropPress}
-      >
-        <View
-          style={[
-            styles.modalContainer,
-            { backgroundColor: ctx.backdropColor },
-          ]}
+      <GestureHandlerRootView style={styles.modalContainer}>
+        <TouchableOpacity
+          style={styles.modalContainer}
+          activeOpacity={1}
+          onPress={backdropPress}
         >
-          <SafeAreaView style={styles.modalContainer}>
-            <TouchableOpacity activeOpacity={1}>
-              <Animated.View
-                style={{
-                  transform: [{ translateY }],
-                }}
-              >
-                {children}
-              </Animated.View>
-            </TouchableOpacity>
-          </SafeAreaView>
-        </View>
-      </TouchableOpacity>
+          <View
+            style={[
+              styles.modalContainer,
+              { backgroundColor: ctx.backdropColor },
+            ]}
+          >
+            <SafeAreaView style={styles.modalContainer}>
+              <TouchableOpacity activeOpacity={1}>
+                <Animated.View
+                  style={{
+                    transform: [{ translateY }],
+                  }}
+                >
+                  {children}
+                </Animated.View>
+              </TouchableOpacity>
+            </SafeAreaView>
+          </View>
+        </TouchableOpacity>
+      </GestureHandlerRootView>
     </Modal>
   );
 };

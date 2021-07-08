@@ -6,8 +6,6 @@ import {
   FlatList,
   useWindowDimensions,
   Animated,
-  // NativeSyntheticEvent,
-  // NativeScrollEvent,
 } from 'react-native';
 import { CATEGORIES, CategoryTypes } from './types';
 import { EmojiCategory } from './components/EmojiCategory';
@@ -80,6 +78,9 @@ export const EmojiKeyboard = () => {
         getItemLayout={getItemLayout}
         scrollEnabled={false}
         // onScroll={onScroll}
+        initialNumToRender={1}
+        windowSize={7}
+        maxToRenderPerBatch={1}
       />
       <Categories flatListRef={flatListRef} scrollNav={scrollNav} />
     </View>
