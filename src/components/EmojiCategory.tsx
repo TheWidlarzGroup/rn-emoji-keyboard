@@ -16,7 +16,7 @@ export const EmojiCategory = ({ item }: { item: CategoryTypes }) => {
   const { width } = useWindowDimensions();
   const ctx = React.useContext(KeyboardContext);
   const numberOfColumns = React.useRef<number>(
-    Math.floor(width / (ctx.emojiSize + 16))
+    Math.floor(width / (ctx.emojiSize + 20))
   );
   const [data, setData] = React.useState<EmojiType[]>([]);
 
@@ -30,10 +30,8 @@ export const EmojiCategory = ({ item }: { item: CategoryTypes }) => {
   }, [item]);
 
   const getItemLayout = (_: EmojiType[] | null | undefined, index: number) => ({
-    length: ctx?.emojiSize ? ctx?.emojiSize : 0,
-    offset:
-      (ctx?.emojiSize ? ctx?.emojiSize : 0) *
-      Math.ceil(index / (ctx?.numberOfColumns ? ctx?.numberOfColumns : 1)),
+    length: ctx.emojiSize ? ctx.emojiSize : 0,
+    offset: ctx.emojiSize * Math.ceil(index / ctx.numberOfColumns),
     index,
   });
 
