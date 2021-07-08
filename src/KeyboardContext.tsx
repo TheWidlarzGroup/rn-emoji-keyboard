@@ -1,18 +1,25 @@
 import * as React from 'react';
 import type { ViewStyle } from 'react-native';
+import {
+  defaultKeyboardContext,
+  defaultKeyboardValues,
+} from './KeyboardProvider';
 import type { EmojiType } from './types';
 
 export type KeyboardProps = {
   onEmojiSelected: (emoji: EmojiType) => void;
-  numberOfColumns?: number;
   emojiSize?: number;
   containerStyles?: ViewStyle;
 };
 export type ContextValues = {
   activeCategoryIndex: number;
   setActiveCategoryIndex: (index: number) => void;
+  numberOfColumns: number;
 };
 
 export const KeyboardContext = React.createContext<
-  (KeyboardProps & ContextValues) | null
->(null);
+  Required<KeyboardProps> & ContextValues
+>({
+  ...defaultKeyboardContext,
+  ...defaultKeyboardValues,
+});

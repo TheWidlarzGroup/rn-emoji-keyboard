@@ -8,7 +8,6 @@ import {
   Animated,
   NativeSyntheticEvent,
   NativeScrollEvent,
-  ViewToken,
 } from 'react-native';
 import { CATEGORIES, CategoryTypes } from './types';
 import { EmojiCategory } from './components/EmojiCategory';
@@ -23,17 +22,6 @@ export const EmojiKeyboard = () => {
 
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const scrollNav = React.useRef(new Animated.Value(0)).current;
-
-  const onViewableItemsChanged = React.useRef(
-    ({ viewableItems }: { viewableItems: Array<ViewToken> }) => {
-      if (viewableItems.length > 0 && viewableItems[0].index !== null) {
-        ctx?.setActiveCategoryIndex(viewableItems[0].index);
-      }
-    }
-  );
-  const viewabilityConfig = React.useRef({
-    viewAreaCoveragePercentThreshold: 60,
-  });
 
   const getItemLayout = (
     _: CategoryTypes[] | null | undefined,
@@ -66,7 +54,7 @@ export const EmojiKeyboard = () => {
   );
 
   return (
-    <View style={[styles.container, ctx?.containerStyles]}>
+    <View style={[styles.container, ctx.containerStyles]}>
       <FlatList
         data={CATEGORIES}
         keyExtractor={(item) => item}
@@ -81,8 +69,6 @@ export const EmojiKeyboard = () => {
         decelerationRate="fast"
         getItemLayout={getItemLayout}
         onScroll={onScroll}
-        onViewableItemsChanged={onViewableItemsChanged.current}
-        viewabilityConfig={viewabilityConfig.current}
       />
       <Categories flatListRef={flatListRef} scrollNav={scrollNav} />
     </View>

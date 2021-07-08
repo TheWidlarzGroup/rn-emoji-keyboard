@@ -10,20 +10,26 @@ type ProviderProps = KeyboardProps & {
   children: React.ReactNode;
 };
 
-export const defaultKeyboardContext: KeyboardProps = {
+export const defaultKeyboardContext: Required<KeyboardProps> = {
   onEmojiSelected: (_emoji: EmojiType) => {},
-  numberOfColumns: 7,
   emojiSize: 24,
+  containerStyles: {},
 };
 
-export const defaultKeyboardValues: Partial<ContextValues> = {
-  //   activeCategoryIndex: 0,
+export const defaultKeyboardValues: ContextValues = {
+  activeCategoryIndex: 0,
+  setActiveCategoryIndex: () => {},
+  numberOfColumns: 5,
 };
 
 export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
-  const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0);
+  const [activeCategoryIndex, setActive] = React.useState(0);
 
-  const value: KeyboardProps & ContextValues = {
+  const setActiveCategoryIndex = React.useCallback((index: number) => {
+    setActive(index);
+  }, []);
+
+  const value: Required<KeyboardProps> & ContextValues = {
     ...defaultKeyboardContext,
     ...defaultKeyboardValues,
     ...props,

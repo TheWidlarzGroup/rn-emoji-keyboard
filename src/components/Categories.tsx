@@ -11,35 +11,45 @@ type CategoriesProps = {
 
 export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
   const ctx = React.useContext(KeyboardContext);
-  const handleScrollToCategory = (category: CategoryTypes) => {
-    flatListRef?.current?.scrollToIndex({
-      index: CATEGORIES.indexOf(category),
-    });
-  };
+  const handleScrollToCategory = React.useCallback(
+    (category: CategoryTypes) => {
+      flatListRef?.current?.scrollToIndex({
+        index: CATEGORIES.indexOf(category),
+      });
+    },
+    [flatListRef]
+  );
+
+  const rendarItem = React.useCallback(
+    ({ item, index }) => (
+      <CategoryItem
+        item={item}
+        index={index}
+        handleScrollToCategory={handleScrollToCategory}
+      />
+    ),
+    [handleScrollToCategory]
+  );
+
+  const activeIndicator = React.useCallback(
+    () => (
+      <Animated.View style={[styles.activeIndicator, { left: scrollNav }]} />
+    ),
+    [scrollNav]
+  );
+
   return (
     <View style={styles.bottomBar}>
       <View style={styles.navigation}>
         <FlatList
           data={CATEGORIES_NAVIGATION}
           keyExtractor={(item) => item.category}
-          renderItem={({ item, index }) => (
-            <CategoryItem
-              item={item}
-              index={index}
-              handleScrollToCategory={handleScrollToCategory}
-            />
-          )}
+          renderItem={rendarItem}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
           scrollEnabled={false}
           horizontal={true}
           onScrollToIndexFailed={(e) => console.log(e)}
-          ListHeaderComponent={() => {
-            return (
-              <Animated.View
-                style={[styles.activeIndicator, { left: scrollNav }]}
-              />
-            );
-          }}
+          ListHeaderComponent={activeIndicator}
           extraData={ctx?.activeCategoryIndex}
         />
       </View>
