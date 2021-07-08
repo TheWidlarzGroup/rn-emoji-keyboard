@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { KeyboardContext } from '../KeyboardContext';
 
 type ModalWithBackdropProps = {
   isOpen: boolean;
@@ -22,6 +23,7 @@ export const ModalWithBackdrop = ({
 }: ModalWithBackdropProps) => {
   const { height: screenHeight } = useWindowDimensions();
   const translateY = React.useRef(new Animated.Value(0)).current;
+  const ctx = React.useContext(KeyboardContext);
 
   React.useEffect(() => {
     Animated.timing(translateY, {
@@ -38,7 +40,12 @@ export const ModalWithBackdrop = ({
         activeOpacity={1}
         onPress={backdropPress}
       >
-        <View style={[styles.modalContainer, styles.backdrop]}>
+        <View
+          style={[
+            styles.modalContainer,
+            { backgroundColor: ctx.backdropColor },
+          ]}
+        >
           <SafeAreaView style={styles.modalContainer}>
             <TouchableOpacity activeOpacity={1}>
               <Animated.View
@@ -66,5 +73,4 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 5,
   },
-  backdrop: { backgroundColor: '#00000055' },
 });

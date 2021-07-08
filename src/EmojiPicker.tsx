@@ -1,35 +1,34 @@
 import * as React from 'react';
-import { Animated, useWindowDimensions, StyleSheet } from 'react-native';
+import { Animated, useWindowDimensions } from 'react-native';
 import { EmojiKeyboard } from './EmojiKeyboard';
 import { Knob } from './components/Knob';
-import { KeyboardProvider } from './KeyboardProvider';
+import { defaultKeyboardContext, KeyboardProvider } from './KeyboardProvider';
 import type { KeyboardProps } from './KeyboardContext';
 import type { EmojiType } from './types';
 import { ModalWithBackdrop } from './components/ModalWithBackdrop';
 
-type EmojiPickerProps = {
-  isOpen: boolean;
-  onClose: () => void;
-};
-
 export const EmojiPicker = ({
   onEmojiSelected,
-  isOpen,
+  open,
   onClose,
+  expandable = defaultKeyboardContext.expandable,
+  defaultHeight = defaultKeyboardContext.defaultHeight,
   ...props
-}: EmojiPickerProps & KeyboardProps) => {
+}: KeyboardProps) => {
   const { height: screenHeight } = useWindowDimensions();
   const offsetY = React.useRef(new Animated.Value(0)).current;
-  const height = React.useRef(new Animated.Value(screenHeight * 0.4)).current;
+  const height = React.useRef(
+    new Animated.Value(screenHeight * defaultHeight)
+  ).current;
   const translateY = React.useRef(new Animated.Value(0)).current;
 
   React.useEffect(() => {
     Animated.timing(translateY, {
-      toValue: isOpen ? 0 : screenHeight,
+      toValue: open ? 0 : screenHeight,
       useNativeDriver: true,
       duration: 500,
     }).start();
-  }, [isOpen, screenHeight, translateY]);
+  }, [open, screenHeight, translateY]);
 
   const close = () => {
     height.setValue(screenHeight * 0.4);
@@ -43,18 +42,22 @@ export const EmojiPicker = ({
         onEmojiSelected(emoji);
         close();
       }}
-      isOpen={isOpen}
+      open={open}
+      onClose={close}
+      expandable={expandable}
+      defaultHeight={defaultHeight}
       {...props}
     >
-      <ModalWithBackdrop isOpen={isOpen} backdropPress={close}>
+      <ModalWithBackdrop isOpen={open} backdropPress={close}>
         <>
-          <Knob height={height} offsetY={offsetY} onClose={onClose} />
+          {expandable && (
+            <Knob height={height} offsetY={offsetY} onClose={onClose} />
+          )}
           <Animated.View
             style={[
               {
                 height: Animated.subtract(height, offsetY),
               },
-              styles.container,
             ]}
           >
             <EmojiKeyboard />
@@ -64,16 +67,3 @@ export const EmojiPicker = ({
     </KeyboardProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  modalContainer: { flex: 1, justifyContent: 'flex-end' },
-  container: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    shadowColor: 'black',
-    shadowOpacity: 0.15,
-    shadowOffset: { width: 0, height: 0 },
-    shadowRadius: 5,
-  },
-  backdrop: { backgroundColor: '#00000055' },
-});

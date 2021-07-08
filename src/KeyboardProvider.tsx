@@ -11,10 +11,18 @@ type ProviderProps = KeyboardProps & {
 };
 
 export const defaultKeyboardContext: Required<KeyboardProps> = {
+  open: false,
+  onClose: () => {},
   onEmojiSelected: (_emoji: EmojiType) => {},
-  emojiSize: 24,
+  emojiSize: 28,
   containerStyles: {},
-  isOpen: false,
+  knobStyles: {},
+  headerStyles: {},
+  expandable: true,
+  hideHeader: false,
+  defaultHeight: 0.4,
+  expandedHeight: 0.8,
+  backdropColor: '#00000055',
 };
 
 export const defaultKeyboardValues: ContextValues = {
@@ -27,8 +35,8 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0);
 
   React.useEffect(() => {
-    if (props.isOpen) setActiveCategoryIndex(0);
-  }, [props.isOpen]);
+    if (props.open) setActiveCategoryIndex(0);
+  }, [props.open]);
 
   const value: Required<KeyboardProps> & ContextValues = {
     ...defaultKeyboardContext,

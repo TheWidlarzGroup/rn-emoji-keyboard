@@ -21,7 +21,7 @@ export default function App() {
       </TouchableOpacity>
       <EmojiPicker
         onEmojiSelected={handlePick}
-        isOpen={isModalOpen}
+        open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
     </SafeAreaView>

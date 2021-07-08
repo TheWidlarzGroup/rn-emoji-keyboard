@@ -5,6 +5,7 @@ import {
   PanGestureHandlerGestureEvent,
   State,
 } from 'react-native-gesture-handler';
+import { KeyboardContext } from '../KeyboardContext';
 
 type KnobProps = {
   offsetY: Animated.Value;
@@ -14,6 +15,7 @@ type KnobProps = {
 
 export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
   const { height: screenHeight } = useWindowDimensions();
+  const ctx = React.useContext(KeyboardContext);
 
   const handleGesture = ({
     nativeEvent: { translationY, state },
@@ -31,16 +33,16 @@ export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
       if (translationY < -30) {
         Animated.spring(height, {
           useNativeDriver: false,
-          toValue: screenHeight * 0.8,
+          toValue: screenHeight * ctx.expandedHeight,
         }).start();
       } else if (translationY > 150) {
-        height.setValue(screenHeight * 0.4);
+        height.setValue(screenHeight * ctx.defaultHeight);
         offsetY.setValue(0);
         onClose();
       } else {
         Animated.spring(height, {
           useNativeDriver: false,
-          toValue: screenHeight * 0.4,
+          toValue: screenHeight * ctx.defaultHeight,
         }).start();
       }
     }
@@ -51,7 +53,7 @@ export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
       onGestureEvent={handleGesture}
       onHandlerStateChange={handleGesture}
     >
-      <Animated.View style={styles.knob} />
+      <Animated.View style={[styles.knob, ctx.knobStyles]} />
     </PanGestureHandler>
   );
 };

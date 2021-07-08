@@ -42,7 +42,9 @@ export const EmojiCategory = ({ item }: { item: CategoryTypes }) => {
 
   return (
     <View style={[styles.container, { width: width }]}>
-      <Text style={styles.sectionTitle}>{item}</Text>
+      {!ctx.hideHeader && (
+        <Text style={[styles.sectionTitle, ctx.headerStyles]}>{item}</Text>
+      )}
       <FlatList
         data={data}
         keyExtractor={(emoji) => emoji.name}

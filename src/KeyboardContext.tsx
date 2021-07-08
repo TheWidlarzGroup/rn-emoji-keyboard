@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { ViewStyle } from 'react-native';
+import type { TextStyle, ViewStyle } from 'react-native';
 import {
   defaultKeyboardContext,
   defaultKeyboardValues,
@@ -7,10 +7,18 @@ import {
 import type { EmojiType } from './types';
 
 export type KeyboardProps = {
+  open: boolean;
+  onClose: () => void;
   onEmojiSelected: (emoji: EmojiType) => void;
   emojiSize?: number;
   containerStyles?: ViewStyle;
-  isOpen?: boolean;
+  knobStyles?: ViewStyle;
+  headerStyles?: TextStyle;
+  expandable?: boolean;
+  hideHeader?: boolean;
+  defaultHeight?: number;
+  expandedHeight?: number;
+  backdropColor?: string;
 };
 export type ContextValues = {
   activeCategoryIndex: number;

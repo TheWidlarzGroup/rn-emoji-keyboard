@@ -1,10 +1,10 @@
 export type EmojiType = {
   emoji: string;
-  emoji_version: string;
   name: string;
-  skin_tone_support: boolean;
   slug: string;
+  skin_tone_support: boolean;
   unicode_version: string;
+  emoji_version: string;
 };
 
 export type CategoryTypes =

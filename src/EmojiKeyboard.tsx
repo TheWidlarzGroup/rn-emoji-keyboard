@@ -62,7 +62,9 @@ export const EmojiKeyboard = () => {
   }, [ctx, scrollNav]);
 
   return (
-    <View style={[styles.container, ctx.containerStyles]}>
+    <View
+      style={[styles.container, styles.containerShadow, ctx.containerStyles]}
+    >
       <Animated.FlatList
         data={CATEGORIES}
         keyExtractor={(item: CategoryTypes) => item}
@@ -88,5 +90,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 16,
+    borderRadius: 16,
+    backgroundColor: '#fff',
+  },
+  containerShadow: {
+    shadowColor: 'black',
+    shadowOpacity: 0.15,
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 5,
+    elevation: 10,
   },
 });
