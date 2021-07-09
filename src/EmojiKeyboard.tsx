@@ -7,10 +7,11 @@ import {
   useWindowDimensions,
   Animated,
 } from 'react-native';
-import { CATEGORIES, CategoryTypes } from './types';
+import type { CategoryTypes, EmojisByCategory } from './types';
 import { EmojiCategory } from './components/EmojiCategory';
 import { KeyboardContext } from './KeyboardContext';
 import { Categories } from './components/Categories';
+import emojisByGroup from './assets/data-by-group.json';
 
 export const EmojiKeyboard = () => {
   const { width } = useWindowDimensions();
@@ -18,7 +19,6 @@ export const EmojiKeyboard = () => {
 
   const flatListRef = React.useRef<FlatList>(null);
 
-  // const scrollX = React.useRef(new Animated.Value(0)).current;
   const scrollNav = React.useRef(new Animated.Value(0)).current;
 
   const getItemLayout = (
@@ -34,24 +34,6 @@ export const EmojiKeyboard = () => {
     (props) => <EmojiCategory {...props} />,
     []
   );
-  // const onScroll = Animated.event(
-  //   [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-  //   {
-  //     listener: ({
-  //       nativeEvent: {
-  //         contentOffset: { x },
-  //       },
-  //     }: NativeSyntheticEvent<NativeScrollEvent>) => {
-  //       console.log(Math.round(x / width));
-  //       ctx.setActiveCategoryIndex(Math.round(x / width));
-  //       // Animated.spring(scrollNav, {
-  //       //   toValue: (x / width) * (28 + 9),
-  //       //   useNativeDriver: true,
-  //       // }).start();
-  //     },
-  //     useNativeDriver: true,
-  //   }
-  // );
   React.useEffect(() => {
     Animated.spring(scrollNav, {
       toValue: ctx.activeCategoryIndex * (28 + 9),
@@ -64,8 +46,8 @@ export const EmojiKeyboard = () => {
       style={[styles.container, styles.containerShadow, ctx.containerStyles]}
     >
       <Animated.FlatList
-        data={CATEGORIES}
-        keyExtractor={(item: CategoryTypes) => item}
+        data={emojisByGroup}
+        keyExtractor={(item: EmojisByCategory) => item.title}
         renderItem={renderItem}
         removeClippedSubviews={true}
         ref={flatListRef}
@@ -74,12 +56,10 @@ export const EmojiKeyboard = () => {
         showsHorizontalScrollIndicator={false}
         pagingEnabled
         scrollEventThrottle={16}
-        decelerationRate="fast"
         getItemLayout={getItemLayout}
         scrollEnabled={false}
-        // onScroll={onScroll}
         initialNumToRender={1}
-        windowSize={1}
+        windowSize={2}
         maxToRenderPerBatch={1}
       />
       <Categories flatListRef={flatListRef} scrollNav={scrollNav} />

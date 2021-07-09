@@ -1,14 +1,7 @@
 import * as React from 'react';
 
-import {
-  StyleSheet,
-  View,
-  Text,
-  FlatList,
-  useWindowDimensions,
-} from 'react-native';
-import emojisByGroup from 'unicode-emoji-json/data-by-group.json';
-import type { CategoryTypes, EmojiType } from 'src/types';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
+import type { EmojisByCategory, EmojiType } from 'src/types';
 import { SingleEmoji } from './SingleEmoji';
 import { KeyboardContext } from '../KeyboardContext';
 
@@ -21,25 +14,24 @@ const emptyEmoji = {
   emoji_version: '0',
 };
 
-export const EmojiCategory = ({ item }: { item: CategoryTypes }) => {
-  const { width } = useWindowDimensions();
-  const ctx = React.useContext(KeyboardContext);
-  const numberOfColumns = React.useRef<number>(
-    Math.floor(width / (ctx.emojiSize * 2))
-  );
+export const EmojiCategory = ({ item }: { item: EmojisByCategory }) => {
+  const { onEmojiSelected, emojiSize, ...ctx } =
+    React.useContext(KeyboardContext);
+
   const [empty, setEmpty] = React.useState<EmojiType[]>([]);
 
   React.useEffect(() => {
-    const fillWithEmpty = new Array(
-      numberOfColumns.current -
-        (emojisByGroup[item].length % numberOfColumns.current)
-    ).fill(emptyEmoji);
-    setEmpty(fillWithEmpty);
-  }, [item]);
+    if (item.data.length % ctx.numberOfColumns) {
+      const fillWithEmpty = new Array(
+        ctx.numberOfColumns - (item.data.length % ctx.numberOfColumns)
+      ).fill(emptyEmoji);
+      setEmpty(fillWithEmpty);
+    }
+  }, [ctx.numberOfColumns, item]);
 
   const getItemLayout = (_: EmojiType[] | null | undefined, index: number) => ({
-    length: ctx.emojiSize ? ctx.emojiSize : 0,
-    offset: ctx.emojiSize * Math.ceil(index / ctx.numberOfColumns),
+    length: emojiSize ? emojiSize : 0,
+    offset: emojiSize * Math.ceil(index / ctx.numberOfColumns),
     index,
   });
 
@@ -47,26 +39,29 @@ export const EmojiCategory = ({ item }: { item: CategoryTypes }) => {
     (props) => (
       <SingleEmoji
         {...props}
-        onPress={() => ctx.onEmojiSelected(props.item)}
-        emojiSize={ctx.emojiSize}
+        onPress={() => onEmojiSelected(props.item)}
+        emojiSize={emojiSize}
       />
     ),
-    [ctx]
+    [onEmojiSelected, emojiSize]
   );
 
   return (
-    <View style={[styles.container, { width: width }]}>
+    <View style={[styles.container, { width: ctx.width }]}>
       {!ctx.hideHeader && (
-        <Text style={[styles.sectionTitle, ctx.headerStyles]}>{item}</Text>
+        <Text style={[styles.sectionTitle, ctx.headerStyles]}>
+          {item.title}
+        </Text>
       )}
       <FlatList
-        data={[...emojisByGroup[item], ...empty]}
+        data={[...item.data, ...empty]}
         keyExtractor={(emoji) => emoji.name}
-        numColumns={numberOfColumns.current}
+        numColumns={ctx.numberOfColumns}
         renderItem={renderItem}
         removeClippedSubviews={true}
         getItemLayout={getItemLayout}
         ListFooterComponent={() => <View style={styles.footer} />}
+        windowSize={1}
       />
     </View>
   );

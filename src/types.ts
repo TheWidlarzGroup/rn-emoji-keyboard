@@ -58,3 +58,8 @@ export const CATEGORIES_NAVIGATION: CategoryNavigationItem[] = [
 //   { icon: '🏧', category: 'Symbols' },
 //   { icon: '🏁', category: 'Flags' },
 // ];
+
+export type EmojisByCategory = {
+  title: CategoryTypes;
+  data: EmojiType[];
+};

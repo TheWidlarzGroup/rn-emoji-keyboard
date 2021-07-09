@@ -24,6 +24,7 @@ export type ContextValues = {
   activeCategoryIndex: number;
   setActiveCategoryIndex: (index: number) => void;
   numberOfColumns: number;
+  width: number;
 };
 
 export const KeyboardContext = React.createContext<

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useWindowDimensions } from 'react-native';
 import {
   KeyboardProps,
   ContextValues,
@@ -29,11 +30,21 @@ export const defaultKeyboardValues: ContextValues = {
   activeCategoryIndex: 0,
   setActiveCategoryIndex: () => {},
   numberOfColumns: 5,
+  width: 0,
 };
 
 export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
+  const { width } = useWindowDimensions();
   const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0);
-
+  const numberOfColumns = React.useRef<number>(
+    Math.floor(
+      width /
+        ((props.emojiSize
+          ? props.emojiSize
+          : defaultKeyboardContext.emojiSize) *
+          2)
+    )
+  );
   React.useEffect(() => {
     if (props.open) setActiveCategoryIndex(0);
   }, [props.open]);
@@ -44,6 +55,8 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     ...props,
     activeCategoryIndex,
     setActiveCategoryIndex,
+    numberOfColumns: numberOfColumns.current,
+    width,
   };
   return (
     <KeyboardContext.Provider value={value}>
