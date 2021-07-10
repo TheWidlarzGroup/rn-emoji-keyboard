@@ -64,6 +64,7 @@ TODO
 | categoryColor | string | "#000000" | no | Change category item color |
 | activeCategoryColor | string | "#005b96" | no | Change active category item color |
 | categoryContainerColor | string | "#e3dbcd" | no | Change category container color |
+| onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
 ## License
  **MIT**
 
