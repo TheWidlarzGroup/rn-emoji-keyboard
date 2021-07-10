@@ -11,7 +11,7 @@ import type { CategoryTypes, EmojisByCategory } from './types';
 import { EmojiCategory } from './components/EmojiCategory';
 import { KeyboardContext } from './KeyboardContext';
 import { Categories } from './components/Categories';
-import emojisByGroup from './assets/data-by-group.json';
+import emojisByGroup from './assets/emojis.json';
 
 export const EmojiKeyboard = () => {
   const { width } = useWindowDimensions();

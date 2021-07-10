@@ -29,7 +29,8 @@
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
+    "bootstrap": "yarn example && yarn && yarn pods",
+    "generateIcons": "node ./scripts/generateIcons.js"
   },
   "keywords": [
     "react-native",
@@ -64,8 +65,11 @@
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-builder-bob": "^0.18.0",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-svg": "^12.1.1",
     "release-it": "^14.2.2",
-    "typescript": "^4.1.3"
+    "typescript": "^4.1.3",
+    "unicode-emoji-json": "^0.2.1"
   },
   "peerDependencies": {
     "react": "*",
@@ -152,7 +156,5 @@
       ]
     ]
   },
-  "dependencies": {
-    "unicode-emoji-json": "^0.2.1"
-  }
+  "dependencies": {}
 }
