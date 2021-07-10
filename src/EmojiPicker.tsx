@@ -32,7 +32,7 @@ export const EmojiPicker = ({
   }, [open, screenHeight, translateY]);
 
   const close = () => {
-    height.setValue(screenHeight * 0.4);
+    height.setValue(getHeight(defaultHeight, screenHeight));
     offsetY.setValue(0);
     onClose();
   };
