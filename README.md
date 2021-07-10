@@ -61,6 +61,9 @@ TODO
 | defaultHeight | number | 0.4 | no | Specify collapsed container height (1 is full screen height) |
 | expandedHeight | number | 0.8 | no | Specify expanded container height (1 is full screen height) *only if expandable is true* |
 | backdropColor | string | "#00000055" | no | Change backdrop color and alpha |
+| categoryColor | string | "#000000" | no | Change category item color |
+| activeCategoryColor | string | "#005b96" | no | Change active category item color |
+| categoryContainerColor | string | "#e3dbcd" | no | Change category container color |
 ## License
  **MIT**
 
@@ -69,3 +72,5 @@ TODO
 categories => Specify displayed categories 
 
 language => Use translation
+
+pixele albo procenty w wysokości 

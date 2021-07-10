@@ -47,7 +47,12 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
 
   return (
     <View style={styles.bottomBar}>
-      <View style={styles.navigation}>
+      <View
+        style={[
+          styles.navigation,
+          { backgroundColor: ctx.categoryContainerColor },
+        ]}
+      >
         <FlatList
           data={CATEGORIES_NAVIGATION}
           keyExtractor={(item) => item.category}
@@ -74,7 +79,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   navigation: {
-    backgroundColor: '#e3dbcd',
     padding: 3,
     borderRadius: 8,
   },

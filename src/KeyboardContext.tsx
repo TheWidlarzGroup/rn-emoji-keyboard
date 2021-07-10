@@ -19,6 +19,9 @@ export type KeyboardProps = {
   defaultHeight?: number;
   expandedHeight?: number;
   backdropColor?: string;
+  categoryColor?: string;
+  activeCategoryColor?: string;
+  categoryContainerColor?: string;
 };
 export type ContextValues = {
   activeCategoryIndex: number;

@@ -24,6 +24,9 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   defaultHeight: 0.4,
   expandedHeight: 0.8,
   backdropColor: '#00000055',
+  categoryColor: '#000000',
+  activeCategoryColor: '#005b96',
+  categoryContainerColor: '#e3dbcd',
 };
 
 export const defaultKeyboardValues: ContextValues = {

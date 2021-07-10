@@ -9,34 +9,37 @@ import Trees from '../assets/Trees';
 import Ban from '../assets/Ban';
 import Users from '../assets/Users';
 
-const color = (isActive: boolean) => (isActive ? '#005b96' : '#000');
-
 export const Icon = ({
   iconName,
   isActive,
+  normalColor,
+  activeColor,
 }: {
   iconName: string;
   isActive: boolean;
+  normalColor: string;
+  activeColor: string;
 }) => {
+  const color = () => (isActive ? activeColor : normalColor);
   switch (iconName) {
     case 'Smile':
-      return <Smile fill={color(isActive)} />;
+      return <Smile fill={color()} />;
     case 'Trees':
-      return <Trees fill={color(isActive)} />;
+      return <Trees fill={color()} />;
     case 'Pizza':
-      return <Pizza fill={color(isActive)} />;
+      return <Pizza fill={color()} />;
     case 'Plane':
-      return <Plane fill={color(isActive)} />;
+      return <Plane fill={color()} />;
     case 'Football':
-      return <Football fill={color(isActive)} />;
+      return <Football fill={color()} />;
     case 'Lightbulb':
-      return <Lightbulb fill={color(isActive)} />;
+      return <Lightbulb fill={color()} />;
     case 'Flag':
-      return <Flag fill={color(isActive)} />;
+      return <Flag fill={color()} />;
     case 'Ban':
-      return <Ban fill={color(isActive)} />;
+      return <Ban fill={color()} />;
     case 'Users':
-      return <Users fill={color(isActive)} />;
+      return <Users fill={color()} />;
     default:
       return null;
   }

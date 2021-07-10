@@ -28,6 +28,8 @@ export const CategoryItem = ({
         <Icon
           iconName={item.icon}
           isActive={ctx?.activeCategoryIndex === index}
+          normalColor={ctx.categoryColor}
+          activeColor={ctx.activeCategoryColor}
         />
       </View>
     </TouchableOpacity>
