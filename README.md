@@ -72,5 +72,3 @@ TODO
 categories => Specify displayed categories 
 
 language => Use translation
-
-pixele albo procenty w wysokości 
