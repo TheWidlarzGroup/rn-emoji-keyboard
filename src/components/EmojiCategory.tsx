@@ -14,20 +14,24 @@ const emptyEmoji = {
   emoji_version: '0',
 };
 
-export const EmojiCategory = ({ item }: { item: EmojisByCategory }) => {
+export const EmojiCategory = ({
+  item: { title, data },
+}: {
+  item: EmojisByCategory;
+}) => {
   const { onEmojiSelected, emojiSize, ...ctx } =
     React.useContext(KeyboardContext);
 
   const [empty, setEmpty] = React.useState<EmojiType[]>([]);
 
   React.useEffect(() => {
-    if (item.data.length % ctx.numberOfColumns) {
+    if (data.length % ctx.numberOfColumns) {
       const fillWithEmpty = new Array(
-        ctx.numberOfColumns - (item.data.length % ctx.numberOfColumns)
+        ctx.numberOfColumns - (data.length % ctx.numberOfColumns)
       ).fill(emptyEmoji);
       setEmpty(fillWithEmpty);
     }
-  }, [ctx.numberOfColumns, item]);
+  }, [ctx.numberOfColumns, data]);
 
   const getItemLayout = (_: EmojiType[] | null | undefined, index: number) => ({
     length: emojiSize ? emojiSize : 0,
@@ -49,12 +53,10 @@ export const EmojiCategory = ({ item }: { item: EmojisByCategory }) => {
   return (
     <View style={[styles.container, { width: ctx.width }]}>
       {!ctx.hideHeader && (
-        <Text style={[styles.sectionTitle, ctx.headerStyles]}>
-          {item.title}
-        </Text>
+        <Text style={[styles.sectionTitle, ctx.headerStyles]}>{title}</Text>
       )}
       <FlatList
-        data={[...item.data, ...empty]}
+        data={[...data, ...empty]}
         keyExtractor={(emoji) => emoji.name}
         numColumns={ctx.numberOfColumns}
         renderItem={renderItem}

@@ -27,6 +27,9 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   categoryColor: '#000000',
   activeCategoryColor: '#005b96',
   categoryContainerColor: '#e3dbcd',
+  onCategoryChangeFailed: (info) => {
+    console.warn(info);
+  },
 };
 
 export const defaultKeyboardValues: ContextValues = {

@@ -30,7 +30,7 @@ export const CATEGORIES: CategoryTypes[] = [
   'Flags',
 ];
 
-type CategoryNavigationItem = {
+export type CategoryNavigationItem = {
   icon: string;
   category: CategoryTypes;
 };
@@ -46,18 +46,6 @@ export const CATEGORIES_NAVIGATION: CategoryNavigationItem[] = [
   { icon: 'Ban', category: 'Symbols' },
   { icon: 'Flag', category: 'Flags' },
 ];
-
-// export const CATEGORIES_NAVIGATION: CategoryNavigationItem[] = [
-//   { icon: '😀', category: 'Smileys & Emotion' },
-//   { icon: '👋', category: 'People & Body' },
-//   { icon: '🐵', category: 'Animals & Nature' },
-//   { icon: '🍇', category: 'Food & Drink' },
-//   { icon: '🌍', category: 'Travel & Places' },
-//   { icon: '🎃', category: 'Activities' },
-//   { icon: '👓', category: 'Objects' },
-//   { icon: '🏧', category: 'Symbols' },
-//   { icon: '🏁', category: 'Flags' },
-// ];
 
 export type EmojisByCategory = {
   title: CategoryTypes;

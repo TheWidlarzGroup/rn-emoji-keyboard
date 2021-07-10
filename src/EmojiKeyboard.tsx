@@ -15,7 +15,8 @@ import emojisByGroup from './assets/emojis.json';
 
 export const EmojiKeyboard = () => {
   const { width } = useWindowDimensions();
-  const ctx = React.useContext(KeyboardContext);
+  const { activeCategoryIndex, containerStyles, onCategoryChangeFailed } =
+    React.useContext(KeyboardContext);
 
   const flatListRef = React.useRef<FlatList>(null);
 
@@ -36,22 +37,20 @@ export const EmojiKeyboard = () => {
   );
   React.useEffect(() => {
     Animated.spring(scrollNav, {
-      toValue: ctx.activeCategoryIndex * (28 + 9),
+      toValue: activeCategoryIndex * (28 + 9),
       useNativeDriver: true,
     }).start();
-  }, [ctx, scrollNav]);
+  }, [activeCategoryIndex, scrollNav]);
 
   return (
-    <View
-      style={[styles.container, styles.containerShadow, ctx.containerStyles]}
-    >
+    <View style={[styles.container, styles.containerShadow, containerStyles]}>
       <Animated.FlatList
         data={emojisByGroup}
         keyExtractor={(item: EmojisByCategory) => item.title}
         renderItem={renderItem}
         removeClippedSubviews={true}
         ref={flatListRef}
-        onScrollToIndexFailed={() => {}}
+        onScrollToIndexFailed={onCategoryChangeFailed}
         horizontal
         showsHorizontalScrollIndicator={false}
         pagingEnabled

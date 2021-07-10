@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { View, Animated, StyleSheet, FlatList } from 'react-native';
 import { KeyboardContext } from '../KeyboardContext';
-import { CATEGORIES, CATEGORIES_NAVIGATION, CategoryTypes } from '../types';
+import {
+  CATEGORIES,
+  CATEGORIES_NAVIGATION,
+  CategoryNavigationItem,
+  CategoryTypes,
+} from '../types';
 import { CategoryItem } from './CategoryItem';
 
 type CategoriesProps = {
@@ -10,7 +15,12 @@ type CategoriesProps = {
 };
 
 export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
-  const ctx = React.useContext(KeyboardContext);
+  const {
+    activeCategoryIndex,
+    categoryContainerColor,
+    onCategoryChangeFailed,
+  } = React.useContext(KeyboardContext);
+
   const handleScrollToCategory = React.useCallback(
     (category: CategoryTypes) => {
       flatListRef?.current?.scrollToIndex({
@@ -21,7 +31,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
   );
 
   const rendarItem = React.useCallback(
-    ({ item, index }) => (
+    ({ item, index }: { item: CategoryNavigationItem; index: number }) => (
       <CategoryItem
         item={item}
         index={index}
@@ -48,10 +58,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
   return (
     <View style={styles.bottomBar}>
       <View
-        style={[
-          styles.navigation,
-          { backgroundColor: ctx.categoryContainerColor },
-        ]}
+        style={[styles.navigation, { backgroundColor: categoryContainerColor }]}
       >
         <FlatList
           data={CATEGORIES_NAVIGATION}
@@ -60,10 +67,10 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
           ItemSeparatorComponent={() => <View style={styles.separator} />}
           scrollEnabled={false}
           horizontal={true}
-          onScrollToIndexFailed={(e) => console.log(e)}
+          onScrollToIndexFailed={onCategoryChangeFailed}
           ListHeaderComponent={activeIndicator}
           ListHeaderComponentStyle={styles.activeIndicatorContainer}
-          extraData={ctx?.activeCategoryIndex}
+          extraData={activeCategoryIndex}
         />
       </View>
     </View>

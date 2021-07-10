@@ -22,6 +22,11 @@ export type KeyboardProps = {
   categoryColor?: string;
   activeCategoryColor?: string;
   categoryContainerColor?: string;
+  onCategoryChangeFailed?: (info: {
+    index: number;
+    highestMeasuredFrameIndex: number;
+    averageItemLength: number;
+  }) => void;
 };
 export type ContextValues = {
   activeCategoryIndex: number;
