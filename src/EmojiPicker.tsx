@@ -6,6 +6,7 @@ import { defaultKeyboardContext, KeyboardProvider } from './KeyboardProvider';
 import type { KeyboardProps } from './KeyboardContext';
 import type { EmojiType } from './types';
 import { ModalWithBackdrop } from './components/ModalWithBackdrop';
+import { getHeight } from './utils';
 
 export const EmojiPicker = ({
   onEmojiSelected,
@@ -18,7 +19,7 @@ export const EmojiPicker = ({
   const { height: screenHeight } = useWindowDimensions();
   const offsetY = React.useRef(new Animated.Value(0)).current;
   const height = React.useRef(
-    new Animated.Value(screenHeight * defaultHeight)
+    new Animated.Value(getHeight(defaultHeight, screenHeight))
   ).current;
   const translateY = React.useRef(new Animated.Value(0)).current;
 

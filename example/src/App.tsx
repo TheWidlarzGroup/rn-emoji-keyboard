@@ -26,6 +26,8 @@ export default function App() {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        defaultHeight={100}
+        expandedHeight={200}
       />
 
       {/* //////////////////////////////////////////// */}

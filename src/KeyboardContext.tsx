@@ -16,8 +16,8 @@ export type KeyboardProps = {
   headerStyles?: TextStyle;
   expandable?: boolean;
   hideHeader?: boolean;
-  defaultHeight?: number;
-  expandedHeight?: number;
+  defaultHeight?: number | string;
+  expandedHeight?: number | string;
   backdropColor?: string;
   categoryColor?: string;
   activeCategoryColor?: string;

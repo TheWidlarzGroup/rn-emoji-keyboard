@@ -58,8 +58,8 @@ TODO
 | containerStyles | ViewStyle | {} | no | Override container styles |
 | hideHeader | boolean | false | no | Hide category names | 
 | expandable | boolean | true | no | Show knob and enable expand on swipe up |
-| defaultHeight | number | 0.4 | no | Specify collapsed container height (1 is full screen height) |
-| expandedHeight | number | 0.8 | no | Specify expanded container height (1 is full screen height) *only if expandable is true* |
+| defaultHeight | number \| string | "40%" | no | Specify collapsed container height (number is points, string is a percentage of the screen height) |
+| expandedHeight | number \| string | "80%" | no | Specify expanded container height (number is points, string is a percentage of the screen height) _works only if expandable is true_ |
 | backdropColor | string | "#00000055" | no | Change backdrop color and alpha |
 | categoryColor | string | "#000000" | no | Change category item color |
 | activeCategoryColor | string | "#005b96" | no | Change active category item color |
