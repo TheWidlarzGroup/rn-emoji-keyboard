@@ -1,6 +1,6 @@
 # react-native-emoji-keyboard
 
-.
+![Preview](/example/assets/preview-small.gif)
 
 ## Usage
 
@@ -16,9 +16,6 @@ export default function App() {
         "emoji": "❤️",
         "name": "red heart",
         "slug": "red_heart",
-        "skin_tone_support": false,
-        "unicode_version": "0.6",
-        "emoji_version": "0.6"
       },
     */
   };
