@@ -63,11 +63,6 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
       <View
         style={[styles.navigation, { backgroundColor: categoryContainerColor }]}
       >
-        {console.log(
-          CATEGORIES_NAVIGATION.filter(
-            ({ category }) => !disabledCategory.includes(category)
-          )
-        )}
         <FlatList
           data={CATEGORIES_NAVIGATION.filter(
             ({ category }) => !disabledCategory.includes(category)
