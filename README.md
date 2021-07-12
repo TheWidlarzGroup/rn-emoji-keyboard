@@ -63,6 +63,7 @@ TODO
 | categoryContainerColor | string | "#e3dbcd" | no | Change category container color |
 | onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
 | translation | CategoryTranslation | en | no | Translation object *see translation section* |
+| disabledCategory | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
 ## Internationalization
 ### Pre-defined
 Due to the limited translation possibilities, we only provide a few pre-defined translations into the following languages:
@@ -94,9 +95,4 @@ translation={{
 ```
 *If you have written a translation into your language, we strongly encourage you to create a Pull Request and add your language to the package, following the example of other langs.*
 ## License
- **MIT**
-
-<br /><br /><br />
-## TODO
-categories => Specify displayed categories 
-
+ **[MIT](/LICENSE)**

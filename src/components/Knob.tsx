@@ -62,10 +62,10 @@ export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
 
 const styles = StyleSheet.create({
   knob: {
-    height: 8,
+    height: 6,
     width: 50,
     backgroundColor: '#fff',
-    marginBottom: 10,
+    marginBottom: 6,
     alignSelf: 'center',
     borderRadius: 4,
     shadowColor: 'black',

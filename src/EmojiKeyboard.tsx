@@ -15,8 +15,12 @@ import emojisByGroup from './assets/emojis.json';
 
 export const EmojiKeyboard = () => {
   const { width } = useWindowDimensions();
-  const { activeCategoryIndex, containerStyles, onCategoryChangeFailed } =
-    React.useContext(KeyboardContext);
+  const {
+    activeCategoryIndex,
+    containerStyles,
+    onCategoryChangeFailed,
+    disabledCategory,
+  } = React.useContext(KeyboardContext);
 
   const flatListRef = React.useRef<FlatList>(null);
 
@@ -45,7 +49,10 @@ export const EmojiKeyboard = () => {
   return (
     <View style={[styles.container, styles.containerShadow, containerStyles]}>
       <Animated.FlatList
-        data={emojisByGroup}
+        data={emojisByGroup.filter((category) => {
+          const title = category.title as CategoryTypes;
+          return !disabledCategory.includes(title);
+        })}
         keyExtractor={(item: EmojisByCategory) => item.title}
         renderItem={renderItem}
         removeClippedSubviews={true}

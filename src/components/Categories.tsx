@@ -19,15 +19,18 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     activeCategoryIndex,
     categoryContainerColor,
     onCategoryChangeFailed,
+    disabledCategory,
   } = React.useContext(KeyboardContext);
 
   const handleScrollToCategory = React.useCallback(
     (category: CategoryTypes) => {
       flatListRef?.current?.scrollToIndex({
-        index: CATEGORIES.indexOf(category),
+        index: CATEGORIES.filter(
+          (name) => !disabledCategory.includes(name)
+        ).indexOf(category),
       });
     },
-    [flatListRef]
+    [disabledCategory, flatListRef]
   );
 
   const rendarItem = React.useCallback(
@@ -60,8 +63,15 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
       <View
         style={[styles.navigation, { backgroundColor: categoryContainerColor }]}
       >
+        {console.log(
+          CATEGORIES_NAVIGATION.filter(
+            ({ category }) => !disabledCategory.includes(category)
+          )
+        )}
         <FlatList
-          data={CATEGORIES_NAVIGATION}
+          data={CATEGORIES_NAVIGATION.filter(
+            ({ category }) => !disabledCategory.includes(category)
+          )}
           keyExtractor={(item) => item.category}
           renderItem={rendarItem}
           ItemSeparatorComponent={() => <View style={styles.separator} />}

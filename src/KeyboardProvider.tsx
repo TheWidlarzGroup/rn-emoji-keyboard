@@ -32,6 +32,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
     console.warn(info);
   },
   translation: en,
+  disabledCategory: [],
 };
 
 export const defaultKeyboardValues: ContextValues = {
