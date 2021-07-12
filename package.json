@@ -1,5 +1,5 @@
 {
-  "name": "react-native-emoji-keyboard",
+  "name": "@jake7/react-native-emoji-keyboard",
   "version": "0.1.0",
   "description": ".",
   "main": "lib/commonjs/index",
@@ -37,15 +37,16 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/jakex7/react-native-emoji-keyboard",
+  "repository": "https://github.com/TheWidlarzGroup/react-native-emoji-keyboard",
   "author": "Jakub Grzywacz <kontakt@jakubgrzywacz.pl> (https://github.com/jakex7)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jakex7/react-native-emoji-keyboard/issues"
+    "url": "https://github.com/TheWidlarzGroup/react-native-emoji-keyboard/issues"
   },
-  "homepage": "https://github.com/jakex7/react-native-emoji-keyboard#readme",
+  "homepage": "https://github.com/TheWidlarzGroup/react-native-emoji-keyboard#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
@@ -104,7 +105,7 @@
       "publish": true
     },
     "github": {
-      "release": true
+      "release": false
     },
     "plugins": {
       "@release-it/conventional-changelog": {
