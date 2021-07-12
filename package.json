@@ -1,6 +1,6 @@
 {
   "name": "@jake7/react-native-emoji-keyboard",
-  "version": "0.1.0",
+  "version": "0.1.1-beta.0",
   "description": ".",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
