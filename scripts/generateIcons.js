@@ -8,7 +8,10 @@ for (const [key, value] of Object.entries(json)) {
     name: emoji.name,
     slug: emoji.slug,
   }));
-  newArray.push({ title: key, data: newData });
+  newArray.push({
+    title: key.replace(' & ', '_').replace(' ', '_').toLocaleLowerCase(),
+    data: newData,
+  });
 }
 
 fs.writeFile(

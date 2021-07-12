@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import EmojiPicker from 'react-native-emoji-keyboard';
+import EmojiPicker, { pl } from 'react-native-emoji-keyboard';
 
 export default function App() {
   const [result, setResult] = React.useState<string>();
@@ -26,6 +26,7 @@ export default function App() {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        translation={pl}
       />
 
       {/* //////////////////////////////////////////// */}

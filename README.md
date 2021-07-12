@@ -62,6 +62,37 @@ TODO
 | activeCategoryColor | string | "#005b96" | no | Change active category item color |
 | categoryContainerColor | string | "#e3dbcd" | no | Change category container color |
 | onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
+| translation | CategoryTranslation | en | no | Translation object *see translation section* |
+## Internationalization
+### Pre-defined
+Due to the limited translation possibilities, we only provide a few pre-defined translations into the following languages:
+* `en` - English
+* `pl` - Polish
+
+First import lang and use it as `translation` prop.
+```ts
+import { pl } from '{package-name}';
+
+// ...
+
+translation={pl}
+```
+### Own
+There is possibility to pass own translation to library with the prop called `translation` like this
+```ts
+translation={{
+  smileys_emotion: 'Smileys & Emotion',
+  people_body: 'People & Body',
+  animals_nature: 'Animals & Nature',
+  food_drink: 'Food & Drink',
+  travel_places: 'Travel & Places',
+  activities: 'Activities',
+  objects: 'Objects',
+  symbols: 'Symbols',
+  flags: 'Flags',
+}}
+```
+*If you have written a translation into your language, we strongly encourage you to create a Pull Request and add your language to the package, following the example of other langs.*
 ## License
  **MIT**
 
@@ -69,4 +100,3 @@ TODO
 ## TODO
 categories => Specify displayed categories 
 
-language => Use translation

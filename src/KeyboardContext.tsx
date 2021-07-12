@@ -4,7 +4,7 @@ import {
   defaultKeyboardContext,
   defaultKeyboardValues,
 } from './KeyboardProvider';
-import type { EmojiType } from './types';
+import type { CategoryTranslation, EmojiType } from './types';
 
 export type KeyboardProps = {
   open: boolean;
@@ -27,6 +27,7 @@ export type KeyboardProps = {
     highestMeasuredFrameIndex: number;
     averageItemLength: number;
   }) => void;
+  translation?: CategoryTranslation;
 };
 export type ContextValues = {
   activeCategoryIndex: number;

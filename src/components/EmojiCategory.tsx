@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text, FlatList } from 'react-native';
-import type { EmojisByCategory, EmojiType } from 'src/types';
+import type { EmojisByCategory, EmojiType } from '../types';
 import { SingleEmoji } from './SingleEmoji';
 import { KeyboardContext } from '../KeyboardContext';
 
@@ -19,23 +19,30 @@ export const EmojiCategory = ({
 }: {
   item: EmojisByCategory;
 }) => {
-  const { onEmojiSelected, emojiSize, ...ctx } =
-    React.useContext(KeyboardContext);
+  const {
+    onEmojiSelected,
+    emojiSize,
+    numberOfColumns,
+    width,
+    hideHeader,
+    headerStyles,
+    translation,
+  } = React.useContext(KeyboardContext);
 
   const [empty, setEmpty] = React.useState<EmojiType[]>([]);
 
   React.useEffect(() => {
-    if (data.length % ctx.numberOfColumns) {
+    if (data.length % numberOfColumns) {
       const fillWithEmpty = new Array(
-        ctx.numberOfColumns - (data.length % ctx.numberOfColumns)
+        numberOfColumns - (data.length % numberOfColumns)
       ).fill(emptyEmoji);
       setEmpty(fillWithEmpty);
     }
-  }, [ctx.numberOfColumns, data]);
+  }, [numberOfColumns, data]);
 
   const getItemLayout = (_: EmojiType[] | null | undefined, index: number) => ({
     length: emojiSize ? emojiSize : 0,
-    offset: emojiSize * Math.ceil(index / ctx.numberOfColumns),
+    offset: emojiSize * Math.ceil(index / numberOfColumns),
     index,
   });
 
@@ -51,14 +58,16 @@ export const EmojiCategory = ({
   );
 
   return (
-    <View style={[styles.container, { width: ctx.width }]}>
-      {!ctx.hideHeader && (
-        <Text style={[styles.sectionTitle, ctx.headerStyles]}>{title}</Text>
+    <View style={[styles.container, { width: width }]}>
+      {!hideHeader && (
+        <Text style={[styles.sectionTitle, headerStyles]}>
+          {translation[title]}
+        </Text>
       )}
       <FlatList
         data={[...data, ...empty]}
         keyExtractor={(emoji) => emoji.name}
-        numColumns={ctx.numberOfColumns}
+        numColumns={numberOfColumns}
         renderItem={renderItem}
         removeClippedSubviews={true}
         getItemLayout={getItemLayout}

@@ -5,6 +5,7 @@ import {
   ContextValues,
   KeyboardContext,
 } from './KeyboardContext';
+import en from './translation/en';
 import type { EmojiType } from './types';
 
 type ProviderProps = KeyboardProps & {
@@ -30,6 +31,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   onCategoryChangeFailed: (info) => {
     console.warn(info);
   },
+  translation: en,
 };
 
 export const defaultKeyboardValues: ContextValues = {
