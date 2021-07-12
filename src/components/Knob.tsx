@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Animated, useWindowDimensions, StyleSheet } from 'react-native';
 import {
-  PanGestureHandler,
-  PanGestureHandlerGestureEvent,
-  State,
-} from 'react-native-gesture-handler';
+  Animated,
+  useWindowDimensions,
+  StyleSheet,
+  View,
+  PanResponder,
+} from 'react-native';
 import { getHeight } from '../utils';
 import { KeyboardContext } from '../KeyboardContext';
 
@@ -18,49 +19,60 @@ export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
   const { height: screenHeight } = useWindowDimensions();
   const ctx = React.useContext(KeyboardContext);
 
-  const handleGesture = ({
-    nativeEvent: { translationY, state },
-  }: PanGestureHandlerGestureEvent) => {
-    if (state === State.ACTIVE) {
-      offsetY.setValue(translationY);
-    }
-    if (state === State.END) {
-      // reset offset => return to current position
-      Animated.spring(offsetY, {
+  const panResponder = React.useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponderCapture: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponderCapture: () => true,
+
+      onPanResponderMove: Animated.event([null, { dy: offsetY }], {
         useNativeDriver: false,
-        toValue: 0,
-      }).start();
-      // slide => expand/collapse keyboard
-      if (translationY < -30) {
-        Animated.spring(height, {
+      }),
+      onPanResponderRelease: (_, gestureState) => {
+        Animated.spring(offsetY, {
           useNativeDriver: false,
-          toValue: getHeight(ctx.expandedHeight, screenHeight),
+          toValue: 0,
         }).start();
-      } else if (translationY > 150) {
-        height.setValue(getHeight(ctx.defaultHeight, screenHeight));
-        offsetY.setValue(0);
-        onClose();
-      } else {
-        Animated.spring(height, {
-          useNativeDriver: false,
-          toValue: getHeight(ctx.defaultHeight, screenHeight),
-        }).start();
-      }
-    }
-  };
+        if (gestureState.dy < -50) {
+          Animated.spring(height, {
+            useNativeDriver: false,
+            toValue: getHeight(ctx.expandedHeight, screenHeight),
+          }).start();
+        } else if (gestureState.dy > 150) {
+          height.setValue(getHeight(ctx.defaultHeight, screenHeight));
+          offsetY.setValue(0);
+          onClose();
+        } else {
+          Animated.spring(height, {
+            useNativeDriver: false,
+            toValue: getHeight(ctx.defaultHeight, screenHeight),
+          }).start();
+        }
+      },
+      onShouldBlockNativeResponder: () => {
+        return true;
+      },
+    })
+  ).current;
 
   return (
-    <PanGestureHandler
-      onGestureEvent={handleGesture}
-      onHandlerStateChange={handleGesture}
-      hitSlop={{ vertical: 20, horizontal: 40 }}
-    >
-      <Animated.View style={[styles.knob, ctx.knobStyles]} />
-    </PanGestureHandler>
+    <View {...panResponder.panHandlers}>
+      <View style={styles.panContainer}>
+        <Animated.View style={[styles.knob, ctx.knobStyles]} />
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  panContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    alignSelf: 'center',
+    flexDirection: 'column-reverse',
+    backgroundColor: '#00000000',
+  },
   knob: {
     height: 6,
     width: 50,
