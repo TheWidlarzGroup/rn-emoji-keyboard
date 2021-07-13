@@ -1,11 +1,12 @@
-# react-native-emoji-keyboard
+# @jake7/react-native-emoji-keyboard
+
 
 ![Preview](/example/assets/preview-small.gif)
 
 ## Usage
 
 ```js
-import EmojiPicker from '{package-name}';
+import EmojiPicker from '@jake7/react-native-emoji-keyboard';
 
 export default function App() {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -31,13 +32,13 @@ export default function App() {
 
 ## Installation
 ```sh
-yarn add {package-name}
+yarn add @jake7/react-native-emoji-keyboard
 ```
 
 or
 
 ```sh
-npm install {package-name}
+npm install @jake7/react-native-emoji-keyboard
 ```
 ## Full Example
 ```js
@@ -72,7 +73,7 @@ Due to the limited translation possibilities, we only provide a few pre-defined 
 
 First import lang and use it as `translation` prop.
 ```ts
-import { pl } from '{package-name}';
+import { pl } from '@jake7/react-native-emoji-keyboard';
 
 // ...
 
