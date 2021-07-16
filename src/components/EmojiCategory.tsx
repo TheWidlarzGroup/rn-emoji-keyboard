@@ -72,7 +72,7 @@ export const EmojiCategory = ({
         removeClippedSubviews={true}
         getItemLayout={getItemLayout}
         ListFooterComponent={() => <View style={styles.footer} />}
-        windowSize={10}
+        windowSize={20}
       />
     </View>
   );

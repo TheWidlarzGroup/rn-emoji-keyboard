@@ -1,13 +1,14 @@
 import * as React from 'react';
 
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import EmojiPicker from 'react-native-emoji-keyboard';
+import EmojiPicker from '@jake7/react-native-emoji-keyboard';
+import type { EmojiType } from 'lib/typescript/types';
 
 export default function App() {
   const [result, setResult] = React.useState<string>();
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
-  const handlePick = (emoji: any) => {
+  const handlePick = (emoji: EmojiType) => {
     console.log(emoji);
     setResult(emoji.emoji);
     setIsModalOpen((prev) => !prev);

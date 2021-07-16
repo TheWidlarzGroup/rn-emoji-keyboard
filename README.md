@@ -13,11 +13,11 @@ export default function App() {
 
   const handlePick = (emojiObject: EmojiType) => {
     console.log(emojiObject);
-    /* example emojiObject = {    {
+    /* example emojiObject = { 
         "emoji": "❤️",
         "name": "red heart",
         "slug": "red_heart",
-      },
+      }
     */
   };
 
@@ -39,10 +39,6 @@ or
 
 ```sh
 npm install @jake7/react-native-emoji-keyboard
-```
-## Full Example
-```js
-TODO
 ```
 ## Accepted props (current implemented)
 | Name | Type | Default Value | Required | Description |
@@ -95,5 +91,36 @@ translation={{
 }}
 ```
 *If you have written a translation into your language, we strongly encourage you to create a Pull Request and add your language to the package, following the example of other langs.*
+## Full Example
+```ts
+import * as React from 'react';
+import { Text, SafeAreaView, TouchableOpacity } from 'react-native';
+import EmojiPicker from '@jake7/react-native-emoji-keyboard';
+import { EmojiType } from '@jake7/react-native-emoji-keyboard/lib/typescript/types';
+
+export default function App() {
+const [result, setResult] = React.useState<string>();
+const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+
+const handlePick = (emoji: EmojiType) => {
+  setResult(emoji.emoji);
+  setIsModalOpen((prev) => !prev);
+  };
+
+  return (
+    <SafeAreaView>
+      <Text>Selected emoji: {result}</Text>
+      <TouchableOpacity onPress={() => setIsModalOpen(true)}>
+        <Text>Open</Text>
+      </TouchableOpacity>
+      <EmojiPicker
+        onEmojiSelected={handlePick}
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </SafeAreaView>
+  );
+}
+```
 ## License
  **[MIT](/LICENSE)**
