@@ -1,5 +1,5 @@
 # 🚀 rn-emoji-keyboard
-A lightweight emoji picker, fully customizable, written as React Native component (without native elements). Designated to be user and developer friendly! 💖
+A lightweight, fully customizable emoji picker, written as React Native component (without native elements). Designated to be user and developer friendly! 💖
 
 ![Preview](/example/assets/preview-small.gif)
 
