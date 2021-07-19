@@ -1,6 +1,6 @@
 {
-  "name": "react-native-emoji-keyboard-example",
-  "description": "Example app for react-native-emoji-keyboard",
+  "name": "rn-emoji-keyboard-example",
+  "description": "Example app for rn-emoji-keyboard",
   "version": "0.0.1",
   "private": true,
   "scripts": {

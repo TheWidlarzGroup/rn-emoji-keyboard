@@ -13,7 +13,7 @@
     "android",
     "ios",
     "cpp",
-    "react-native-emoji-keyboard.podspec",
+    "rn-emoji-keyboard.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",
