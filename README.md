@@ -1,12 +1,20 @@
-# @jake7/react-native-emoji-keyboard
-
+# 🚀 rn-emoji-keyboard
+A lightweight emoji picker, fully customizable, written as React Native component (without native elements). Designated to be user and developer friendly! 💖
 
 ![Preview](/example/assets/preview-small.gif)
 
-## Usage
+## 🪄 Installation
+```sh
+yarn add rn-emoji-keyboard
+```
+or
+```sh
+npm install rn-emoji-keyboard
+```
+## ⚡️ Usage
 
 ```js
-import EmojiPicker from '@jake7/react-native-emoji-keyboard';
+import EmojiPicker from 'rn-emoji-keyboard';
 
 export default function App() {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -30,17 +38,7 @@ export default function App() {
 }
 ```
 
-## Installation
-```sh
-yarn add @jake7/react-native-emoji-keyboard
-```
-
-or
-
-```sh
-npm install @jake7/react-native-emoji-keyboard
-```
-## Accepted props (current implemented)
+## ⚙️ Accepted props (current implemented)
 | Name | Type | Default Value | Required | Description |
 |---|---|---|---|---|
 | onEmojiSelected | function | undefined | yes | Callback on emoji selected |
@@ -61,21 +59,21 @@ npm install @jake7/react-native-emoji-keyboard
 | onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
 | translation | CategoryTranslation | en | no | Translation object *see translation section* |
 | disabledCategory | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
-## Internationalization
+## 🇺🇸 Internationalization
 ### Pre-defined
 Due to the limited translation possibilities, we only provide a few pre-defined translations into the following languages:
-* `en` - English
-* `pl` - Polish
+* `en` - English 🇺🇸
+* `pl` - Polish 🇵🇱
 
 First import lang and use it as `translation` prop.
 ```ts
-import { pl } from '@jake7/react-native-emoji-keyboard';
+import { pl } from 'rn-emoji-keyboard';
 
 // ...
 
 translation={pl}
 ```
-### Own
+### 🏁 Own
 There is possibility to pass own translation to library with the prop called `translation` like this
 ```ts
 translation={{
@@ -91,20 +89,20 @@ translation={{
 }}
 ```
 *If you have written a translation into your language, we strongly encourage you to create a Pull Request and add your language to the package, following the example of other langs.*
-## Full Example
+## 📚 Full Example
 ```ts
 import * as React from 'react';
 import { Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import EmojiPicker from '@jake7/react-native-emoji-keyboard';
-import { EmojiType } from '@jake7/react-native-emoji-keyboard/lib/typescript/types';
+import EmojiPicker from 'rn-emoji-keyboard';
+import { EmojiType } from 'rn-emoji-keyboard/lib/typescript/types';
 
 export default function App() {
-const [result, setResult] = React.useState<string>();
-const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+  const [result, setResult] = React.useState<string>();
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
-const handlePick = (emoji: EmojiType) => {
-  setResult(emoji.emoji);
-  setIsModalOpen((prev) => !prev);
+  const handlePick = (emojiObject: EmojiType) => {
+    setResult(emojiObject.emoji);
+    setIsModalOpen(false);
   };
 
   return (
@@ -122,5 +120,9 @@ const handlePick = (emoji: EmojiType) => {
   );
 }
 ```
-## License
+## 📈 Future plans
+* Skin tone palette selector.
+* Search bar.
+* Hide forbidden emojis.
+## ⚖️ License
  **[MIT](/LICENSE)**
