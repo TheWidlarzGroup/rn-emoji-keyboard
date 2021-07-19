@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@jake7/react-native-emoji-keyboard": ["./src/index"]
+      "rn-emoji-keyboard": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

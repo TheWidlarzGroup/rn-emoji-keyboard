@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import EmojiPicker from '@jake7/react-native-emoji-keyboard';
+import EmojiPicker from 'rn-emoji-keyboard';
 import type { EmojiType } from 'lib/typescript/types';
 
 export default function App() {
