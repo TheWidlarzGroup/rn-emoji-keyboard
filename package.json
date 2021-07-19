@@ -1,6 +1,6 @@
 {
   "name": "rn-emoji-keyboard",
-  "version": "0.1.1-beta.1",
+  "version": "0.2.0",
   "description": ".",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -37,13 +37,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/TheWidlarzGroup/react-native-emoji-keyboard",
+  "repository": "https://github.com/TheWidlarzGroup/rn-emoji-keyboard",
   "author": "Jakub Grzywacz <kontakt@jakubgrzywacz.pl> (https://github.com/jakex7)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TheWidlarzGroup/react-native-emoji-keyboard/issues"
+    "url": "https://github.com/TheWidlarzGroup/rn-emoji-keyboard/issues"
   },
-  "homepage": "https://github.com/TheWidlarzGroup/react-native-emoji-keyboard#readme",
+  "homepage": "https://github.com/TheWidlarzGroup/rn-emoji-keyboard#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
@@ -103,7 +103,7 @@
       "publish": true
     },
     "github": {
-      "release": false
+      "release": true
     },
     "plugins": {
       "@release-it/conventional-changelog": {
