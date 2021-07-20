@@ -94,13 +94,13 @@ translation={{
 You can clone the repo and run `yarn example ios` or `yarn example android` to preview app with this examples.
 ### [Basic](/example/src/Basic/Basic.tsx)
 ![Preview](/example/assets/light-preview.jpg)
-### Dark
+### [Dark](/example/src/Dark/Dark.tsx)
 ![Preview](/example/assets/dark-preview.jpg)
-### Translated
+### [Translated](/example/src/Translated/Translated.tsx)
 ![Preview](/example/assets/translated-preview.jpg)
-### DisabledCategories
+### [DisabledCategories](/example/src/DisabledCategories/DisabledCategories.tsx)
 ![Preview](/example/assets/categories-preview.jpg)
-### Static (without knob)
+### [Static (without knob)](/example/src/Static/Static.tsx)
 ![Preview](/example/assets/static-preview.jpg)
 ## 📈 Future plans
 * Skin tone palette selector.
