@@ -92,15 +92,15 @@ translation={{
 *If you have written a translation into your language, we strongly encourage you to create a Pull Request and add your language to the package, following the example of other langs.*
 ## 🎉 Examples
 You can clone the repo and run `yarn example ios` or `yarn example android` to preview app with this examples.
-#### Basic
+### [Basic](/example/src/Basic/Basic.tsx)
 ![Preview](/example/assets/light-preview.jpg)
-#### Dark
+### Dark
 ![Preview](/example/assets/dark-preview.jpg)
-#### Translated
+### Translated
 ![Preview](/example/assets/translated-preview.jpg)
-#### DisabledCategories
+### DisabledCategories
 ![Preview](/example/assets/categories-preview.jpg)
-#### Static (without knob)
+### Static (without knob)
 ![Preview](/example/assets/static-preview.jpg)
 ## 📈 Future plans
 * Skin tone palette selector.
