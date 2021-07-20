@@ -90,37 +90,18 @@ translation={{
 }}
 ```
 *If you have written a translation into your language, we strongly encourage you to create a Pull Request and add your language to the package, following the example of other langs.*
-## 📚 Full Example
-```ts
-import * as React from 'react';
-import { Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import EmojiPicker from 'rn-emoji-keyboard';
-import { EmojiType } from 'rn-emoji-keyboard/lib/typescript/types';
-
-export default function App() {
-  const [result, setResult] = React.useState<string>();
-  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
-
-  const handlePick = (emojiObject: EmojiType) => {
-    setResult(emojiObject.emoji);
-    setIsModalOpen(false);
-  };
-
-  return (
-    <SafeAreaView>
-      <Text>Selected emoji: {result}</Text>
-      <TouchableOpacity onPress={() => setIsModalOpen(true)}>
-        <Text>Open</Text>
-      </TouchableOpacity>
-      <EmojiPicker
-        onEmojiSelected={handlePick}
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
-    </SafeAreaView>
-  );
-}
-```
+## 🎉 Examples
+You can clone the repo and run `yarn example ios` or `yarn example android` to preview app with this examples.
+#### Basic
+![Preview](/example/assets/light-preview.jpg)
+#### Dark
+![Preview](/example/assets/dark-preview.jpg)
+#### Translated
+![Preview](/example/assets/translated-preview.jpg)
+#### DisabledCategories
+![Preview](/example/assets/categories-preview.jpg)
+#### Static (without knob)
+![Preview](/example/assets/static-preview.jpg)
 ## 📈 Future plans
 * Skin tone palette selector.
 * Search bar.
