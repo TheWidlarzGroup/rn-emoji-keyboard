@@ -22,6 +22,7 @@ export type KeyboardProps = {
   categoryColor?: string;
   activeCategoryColor?: string;
   categoryContainerColor?: string;
+  activeCategoryContainerColor?: string;
   onCategoryChangeFailed?: (info: {
     index: number;
     highestMeasuredFrameIndex: number;

@@ -20,6 +20,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     categoryContainerColor,
     onCategoryChangeFailed,
     disabledCategory,
+    activeCategoryContainerColor,
   } = React.useContext(KeyboardContext);
 
   const handleScrollToCategory = React.useCallback(
@@ -50,12 +51,15 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
         style={[
           styles.activeIndicator,
           {
+            backgroundColor: activeCategoryContainerColor,
+          },
+          {
             transform: [{ translateX: scrollNav }],
           },
         ]}
       />
     ),
-    [scrollNav]
+    [activeCategoryContainerColor, scrollNav]
   );
 
   return (
@@ -104,7 +108,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 28,
     height: 28,
-    backgroundColor: 'white',
     borderRadius: 6,
   },
   activeIndicatorContainer: {
