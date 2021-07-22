@@ -1,7 +1,13 @@
+export type JsonEmoji = {
+  emoji: string;
+  name: string;
+  v: string;
+};
 export type EmojiType = {
   emoji: string;
   name: string;
   slug: string;
+  unicode_version: string;
 };
 
 export type CategoryTypes =

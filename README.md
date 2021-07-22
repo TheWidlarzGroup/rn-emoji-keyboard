@@ -25,6 +25,7 @@ export default function App() {
         "emoji": "❤️",
         "name": "red heart",
         "slug": "red_heart",
+        "unicode_version": "0.6",
       }
     */
   };

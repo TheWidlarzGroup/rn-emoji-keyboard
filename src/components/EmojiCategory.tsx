@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text, FlatList } from 'react-native';
-import type { EmojisByCategory, EmojiType } from '../types';
+import type { EmojisByCategory, EmojiType, JsonEmoji } from '../types';
 import { SingleEmoji } from './SingleEmoji';
 import { KeyboardContext } from '../KeyboardContext';
 
@@ -9,9 +9,7 @@ const emptyEmoji = {
   emoji: '',
   name: 'blank emoji',
   slug: 'blank_emoji',
-  skin_tone_support: false,
   unicode_version: '0',
-  emoji_version: '0',
 };
 
 export const EmojiCategory = ({
@@ -46,11 +44,18 @@ export const EmojiCategory = ({
     index,
   });
 
+  const parseEmoji = (emoji: JsonEmoji) => ({
+    name: emoji.name,
+    emoji: emoji.emoji,
+    unicode_version: emoji.v,
+    slug: emoji.name.replace(' ', '_'),
+  });
+
   const renderItem = React.useCallback(
     (props) => (
       <SingleEmoji
         {...props}
-        onPress={() => onEmojiSelected(props.item)}
+        onPress={() => onEmojiSelected(parseEmoji(props.item))}
         emojiSize={emojiSize}
       />
     ),

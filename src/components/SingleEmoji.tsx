@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import type { EmojiType } from '../types';
+import type { JsonEmoji } from '../types';
 
 export class SingleEmoji extends React.Component<{
-  item: EmojiType;
-  onPress: (emojiObject: EmojiType) => void;
+  item: JsonEmoji;
+  onPress: () => void;
   emojiSize: number;
 }> {
   shouldComponentUpdate() {
@@ -13,7 +13,7 @@ export class SingleEmoji extends React.Component<{
   render() {
     const { item, emojiSize, onPress } = this.props;
     return (
-      <TouchableOpacity onPress={() => onPress(item)} style={styles.container}>
+      <TouchableOpacity onPress={() => onPress()} style={styles.container}>
         <View style={styles.iconContainer}>
           <Text style={{ fontSize: emojiSize }}>{item.emoji}</Text>
         </View>

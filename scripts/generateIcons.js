@@ -6,7 +6,7 @@ for (const [key, value] of Object.entries(json)) {
   const newData = value.map((emoji) => ({
     emoji: emoji.emoji,
     name: emoji.name,
-    slug: emoji.slug,
+    v: emoji.unicode_version,
   }));
   newArray.push({
     title: key.replace(' & ', '_').replace(' ', '_').toLocaleLowerCase(),
