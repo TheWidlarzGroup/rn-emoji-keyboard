@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <EmojiPicker
-      onEmojiSelected={handleSelect}
+      onEmojiSelected={handlePick}
       open={isOpen}
       onClose={() => setIsOpen(false)} />
   )
