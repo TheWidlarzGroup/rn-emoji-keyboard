@@ -14,7 +14,7 @@ const Translated = () => {
     setIsModalOpen((prev) => !prev);
   };
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Emotka: {result}</Text>
       <TouchableOpacity onPress={() => setIsModalOpen(true)}>
         <Text style={styles.text}>Otwórz</Text>

@@ -1,32 +1,26 @@
 import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import EmojiPicker from 'rn-emoji-keyboard';
+import { EmojiKeyboard } from 'rn-emoji-keyboard';
 import type { EmojiType } from 'src/types';
 
 const Static = () => {
   const [result, setResult] = React.useState<string>();
-  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
   const handlePick = (emoji: EmojiType) => {
-    console.log(emoji);
     setResult(emoji.emoji);
-    setIsModalOpen((prev) => !prev);
   };
   return (
-    <SafeAreaView>
-      <Text style={styles.text}>Result: {result}</Text>
-      <TouchableOpacity onPress={() => setIsModalOpen(true)}>
-        <Text style={styles.text}>Open</Text>
-      </TouchableOpacity>
-
-      <EmojiPicker
-        onEmojiSelected={handlePick}
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        expandable={false}
-        defaultHeight="65%"
-      />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <Text style={styles.text}>Result: {result}</Text>
+      </View>
+      <View style={styles.container}>
+        <EmojiKeyboard
+          onEmojiSelected={handlePick}
+          containerStyles={styles.keyboardContainer}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -39,6 +33,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 64,
     fontSize: 18,
+  },
+  keyboardContainer: {
+    borderRadius: 0,
   },
 });
 

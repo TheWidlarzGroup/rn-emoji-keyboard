@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import EmojiPicker from 'rn-emoji-keyboard';
 import type { EmojiType } from 'src/types';
 
-const Basic = () => {
+const StaticModal = () => {
   const [result, setResult] = React.useState<string>();
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
@@ -24,6 +24,8 @@ const Basic = () => {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        expandable={false}
+        defaultHeight="65%"
       />
     </SafeAreaView>
   );
@@ -40,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Basic;
+export default StaticModal;
