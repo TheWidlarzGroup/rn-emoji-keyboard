@@ -64,13 +64,11 @@ export default function App() {
 ## 🖼 Usage as static
 
 ```js
-import { EmojiStaticKeyboard, KeyboardProvider } from 'rn-emoji-keyboard';
+import { EmojiKeyboard } from 'rn-emoji-keyboard';
 
 // ...
 
-<KeyboardProvider onEmojiSelected={handlePick}>
-  <EmojiStaticKeyboard />
-</KeyboardProvider>
+<EmojiKeyboard onEmojiSelected={handlePick} />
 ```
 Example about serving as static keyboard [you can find here](/example/src/Dark/Dark.tsx).
 ## 🇺🇸 Internationalization
