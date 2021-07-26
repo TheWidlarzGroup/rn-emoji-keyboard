@@ -13,7 +13,7 @@ import { KeyboardContext } from './KeyboardContext';
 import { Categories } from './components/Categories';
 import emojisByGroup from './assets/emojis.json';
 
-export const EmojiKeyboard = () => {
+export const EmojiStaticKeyboard = () => {
   const { width } = useWindowDimensions();
   const {
     activeCategoryIndex,

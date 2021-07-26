@@ -6,10 +6,12 @@ import {
 } from './KeyboardProvider';
 import type { CategoryTranslation, EmojiType, CategoryTypes } from './types';
 
+export type OnEmojiSelected = (emoji: EmojiType) => void;
+
 export type KeyboardProps = {
   open: boolean;
   onClose: () => void;
-  onEmojiSelected: (emoji: EmojiType) => void;
+  onEmojiSelected: OnEmojiSelected;
   emojiSize?: number;
   containerStyles?: ViewStyle;
   knobStyles?: ViewStyle;

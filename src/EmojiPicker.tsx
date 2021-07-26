@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Animated, useWindowDimensions } from 'react-native';
-import { EmojiKeyboard } from './EmojiKeyboard';
+import { EmojiStaticKeyboard } from './EmojiStaticKeyboard';
 import { Knob } from './components/Knob';
 import { defaultKeyboardContext, KeyboardProvider } from './KeyboardProvider';
 import type { KeyboardProps } from './KeyboardContext';
@@ -61,7 +61,7 @@ export const EmojiPicker = ({
               },
             ]}
           >
-            <EmojiKeyboard />
+            <EmojiStaticKeyboard />
           </Animated.View>
         </>
       </ModalWithBackdrop>

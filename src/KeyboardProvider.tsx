@@ -4,12 +4,14 @@ import {
   KeyboardProps,
   ContextValues,
   KeyboardContext,
+  OnEmojiSelected,
 } from './KeyboardContext';
 import en from './translation/en';
 import type { EmojiType } from './types';
 
-type ProviderProps = KeyboardProps & {
+type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode;
+  onEmojiSelected: OnEmojiSelected;
 };
 
 export const defaultKeyboardContext: Required<KeyboardProps> = {
