@@ -9,6 +9,7 @@ type RootStackParamList = {
   Dark: undefined;
   Translated: undefined;
   DisabledCategories: undefined;
+  StaticModal: undefined;
   Static: undefined;
 };
 
@@ -27,6 +28,10 @@ const Examples = ({ navigation }: Props) => {
         <Button
           title="DisabledCategories"
           onPress={() => navigation.navigate('DisabledCategories')}
+        />
+        <Button
+          title="StaticModal"
+          onPress={() => navigation.navigate('StaticModal')}
         />
         <Button title="Static" onPress={() => navigation.navigate('Static')} />
       </View>

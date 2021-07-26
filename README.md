@@ -61,6 +61,18 @@ export default function App() {
 | onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
 | translation | CategoryTranslation | en | no | Translation object *see translation section* |
 | disabledCategory | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
+## 🖼 Usage as static
+
+```js
+import { EmojiStaticKeyboard, KeyboardProvider } from 'rn-emoji-keyboard';
+
+// ...
+
+<KeyboardProvider onEmojiSelected={handlePick}>
+  <EmojiStaticKeyboard />
+</KeyboardProvider>
+```
+Example about serving as static keyboard [you can find here](/example/src/Dark/Dark.tsx).
 ## 🇺🇸 Internationalization
 ### Pre-defined
 Due to the limited translation possibilities, we only provide a few pre-defined translations into the following languages:
@@ -101,7 +113,9 @@ You can clone the repo and run `yarn example ios` or `yarn example android` to p
 ![Preview](/example/assets/translated-preview.jpg)
 ### [DisabledCategories](/example/src/DisabledCategories/DisabledCategories.tsx)
 ![Preview](/example/assets/categories-preview.jpg)
-### [Static (without knob)](/example/src/Static/Static.tsx)
+### [StaticModal (without knob)](/example/src/StaticModal/StaticModal.tsx)
+![Preview](/example/assets/static-modal-preview.jpg)
+### [Static](/example/src/Static/Static.tsx)
 ![Preview](/example/assets/static-preview.jpg)
 ## 📈 Future plans
 * Skin tone palette selector.
