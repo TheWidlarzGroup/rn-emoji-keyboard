@@ -7,7 +7,7 @@ import {
   PanResponder,
 } from 'react-native';
 import { getHeight } from '../utils';
-import { KeyboardContext } from '../KeyboardContext';
+import { KeyboardContext } from '../contexts/KeyboardContext';
 
 type KnobProps = {
   offsetY: Animated.Value;

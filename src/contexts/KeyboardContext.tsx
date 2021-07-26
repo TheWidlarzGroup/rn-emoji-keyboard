@@ -4,7 +4,7 @@ import {
   defaultKeyboardContext,
   defaultKeyboardValues,
 } from './KeyboardProvider';
-import type { CategoryTranslation, EmojiType, CategoryTypes } from './types';
+import type { CategoryTranslation, EmojiType, CategoryTypes } from '../types';
 
 export type OnEmojiSelected = (emoji: EmojiType) => void;
 

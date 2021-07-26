@@ -7,11 +7,11 @@ import {
   useWindowDimensions,
   Animated,
 } from 'react-native';
-import type { CategoryTypes, EmojisByCategory } from './types';
-import { EmojiCategory } from './components/EmojiCategory';
-import { KeyboardContext } from './KeyboardContext';
-import { Categories } from './components/Categories';
-import emojisByGroup from './assets/emojis.json';
+import type { CategoryTypes, EmojisByCategory } from '../types';
+import { EmojiCategory } from './EmojiCategory';
+import { KeyboardContext } from '../contexts/KeyboardContext';
+import { Categories } from './Categories';
+import emojisByGroup from '../assets/emojis.json';
 
 export const EmojiStaticKeyboard = () => {
   const { width } = useWindowDimensions();

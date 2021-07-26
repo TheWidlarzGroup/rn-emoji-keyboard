@@ -6,8 +6,8 @@ import {
   KeyboardContext,
   OnEmojiSelected,
 } from './KeyboardContext';
-import en from './translation/en';
-import type { EmojiType } from './types';
+import en from '../translation/en';
+import type { EmojiType } from '../types';
 
 type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode;

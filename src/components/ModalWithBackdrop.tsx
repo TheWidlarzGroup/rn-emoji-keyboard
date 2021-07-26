@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { KeyboardContext } from '../KeyboardContext';
+import { KeyboardContext } from '../contexts/KeyboardContext';
 
 type ModalWithBackdropProps = {
   isOpen: boolean;

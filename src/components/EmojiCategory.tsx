@@ -3,7 +3,7 @@ import * as React from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import type { EmojisByCategory, EmojiType, JsonEmoji } from '../types';
 import { SingleEmoji } from './SingleEmoji';
-import { KeyboardContext } from '../KeyboardContext';
+import { KeyboardContext } from '../contexts/KeyboardContext';
 
 const emptyEmoji = {
   emoji: '',

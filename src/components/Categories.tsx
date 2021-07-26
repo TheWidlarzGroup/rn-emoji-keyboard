@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Animated, StyleSheet, FlatList } from 'react-native';
-import { KeyboardContext } from '../KeyboardContext';
+import { KeyboardContext } from '../contexts/KeyboardContext';
 import {
   CATEGORIES,
   CATEGORIES_NAVIGATION,

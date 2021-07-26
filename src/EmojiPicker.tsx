@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { Animated, useWindowDimensions } from 'react-native';
-import { EmojiStaticKeyboard } from './EmojiStaticKeyboard';
+import { EmojiStaticKeyboard } from './components/EmojiStaticKeyboard';
 import { Knob } from './components/Knob';
-import { defaultKeyboardContext, KeyboardProvider } from './KeyboardProvider';
-import type { KeyboardProps } from './KeyboardContext';
+import {
+  defaultKeyboardContext,
+  KeyboardProvider,
+} from './contexts/KeyboardProvider';
+import type { KeyboardProps } from './contexts/KeyboardContext';
 import type { EmojiType } from './types';
 import { ModalWithBackdrop } from './components/ModalWithBackdrop';
 import { getHeight } from './utils';

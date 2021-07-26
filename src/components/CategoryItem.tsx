@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { KeyboardContext } from '../KeyboardContext';
+import { KeyboardContext } from '../contexts/KeyboardContext';
 import type { CategoryNavigationItem, CategoryTypes } from '../types';
 import { Icon } from './Icon';
 
