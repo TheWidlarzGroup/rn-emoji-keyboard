@@ -1,4 +1,4 @@
-name: Lint
+name: TypeScript
 
 on: [push]
 
@@ -13,5 +13,5 @@ jobs:
       - uses: c-hive/gha-yarn-cache@v1
       - name: Install node modules
         run: yarn
-      - name: lint
-        run: yarn lint
+      - name: typescript
+        run: yarn typescript
