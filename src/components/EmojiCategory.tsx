@@ -28,12 +28,8 @@ export const EmojiCategory = ({
     translation,
   } = React.useContext(KeyboardContext);
 
-  const { keyboardState, setKeyboardState } = useKeyboardStore();
+  const { setKeyboardState } = useKeyboardStore();
 
-  console.log(
-    'Current emoji state',
-    keyboardState.recentlyUsed.map((emoji) => emoji.emoji)
-  );
   const [empty, setEmpty] = React.useState<EmojiType[]>([]);
 
   React.useEffect(() => {
