@@ -78,7 +78,13 @@ export const EmojiCategory = ({
         removeClippedSubviews={true}
         getItemLayout={getItemLayout}
         ListFooterComponent={() => (
-          <View style={categoryPosition === 'floating' && styles.footer} />
+          <View
+            style={
+              categoryPosition === 'floating'
+                ? styles.footerFloating
+                : styles.footer
+            }
+          />
         )}
         windowSize={20}
       />
@@ -98,5 +104,6 @@ const styles = StyleSheet.create({
     marginBottom: 6,
     marginLeft: 12,
   },
-  footer: { height: 70 },
+  footer: { height: 8 },
+  footerFloating: { height: 70 },
 });
