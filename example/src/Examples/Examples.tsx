@@ -11,6 +11,8 @@ type RootStackParamList = {
   DisabledCategories: undefined;
   StaticModal: undefined;
   Static: undefined;
+  TopCategory: undefined;
+  BottomCategory: undefined;
 };
 
 type Props = StackScreenProps<RootStackParamList, 'Examples'>;
@@ -26,14 +28,25 @@ const Examples = ({ navigation }: Props) => {
           onPress={() => navigation.navigate('Translated')}
         />
         <Button
-          title="DisabledCategories"
+          title="Disabled Categories"
           onPress={() => navigation.navigate('DisabledCategories')}
         />
         <Button
-          title="StaticModal"
+          title="Static Modal (wihtout knob)"
           onPress={() => navigation.navigate('StaticModal')}
         />
-        <Button title="Static" onPress={() => navigation.navigate('Static')} />
+        <Button
+          title="Static Component"
+          onPress={() => navigation.navigate('Static')}
+        />
+        <Button
+          title="Category Top"
+          onPress={() => navigation.navigate('TopCategory')}
+        />
+        <Button
+          title="Category Bottom"
+          onPress={() => navigation.navigate('BottomCategory')}
+        />
       </View>
     </SafeAreaView>
   );

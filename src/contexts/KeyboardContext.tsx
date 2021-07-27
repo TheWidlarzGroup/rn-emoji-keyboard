@@ -32,6 +32,7 @@ export type KeyboardProps = {
   }) => void;
   translation?: CategoryTranslation;
   disabledCategory?: CategoryTypes[];
+  categoryPosition?: 'floating' | 'top' | 'bottom';
 };
 export type ContextValues = {
   activeCategoryIndex: number;

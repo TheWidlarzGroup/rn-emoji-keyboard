@@ -20,6 +20,7 @@ export const EmojiStaticKeyboard = () => {
     containerStyles,
     onCategoryChangeFailed,
     disabledCategory,
+    categoryPosition,
   } = React.useContext(KeyboardContext);
 
   const flatListRef = React.useRef<FlatList>(null);
@@ -47,7 +48,14 @@ export const EmojiStaticKeyboard = () => {
   }, [activeCategoryIndex, scrollNav]);
 
   return (
-    <View style={[styles.container, styles.containerShadow, containerStyles]}>
+    <View
+      style={[
+        styles.container,
+        styles.containerShadow,
+        categoryPosition === 'top' && styles.containerReverse,
+        containerStyles,
+      ]}
+    >
       <Animated.FlatList
         data={emojisByGroup.filter((category) => {
           const title = category.title as CategoryTypes;
@@ -76,10 +84,10 @@ export const EmojiStaticKeyboard = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 16,
     borderRadius: 16,
     backgroundColor: '#fff',
   },
+  containerReverse: { flexDirection: 'column-reverse' },
   containerShadow: {
     shadowColor: 'black',
     shadowOpacity: 0.15,
