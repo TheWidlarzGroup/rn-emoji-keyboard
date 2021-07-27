@@ -38,7 +38,6 @@ export default function App() {
   )
 }
 ```
-
 ## ⚙️ Accepted props (current implemented)
 | Name | Type | Default Value | Required | Description |
 |---|---|---|---|---|
@@ -61,8 +60,12 @@ export default function App() {
 | onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
 | translation | CategoryTranslation | en | no | Translation object *see translation section* |
 | disabledCategory | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
-## 🖼 Usage as static
 
+## 📊 Comparison
+
+![comparison table](/example/assets/table-comparison-small.png)
+
+## 🖼 Usage as static
 ```js
 import { EmojiKeyboard } from 'rn-emoji-keyboard';
 
