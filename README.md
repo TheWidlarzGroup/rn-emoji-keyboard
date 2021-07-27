@@ -113,12 +113,16 @@ You can clone the repo and run `yarn example ios` or `yarn example android` to p
 ![Preview](/example/assets/dark-preview.jpg)
 ### [Translated](/example/src/Translated/Translated.tsx)
 ![Preview](/example/assets/translated-preview.jpg)
-### [DisabledCategories](/example/src/DisabledCategories/DisabledCategories.tsx)
+### [Disabled Categories](/example/src/DisabledCategories/DisabledCategories.tsx)
 ![Preview](/example/assets/categories-preview.jpg)
-### [StaticModal (without knob)](/example/src/StaticModal/StaticModal.tsx)
+### [Static Modal (without knob)](/example/src/StaticModal/StaticModal.tsx)
 ![Preview](/example/assets/static-modal-preview.jpg)
 ### [Static](/example/src/Static/Static.tsx)
 ![Preview](/example/assets/static-preview.jpg)
+### [Categories Top](/example/src/TopCategory/TopCategory.tsx)
+![Preview](/example/assets/categories-top-preview.jpg)
+### [Categories Bottom](/example/src/BottomCategory/BottomCategory.tsx)
+![Preview](/example/assets/categories-bottom-preview.jpg)
 ## 📈 Future plans
 * Skin tone palette selector.
 * Search bar.
