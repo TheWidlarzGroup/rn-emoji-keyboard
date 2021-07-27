@@ -1,7 +1,7 @@
 {
   "name": "rn-emoji-keyboard",
-  "version": "0.2.3",
-  "description": ".",
+  "version": "0.2.2",
+  "description": "Super performant, lightweight, fully customizable emoji picker. Designated to be user and developer friendly! 💖",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
