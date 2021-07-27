@@ -60,6 +60,7 @@ export default function App() {
 | onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
 | translation | CategoryTranslation | en | no | Translation object *see translation section* |
 | disabledCategory | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
+| categoryPosition | CategoryPosition | categoryPosition | no | Specify category container position |
 
 ## 📊 Comparison
 
