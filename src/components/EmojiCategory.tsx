@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, FlatList } from 'react-native';
 import type { EmojisByCategory, EmojiType, JsonEmoji } from '../types';
 import { SingleEmoji } from './SingleEmoji';
 import { KeyboardContext } from '../contexts/KeyboardContext';
+import { useKeyboardStore } from '../store/useKeyboardStore';
 
 const emptyEmoji = {
   emoji: '',
@@ -27,6 +28,12 @@ export const EmojiCategory = ({
     translation,
   } = React.useContext(KeyboardContext);
 
+  const { keyboardState, setKeyboardState } = useKeyboardStore();
+
+  console.log(
+    'Current emoji state',
+    keyboardState.recentlyUsed.map((emoji) => emoji.emoji)
+  );
   const [empty, setEmpty] = React.useState<EmojiType[]>([]);
 
   React.useEffect(() => {
@@ -51,15 +58,24 @@ export const EmojiCategory = ({
     slug: emoji.name.replace(' ', '_'),
   });
 
+  const handleEmojiPress = React.useCallback(
+    (emoji: JsonEmoji) => {
+      const parsedEmoji = parseEmoji(emoji);
+      onEmojiSelected(parsedEmoji);
+      setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: parsedEmoji });
+    },
+    [onEmojiSelected, setKeyboardState]
+  );
+
   const renderItem = React.useCallback(
     (props) => (
       <SingleEmoji
         {...props}
-        onPress={() => onEmojiSelected(parseEmoji(props.item))}
+        onPress={() => handleEmojiPress(props.item)}
         emojiSize={emojiSize}
       />
     ),
-    [onEmojiSelected, emojiSize]
+    [emojiSize, handleEmojiPress]
   );
 
   return (
