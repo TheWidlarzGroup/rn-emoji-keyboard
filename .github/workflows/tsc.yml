@@ -3,7 +3,7 @@ name: TypeScript
 on: [push]
 
 jobs:
-  eslint:
+  tsc:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
