@@ -96,7 +96,6 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
       <View style={getStylesBasedOnPosition()}>
         <FlatList
           data={CATEGORIES_NAVIGATION.filter(({ category }) => {
-            console.log(searchPhrase, 'search');
             if (searchPhrase === '' && category === 'search') return false;
             return !disabledCategory.includes(category);
           })}
