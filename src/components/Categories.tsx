@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, Animated, StyleSheet, FlatList } from 'react-native';
+import { View, Animated, StyleSheet, FlatList, ViewStyle } from 'react-native';
 import { useKeyboardStore } from '../store/useKeyboardStore';
+import { defaultKeyboardContext } from '../contexts/KeyboardProvider';
 import { KeyboardContext } from '../contexts/KeyboardContext';
 import {
   CATEGORIES,
@@ -23,6 +24,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     disabledCategory,
     activeCategoryContainerColor,
     enableRecentlyUsed,
+    categoryPosition,
   } = React.useContext(KeyboardContext);
   const { keyboardState } = useKeyboardStore();
   const handleScrollToCategory = React.useCallback(
@@ -66,11 +68,36 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
   const isRecentlyUsedHidden = (category: CategoryTypes) =>
     category === 'recently_used' &&
     (keyboardState.recentlyUsed.length === 0 || !enableRecentlyUsed);
+
+  const getStylesBasedOnPosition = () => {
+    const style: ViewStyle[] = [styles.navigation];
+    switch (categoryPosition) {
+      case 'floating':
+        style.push(styles.navigationFloating);
+        break;
+      case 'top':
+        style.push(styles.navigationTop);
+        break;
+      case 'bottom':
+        style.push(styles.navigationBottom);
+        break;
+      default:
+        break;
+    }
+    if (
+      categoryContainerColor !==
+        defaultKeyboardContext.categoryContainerColor ||
+      categoryPosition === 'floating'
+    )
+      style.push({
+        backgroundColor: categoryContainerColor,
+      });
+    return style;
+  };
+
   return (
-    <View style={styles.bottomBar}>
-      <View
-        style={[styles.navigation, { backgroundColor: categoryContainerColor }]}
-      >
+    <View style={[categoryPosition === 'floating' && styles.floating]}>
+      <View style={getStylesBasedOnPosition()}>
         <FlatList
           data={CATEGORIES_NAVIGATION.filter(({ category }) => {
             if (isRecentlyUsedHidden(category)) return false;
@@ -92,7 +119,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
 };
 
 const styles = StyleSheet.create({
-  bottomBar: {
+  floating: {
     position: 'absolute',
     bottom: 20,
     left: 20,
@@ -101,7 +128,24 @@ const styles = StyleSheet.create({
   },
   navigation: {
     padding: 3,
+    alignItems: 'center',
+    borderColor: '#00000011',
+  },
+  navigationFloating: {
     borderRadius: 8,
+  },
+  navigationBottom: {
+    paddingVertical: 6,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+    borderTopWidth: 1,
+  },
+  navigationTop: {
+    paddingTop: 12,
+    paddingBottom: 6,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    borderBottomWidth: 1,
   },
   separator: {
     width: 1,

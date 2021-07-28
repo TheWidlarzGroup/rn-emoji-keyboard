@@ -22,6 +22,8 @@ export type CategoryTypes =
   | 'flags'
   | 'recently_used';
 
+export type CategoryPosition = 'floating' | 'top' | 'bottom';
+
 export const CATEGORIES: CategoryTypes[] = [
   'smileys_emotion',
   'people_body',

@@ -4,7 +4,12 @@ import {
   defaultKeyboardContext,
   defaultKeyboardValues,
 } from './KeyboardProvider';
-import type { CategoryTranslation, EmojiType, CategoryTypes } from '../types';
+import type {
+  CategoryTranslation,
+  EmojiType,
+  CategoryTypes,
+  CategoryPosition,
+} from '../types';
 
 export type OnEmojiSelected = (emoji: EmojiType) => void;
 
@@ -33,6 +38,7 @@ export type KeyboardProps = {
   translation?: CategoryTranslation;
   disabledCategory?: CategoryTypes[];
   enableRecentlyUsed?: boolean;
+  categoryPosition?: CategoryPosition;
 };
 export type ContextValues = {
   activeCategoryIndex: number;

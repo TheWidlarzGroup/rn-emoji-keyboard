@@ -37,6 +37,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   translation: en,
   disabledCategory: [],
   enableRecentlyUsed: false,
+  categoryPosition: 'floating',
 };
 
 export const defaultKeyboardValues: ContextValues = {

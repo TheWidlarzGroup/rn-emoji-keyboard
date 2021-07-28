@@ -45,6 +45,8 @@ export default function App() {
 | open | boolean | false | yes | Opens modal picker |
 | onClose | function | undefined | yes | Request close modal *runs when onEmojiSelected or backdrop pressed* |
 | emojiSize | number | 28 | no | Custom emoji size |
+| enableRecentlyUsed | boolean | false | no | Enable recently used emojis in categories |
+| categoryPosition | 'floating' \| 'top' \| 'bottom' | 'floating' | no | Specify category container position |
 | headerStyles | TextStyle | {} | no | Override category name styles |
 | knobStyles | ViewStyle | {} | no | Override knob styles |
 | containerStyles | ViewStyle | {} | no | Override container styles |
@@ -60,7 +62,6 @@ export default function App() {
 | onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
 | translation | CategoryTranslation | en | no | Translation object *see translation section* |
 | disabledCategory | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
-| enableRecentlyUsed | boolean | false | no | Enable recently used emojis in categories |
 
 ## 📊 Comparison
 
@@ -113,14 +114,18 @@ You can clone the repo and run `yarn example ios` or `yarn example android` to p
 ![Preview](/example/assets/dark-preview.jpg)
 ### [Translated](/example/src/Translated/Translated.tsx)
 ![Preview](/example/assets/translated-preview.jpg)
-### [DisabledCategories](/example/src/DisabledCategories/DisabledCategories.tsx)
+### [Disabled Categories](/example/src/DisabledCategories/DisabledCategories.tsx)
 ![Preview](/example/assets/categories-preview.jpg)
-### [StaticModal (without knob)](/example/src/StaticModal/StaticModal.tsx)
+### [Static Modal (without knob)](/example/src/StaticModal/StaticModal.tsx)
 ![Preview](/example/assets/static-modal-preview.jpg)
 ### [Static](/example/src/Static/Static.tsx)
 ![Preview](/example/assets/static-preview.jpg)
 ### [Recently used](/example/src/EnableRecently/EnableRecently.tsx)
 ![Preview](/example/assets/enable-recently-used-preview.jpg)
+### [Categories Top](/example/src/TopCategory/TopCategory.tsx)
+![Preview](/example/assets/categories-top-preview.jpg)
+### [Categories Bottom](/example/src/BottomCategory/BottomCategory.tsx)
+![Preview](/example/assets/categories-bottom-preview.jpg)
 ## 📈 Future plans
 * Skin tone palette selector.
 * Search bar.

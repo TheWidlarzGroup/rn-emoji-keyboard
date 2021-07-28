@@ -21,6 +21,7 @@ export const EmojiStaticKeyboard = () => {
     containerStyles,
     onCategoryChangeFailed,
     disabledCategory,
+    categoryPosition,
   } = React.useContext(KeyboardContext);
   const { keyboardState } = useKeyboardStore();
   const flatListRef = React.useRef<FlatList>(null);
@@ -60,7 +61,14 @@ export const EmojiStaticKeyboard = () => {
   }, [disabledCategory, keyboardState.recentlyUsed]);
 
   return (
-    <View style={[styles.container, styles.containerShadow, containerStyles]}>
+    <View
+      style={[
+        styles.container,
+        styles.containerShadow,
+        categoryPosition === 'top' && styles.containerReverse,
+        containerStyles,
+      ]}
+    >
       <Animated.FlatList
         extraData={keyboardState.recentlyUsed.length}
         data={renderList()}
@@ -87,10 +95,10 @@ export const EmojiStaticKeyboard = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 16,
     borderRadius: 16,
     backgroundColor: '#fff',
   },
+  containerReverse: { flexDirection: 'column-reverse' },
   containerShadow: {
     shadowColor: 'black',
     shadowOpacity: 0.15,
