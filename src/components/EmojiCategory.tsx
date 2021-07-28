@@ -26,6 +26,7 @@ export const EmojiCategory = ({
     hideHeader,
     headerStyles,
     translation,
+    categoryPosition,
   } = React.useContext(KeyboardContext);
 
   const { setKeyboardState } = useKeyboardStore();
@@ -89,7 +90,15 @@ export const EmojiCategory = ({
         renderItem={renderItem}
         removeClippedSubviews={true}
         getItemLayout={getItemLayout}
-        ListFooterComponent={() => <View style={styles.footer} />}
+        ListFooterComponent={() => (
+          <View
+            style={
+              categoryPosition === 'floating'
+                ? styles.footerFloating
+                : styles.footer
+            }
+          />
+        )}
         windowSize={20}
       />
     </View>
@@ -104,8 +113,10 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     opacity: 0.6,
+    marginTop: 16,
     marginBottom: 6,
     marginLeft: 12,
   },
-  footer: { height: 70 },
+  footer: { height: 8 },
+  footerFloating: { height: 70 },
 });

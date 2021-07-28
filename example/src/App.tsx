@@ -9,6 +9,8 @@ import Translated from './Translated/Translated';
 import DisabledCategories from './DisabledCategories/DisabledCategories';
 import StaticModal from './StaticModal/StaticModal';
 import Static from './Static/Static';
+import TopCategory from './TopCategory/TopCategory';
+import BottomCategory from './BottomCategory/BottomCategory';
 
 const Stack = createStackNavigator();
 export default () => {
@@ -25,6 +27,8 @@ export default () => {
         />
         <Stack.Screen name="StaticModal" component={StaticModal} />
         <Stack.Screen name="Static" component={Static} />
+        <Stack.Screen name="TopCategory" component={TopCategory} />
+        <Stack.Screen name="BottomCategory" component={BottomCategory} />
       </Stack.Navigator>
     </NavigationContainer>
   );

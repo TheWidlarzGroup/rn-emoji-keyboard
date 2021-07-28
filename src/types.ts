@@ -21,6 +21,8 @@ export type CategoryTypes =
   | 'symbols'
   | 'flags';
 
+export type CategoryPosition = 'floating' | 'top' | 'bottom';
+
 export const CATEGORIES: CategoryTypes[] = [
   'smileys_emotion',
   'people_body',
