@@ -60,6 +60,7 @@ export default function App() {
 | onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
 | translation | CategoryTranslation | en | no | Translation object *see translation section* |
 | disabledCategory | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
+| enableRecentlyUsed | boolean | false | no | Enable recently used emojis in categories |
 
 ## 📊 Comparison
 
@@ -118,6 +119,8 @@ You can clone the repo and run `yarn example ios` or `yarn example android` to p
 ![Preview](/example/assets/static-modal-preview.jpg)
 ### [Static](/example/src/Static/Static.tsx)
 ![Preview](/example/assets/static-preview.jpg)
+### [Recently used](/example/src/EnableRecently/EnableRecently.tsx)
+![Preview](/example/assets/enable-recently-used-preview.jpg)
 ## 📈 Future plans
 * Skin tone palette selector.
 * Search bar.
