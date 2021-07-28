@@ -38,12 +38,15 @@ export type KeyboardProps = {
   translation?: CategoryTranslation;
   disabledCategory?: CategoryTypes[];
   categoryPosition?: CategoryPosition;
+  enableSearchBar?: boolean;
 };
 export type ContextValues = {
   activeCategoryIndex: number;
   setActiveCategoryIndex: (index: number) => void;
   numberOfColumns: number;
   width: number;
+  searchPhrase: string;
+  setSearchPhrase: (phrase: string) => void;
 };
 
 export const KeyboardContext = React.createContext<

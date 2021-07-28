@@ -23,6 +23,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     disabledCategory,
     activeCategoryContainerColor,
     categoryPosition,
+    searchPhrase,
   } = React.useContext(KeyboardContext);
 
   const handleScrollToCategory = React.useCallback(
@@ -94,9 +95,11 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     <View style={[categoryPosition === 'floating' && styles.floating]}>
       <View style={getStylesBasedOnPosition()}>
         <FlatList
-          data={CATEGORIES_NAVIGATION.filter(
-            ({ category }) => !disabledCategory.includes(category)
-          )}
+          data={CATEGORIES_NAVIGATION.filter(({ category }) => {
+            console.log(searchPhrase, 'search');
+            if (searchPhrase === '' && category === 'search') return false;
+            return !disabledCategory.includes(category);
+          })}
           keyExtractor={(item) => item.category}
           renderItem={rendarItem}
           ItemSeparatorComponent={() => <View style={styles.separator} />}

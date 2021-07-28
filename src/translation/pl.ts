@@ -10,5 +10,6 @@ const pl: CategoryTranslation = {
   objects: 'Przedmioty',
   symbols: 'Symbole',
   flags: 'Flagi',
+  search: 'Szukaj',
 };
 export default pl;

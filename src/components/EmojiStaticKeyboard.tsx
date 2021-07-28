@@ -12,6 +12,7 @@ import { EmojiCategory } from './EmojiCategory';
 import { KeyboardContext } from '../contexts/KeyboardContext';
 import { Categories } from './Categories';
 import emojisByGroup from '../assets/emojis.json';
+import { SearchBar } from './SearchBar';
 
 export const EmojiStaticKeyboard = () => {
   const { width } = useWindowDimensions();
@@ -21,6 +22,9 @@ export const EmojiStaticKeyboard = () => {
     onCategoryChangeFailed,
     disabledCategory,
     categoryPosition,
+    enableSearchBar,
+    searchPhrase,
+    setActiveCategoryIndex,
   } = React.useContext(KeyboardContext);
 
   const flatListRef = React.useRef<FlatList>(null);
@@ -47,6 +51,29 @@ export const EmojiStaticKeyboard = () => {
     }).start();
   }, [activeCategoryIndex, scrollNav]);
 
+  const getData = React.useCallback(() => {
+    const enabledCategories = emojisByGroup.filter((category) => {
+      const title = category.title as CategoryTypes;
+      return !disabledCategory.includes(title);
+    });
+    enabledCategories.push({
+      title: 'search',
+      data: emojisByGroup
+        .map((group) => group.data)
+        .flat()
+        .filter((emoji) => {
+          return emoji.name.toLowerCase().includes(searchPhrase.toLowerCase());
+        }),
+    });
+    return enabledCategories;
+  }, [disabledCategory, searchPhrase]);
+
+  React.useEffect(() => {
+    if (searchPhrase !== '') {
+      flatListRef.current?.scrollToEnd();
+      setActiveCategoryIndex(getData().length - 1);
+    }
+  }, [getData, searchPhrase, setActiveCategoryIndex]);
   return (
     <View
       style={[
@@ -56,11 +83,10 @@ export const EmojiStaticKeyboard = () => {
         containerStyles,
       ]}
     >
+      {enableSearchBar && <SearchBar />}
       <Animated.FlatList
-        data={emojisByGroup.filter((category) => {
-          const title = category.title as CategoryTypes;
-          return !disabledCategory.includes(title);
-        })}
+        data={getData()}
+        extraData={searchPhrase}
         keyExtractor={(item: EmojisByCategory) => item.title}
         renderItem={renderItem}
         removeClippedSubviews={true}

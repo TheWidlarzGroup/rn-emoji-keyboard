@@ -10,5 +10,6 @@ export const en: CategoryTranslation = {
   objects: 'Objects',
   symbols: 'Symbols',
   flags: 'Flags',
+  search: 'Search',
 };
 export default en;

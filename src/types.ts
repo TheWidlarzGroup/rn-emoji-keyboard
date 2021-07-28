@@ -19,7 +19,8 @@ export type CategoryTypes =
   | 'activities'
   | 'objects'
   | 'symbols'
-  | 'flags';
+  | 'flags'
+  | 'search';
 
 export type CategoryPosition = 'floating' | 'top' | 'bottom';
 
@@ -33,6 +34,7 @@ export const CATEGORIES: CategoryTypes[] = [
   'objects',
   'symbols',
   'flags',
+  'search',
 ];
 
 export type CategoryNavigationItem = {
@@ -54,6 +56,7 @@ export const CATEGORIES_NAVIGATION: CategoryNavigationItem[] = [
   { icon: 'Lightbulb', category: 'objects' },
   { icon: 'Ban', category: 'symbols' },
   { icon: 'Flag', category: 'flags' },
+  { icon: 'Search', category: 'search' },
 ];
 
 export type EmojisByCategory = {
