@@ -12,6 +12,7 @@ import { EmojiCategory } from './EmojiCategory';
 import { KeyboardContext } from '../contexts/KeyboardContext';
 import { Categories } from './Categories';
 import emojisByGroup from '../assets/emojis.json';
+import { useKeyboardStore } from '../store/useKeyboardStore';
 
 export const EmojiStaticKeyboard = () => {
   const { width } = useWindowDimensions();
@@ -21,9 +22,8 @@ export const EmojiStaticKeyboard = () => {
     onCategoryChangeFailed,
     disabledCategory,
   } = React.useContext(KeyboardContext);
-
+  const { keyboardState } = useKeyboardStore();
   const flatListRef = React.useRef<FlatList>(null);
-
   const scrollNav = React.useRef(new Animated.Value(0)).current;
 
   const getItemLayout = (
@@ -46,13 +46,24 @@ export const EmojiStaticKeyboard = () => {
     }).start();
   }, [activeCategoryIndex, scrollNav]);
 
+  const renderList = React.useCallback(() => {
+    const data = emojisByGroup.filter((category) => {
+      const title = category.title as CategoryTypes;
+      return !disabledCategory.includes(title);
+    });
+    if (keyboardState.recentlyUsed.length)
+      data.push({
+        title: 'recently_used',
+        data: keyboardState.recentlyUsed,
+      });
+    return data;
+  }, [disabledCategory, keyboardState.recentlyUsed]);
+
   return (
     <View style={[styles.container, styles.containerShadow, containerStyles]}>
       <Animated.FlatList
-        data={emojisByGroup.filter((category) => {
-          const title = category.title as CategoryTypes;
-          return !disabledCategory.includes(title);
-        })}
+        extraData={keyboardState.recentlyUsed.length}
+        data={renderList()}
         keyExtractor={(item: EmojisByCategory) => item.title}
         renderItem={renderItem}
         removeClippedSubviews={true}

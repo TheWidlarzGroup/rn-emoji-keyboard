@@ -58,7 +58,7 @@ export const EmojiCategory = ({
     (emoji: JsonEmoji) => {
       const parsedEmoji = parseEmoji(emoji);
       onEmojiSelected(parsedEmoji);
-      setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: parsedEmoji });
+      setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji });
     },
     [onEmojiSelected, setKeyboardState]
   );

@@ -32,6 +32,7 @@ export type KeyboardProps = {
   }) => void;
   translation?: CategoryTranslation;
   disabledCategory?: CategoryTypes[];
+  hideRecentlyUsed?: boolean;
 };
 export type ContextValues = {
   activeCategoryIndex: number;
