@@ -19,7 +19,8 @@ export type CategoryTypes =
   | 'activities'
   | 'objects'
   | 'symbols'
-  | 'flags';
+  | 'flags'
+  | 'recently_used';
 
 export const CATEGORIES: CategoryTypes[] = [
   'smileys_emotion',
@@ -31,6 +32,7 @@ export const CATEGORIES: CategoryTypes[] = [
   'objects',
   'symbols',
   'flags',
+  'recently_used',
 ];
 
 export type CategoryNavigationItem = {
@@ -52,6 +54,7 @@ export const CATEGORIES_NAVIGATION: CategoryNavigationItem[] = [
   { icon: 'Lightbulb', category: 'objects' },
   { icon: 'Ban', category: 'symbols' },
   { icon: 'Flag', category: 'flags' },
+  { icon: 'Clock', category: 'recently_used' },
 ];
 
 export type EmojisByCategory = {

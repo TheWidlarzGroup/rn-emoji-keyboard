@@ -1,6 +1,7 @@
 import type { CategoryTranslation } from '../types';
 
 export const en: CategoryTranslation = {
+  recently_used: 'Recently used',
   smileys_emotion: 'Smileys & Emotion',
   people_body: 'People & Body',
   animals_nature: 'Animals & Nature',
