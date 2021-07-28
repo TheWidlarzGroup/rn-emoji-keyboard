@@ -56,6 +56,7 @@ export const EmojiCategory = ({
 
   const handleEmojiPress = React.useCallback(
     (emoji: JsonEmoji) => {
+      if (emoji.name === 'blank emoji') return;
       const parsedEmoji = parseEmoji(emoji);
       onEmojiSelected(parsedEmoji);
       setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: parsedEmoji });
