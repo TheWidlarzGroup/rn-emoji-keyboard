@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import EmojiPicker from 'rn-emoji-keyboard';
 import type { EmojiType } from 'src/types';
 
-const HideRecently = () => {
+const EnableRecently = () => {
   const [result, setResult] = React.useState<string>();
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
@@ -24,7 +24,7 @@ const HideRecently = () => {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        hideRecentlyUsed
+        enableRecentlyUsed
       />
     </SafeAreaView>
   );
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HideRecently;
+export default EnableRecently;

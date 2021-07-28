@@ -11,7 +11,7 @@ type RootStackParamList = {
   DisabledCategories: undefined;
   StaticModal: undefined;
   Static: undefined;
-  HideRecently: undefined;
+  EnableRecently: undefined;
 };
 
 type Props = StackScreenProps<RootStackParamList, 'Examples'>;
@@ -36,8 +36,8 @@ const Examples = ({ navigation }: Props) => {
         />
         <Button title="Static" onPress={() => navigation.navigate('Static')} />
         <Button
-          title="Hide recently used"
-          onPress={() => navigation.navigate('HideRecently')}
+          title="Enable recently used"
+          onPress={() => navigation.navigate('EnableRecently')}
         />
       </View>
     </SafeAreaView>

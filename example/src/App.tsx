@@ -9,7 +9,7 @@ import Translated from './Translated/Translated';
 import DisabledCategories from './DisabledCategories/DisabledCategories';
 import StaticModal from './StaticModal/StaticModal';
 import Static from './Static/Static';
-import HideRecently from './HideRecently/HideRecently';
+import EnableRecently from './EnableRecently/EnableRecently';
 
 const Stack = createStackNavigator();
 export default () => {
@@ -26,7 +26,7 @@ export default () => {
         />
         <Stack.Screen name="StaticModal" component={StaticModal} />
         <Stack.Screen name="Static" component={Static} />
-        <Stack.Screen name="HideRecently" component={HideRecently} />
+        <Stack.Screen name="EnableRecently" component={EnableRecently} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -22,7 +22,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     onCategoryChangeFailed,
     disabledCategory,
     activeCategoryContainerColor,
-    hideRecentlyUsed,
+    enableRecentlyUsed,
   } = React.useContext(KeyboardContext);
   const { keyboardState } = useKeyboardStore();
   const handleScrollToCategory = React.useCallback(
@@ -65,7 +65,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
   );
   const isRecentlyUsedHidden = (category: CategoryTypes) =>
     category === 'recently_used' &&
-    (keyboardState.recentlyUsed.length === 0 || hideRecentlyUsed);
+    (keyboardState.recentlyUsed.length === 0 || !enableRecentlyUsed);
   return (
     <View style={styles.bottomBar}>
       <View
