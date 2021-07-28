@@ -11,6 +11,7 @@ import StaticModal from './StaticModal/StaticModal';
 import Static from './Static/Static';
 import TopCategory from './TopCategory/TopCategory';
 import BottomCategory from './BottomCategory/BottomCategory';
+import SearchBar from './SearchBar/SearchBar';
 
 const Stack = createStackNavigator();
 export default () => {
@@ -29,6 +30,7 @@ export default () => {
         <Stack.Screen name="Static" component={Static} />
         <Stack.Screen name="TopCategory" component={TopCategory} />
         <Stack.Screen name="BottomCategory" component={BottomCategory} />
+        <Stack.Screen name="SearchBar" component={SearchBar} />
       </Stack.Navigator>
     </NavigationContainer>
   );

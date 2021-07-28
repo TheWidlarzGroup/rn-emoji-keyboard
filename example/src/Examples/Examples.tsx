@@ -13,6 +13,7 @@ type RootStackParamList = {
   Static: undefined;
   TopCategory: undefined;
   BottomCategory: undefined;
+  SearchBar: undefined;
 };
 
 type Props = StackScreenProps<RootStackParamList, 'Examples'>;
@@ -46,6 +47,10 @@ const Examples = ({ navigation }: Props) => {
         <Button
           title="Category Bottom"
           onPress={() => navigation.navigate('BottomCategory')}
+        />
+        <Button
+          title="Search Bar"
+          onPress={() => navigation.navigate('SearchBar')}
         />
       </View>
     </SafeAreaView>
