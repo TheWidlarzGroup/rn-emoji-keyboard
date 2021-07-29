@@ -62,6 +62,7 @@ export const EmojiStaticKeyboard = () => {
         .map((group) => group.data)
         .flat()
         .filter((emoji) => {
+          if (searchPhrase && searchPhrase.length < 2) return false;
           return emoji.name.toLowerCase().includes(searchPhrase.toLowerCase());
         }),
     });

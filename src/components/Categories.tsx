@@ -102,7 +102,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
           keyExtractor={(item) => item.category}
           renderItem={rendarItem}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
-          scrollEnabled={false}
+          showsHorizontalScrollIndicator={false}
           horizontal={true}
           onScrollToIndexFailed={onCategoryChangeFailed}
           ListHeaderComponent={activeIndicator}
