@@ -47,16 +47,17 @@ export const EmojiStaticKeyboard = () => {
     }).start();
   }, [activeCategoryIndex, scrollNav]);
 
-  const renderList = React.useCallback(() => {
+  const renderList = React.useMemo(() => {
     const data = emojisByGroup.filter((category) => {
       const title = category.title as CategoryTypes;
       return !disabledCategory.includes(title);
     });
-    if (keyboardState.recentlyUsed.length)
+    if (keyboardState.recentlyUsed.length) {
       data.push({
         title: 'recently_used',
         data: keyboardState.recentlyUsed,
       });
+    }
     return data;
   }, [disabledCategory, keyboardState.recentlyUsed]);
 
@@ -71,7 +72,7 @@ export const EmojiStaticKeyboard = () => {
     >
       <Animated.FlatList
         extraData={keyboardState.recentlyUsed.length}
-        data={renderList()}
+        data={renderList}
         keyExtractor={(item: EmojisByCategory) => item.title}
         renderItem={renderItem}
         removeClippedSubviews={true}
