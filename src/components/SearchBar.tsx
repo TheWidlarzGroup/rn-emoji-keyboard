@@ -1,26 +1,57 @@
 import * as React from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import { KeyboardContext } from '../contexts/KeyboardContext';
+import { Icon } from './Icon';
 
-export const SearchBar = () => {
-  const [search, setSearch] = React.useState('');
-  const { setSearchPhrase, translation } = React.useContext(KeyboardContext);
-  React.useEffect(() => {
-    console.log(search);
-  }, [search]);
+type SearchBarProps = {
+  flatListRef: React.RefObject<FlatList>;
+};
+
+export const SearchBar = ({ flatListRef }: SearchBarProps) => {
+  const {
+    searchPhrase,
+    setSearchPhrase,
+    translation,
+    setActiveCategoryIndex,
+    closeSearchColor,
+  } = React.useContext(KeyboardContext);
+  const inputRef = React.useRef<TextInput>(null);
 
   const handleSearch = (text: string) => {
-    setSearch(text);
     setSearchPhrase(text);
   };
+  const clearPhrase = () => {
+    setSearchPhrase('');
+    inputRef.current?.blur();
+    setActiveCategoryIndex(0);
+    flatListRef?.current?.scrollToIndex({ index: 0, animated: true });
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        value={search}
+        value={searchPhrase}
         onChangeText={handleSearch}
         placeholder={translation.search}
+        ref={inputRef}
       />
+      {!!searchPhrase && (
+        <TouchableOpacity onPress={clearPhrase} style={styles.button}>
+          <Icon
+            iconName={'Close'}
+            isActive={true}
+            normalColor={closeSearchColor}
+            activeColor={closeSearchColor}
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -28,13 +59,19 @@ export const SearchBar = () => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 16,
-  },
-  input: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
     marginHorizontal: 16,
     borderRadius: 100,
     borderWidth: 1,
     borderColor: '#00000011',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  input: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    flex: 1,
+  },
+  button: {
+    marginRight: 8,
   },
 });

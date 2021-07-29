@@ -9,6 +9,7 @@ import Trees from '../assets/Trees';
 import Ban from '../assets/Ban';
 import Users from '../assets/Users';
 import Search from '../assets/Search';
+import Close from '../assets/Close';
 
 export const Icon = ({
   iconName,
@@ -43,6 +44,8 @@ export const Icon = ({
       return <Users fill={color()} />;
     case 'Search':
       return <Search fill={color()} />;
+    case 'Close':
+      return <Close fill={color()} />;
     default:
       return null;
   }

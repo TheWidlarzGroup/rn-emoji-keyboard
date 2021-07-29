@@ -83,7 +83,7 @@ export const EmojiStaticKeyboard = () => {
         containerStyles,
       ]}
     >
-      {enableSearchBar && <SearchBar />}
+      {enableSearchBar && <SearchBar flatListRef={flatListRef} />}
       <Animated.FlatList
         data={getData()}
         extraData={searchPhrase}

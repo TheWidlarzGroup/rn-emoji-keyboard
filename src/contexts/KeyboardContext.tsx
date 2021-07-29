@@ -39,6 +39,7 @@ export type KeyboardProps = {
   disabledCategory?: CategoryTypes[];
   categoryPosition?: CategoryPosition;
   enableSearchBar?: boolean;
+  closeSearchColor?: string;
 };
 export type ContextValues = {
   activeCategoryIndex: number;

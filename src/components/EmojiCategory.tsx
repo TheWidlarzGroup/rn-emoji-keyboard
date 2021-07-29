@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     opacity: 0.6,
-    marginTop: 16,
+    marginTop: 12,
     marginBottom: 6,
     marginLeft: 12,
   },
