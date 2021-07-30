@@ -25,7 +25,6 @@ const EnableRecently = () => {
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         enableRecentlyUsed
-        enableSearchBar
       />
     </SafeAreaView>
   );
