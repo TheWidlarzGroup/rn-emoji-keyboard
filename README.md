@@ -46,7 +46,8 @@ export default function App() {
 | onClose | function | undefined | yes | Request close modal *runs when onEmojiSelected or backdrop pressed* |
 | emojiSize | number | 28 | no | Custom emoji size |
 | enableRecentlyUsed | boolean | false | no | Enable recently used emojis in categories |
-| categoryPosition | 'floating' \| 'top' \| 'bottom' | 'floating' | no | Specify category container position || enableSearchBar | boolean | false | no | Enable search bar |
+| categoryPosition | 'floating' \| 'top' \| 'bottom' | 'floating' | no | Specify category container position |
+| enableSearchBar | boolean | false | no | Enable search bar |
 | closeSearchColor | string | "#00000055" | no | Change button (cross) color for close/cancel search |
 | headerStyles | TextStyle | {} | no | Override category name styles |
 | knobStyles | ViewStyle | {} | no | Override knob styles |
