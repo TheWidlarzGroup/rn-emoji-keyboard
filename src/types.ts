@@ -20,6 +20,7 @@ export type CategoryTypes =
   | 'objects'
   | 'symbols'
   | 'flags'
+  | 'recently_used'
   | 'search';
 
 export type CategoryPosition = 'floating' | 'top' | 'bottom';
@@ -34,6 +35,7 @@ export const CATEGORIES: CategoryTypes[] = [
   'objects',
   'symbols',
   'flags',
+  'recently_used',
   'search',
 ];
 
@@ -56,6 +58,7 @@ export const CATEGORIES_NAVIGATION: CategoryNavigationItem[] = [
   { icon: 'Lightbulb', category: 'objects' },
   { icon: 'Ban', category: 'symbols' },
   { icon: 'Flag', category: 'flags' },
+  { icon: 'Clock', category: 'recently_used' },
   { icon: 'Search', category: 'search' },
 ];
 

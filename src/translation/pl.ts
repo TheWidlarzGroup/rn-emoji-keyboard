@@ -1,7 +1,8 @@
 import type { CategoryTranslation } from '../types';
 
 const pl: CategoryTranslation = {
-  smileys_emotion: 'Buźki i Emocje',
+  recently_used: 'Ostatnio używane',
+  smileys_emotion: 'Buźki i emocje',
   people_body: 'Ludzie',
   animals_nature: 'Zwierzęta i przyroda',
   food_drink: 'Jedzenie i napoje',

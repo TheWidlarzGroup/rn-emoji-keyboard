@@ -36,6 +36,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   },
   translation: en,
   disabledCategory: [],
+  enableRecentlyUsed: false,
   categoryPosition: 'floating',
   enableSearchBar: false,
   closeSearchColor: '#00000055',

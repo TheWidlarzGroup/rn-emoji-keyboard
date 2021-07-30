@@ -13,7 +13,7 @@ export class SingleEmoji extends React.Component<{
   render() {
     const { item, emojiSize, onPress } = this.props;
     return (
-      <TouchableOpacity onPress={() => onPress()} style={styles.container}>
+      <TouchableOpacity onPress={onPress} style={styles.container}>
         <View style={styles.iconContainer}>
           <Text style={{ fontSize: emojiSize }}>{item.emoji}</Text>
         </View>

@@ -37,6 +37,7 @@ export type KeyboardProps = {
   }) => void;
   translation?: CategoryTranslation;
   disabledCategory?: CategoryTypes[];
+  enableRecentlyUsed?: boolean;
   categoryPosition?: CategoryPosition;
   enableSearchBar?: boolean;
   closeSearchColor?: string;

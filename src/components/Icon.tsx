@@ -10,6 +10,7 @@ import Ban from '../assets/Ban';
 import Users from '../assets/Users';
 import Search from '../assets/Search';
 import Close from '../assets/Close';
+import Clock from '../assets/Clock';
 
 export const Icon = ({
   iconName,
@@ -46,6 +47,8 @@ export const Icon = ({
       return <Search fill={color()} />;
     case 'Close':
       return <Close fill={color()} />;
+    case 'Clock':
+      return <Clock fill={color()} />;
     default:
       return null;
   }
