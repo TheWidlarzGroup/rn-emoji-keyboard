@@ -39,7 +39,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     [disabledCategory, flatListRef]
   );
 
-  const rendarItem = React.useCallback(
+  const renderItem = React.useCallback(
     ({ item, index }: { item: CategoryNavigationItem; index: number }) => (
       <CategoryItem
         item={item}
@@ -66,9 +66,6 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     ),
     [activeCategoryContainerColor, scrollNav]
   );
-  const isRecentlyUsedHidden = (category: CategoryTypes) =>
-    category === 'recently_used' &&
-    (keyboardState.recentlyUsed.length === 0 || !enableRecentlyUsed);
 
   const getStylesBasedOnPosition = () => {
     const style: ViewStyle[] = [styles.navigation];
@@ -96,17 +93,29 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     return style;
   };
 
+  const renderData = React.useMemo(() => {
+    const isRecentlyUsedHidden = (category: CategoryTypes) =>
+      category === 'recently_used' &&
+      (keyboardState.recentlyUsed.length === 0 || !enableRecentlyUsed);
+    return CATEGORIES_NAVIGATION.filter(({ category }) => {
+      if (searchPhrase === '' && category === 'search') return false;
+      if (isRecentlyUsedHidden(category)) return false;
+      return !disabledCategory.includes(category);
+    });
+  }, [
+    disabledCategory,
+    enableRecentlyUsed,
+    keyboardState.recentlyUsed.length,
+    searchPhrase,
+  ]);
+
   return (
     <View style={[categoryPosition === 'floating' && styles.floating]}>
       <View style={getStylesBasedOnPosition()}>
         <FlatList
-          data={CATEGORIES_NAVIGATION.filter(({ category }) => {
-            if (searchPhrase === '' && category === 'search') return false;
-            if (isRecentlyUsedHidden(category)) return false;
-            return !disabledCategory.includes(category);
-          })}
+          data={renderData}
           keyExtractor={(item) => item.category}
-          renderItem={rendarItem}
+          renderItem={renderItem}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
