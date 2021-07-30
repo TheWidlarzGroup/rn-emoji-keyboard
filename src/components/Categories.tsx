@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, Animated, StyleSheet, FlatList, ViewStyle } from 'react-native';
+import { useKeyboardStore } from '../store/useKeyboardStore';
 import { defaultKeyboardContext } from '../contexts/KeyboardProvider';
 import { KeyboardContext } from '../contexts/KeyboardContext';
 import {
@@ -22,9 +23,10 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     onCategoryChangeFailed,
     disabledCategory,
     activeCategoryContainerColor,
+    enableRecentlyUsed,
     categoryPosition,
   } = React.useContext(KeyboardContext);
-
+  const { keyboardState } = useKeyboardStore();
   const handleScrollToCategory = React.useCallback(
     (category: CategoryTypes) => {
       flatListRef?.current?.scrollToIndex({
@@ -63,6 +65,9 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     ),
     [activeCategoryContainerColor, scrollNav]
   );
+  const isRecentlyUsedHidden = (category: CategoryTypes) =>
+    category === 'recently_used' &&
+    (keyboardState.recentlyUsed.length === 0 || !enableRecentlyUsed);
 
   const getStylesBasedOnPosition = () => {
     const style: ViewStyle[] = [styles.navigation];
@@ -94,9 +99,10 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     <View style={[categoryPosition === 'floating' && styles.floating]}>
       <View style={getStylesBasedOnPosition()}>
         <FlatList
-          data={CATEGORIES_NAVIGATION.filter(
-            ({ category }) => !disabledCategory.includes(category)
-          )}
+          data={CATEGORIES_NAVIGATION.filter(({ category }) => {
+            if (isRecentlyUsedHidden(category)) return false;
+            return !disabledCategory.includes(category);
+          })}
           keyExtractor={(item) => item.category}
           renderItem={rendarItem}
           ItemSeparatorComponent={() => <View style={styles.separator} />}

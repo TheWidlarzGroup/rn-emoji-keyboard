@@ -1,12 +1,12 @@
-import type { EmojiType } from 'src/types';
+import type { JsonEmoji } from 'src/types';
 
 export type RecentEmojiState = {
-  recentlyUsed: EmojiType[];
+  recentlyUsed: JsonEmoji[];
 };
 
 export type RecentEmojiAction =
-  | { type: 'RECENT_EMOJI_ADD'; payload: EmojiType }
-  | { type: 'RECENT_EMOJI_REMOVE'; payload: EmojiType }
+  | { type: 'RECENT_EMOJI_ADD'; payload: JsonEmoji }
+  | { type: 'RECENT_EMOJI_REMOVE'; payload: JsonEmoji }
   | { type: 'RECENT_EMOJI_CLEAR' };
 
 export default function recentEmojiReducer(
@@ -17,7 +17,7 @@ export default function recentEmojiReducer(
     case 'RECENT_EMOJI_ADD':
       return {
         ...state,
-        recentlyUsed: [...filterEmoji(state, action.payload), action.payload],
+        recentlyUsed: [action.payload, ...filterEmoji(state, action.payload)],
       };
     case 'RECENT_EMOJI_REMOVE':
       return {
@@ -31,5 +31,5 @@ export default function recentEmojiReducer(
   }
 }
 
-const filterEmoji = (state: RecentEmojiState, emoji: EmojiType) =>
+const filterEmoji = (state: RecentEmojiState, emoji: JsonEmoji) =>
   state.recentlyUsed.filter((usedEmoji) => usedEmoji.emoji !== emoji.emoji);

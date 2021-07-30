@@ -11,6 +11,7 @@ type RootStackParamList = {
   DisabledCategories: undefined;
   StaticModal: undefined;
   Static: undefined;
+  EnableRecently: undefined;
   TopCategory: undefined;
   BottomCategory: undefined;
 };
@@ -38,6 +39,10 @@ const Examples = ({ navigation }: Props) => {
         <Button
           title="Static Component"
           onPress={() => navigation.navigate('Static')}
+        />
+        <Button
+          title="Enable recently used"
+          onPress={() => navigation.navigate('EnableRecently')}
         />
         <Button
           title="Category Top"

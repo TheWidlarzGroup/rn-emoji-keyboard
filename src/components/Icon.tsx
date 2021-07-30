@@ -8,6 +8,7 @@ import Smile from '../assets/Smile';
 import Trees from '../assets/Trees';
 import Ban from '../assets/Ban';
 import Users from '../assets/Users';
+import Clock from '../assets/Clock';
 
 export const Icon = ({
   iconName,
@@ -40,6 +41,8 @@ export const Icon = ({
       return <Ban fill={color()} />;
     case 'Users':
       return <Users fill={color()} />;
+    case 'Clock':
+      return <Clock fill={color()} />;
     default:
       return null;
   }

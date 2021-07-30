@@ -9,6 +9,7 @@ import Translated from './Translated/Translated';
 import DisabledCategories from './DisabledCategories/DisabledCategories';
 import StaticModal from './StaticModal/StaticModal';
 import Static from './Static/Static';
+import EnableRecently from './EnableRecently/EnableRecently';
 import TopCategory from './TopCategory/TopCategory';
 import BottomCategory from './BottomCategory/BottomCategory';
 
@@ -19,7 +20,10 @@ export default () => {
       <Stack.Navigator>
         <Stack.Screen name="Examples" component={Examples} />
         <Stack.Screen name="Basic" component={Basic} />
+        <Stack.Screen name="EnableRecently" component={EnableRecently} />
         <Stack.Screen name="Dark" component={Dark} />
+        <Stack.Screen name="TopCategory" component={TopCategory} />
+        <Stack.Screen name="BottomCategory" component={BottomCategory} />
         <Stack.Screen name="Translated" component={Translated} />
         <Stack.Screen
           name="DisabledCategories"
@@ -27,8 +31,6 @@ export default () => {
         />
         <Stack.Screen name="StaticModal" component={StaticModal} />
         <Stack.Screen name="Static" component={Static} />
-        <Stack.Screen name="TopCategory" component={TopCategory} />
-        <Stack.Screen name="BottomCategory" component={BottomCategory} />
       </Stack.Navigator>
     </NavigationContainer>
   );

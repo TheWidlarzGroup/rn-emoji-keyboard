@@ -60,7 +60,7 @@ export const EmojiCategory = ({
       if (emoji.name === 'blank emoji') return;
       const parsedEmoji = parseEmoji(emoji);
       onEmojiSelected(parsedEmoji);
-      setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: parsedEmoji });
+      setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji });
     },
     [onEmojiSelected, setKeyboardState]
   );
