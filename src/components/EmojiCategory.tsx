@@ -5,6 +5,7 @@ import type { EmojisByCategory, EmojiType, JsonEmoji } from '../types';
 import { SingleEmoji } from './SingleEmoji';
 import { KeyboardContext } from '../contexts/KeyboardContext';
 import { useKeyboardStore } from '../store/useKeyboardStore';
+import { parseEmoji } from '../utils';
 
 const emptyEmoji = {
   emoji: '',
@@ -46,13 +47,6 @@ export const EmojiCategory = ({
     length: emojiSize ? emojiSize : 0,
     offset: emojiSize * Math.ceil(index / numberOfColumns),
     index,
-  });
-
-  const parseEmoji = (emoji: JsonEmoji) => ({
-    name: emoji.name,
-    emoji: emoji.emoji,
-    unicode_version: emoji.v,
-    slug: emoji.name.replace(' ', '_'),
   });
 
   const handleEmojiPress = React.useCallback(

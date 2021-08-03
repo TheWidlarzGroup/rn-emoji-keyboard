@@ -1,4 +1,4 @@
-import { CATEGORIES, CategoryTypes } from './types';
+import { CATEGORIES, CategoryTypes, JsonEmoji } from './types';
 
 export const getHeight = (value: string | number, screenHeight: number) =>
   typeof value === 'number'
@@ -11,6 +11,13 @@ export const exhaustiveTypeCheck = (arg: never, strict = true) => {
     throw new Error(`unhandled union case for : ${arg}`);
   }
 };
+
+export const parseEmoji = (emoji: JsonEmoji) => ({
+  name: emoji.name,
+  emoji: emoji.emoji,
+  unicode_version: emoji.v,
+  slug: emoji.name.replace(' ', '_'),
+});
 
 export const getCategoryIndex = (
   disabledCategory: CategoryTypes[],
