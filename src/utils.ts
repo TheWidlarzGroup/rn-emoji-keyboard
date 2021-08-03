@@ -1,3 +1,5 @@
+import { CATEGORIES, CategoryTypes } from './types';
+
 export const getHeight = (value: string | number, screenHeight: number) =>
   typeof value === 'number'
     ? value
@@ -9,3 +11,12 @@ export const exhaustiveTypeCheck = (arg: never, strict = true) => {
     throw new Error(`unhandled union case for : ${arg}`);
   }
 };
+
+export const getCategoryIndex = (
+  disabledCategory: CategoryTypes[],
+  category: CategoryTypes
+) => ({
+  index: CATEGORIES.filter((name) => !disabledCategory.includes(name)).indexOf(
+    category
+  ),
+});
