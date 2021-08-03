@@ -47,6 +47,8 @@ export default function App() {
 | emojiSize | number | 28 | no | Custom emoji size |
 | enableRecentlyUsed | boolean | false | no | Enable recently used emojis in categories |
 | categoryPosition | 'floating' \| 'top' \| 'bottom' | 'floating' | no | Specify category container position |
+| enableSearchBar | boolean | false | no | Enable search bar |
+| closeSearchColor | string | "#00000055" | no | Change button (cross) color for close/cancel search |
 | headerStyles | TextStyle | {} | no | Override category name styles |
 | knobStyles | ViewStyle | {} | no | Override knob styles |
 | containerStyles | ViewStyle | {} | no | Override container styles |
@@ -126,9 +128,10 @@ You can clone the repo and run `yarn example ios` or `yarn example android` to p
 ![Preview](/example/assets/categories-top-preview.jpg)
 ### [Categories Bottom](/example/src/BottomCategory/BottomCategory.tsx)
 ![Preview](/example/assets/categories-bottom-preview.jpg)
+### [Search Bar](/example/src/SearchBar/SearchBar.tsx)
+![Preview](/example/assets/search-bar-preview.gif)
 ## 📈 Future plans
 * Skin tone palette selector.
-* Search bar.
 * Write native module to display forbidden emojis on android.
 ## ⚖️ License
  **[MIT](/LICENSE)**

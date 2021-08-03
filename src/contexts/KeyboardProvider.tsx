@@ -38,6 +38,8 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   disabledCategory: [],
   enableRecentlyUsed: false,
   categoryPosition: 'floating',
+  enableSearchBar: false,
+  closeSearchColor: '#00000055',
 };
 
 export const defaultKeyboardValues: ContextValues = {
@@ -45,11 +47,14 @@ export const defaultKeyboardValues: ContextValues = {
   setActiveCategoryIndex: () => {},
   numberOfColumns: 5,
   width: 0,
+  searchPhrase: '',
+  setSearchPhrase: (_phrase: string) => {},
 };
 
 export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const { width } = useWindowDimensions();
   const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0);
+  const [searchPhrase, setSearchPhrase] = React.useState('');
   const numberOfColumns = React.useRef<number>(
     Math.floor(
       width /
@@ -61,6 +66,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   );
   React.useEffect(() => {
     if (props.open) setActiveCategoryIndex(0);
+    setSearchPhrase('');
   }, [props.open]);
 
   const value: Required<KeyboardProps> & ContextValues = {
@@ -71,6 +77,8 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     setActiveCategoryIndex,
     numberOfColumns: numberOfColumns.current,
     width,
+    searchPhrase,
+    setSearchPhrase,
   };
   return (
     <KeyboardContext.Provider value={value}>

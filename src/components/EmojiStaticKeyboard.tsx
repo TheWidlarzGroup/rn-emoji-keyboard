@@ -12,6 +12,7 @@ import { EmojiCategory } from './EmojiCategory';
 import { KeyboardContext } from '../contexts/KeyboardContext';
 import { Categories } from './Categories';
 import emojisByGroup from '../assets/emojis.json';
+import { SearchBar } from './SearchBar';
 import { useKeyboardStore } from '../store/useKeyboardStore';
 
 export const EmojiStaticKeyboard = () => {
@@ -22,6 +23,9 @@ export const EmojiStaticKeyboard = () => {
     onCategoryChangeFailed,
     disabledCategory,
     categoryPosition,
+    enableSearchBar,
+    searchPhrase,
+    setActiveCategoryIndex,
   } = React.useContext(KeyboardContext);
   const { keyboardState } = useKeyboardStore();
   const flatListRef = React.useRef<FlatList>(null);
@@ -58,8 +62,25 @@ export const EmojiStaticKeyboard = () => {
         data: keyboardState.recentlyUsed,
       });
     }
+    data.push({
+      title: 'search',
+      data: emojisByGroup
+        .map((group) => group.data)
+        .flat()
+        .filter((emoji) => {
+          if (searchPhrase && searchPhrase.length < 2) return false;
+          return emoji.name.toLowerCase().includes(searchPhrase.toLowerCase());
+        }),
+    });
     return data;
-  }, [disabledCategory, keyboardState.recentlyUsed]);
+  }, [disabledCategory, keyboardState.recentlyUsed, searchPhrase]);
+
+  React.useEffect(() => {
+    if (searchPhrase !== '') {
+      flatListRef.current?.scrollToEnd();
+      setActiveCategoryIndex(renderList.length - 1);
+    }
+  }, [renderList, searchPhrase, setActiveCategoryIndex]);
 
   return (
     <View
@@ -70,8 +91,9 @@ export const EmojiStaticKeyboard = () => {
         containerStyles,
       ]}
     >
+      {enableSearchBar && <SearchBar flatListRef={flatListRef} />}
       <Animated.FlatList
-        extraData={keyboardState.recentlyUsed.length}
+        extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
         data={renderList}
         keyExtractor={(item: EmojisByCategory) => item.title}
         renderItem={renderItem}
