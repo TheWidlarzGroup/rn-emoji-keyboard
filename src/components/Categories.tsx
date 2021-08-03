@@ -10,6 +10,7 @@ import {
   CategoryTypes,
 } from '../types';
 import { CategoryItem } from './CategoryItem';
+import { exhaustiveTypeCheck } from '../utils';
 
 type CategoriesProps = {
   flatListRef: React.RefObject<FlatList>;
@@ -80,8 +81,10 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
         style.push(styles.navigationBottom);
         break;
       default:
+        exhaustiveTypeCheck(categoryPosition);
         break;
     }
+
     if (
       categoryContainerColor !==
         defaultKeyboardContext.categoryContainerColor ||
