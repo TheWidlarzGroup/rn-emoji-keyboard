@@ -1,20 +1,16 @@
-import * as React from 'react';
-import { Animated, FlatList, StyleSheet, View, ViewStyle } from 'react-native';
-import { useKeyboardStore } from '../store/useKeyboardStore';
-import { defaultKeyboardContext } from '../contexts/KeyboardProvider';
-import { KeyboardContext } from '../contexts/KeyboardContext';
-import {
-  CATEGORIES_NAVIGATION,
-  CategoryNavigationItem,
-  CategoryTypes,
-} from '../types';
-import { CategoryItem } from './CategoryItem';
-import { exhaustiveTypeCheck, getCategoryIndex } from '../utils';
+import * as React from 'react'
+import { Animated, FlatList, StyleSheet, View, ViewStyle } from 'react-native'
+import { useKeyboardStore } from '../store/useKeyboardStore'
+import { defaultKeyboardContext } from '../contexts/KeyboardProvider'
+import { KeyboardContext } from '../contexts/KeyboardContext'
+import { CATEGORIES_NAVIGATION, CategoryNavigationItem, CategoryTypes } from '../types'
+import { CategoryItem } from './CategoryItem'
+import { exhaustiveTypeCheck, getCategoryIndex } from '../utils'
 
 type CategoriesProps = {
-  flatListRef: React.RefObject<FlatList>;
-  scrollNav: Animated.Value;
-};
+  flatListRef: React.RefObject<FlatList>
+  scrollNav: Animated.Value
+}
 
 export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
   const {
@@ -26,27 +22,21 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     enableRecentlyUsed,
     categoryPosition,
     searchPhrase,
-  } = React.useContext(KeyboardContext);
-  const { keyboardState } = useKeyboardStore();
+  } = React.useContext(KeyboardContext)
+  const { keyboardState } = useKeyboardStore()
   const handleScrollToCategory = React.useCallback(
     (category: CategoryTypes) => {
-      flatListRef?.current?.scrollToIndex(
-        getCategoryIndex(disabledCategory, category)
-      );
+      flatListRef?.current?.scrollToIndex(getCategoryIndex(disabledCategory, category))
     },
     [disabledCategory, flatListRef]
-  );
+  )
 
   const renderItem = React.useCallback(
     ({ item, index }: { item: CategoryNavigationItem; index: number }) => (
-      <CategoryItem
-        item={item}
-        index={index}
-        handleScrollToCategory={handleScrollToCategory}
-      />
+      <CategoryItem item={item} index={index} handleScrollToCategory={handleScrollToCategory} />
     ),
     [handleScrollToCategory]
-  );
+  )
 
   const activeIndicator = React.useCallback(
     () => (
@@ -63,51 +53,45 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
       />
     ),
     [activeCategoryContainerColor, scrollNav]
-  );
+  )
 
   const getStylesBasedOnPosition = () => {
-    const style: ViewStyle[] = [styles.navigation];
+    const style: ViewStyle[] = [styles.navigation]
     switch (categoryPosition) {
       case 'floating':
-        style.push(styles.navigationFloating);
-        break;
+        style.push(styles.navigationFloating)
+        break
       case 'top':
-        style.push(styles.navigationTop);
-        break;
+        style.push(styles.navigationTop)
+        break
       case 'bottom':
-        style.push(styles.navigationBottom);
-        break;
+        style.push(styles.navigationBottom)
+        break
       default:
-        exhaustiveTypeCheck(categoryPosition);
-        break;
+        exhaustiveTypeCheck(categoryPosition)
+        break
     }
 
     if (
-      categoryContainerColor !==
-        defaultKeyboardContext.categoryContainerColor ||
+      categoryContainerColor !== defaultKeyboardContext.categoryContainerColor ||
       categoryPosition === 'floating'
     )
       style.push({
         backgroundColor: categoryContainerColor,
-      });
-    return style;
-  };
+      })
+    return style
+  }
 
   const renderData = React.useMemo(() => {
     const isRecentlyUsedHidden = (category: CategoryTypes) =>
       category === 'recently_used' &&
-      (keyboardState.recentlyUsed.length === 0 || !enableRecentlyUsed);
+      (keyboardState.recentlyUsed.length === 0 || !enableRecentlyUsed)
     return CATEGORIES_NAVIGATION.filter(({ category }) => {
-      if (searchPhrase === '' && category === 'search') return false;
-      if (isRecentlyUsedHidden(category)) return false;
-      return !disabledCategory.includes(category);
-    });
-  }, [
-    disabledCategory,
-    enableRecentlyUsed,
-    keyboardState.recentlyUsed.length,
-    searchPhrase,
-  ]);
+      if (searchPhrase === '' && category === 'search') return false
+      if (isRecentlyUsedHidden(category)) return false
+      return !disabledCategory.includes(category)
+    })
+  }, [disabledCategory, enableRecentlyUsed, keyboardState.recentlyUsed.length, searchPhrase])
 
   return (
     <View style={[categoryPosition === 'floating' && styles.floating]}>
@@ -126,8 +110,8 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
         />
       </View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   floating: {
@@ -175,4 +159,4 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
   },
-});
+})

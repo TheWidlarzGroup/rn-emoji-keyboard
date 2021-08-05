@@ -1,4 +1,4 @@
-import type { CategoryTranslation } from '../types';
+import type { CategoryTranslation } from '../types'
 
 export const en: CategoryTranslation = {
   recently_used: 'Recently used',
@@ -12,5 +12,5 @@ export const en: CategoryTranslation = {
   symbols: 'Symbols',
   flags: 'Flags',
   search: 'Search',
-};
-export default en;
+}
+export default en

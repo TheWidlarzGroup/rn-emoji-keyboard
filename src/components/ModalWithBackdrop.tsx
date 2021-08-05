@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 import {
   SafeAreaView,
   Modal,
@@ -7,58 +7,47 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-} from 'react-native';
-import { KeyboardContext } from '../contexts/KeyboardContext';
-import { useTimeout } from '../hooks/useTimeout';
+} from 'react-native'
+import { KeyboardContext } from '../contexts/KeyboardContext'
+import { useTimeout } from '../hooks/useTimeout'
 
 type ModalWithBackdropProps = {
-  isOpen: boolean;
-  backdropPress: () => void;
-  children: React.ReactNode;
-};
+  isOpen: boolean
+  backdropPress: () => void
+  children: React.ReactNode
+}
 
-export const ModalWithBackdrop = ({
-  isOpen,
-  backdropPress,
-  children,
-}: ModalWithBackdropProps) => {
-  const { height: screenHeight } = useWindowDimensions();
-  const translateY = React.useRef(new Animated.Value(screenHeight)).current;
-  const { backdropColor } = React.useContext(KeyboardContext);
-  const handleTimeout = useTimeout();
+export const ModalWithBackdrop = ({ isOpen, backdropPress, children }: ModalWithBackdropProps) => {
+  const { height: screenHeight } = useWindowDimensions()
+  const translateY = React.useRef(new Animated.Value(screenHeight)).current
+  const { backdropColor } = React.useContext(KeyboardContext)
+  const handleTimeout = useTimeout()
 
   React.useEffect(() => {
     Animated.spring(translateY, {
       toValue: isOpen ? 0 : screenHeight,
       useNativeDriver: true,
-    }).start();
-  }, [isOpen, screenHeight, translateY]);
+    }).start()
+  }, [isOpen, screenHeight, translateY])
 
   const handleClose = () => {
     Animated.spring(translateY, {
       toValue: screenHeight,
       useNativeDriver: true,
-    }).start();
-    handleTimeout(() => backdropPress(), 200);
-  };
+    }).start()
+    handleTimeout(() => backdropPress(), 200)
+  }
 
   return (
     <Modal visible={isOpen} animationType="fade" transparent={true}>
-      <TouchableOpacity
-        style={styles.modalContainer}
-        activeOpacity={1}
-        onPress={handleClose}
-      >
-        <View
-          style={[styles.modalContainer, { backgroundColor: backdropColor }]}
-        >
+      <TouchableOpacity style={styles.modalContainer} activeOpacity={1} onPress={handleClose}>
+        <View style={[styles.modalContainer, { backgroundColor: backdropColor }]}>
           <SafeAreaView style={styles.modalContainer}>
             <TouchableOpacity activeOpacity={1}>
               <Animated.View
                 style={{
                   transform: [{ translateY }],
-                }}
-              >
+                }}>
                 {children}
               </Animated.View>
             </TouchableOpacity>
@@ -66,8 +55,8 @@ export const ModalWithBackdrop = ({
         </View>
       </TouchableOpacity>
     </Modal>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   modalContainer: { flex: 1, justifyContent: 'flex-end' },
@@ -80,4 +69,4 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 10,
   },
-});
+})

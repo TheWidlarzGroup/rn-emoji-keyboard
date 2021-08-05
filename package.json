@@ -52,6 +52,7 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",
     "@release-it/conventional-changelog": "^2.0.0",
+    "@twgdev/prettier-config": "^1.0.2",
     "@types/jest": "^26.0.0",
     "@types/react": "^16.9.19",
     "@types/react-native": "0.62.13",
@@ -116,31 +117,13 @@
     "extends": [
       "@react-native-community",
       "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "quoteProps": "consistent",
-          "singleQuote": true,
-          "tabWidth": 2,
-          "trailingComma": "es5",
-          "useTabs": false
-        }
-      ]
-    }
+    ]
   },
   "eslintIgnore": [
     "node_modules/",
     "lib/"
   ],
-  "prettier": {
-    "quoteProps": "consistent",
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "es5",
-    "useTabs": false
-  },
+  "prettier": "@twgdev/prettier-config",
   "react-native-builder-bob": {
     "source": "src",
     "output": "lib",

@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import EmojiPicker from 'rn-emoji-keyboard';
-import type { EmojiType } from 'src/types';
+import * as React from 'react'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import EmojiPicker from 'rn-emoji-keyboard'
+import type { EmojiType } from 'src/types'
 
 const Dark = () => {
-  const [result, setResult] = React.useState<string>();
-  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+  const [result, setResult] = React.useState<string>()
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
 
   const handlePick = (emoji: EmojiType) => {
-    console.log(emoji);
-    setResult(emoji.emoji);
-    setIsModalOpen((prev) => !prev);
-  };
+    console.log(emoji)
+    setResult(emoji.emoji)
+    setIsModalOpen((prev) => !prev)
+  }
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Result: {result}</Text>
@@ -34,8 +34,8 @@ const Dark = () => {
         headerStyles={styles.headerStyles}
       />
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
   },
-});
+})
 
-export default Dark;
+export default Dark

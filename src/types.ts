@@ -10,39 +10,39 @@ export const CATEGORIES_NAVIGATION = [
   { icon: 'Flag', category: 'flags' },
   { icon: 'Clock', category: 'recently_used' },
   { icon: 'Search', category: 'search' },
-] as const;
+] as const
 
-export type IconNames = typeof CATEGORIES_NAVIGATION[number]['icon'];
-export type CategoryTypes = typeof CATEGORIES_NAVIGATION[number]['category'];
+export type IconNames = typeof CATEGORIES_NAVIGATION[number]['icon']
+export type CategoryTypes = typeof CATEGORIES_NAVIGATION[number]['category']
 
 export const CATEGORIES: readonly CategoryTypes[] = CATEGORIES_NAVIGATION.map(
   ({ category }) => category
-);
+)
 
 export type JsonEmoji = {
-  emoji: string;
-  name: string;
-  v: string;
-};
+  emoji: string
+  name: string
+  v: string
+}
 export type EmojiType = {
-  emoji: string;
-  name: string;
-  slug: string;
-  unicode_version: string;
-};
+  emoji: string
+  name: string
+  slug: string
+  unicode_version: string
+}
 
-export type CategoryPosition = 'floating' | 'top' | 'bottom';
+export type CategoryPosition = 'floating' | 'top' | 'bottom'
 
 export type CategoryNavigationItem = {
-  icon: IconNames;
-  category: CategoryTypes;
-};
+  icon: IconNames
+  category: CategoryTypes
+}
 
 export type CategoryTranslation = {
-  [key in CategoryTypes]: string;
-};
+  [key in CategoryTypes]: string
+}
 
 export type EmojisByCategory = {
-  title: CategoryTypes;
-  data: EmojiType[];
-};
+  title: CategoryTypes
+  data: EmojiType[]
+}

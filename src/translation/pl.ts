@@ -1,4 +1,4 @@
-import type { CategoryTranslation } from '../types';
+import type { CategoryTranslation } from '../types'
 
 const pl: CategoryTranslation = {
   recently_used: 'Ostatnio używane',
@@ -12,5 +12,5 @@ const pl: CategoryTranslation = {
   symbols: 'Symbole',
   flags: 'Flagi',
   search: 'Szukaj',
-};
-export default pl;
+}
+export default pl
