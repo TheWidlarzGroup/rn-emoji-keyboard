@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { KeyboardContext } from '../contexts/KeyboardContext';
+import { useTimeout } from '../hooks/useTimeout';
 
 type ModalWithBackdropProps = {
   isOpen: boolean;
@@ -23,7 +24,8 @@ export const ModalWithBackdrop = ({
 }: ModalWithBackdropProps) => {
   const { height: screenHeight } = useWindowDimensions();
   const translateY = React.useRef(new Animated.Value(screenHeight)).current;
-  const ctx = React.useContext(KeyboardContext);
+  const { backdropColor } = React.useContext(KeyboardContext);
+  const handleTimeout = useTimeout();
 
   React.useEffect(() => {
     Animated.spring(translateY, {
@@ -37,7 +39,7 @@ export const ModalWithBackdrop = ({
       toValue: screenHeight,
       useNativeDriver: true,
     }).start();
-    setTimeout(() => backdropPress(), 200);
+    handleTimeout(() => backdropPress(), 200);
   };
 
   return (
@@ -48,10 +50,7 @@ export const ModalWithBackdrop = ({
         onPress={handleClose}
       >
         <View
-          style={[
-            styles.modalContainer,
-            { backgroundColor: ctx.backdropColor },
-          ]}
+          style={[styles.modalContainer, { backgroundColor: backdropColor }]}
         >
           <SafeAreaView style={styles.modalContainer}>
             <TouchableOpacity activeOpacity={1}>

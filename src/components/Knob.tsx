@@ -17,7 +17,8 @@ type KnobProps = {
 
 export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
   const { height: screenHeight } = useWindowDimensions();
-  const ctx = React.useContext(KeyboardContext);
+  const { expandedHeight, defaultHeight, knobStyles } =
+    React.useContext(KeyboardContext);
 
   const panResponder = React.useRef(
     PanResponder.create({
@@ -37,16 +38,16 @@ export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
         if (gestureState.dy < -50) {
           Animated.spring(height, {
             useNativeDriver: false,
-            toValue: getHeight(ctx.expandedHeight, screenHeight),
+            toValue: getHeight(expandedHeight, screenHeight),
           }).start();
         } else if (gestureState.dy > 150) {
-          height.setValue(getHeight(ctx.defaultHeight, screenHeight));
+          height.setValue(getHeight(defaultHeight, screenHeight));
           offsetY.setValue(0);
           onClose();
         } else {
           Animated.spring(height, {
             useNativeDriver: false,
-            toValue: getHeight(ctx.defaultHeight, screenHeight),
+            toValue: getHeight(defaultHeight, screenHeight),
           }).start();
         }
       },
@@ -59,7 +60,7 @@ export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
   return (
     <View {...panResponder.panHandlers}>
       <View style={styles.panContainer}>
-        <Animated.View style={[styles.knob, ctx.knobStyles]} />
+        <Animated.View style={[styles.knob, knobStyles]} />
       </View>
     </View>
   );

@@ -15,6 +15,8 @@ import emojisByGroup from '../assets/emojis.json';
 import { SearchBar } from './SearchBar';
 import { useKeyboardStore } from '../store/useKeyboardStore';
 
+const CATEGORY_ELEMENT_WIDTH = 37;
+
 export const EmojiStaticKeyboard = () => {
   const { width } = useWindowDimensions();
   const {
@@ -46,7 +48,7 @@ export const EmojiStaticKeyboard = () => {
   );
   React.useEffect(() => {
     Animated.spring(scrollNav, {
-      toValue: activeCategoryIndex * (28 + 9),
+      toValue: activeCategoryIndex * CATEGORY_ELEMENT_WIDTH,
       useNativeDriver: true,
     }).start();
   }, [activeCategoryIndex, scrollNav]);

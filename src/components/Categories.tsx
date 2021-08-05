@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { View, Animated, StyleSheet, FlatList, ViewStyle } from 'react-native';
+import { Animated, FlatList, StyleSheet, View, ViewStyle } from 'react-native';
 import { useKeyboardStore } from '../store/useKeyboardStore';
 import { defaultKeyboardContext } from '../contexts/KeyboardProvider';
 import { KeyboardContext } from '../contexts/KeyboardContext';
 import {
-  CATEGORIES,
   CATEGORIES_NAVIGATION,
   CategoryNavigationItem,
   CategoryTypes,
 } from '../types';
 import { CategoryItem } from './CategoryItem';
+import { exhaustiveTypeCheck, getCategoryIndex } from '../utils';
 
 type CategoriesProps = {
   flatListRef: React.RefObject<FlatList>;
@@ -30,11 +30,9 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
   const { keyboardState } = useKeyboardStore();
   const handleScrollToCategory = React.useCallback(
     (category: CategoryTypes) => {
-      flatListRef?.current?.scrollToIndex({
-        index: CATEGORIES.filter(
-          (name) => !disabledCategory.includes(name)
-        ).indexOf(category),
-      });
+      flatListRef?.current?.scrollToIndex(
+        getCategoryIndex(disabledCategory, category)
+      );
     },
     [disabledCategory, flatListRef]
   );
@@ -80,8 +78,10 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
         style.push(styles.navigationBottom);
         break;
       default:
+        exhaustiveTypeCheck(categoryPosition);
         break;
     }
+
     if (
       categoryContainerColor !==
         defaultKeyboardContext.categoryContainerColor ||
