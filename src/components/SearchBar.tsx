@@ -20,6 +20,9 @@ export const SearchBar = ({ flatListRef }: SearchBarProps) => {
     translation,
     setActiveCategoryIndex,
     closeSearchColor,
+    searchBarStyles,
+    searchBarTextStyles,
+    searchBarPlaceholderColor,
   } = React.useContext(KeyboardContext);
   const inputRef = React.useRef<TextInput>(null);
 
@@ -34,13 +37,14 @@ export const SearchBar = ({ flatListRef }: SearchBarProps) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, searchBarStyles]}>
       <TextInput
-        style={styles.input}
+        style={[styles.input, searchBarTextStyles]}
         value={searchPhrase}
         onChangeText={handleSearch}
         placeholder={translation.search}
         ref={inputRef}
+        placeholderTextColor={searchBarPlaceholderColor}
       />
       {!!searchPhrase && (
         <TouchableOpacity onPress={clearPhrase} style={styles.button}>
