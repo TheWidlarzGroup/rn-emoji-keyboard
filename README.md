@@ -49,6 +49,9 @@ export default function App() {
 | categoryPosition | 'floating' \| 'top' \| 'bottom' | 'floating' | no | Specify category container position |
 | enableSearchBar | boolean | false | no | Enable search bar |
 | closeSearchColor | string | "#00000055" | no | Change button (cross) color for close/cancel search |
+| searchBarStyles | ViewStyle | {} | no | Override search bar container styles |
+| searchBarTextStyles | ViewStyle | {} | no | Override search bar text styles |
+| searchBarPlaceholderColor | string | "#00000055" | no | Override search bar placeholder color |
 | headerStyles | TextStyle | {} | no | Override category name styles |
 | knobStyles | ViewStyle | {} | no | Override knob styles |
 | containerStyles | ViewStyle | {} | no | Override container styles |
