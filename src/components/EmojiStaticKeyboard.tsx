@@ -22,6 +22,7 @@ export const EmojiStaticKeyboard = () => {
     enableSearchBar,
     searchPhrase,
     setActiveCategoryIndex,
+    enableRecentlyUsed,
   } = React.useContext(KeyboardContext)
   const { keyboardState } = useKeyboardStore()
   const flatListRef = React.useRef<FlatList>(null)
@@ -46,7 +47,7 @@ export const EmojiStaticKeyboard = () => {
       const title = category.title as CategoryTypes
       return !disabledCategory.includes(title)
     })
-    if (keyboardState.recentlyUsed.length) {
+    if (keyboardState.recentlyUsed.length && enableRecentlyUsed) {
       data.push({
         title: 'recently_used',
         data: keyboardState.recentlyUsed,
@@ -63,7 +64,7 @@ export const EmojiStaticKeyboard = () => {
         }),
     })
     return data
-  }, [disabledCategory, keyboardState.recentlyUsed, searchPhrase])
+  }, [disabledCategory, enableRecentlyUsed, keyboardState.recentlyUsed, searchPhrase])
 
   React.useEffect(() => {
     if (searchPhrase !== '') {

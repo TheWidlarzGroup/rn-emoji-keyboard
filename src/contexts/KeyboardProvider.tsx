@@ -35,6 +35,9 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   categoryPosition: 'floating',
   enableSearchBar: false,
   closeSearchColor: '#00000055',
+  searchBarStyles: {},
+  searchBarTextStyles: {},
+  searchBarPlaceholderColor: '#00000055',
 }
 
 export const defaultKeyboardValues: ContextValues = {
