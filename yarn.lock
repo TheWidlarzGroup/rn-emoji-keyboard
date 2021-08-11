@@ -1837,6 +1837,11 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
+"@twgdev/prettier-config@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@twgdev/prettier-config/-/prettier-config-1.0.2.tgz#5a313df4341efb2221b5e7b4c52153e86861b1dc"
+  integrity sha512-79UJ8Cp+dIoE8V5g8y2SDvshhGQsGaDkTdY3YVbbMzTUW/Bdv/0AOFASNNGKXy7pfkcukeUD27cgRECAU4Swyg==
+
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
   version "7.1.14"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.14.tgz#faaeefc4185ec71c389f4501ee5ec84b170cc402"

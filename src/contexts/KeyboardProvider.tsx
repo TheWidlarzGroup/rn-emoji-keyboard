@@ -1,18 +1,13 @@
-import * as React from 'react';
-import { useWindowDimensions } from 'react-native';
-import {
-  KeyboardProps,
-  ContextValues,
-  KeyboardContext,
-  OnEmojiSelected,
-} from './KeyboardContext';
-import en from '../translation/en';
-import type { EmojiType } from '../types';
+import * as React from 'react'
+import { useWindowDimensions } from 'react-native'
+import { KeyboardProps, ContextValues, KeyboardContext, OnEmojiSelected } from './KeyboardContext'
+import en from '../translation/en'
+import type { EmojiType } from '../types'
 
 type ProviderProps = Partial<KeyboardProps> & {
-  children: React.ReactNode;
-  onEmojiSelected: OnEmojiSelected;
-};
+  children: React.ReactNode
+  onEmojiSelected: OnEmojiSelected
+}
 
 export const defaultKeyboardContext: Required<KeyboardProps> = {
   open: false,
@@ -32,7 +27,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   categoryContainerColor: '#e3dbcd',
   activeCategoryContainerColor: '#ffffff',
   onCategoryChangeFailed: (info) => {
-    console.warn(info);
+    console.warn(info)
   },
   translation: en,
   disabledCategory: [],
@@ -43,7 +38,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   searchBarStyles: {},
   searchBarTextStyles: {},
   searchBarPlaceholderColor: '#00000055',
-};
+}
 
 export const defaultKeyboardValues: ContextValues = {
   activeCategoryIndex: 0,
@@ -52,25 +47,19 @@ export const defaultKeyboardValues: ContextValues = {
   width: 0,
   searchPhrase: '',
   setSearchPhrase: (_phrase: string) => {},
-};
+}
 
 export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
-  const { width } = useWindowDimensions();
-  const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0);
-  const [searchPhrase, setSearchPhrase] = React.useState('');
+  const { width } = useWindowDimensions()
+  const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0)
+  const [searchPhrase, setSearchPhrase] = React.useState('')
   const numberOfColumns = React.useRef<number>(
-    Math.floor(
-      width /
-        ((props.emojiSize
-          ? props.emojiSize
-          : defaultKeyboardContext.emojiSize) *
-          2)
-    )
-  );
+    Math.floor(width / ((props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 2))
+  )
   React.useEffect(() => {
-    if (props.open) setActiveCategoryIndex(0);
-    setSearchPhrase('');
-  }, [props.open]);
+    if (props.open) setActiveCategoryIndex(0)
+    setSearchPhrase('')
+  }, [props.open])
 
   const value: Required<KeyboardProps> & ContextValues = {
     ...defaultKeyboardContext,
@@ -82,12 +71,8 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     width,
     searchPhrase,
     setSearchPhrase,
-  };
-  return (
-    <KeyboardContext.Provider value={value}>
-      {props.children}
-    </KeyboardContext.Provider>
-  );
-});
+  }
+  return <KeyboardContext.Provider value={value}>{props.children}</KeyboardContext.Provider>
+})
 
-KeyboardProvider.displayName = 'KeyboardProvider';
+KeyboardProvider.displayName = 'KeyboardProvider'

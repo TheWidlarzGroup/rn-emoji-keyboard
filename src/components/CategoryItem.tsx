@@ -1,31 +1,23 @@
-import * as React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { KeyboardContext } from '../contexts/KeyboardContext';
-import type { CategoryNavigationItem, CategoryTypes } from '../types';
-import { Icon } from './Icon';
+import * as React from 'react'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { KeyboardContext } from '../contexts/KeyboardContext'
+import type { CategoryNavigationItem, CategoryTypes } from '../types'
+import { Icon } from './Icon'
 
 type CategoryItemProps = {
-  item: CategoryNavigationItem;
-  index: number;
-  handleScrollToCategory: (category: CategoryTypes) => void;
-};
+  item: CategoryNavigationItem
+  index: number
+  handleScrollToCategory: (category: CategoryTypes) => void
+}
 
-export const CategoryItem = ({
-  item,
-  index,
-  handleScrollToCategory,
-}: CategoryItemProps) => {
-  const {
-    activeCategoryIndex,
-    categoryColor,
-    activeCategoryColor,
-    setActiveCategoryIndex,
-  } = React.useContext(KeyboardContext);
+export const CategoryItem = ({ item, index, handleScrollToCategory }: CategoryItemProps) => {
+  const { activeCategoryIndex, categoryColor, activeCategoryColor, setActiveCategoryIndex } =
+    React.useContext(KeyboardContext)
 
   const handleSelect = () => {
-    handleScrollToCategory(item.category);
-    setActiveCategoryIndex(index);
-  };
+    handleScrollToCategory(item.category)
+    setActiveCategoryIndex(index)
+  }
 
   return (
     <TouchableOpacity onPress={handleSelect}>
@@ -38,8 +30,8 @@ export const CategoryItem = ({
         />
       </View>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -51,4 +43,4 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   icon: { textAlign: 'center' },
-});
+})

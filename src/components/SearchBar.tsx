@@ -1,17 +1,11 @@
-import * as React from 'react';
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
-import { KeyboardContext } from '../contexts/KeyboardContext';
-import { Icon } from './Icon';
+import * as React from 'react'
+import { View, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
+import { KeyboardContext } from '../contexts/KeyboardContext'
+import { Icon } from './Icon'
 
 type SearchBarProps = {
-  flatListRef: React.RefObject<FlatList>;
-};
+  flatListRef: React.RefObject<FlatList>
+}
 
 export const SearchBar = ({ flatListRef }: SearchBarProps) => {
   const {
@@ -23,18 +17,18 @@ export const SearchBar = ({ flatListRef }: SearchBarProps) => {
     searchBarStyles,
     searchBarTextStyles,
     searchBarPlaceholderColor,
-  } = React.useContext(KeyboardContext);
-  const inputRef = React.useRef<TextInput>(null);
+  } = React.useContext(KeyboardContext)
+  const inputRef = React.useRef<TextInput>(null)
 
   const handleSearch = (text: string) => {
-    setSearchPhrase(text);
-  };
+    setSearchPhrase(text)
+  }
   const clearPhrase = () => {
-    setSearchPhrase('');
-    inputRef.current?.blur();
-    setActiveCategoryIndex(0);
-    flatListRef?.current?.scrollToIndex({ index: 0, animated: true });
-  };
+    setSearchPhrase('')
+    inputRef.current?.blur()
+    setActiveCategoryIndex(0)
+    flatListRef?.current?.scrollToIndex({ index: 0, animated: true })
+  }
 
   return (
     <View style={[styles.container, searchBarStyles]}>
@@ -57,8 +51,8 @@ export const SearchBar = ({ flatListRef }: SearchBarProps) => {
         </TouchableOpacity>
       )}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -78,4 +72,4 @@ const styles = StyleSheet.create({
   button: {
     marginRight: 8,
   },
-});
+})

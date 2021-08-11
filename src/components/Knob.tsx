@@ -1,24 +1,17 @@
-import * as React from 'react';
-import {
-  Animated,
-  useWindowDimensions,
-  StyleSheet,
-  View,
-  PanResponder,
-} from 'react-native';
-import { getHeight } from '../utils';
-import { KeyboardContext } from '../contexts/KeyboardContext';
+import * as React from 'react'
+import { Animated, useWindowDimensions, StyleSheet, View, PanResponder } from 'react-native'
+import { getHeight } from '../utils'
+import { KeyboardContext } from '../contexts/KeyboardContext'
 
 type KnobProps = {
-  offsetY: Animated.Value;
-  height: Animated.Value;
-  onClose: () => void;
-};
+  offsetY: Animated.Value
+  height: Animated.Value
+  onClose: () => void
+}
 
 export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
-  const { height: screenHeight } = useWindowDimensions();
-  const { expandedHeight, defaultHeight, knobStyles } =
-    React.useContext(KeyboardContext);
+  const { height: screenHeight } = useWindowDimensions()
+  const { expandedHeight, defaultHeight, knobStyles } = React.useContext(KeyboardContext)
 
   const panResponder = React.useRef(
     PanResponder.create({
@@ -34,28 +27,28 @@ export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
         Animated.spring(offsetY, {
           useNativeDriver: false,
           toValue: 0,
-        }).start();
+        }).start()
         if (gestureState.dy < -50) {
           Animated.spring(height, {
             useNativeDriver: false,
             toValue: getHeight(expandedHeight, screenHeight),
-          }).start();
+          }).start()
         } else if (gestureState.dy > 150) {
-          height.setValue(getHeight(defaultHeight, screenHeight));
-          offsetY.setValue(0);
-          onClose();
+          height.setValue(getHeight(defaultHeight, screenHeight))
+          offsetY.setValue(0)
+          onClose()
         } else {
           Animated.spring(height, {
             useNativeDriver: false,
             toValue: getHeight(defaultHeight, screenHeight),
-          }).start();
+          }).start()
         }
       },
       onShouldBlockNativeResponder: () => {
-        return true;
+        return true
       },
     })
-  ).current;
+  ).current
 
   return (
     <View {...panResponder.panHandlers}>
@@ -63,8 +56,8 @@ export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
         <Animated.View style={[styles.knob, knobStyles]} />
       </View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   panContainer: {
@@ -86,4 +79,4 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 5,
   },
-});
+})
