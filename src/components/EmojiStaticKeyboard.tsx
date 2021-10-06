@@ -17,7 +17,7 @@ export const EmojiStaticKeyboard = () => {
     activeCategoryIndex,
     containerStyles,
     onCategoryChangeFailed,
-    disabledCategory,
+    disabledCategories,
     categoryPosition,
     enableSearchBar,
     searchPhrase,
@@ -45,7 +45,7 @@ export const EmojiStaticKeyboard = () => {
   const renderList = React.useMemo(() => {
     const data = emojisByGroup.filter((category) => {
       const title = category.title as CategoryTypes
-      return !disabledCategory.includes(title)
+      return !disabledCategories.includes(title)
     })
     if (keyboardState.recentlyUsed.length && enableRecentlyUsed) {
       data.push({
@@ -64,7 +64,7 @@ export const EmojiStaticKeyboard = () => {
         }),
     })
     return data
-  }, [disabledCategory, enableRecentlyUsed, keyboardState.recentlyUsed, searchPhrase])
+  }, [disabledCategories, enableRecentlyUsed, keyboardState.recentlyUsed, searchPhrase])
 
   React.useEffect(() => {
     if (searchPhrase !== '') {
