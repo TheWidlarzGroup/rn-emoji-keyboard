@@ -1,0 +1,16 @@
+import type { CategoryTranslation } from '../types'
+
+export const it: CategoryTranslation = {
+  recently_used: 'Usate di recente',
+  smileys_emotion: 'Sorrisi & Emozioni',
+  people_body: 'Persone & Corpo',
+  animals_nature: 'Animali & Natura',
+  food_drink: 'Cibo & Bevande',
+  travel_places: 'Viaggi & Luoghi',
+  activities: 'Attività',
+  objects: 'Oggetti',
+  symbols: 'Simboli',
+  flags: 'Bandiere',
+  search: 'Ricerca',
+}
+export default it
