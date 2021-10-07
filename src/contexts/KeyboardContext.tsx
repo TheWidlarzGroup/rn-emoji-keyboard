@@ -28,7 +28,7 @@ export type KeyboardProps = {
     averageItemLength: number
   }) => void
   translation?: CategoryTranslation
-  disabledCategory?: CategoryTypes[]
+  disabledCategories?: CategoryTypes[]
   enableRecentlyUsed?: boolean
   categoryPosition?: CategoryPosition
   enableSearchBar?: boolean
