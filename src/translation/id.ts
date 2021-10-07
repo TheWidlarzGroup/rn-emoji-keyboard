@@ -6,7 +6,7 @@ export const id: CategoryTranslation = {
   people_body: 'Orang & Tubuh',
   animals_nature: 'Hewan & Alam',
   food_drink: 'Makan & Minum',
-  travel_places: 'Perjalanam & Tempat',
+  travel_places: 'Perjalanan & Tempat',
   activities: 'Aktivitas',
   objects: 'Objek',
   symbols: 'Simbol',
