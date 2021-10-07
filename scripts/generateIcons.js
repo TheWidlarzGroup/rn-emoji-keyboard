@@ -3,11 +3,13 @@ const fs = require('fs')
 
 const newArray = []
 for (const [key, value] of Object.entries(json)) {
-  const newData = value.map((emoji) => ({
-    emoji: emoji.emoji,
-    name: emoji.name,
-    v: emoji.unicode_version,
-  }))
+  const newData = value
+    .filter((emoji) => parseFloat(emoji.unicode_version) < 12)
+    .map((emoji) => ({
+      emoji: emoji.emoji,
+      name: emoji.name,
+      v: emoji.unicode_version,
+    }))
   newArray.push({
     title: key.replace(' & ', '_').replace(' ', '_').toLocaleLowerCase(),
     data: newData,

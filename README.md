@@ -21,7 +21,7 @@ export default function App() {
 
   const handlePick = (emojiObject: EmojiType) => {
     console.log(emojiObject);
-    /* example emojiObject = { 
+    /* example emojiObject = {
         "emoji": "❤️",
         "name": "red heart",
         "slug": "red_heart",
@@ -55,7 +55,7 @@ export default function App() {
 | headerStyles | TextStyle | {} | no | Override category name styles |
 | knobStyles | ViewStyle | {} | no | Override knob styles |
 | containerStyles | ViewStyle | {} | no | Override container styles |
-| hideHeader | boolean | false | no | Hide category names | 
+| hideHeader | boolean | false | no | Hide category names |
 | expandable | boolean | true | no | Show knob and enable expand on swipe up |
 | defaultHeight | number \| string | "40%" | no | Specify collapsed container height (number is points, string is a percentage of the screen height) |
 | expandedHeight | number \| string | "80%" | no | Specify expanded container height (number is points, string is a percentage of the screen height) _works only if expandable is true_ |
@@ -66,7 +66,7 @@ export default function App() {
 | activeCategoryContainerColor | string | "#ffffff" | no | Change selected category container color |
 | onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
 | translation | CategoryTranslation | en | no | Translation object *see translation section* |
-| disabledCategory | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
+| disabledCategories | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
 
 ## 📊 Comparison
 

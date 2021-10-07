@@ -1,15 +1,14 @@
 import * as React from 'react'
 import { EmojiStaticKeyboard } from './components/EmojiStaticKeyboard'
 import { KeyboardProvider } from './contexts/KeyboardProvider'
-import type { KeyboardProps, OnEmojiSelected } from './contexts/KeyboardContext'
+import type { KeyboardProps } from './contexts/KeyboardContext'
 
-type EmojiKeyboardProps = {
-  onEmojiSelected: OnEmojiSelected
-} & Partial<KeyboardProps>
+type EmojiKeyboardProps = Omit<Partial<KeyboardProps>, 'open' | 'onClose'> &
+  Pick<KeyboardProps, 'onEmojiSelected'>
 
 export const EmojiKeyboard = (props: EmojiKeyboardProps) => {
   return (
-    <KeyboardProvider {...props}>
+    <KeyboardProvider {...props} open={true} onClose={() => {}}>
       <EmojiStaticKeyboard />
     </KeyboardProvider>
   )

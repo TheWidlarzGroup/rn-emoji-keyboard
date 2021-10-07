@@ -24,7 +24,7 @@ const DisabledCategories = () => {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        disabledCategory={['activities', 'flags', 'objects', 'symbols']}
+        disabledCategories={['activities', 'flags', 'objects', 'symbols']}
       />
     </SafeAreaView>
   )
