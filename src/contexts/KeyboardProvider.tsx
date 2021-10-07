@@ -30,7 +30,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
     console.warn(info)
   },
   translation: en,
-  disabledCategory: [],
+  disabledCategories: [],
   enableRecentlyUsed: false,
   categoryPosition: 'floating',
   enableSearchBar: false,

@@ -17,7 +17,7 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     activeCategoryIndex,
     categoryContainerColor,
     onCategoryChangeFailed,
-    disabledCategory,
+    disabledCategories,
     activeCategoryContainerColor,
     enableRecentlyUsed,
     categoryPosition,
@@ -26,9 +26,9 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
   const { keyboardState } = useKeyboardStore()
   const handleScrollToCategory = React.useCallback(
     (category: CategoryTypes) => {
-      flatListRef?.current?.scrollToIndex(getCategoryIndex(disabledCategory, category))
+      flatListRef?.current?.scrollToIndex(getCategoryIndex(disabledCategories, category))
     },
-    [disabledCategory, flatListRef]
+    [disabledCategories, flatListRef]
   )
 
   const renderItem = React.useCallback(
@@ -89,9 +89,9 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     return CATEGORIES_NAVIGATION.filter(({ category }) => {
       if (searchPhrase === '' && category === 'search') return false
       if (isRecentlyUsedHidden(category)) return false
-      return !disabledCategory.includes(category)
+      return !disabledCategories.includes(category)
     })
-  }, [disabledCategory, enableRecentlyUsed, keyboardState.recentlyUsed.length, searchPhrase])
+  }, [disabledCategories, enableRecentlyUsed, keyboardState.recentlyUsed.length, searchPhrase])
 
   return (
     <View style={[categoryPosition === 'floating' && styles.floating]}>
