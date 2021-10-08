@@ -87,6 +87,8 @@ Due to the limited translation possibilities, we only provide a few pre-defined 
 * `en` - English 🇺🇸
 * `pl` - Polish 🇵🇱
 * `it` - Italian 🇮🇹
+* `ko` - Korean 🇰🇷
+* `id` - Indonesian 🇲🇨
 
 First import lang and use it as `translation` prop.
 ```ts
