@@ -90,6 +90,7 @@ Due to the limited translation possibilities, we only provide a few pre-defined 
 * `it` - Italian 🇮🇹
 * `ko` - Korean 🇰🇷
 * `id` - Indonesian 🇲🇨
+* `es` - Spanish 🇪🇸
 
 First import lang and use it as `translation` prop.
 ```ts
