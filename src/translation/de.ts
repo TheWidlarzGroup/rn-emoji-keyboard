@@ -14,4 +14,3 @@ export const de: CategoryTranslation = {
   search: 'Suche',
 }
 export default de
-
