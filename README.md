@@ -86,6 +86,7 @@ Example about serving as static keyboard [you can find here](/example/src/Dark/D
 Due to the limited translation possibilities, we only provide a few pre-defined translations into the following languages:
 * `en` - English 🇺🇸
 * `pl` - Polish 🇵🇱
+* `it` - Italian 🇮🇹
 
 First import lang and use it as `translation` prop.
 ```ts
