@@ -13,6 +13,7 @@ import Close from '../assets/Close'
 import Clock from '../assets/Clock'
 import type { IconNames } from '../types'
 import { exhaustiveTypeCheck } from '../utils'
+import QuestionMark from '../assets/QuestionMark'
 
 export const Icon = ({
   iconName,
@@ -20,7 +21,7 @@ export const Icon = ({
   normalColor,
   activeColor,
 }: {
-  iconName: IconNames | 'Close'
+  iconName: IconNames | 'Close' | 'QuestionMark'
   isActive: boolean
   normalColor: string
   activeColor: string
@@ -51,6 +52,8 @@ export const Icon = ({
       return <Close fill={color} />
     case 'Clock':
       return <Clock fill={color} />
+    case 'QuestionMark':
+      return <QuestionMark fill={color} />
     default:
       exhaustiveTypeCheck(iconName)
       return null
