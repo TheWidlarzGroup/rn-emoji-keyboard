@@ -5,11 +5,8 @@ import type { CategoryTypes, EmojisByCategory } from '../types'
 import { EmojiCategory } from './EmojiCategory'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { Categories } from './Categories'
-import emojisByGroup from '../assets/emojis.json'
 import { SearchBar } from './SearchBar'
 import { useKeyboardStore } from '../store/useKeyboardStore'
-
-const CATEGORY_ELEMENT_WIDTH = 37
 
 export const EmojiStaticKeyboard = () => {
   const { width } = useWindowDimensions()
@@ -17,16 +14,13 @@ export const EmojiStaticKeyboard = () => {
     activeCategoryIndex,
     containerStyles,
     onCategoryChangeFailed,
-    disabledCategories,
     categoryPosition,
     enableSearchBar,
     searchPhrase,
-    setActiveCategoryIndex,
-    enableRecentlyUsed,
+    renderList,
   } = React.useContext(KeyboardContext)
   const { keyboardState } = useKeyboardStore()
   const flatListRef = React.useRef<FlatList>(null)
-  const scrollNav = React.useRef(new Animated.Value(0)).current
 
   const getItemLayout = (_: CategoryTypes[] | null | undefined, index: number) => ({
     length: width,
@@ -35,43 +29,12 @@ export const EmojiStaticKeyboard = () => {
   })
 
   const renderItem = React.useCallback((props) => <EmojiCategory {...props} />, [])
-  React.useEffect(() => {
-    Animated.spring(scrollNav, {
-      toValue: activeCategoryIndex * CATEGORY_ELEMENT_WIDTH,
-      useNativeDriver: true,
-    }).start()
-  }, [activeCategoryIndex, scrollNav])
-
-  const renderList = React.useMemo(() => {
-    const data = emojisByGroup.filter((category) => {
-      const title = category.title as CategoryTypes
-      return !disabledCategories.includes(title)
-    })
-    if (keyboardState.recentlyUsed.length && enableRecentlyUsed) {
-      data.push({
-        title: 'recently_used',
-        data: keyboardState.recentlyUsed,
-      })
-    }
-    data.push({
-      title: 'search',
-      data: emojisByGroup
-        .map((group) => group.data)
-        .flat()
-        .filter((emoji) => {
-          if (searchPhrase && searchPhrase.length < 2) return false
-          return emoji.name.toLowerCase().includes(searchPhrase.toLowerCase())
-        }),
-    })
-    return data
-  }, [disabledCategories, enableRecentlyUsed, keyboardState.recentlyUsed, searchPhrase])
 
   React.useEffect(() => {
-    if (searchPhrase !== '') {
-      flatListRef.current?.scrollToEnd()
-      setActiveCategoryIndex(renderList.length - 1)
-    }
-  }, [renderList, searchPhrase, setActiveCategoryIndex])
+    flatListRef.current?.scrollToIndex({
+      index: activeCategoryIndex,
+    })
+  }, [activeCategoryIndex])
 
   return (
     <View
@@ -81,7 +44,7 @@ export const EmojiStaticKeyboard = () => {
         categoryPosition === 'top' && styles.containerReverse,
         containerStyles,
       ]}>
-      {enableSearchBar && <SearchBar flatListRef={flatListRef} />}
+      {enableSearchBar && <SearchBar />}
       <Animated.FlatList
         extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
         data={renderList}
@@ -100,7 +63,7 @@ export const EmojiStaticKeyboard = () => {
         windowSize={2}
         maxToRenderPerBatch={1}
       />
-      <Categories flatListRef={flatListRef} scrollNav={scrollNav} />
+      <Categories />
     </View>
   )
 }
