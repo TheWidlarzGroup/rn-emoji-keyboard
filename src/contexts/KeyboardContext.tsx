@@ -42,6 +42,7 @@ export type KeyboardProps = {
   searchBarStyles?: ViewStyle
   searchBarTextStyles?: TextStyle
   searchBarPlaceholderColor?: string
+  categoryOrder?: CategoryTypes[]
 }
 export type ContextValues = {
   activeCategoryIndex: number

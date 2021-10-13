@@ -5,6 +5,7 @@ import en from '../translation/en'
 import emojisByGroup from '../assets/emojis.json'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import type { EmojiType, CategoryTypes, EmojisByCategory } from '../types'
+import { CATEGORIES } from '../types'
 
 type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode
@@ -40,6 +41,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   searchBarStyles: {},
   searchBarTextStyles: {},
   searchBarPlaceholderColor: '#00000055',
+  categoryOrder: [...CATEGORIES],
 }
 
 export const defaultKeyboardValues: ContextValues = {
@@ -67,7 +69,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   }, [props.open])
 
   const renderList = React.useMemo(() => {
-    const data = emojisByGroup.filter((category) => {
+    let data = emojisByGroup.filter((category) => {
       const title = category.title as CategoryTypes
       if (props.disabledCategories) return !props.disabledCategories.includes(title)
       return true
@@ -90,11 +92,21 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
           }),
       })
     }
+    if (props.categoryOrder) {
+      const orderedData = props.categoryOrder.flatMap((name) =>
+        data.filter((el) => el.title === name)
+      )
+      const restData = data.filter(
+        (el) => !props?.categoryOrder?.includes(el.title as CategoryTypes)
+      )
+      data = [...orderedData, ...restData]
+    }
     return data as EmojisByCategory[]
   }, [
     keyboardState.recentlyUsed,
     props.enableRecentlyUsed,
     props.enableSearchBar,
+    props.categoryOrder,
     props.disabledCategories,
     searchPhrase,
   ])
