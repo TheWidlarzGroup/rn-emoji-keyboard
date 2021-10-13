@@ -1,17 +1,16 @@
 import * as React from 'react'
 
 import { StyleSheet, View, Text, FlatList } from 'react-native'
-import type { EmojisByCategory, EmojiType, JsonEmoji } from '../types'
+import type { EmojisByCategory, JsonEmoji } from '../types'
 import { SingleEmoji } from './SingleEmoji'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import { parseEmoji } from '../utils'
 
-const emptyEmoji = {
+const emptyEmoji: JsonEmoji = {
   emoji: '',
   name: 'blank emoji',
-  slug: 'blank_emoji',
-  unicode_version: '0',
+  v: '0',
 }
 
 export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategory }) => {
@@ -28,7 +27,7 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
 
   const { setKeyboardState } = useKeyboardStore()
 
-  const [empty, setEmpty] = React.useState<EmojiType[]>([])
+  const [empty, setEmpty] = React.useState<JsonEmoji[]>([])
 
   React.useEffect(() => {
     if (data.length % numberOfColumns) {
@@ -39,7 +38,7 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
     }
   }, [numberOfColumns, data])
 
-  const getItemLayout = (_: EmojiType[] | null | undefined, index: number) => ({
+  const getItemLayout = (_: JsonEmoji[] | null | undefined, index: number) => ({
     length: emojiSize ? emojiSize : 0,
     offset: emojiSize * Math.ceil(index / numberOfColumns),
     index,
