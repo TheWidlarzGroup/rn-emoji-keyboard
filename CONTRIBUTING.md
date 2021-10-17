@@ -3,12 +3,12 @@
 We want this community to be friendly and respectful to each other. Please follow it in all your interactions with the project.
 
 ## Translations
-It would be great if you can contribute your translations! You can do it by following this steps
+It would be great if you could contribute your translations! You can do it by following this steps
 *You can use `en` everywhere as reference*
 
 * Create language file in [translation directory](/src/translation/)
 *For example `en.ts`*
-* Create translation object like in other languages
+* Create a translation object like in other languages
   * *remember to change object name per your language*
 * Import and export this file in [index.tsx file](/src/index.tsx)
 * Add new language to documentation in [README.md file](/README.md#pre-defined)
