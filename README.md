@@ -145,3 +145,5 @@ You can clone the repo and run `yarn example ios` or `yarn example android` to p
 * Write native module to display forbidden emojis on android.
 ## ⚖️ License
  **[MIT](/LICENSE)**
+## 📝 Contribute
+If you want to contribute read the [CONTRIBUTING.md](/CONTRIBUTING.md) guide.
