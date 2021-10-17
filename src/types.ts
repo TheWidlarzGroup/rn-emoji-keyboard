@@ -44,5 +44,5 @@ export type CategoryTranslation = {
 
 export type EmojisByCategory = {
   title: CategoryTypes
-  data: EmojiType[]
+  data: JsonEmoji[]
 }

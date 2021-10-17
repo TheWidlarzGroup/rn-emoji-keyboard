@@ -1,7 +1,13 @@
 import * as React from 'react'
 import type { TextStyle, ViewStyle } from 'react-native'
 import { defaultKeyboardContext, defaultKeyboardValues } from './KeyboardProvider'
-import type { CategoryTranslation, EmojiType, CategoryTypes, CategoryPosition } from '../types'
+import type {
+  CategoryTranslation,
+  EmojiType,
+  CategoryTypes,
+  CategoryPosition,
+  EmojisByCategory,
+} from '../types'
 
 export type OnEmojiSelected = (emoji: EmojiType) => void
 
@@ -36,6 +42,7 @@ export type KeyboardProps = {
   searchBarStyles?: ViewStyle
   searchBarTextStyles?: TextStyle
   searchBarPlaceholderColor?: string
+  categoryOrder?: CategoryTypes[]
 }
 export type ContextValues = {
   activeCategoryIndex: number
@@ -44,6 +51,7 @@ export type ContextValues = {
   width: number
   searchPhrase: string
   setSearchPhrase: (phrase: string) => void
+  renderList: EmojisByCategory[]
 }
 
 export const KeyboardContext = React.createContext<Required<KeyboardProps> & ContextValues>({

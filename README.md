@@ -67,6 +67,7 @@ export default function App() {
 | onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
 | translation | CategoryTranslation | en | no | Translation object *see translation section* |
 | disabledCategories | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
+| categoryOrder | CategoryTypes[] | [] | no | Set category sequence |
 
 ## 📊 Comparison
 

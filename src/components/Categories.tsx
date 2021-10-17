@@ -1,34 +1,29 @@
 import * as React from 'react'
 import { Animated, FlatList, StyleSheet, View, ViewStyle } from 'react-native'
-import { useKeyboardStore } from '../store/useKeyboardStore'
 import { defaultKeyboardContext } from '../contexts/KeyboardProvider'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { CATEGORIES_NAVIGATION, CategoryNavigationItem, CategoryTypes } from '../types'
 import { CategoryItem } from './CategoryItem'
-import { exhaustiveTypeCheck, getCategoryIndex } from '../utils'
+import { exhaustiveTypeCheck } from '../utils'
 
-type CategoriesProps = {
-  flatListRef: React.RefObject<FlatList>
-  scrollNav: Animated.Value
-}
+const CATEGORY_ELEMENT_WIDTH = 37
 
-export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
+export const Categories = () => {
   const {
     activeCategoryIndex,
     categoryContainerColor,
     onCategoryChangeFailed,
-    disabledCategories,
     activeCategoryContainerColor,
-    enableRecentlyUsed,
     categoryPosition,
-    searchPhrase,
+    renderList,
+    setActiveCategoryIndex,
   } = React.useContext(KeyboardContext)
-  const { keyboardState } = useKeyboardStore()
+  const scrollNav = React.useRef(new Animated.Value(0)).current
   const handleScrollToCategory = React.useCallback(
     (category: CategoryTypes) => {
-      flatListRef?.current?.scrollToIndex(getCategoryIndex(disabledCategories, category))
+      setActiveCategoryIndex(renderList.findIndex((cat) => cat.title === category))
     },
-    [disabledCategories, flatListRef]
+    [renderList, setActiveCategoryIndex]
   )
 
   const renderItem = React.useCallback(
@@ -37,6 +32,12 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
     ),
     [handleScrollToCategory]
   )
+  React.useEffect(() => {
+    Animated.spring(scrollNav, {
+      toValue: activeCategoryIndex * CATEGORY_ELEMENT_WIDTH,
+      useNativeDriver: true,
+    }).start()
+  }, [activeCategoryIndex, scrollNav])
 
   const activeIndicator = React.useCallback(
     () => (
@@ -83,15 +84,13 @@ export const Categories = ({ flatListRef, scrollNav }: CategoriesProps) => {
   }
 
   const renderData = React.useMemo(() => {
-    const isRecentlyUsedHidden = (category: CategoryTypes) =>
-      category === 'recently_used' &&
-      (keyboardState.recentlyUsed.length === 0 || !enableRecentlyUsed)
-    return CATEGORIES_NAVIGATION.filter(({ category }) => {
-      if (searchPhrase === '' && category === 'search') return false
-      if (isRecentlyUsedHidden(category)) return false
-      return !disabledCategories.includes(category)
-    })
-  }, [disabledCategories, enableRecentlyUsed, keyboardState.recentlyUsed.length, searchPhrase])
+    return renderList.map((category) => ({
+      category: category.title,
+      icon:
+        CATEGORIES_NAVIGATION.find((cat) => cat.category === category.title)?.icon ||
+        'QuestionMark',
+    })) as CategoryNavigationItem[]
+  }, [renderList])
 
   return (
     <View style={[categoryPosition === 'floating' && styles.floating]}>

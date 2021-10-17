@@ -1,13 +1,9 @@
 import * as React from 'react'
-import { View, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native'
+import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { Icon } from './Icon'
 
-type SearchBarProps = {
-  flatListRef: React.RefObject<FlatList>
-}
-
-export const SearchBar = ({ flatListRef }: SearchBarProps) => {
+export const SearchBar = () => {
   const {
     searchPhrase,
     setSearchPhrase,
@@ -17,17 +13,20 @@ export const SearchBar = ({ flatListRef }: SearchBarProps) => {
     searchBarStyles,
     searchBarTextStyles,
     searchBarPlaceholderColor,
+    renderList,
   } = React.useContext(KeyboardContext)
   const inputRef = React.useRef<TextInput>(null)
 
   const handleSearch = (text: string) => {
     setSearchPhrase(text)
+    if (text === '') return setActiveCategoryIndex(0)
+    const searchIndex = renderList.findIndex((cat) => cat.title === 'search')
+    if (searchIndex !== -1) setActiveCategoryIndex(searchIndex)
   }
   const clearPhrase = () => {
     setSearchPhrase('')
     inputRef.current?.blur()
     setActiveCategoryIndex(0)
-    flatListRef?.current?.scrollToIndex({ index: 0, animated: true })
   }
 
   return (
