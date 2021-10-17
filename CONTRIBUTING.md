@@ -11,7 +11,7 @@ It would be great if you could contribute your translations! You can do it by fo
 * Create a translation object like in other languages
   * *remember to change object name per your language*
 * Import and export this file in [index.tsx file](/src/index.tsx)
-* Add new language to documentation in [README.md file](/README.md#pre-defined)
+* Add a new language to documentation in [README.md file](/README.md#pre-defined)
 
 ## Development workflow
 
