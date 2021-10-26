@@ -10,6 +10,7 @@ import { getHeight } from './utils'
 
 export const EmojiPicker = ({
   onEmojiSelected,
+  onRequestClose,
   open,
   onClose,
   expandable = defaultKeyboardContext.expandable,
@@ -46,7 +47,7 @@ export const EmojiPicker = ({
       expandable={expandable}
       defaultHeight={defaultHeight}
       {...props}>
-      <ModalWithBackdrop isOpen={open} backdropPress={close}>
+      <ModalWithBackdrop isOpen={open} backdropPress={close} onRequestClose={onRequestClose}>
         <>
           {expandable && <Knob height={height} offsetY={offsetY} onClose={onClose} />}
           <Animated.View

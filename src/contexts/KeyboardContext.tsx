@@ -9,6 +9,7 @@ export type KeyboardProps = {
   open: boolean
   onClose: () => void
   onEmojiSelected: OnEmojiSelected
+  onRequestClose: () => void
   emojiSize?: number
   containerStyles?: ViewStyle
   knobStyles?: ViewStyle
