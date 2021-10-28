@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  ModalProps,
 } from 'react-native'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useTimeout } from '../hooks/useTimeout'
@@ -17,7 +18,12 @@ type ModalWithBackdropProps = {
   children: React.ReactNode
 }
 
-export const ModalWithBackdrop = ({ isOpen, backdropPress, children }: ModalWithBackdropProps) => {
+export const ModalWithBackdrop = ({
+  isOpen,
+  backdropPress,
+  children,
+  ...rest
+}: ModalWithBackdropProps & ModalProps) => {
   const { height: screenHeight } = useWindowDimensions()
   const translateY = React.useRef(new Animated.Value(screenHeight)).current
   const { backdropColor } = React.useContext(KeyboardContext)
@@ -39,7 +45,7 @@ export const ModalWithBackdrop = ({ isOpen, backdropPress, children }: ModalWith
   }
 
   return (
-    <Modal visible={isOpen} animationType="fade" transparent={true}>
+    <Modal visible={isOpen} animationType="fade" transparent={true} {...rest}>
       <TouchableOpacity style={styles.modalContainer} activeOpacity={1} onPress={handleClose}>
         <View style={[styles.modalContainer, { backgroundColor: backdropColor }]}>
           <SafeAreaView style={styles.modalContainer}>
