@@ -11,7 +11,7 @@ for (const [key, value] of Object.entries(json)) {
       v: emoji.unicode_version,
     }))
   newArray.push({
-    title: key.replace(' & ', '_').replace(' ', '_').toLocaleLowerCase(),
+    title: key.replace(/ & /g, '_').replace(/ /g, '_').toLocaleLowerCase(),
     data: newData,
   })
 }
