@@ -16,7 +16,6 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   open: false,
   onClose: () => {},
   onEmojiSelected: (_emoji: EmojiType) => {},
-  onRequestClose: () => {},
   emojiSize: 28,
   containerStyles: {},
   knobStyles: {},
@@ -43,6 +42,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   searchBarTextStyles: {},
   searchBarPlaceholderColor: '#00000055',
   categoryOrder: [...CATEGORIES],
+  onRequestClose: () => {},
 }
 
 export const defaultKeyboardValues: ContextValues = {

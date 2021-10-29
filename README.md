@@ -68,6 +68,7 @@ export default function App() {
 | translation | CategoryTranslation | en | no | Translation object *see translation section* |
 | disabledCategories | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
 | categoryOrder | CategoryTypes[] | [] | no | Set category sequence |
+| onRequestClose | function | undefined | no | Handle onRequestClose in modal |
 
 ## 📊 Comparison
 
