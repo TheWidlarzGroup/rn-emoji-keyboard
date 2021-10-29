@@ -15,7 +15,6 @@ export type KeyboardProps = {
   open: boolean
   onClose: () => void
   onEmojiSelected: OnEmojiSelected
-  onRequestClose: () => void
   emojiSize?: number
   containerStyles?: ViewStyle
   knobStyles?: ViewStyle
@@ -44,6 +43,7 @@ export type KeyboardProps = {
   searchBarTextStyles?: TextStyle
   searchBarPlaceholderColor?: string
   categoryOrder?: CategoryTypes[]
+  onRequestClose?: () => void
 }
 export type ContextValues = {
   activeCategoryIndex: number

@@ -16,7 +16,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   open: false,
   onClose: () => {},
   onEmojiSelected: (_emoji: EmojiType) => {},
-  onRequestClose: ()=> {},
+  onRequestClose: () => {},
   emojiSize: 28,
   containerStyles: {},
   knobStyles: {},
