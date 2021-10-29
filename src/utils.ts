@@ -14,7 +14,7 @@ export const parseEmoji = (emoji: JsonEmoji) => ({
   name: emoji.name,
   emoji: emoji.emoji,
   unicode_version: emoji.v,
-  slug: emoji.name.replace(' ', '_'),
+  slug: emoji.name.replace(/ /g, '_'),
 })
 
 export const getCategoryIndex = (disabledCategory: CategoryTypes[], category: CategoryTypes) => ({
