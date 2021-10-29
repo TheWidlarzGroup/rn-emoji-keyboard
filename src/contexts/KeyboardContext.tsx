@@ -43,6 +43,7 @@ export type KeyboardProps = {
   searchBarTextStyles?: TextStyle
   searchBarPlaceholderColor?: string
   categoryOrder?: CategoryTypes[]
+  onRequestClose?: () => void
 }
 export type ContextValues = {
   activeCategoryIndex: number
