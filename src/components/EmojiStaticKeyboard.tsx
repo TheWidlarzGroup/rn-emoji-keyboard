@@ -8,7 +8,7 @@ import { Categories } from './Categories'
 import { SearchBar } from './SearchBar'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 
-export const EmojiStaticKeyboard = () => {
+export const EmojiStaticKeyboard = (props) => {
   const { width } = useWindowDimensions()
   const {
     activeCategoryIndex,
@@ -44,7 +44,7 @@ export const EmojiStaticKeyboard = () => {
         categoryPosition === 'top' && styles.containerReverse,
         containerStyles,
       ]}>
-      {enableSearchBar && <SearchBar />}
+      {enableSearchBar && <SearchBar  height={props.height} offsetY={props.offsetY} onClose={props.onClose}/>}
       <Animated.FlatList
         extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
         data={renderList}

@@ -56,7 +56,7 @@ export const EmojiPicker = ({
                 height: Animated.subtract(height, offsetY),
               },
             ]}>
-            <EmojiStaticKeyboard />
+            <EmojiStaticKeyboard height={height} offsetY={offsetY} onClose={onClose} />
           </Animated.View>
         </>
       </ModalWithBackdrop>

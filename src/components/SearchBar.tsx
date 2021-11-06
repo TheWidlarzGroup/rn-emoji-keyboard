@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TextInput, TouchableOpacity,useWindowDimensions, Animated } from 'react-native'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { Icon } from './Icon'
+import { getHeight } from '../utils'
 
-export const SearchBar = () => {
+export const SearchBar = (props) => {
   const {
     searchPhrase,
     setSearchPhrase,
@@ -14,8 +15,11 @@ export const SearchBar = () => {
     searchBarTextStyles,
     searchBarPlaceholderColor,
     renderList,
+    expandedHeight
   } = React.useContext(KeyboardContext)
   const inputRef = React.useRef<TextInput>(null)
+
+  const { height: screenHeight } = useWindowDimensions()
 
   const handleSearch = (text: string) => {
     setSearchPhrase(text)
@@ -28,6 +32,12 @@ export const SearchBar = () => {
     inputRef.current?.blur()
     setActiveCategoryIndex(0)
   }
+  const increaseHeightOnFocus=()=>{
+    Animated.spring(props.height, {
+      useNativeDriver: false,
+      toValue: getHeight(expandedHeight, screenHeight),
+    }).start()
+  }
 
   return (
     <View style={[styles.container, searchBarStyles]}>
@@ -38,6 +48,7 @@ export const SearchBar = () => {
         placeholder={translation.search}
         ref={inputRef}
         placeholderTextColor={searchBarPlaceholderColor}
+        onFocus={increaseHeightOnFocus}
       />
       {!!searchPhrase && (
         <TouchableOpacity onPress={clearPhrase} style={styles.button}>
