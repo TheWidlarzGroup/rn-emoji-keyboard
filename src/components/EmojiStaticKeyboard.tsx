@@ -1,12 +1,20 @@
 import * as React from 'react'
 
-import { StyleSheet, View, FlatList, useWindowDimensions, Animated } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  useWindowDimensions,
+  Animated,
+  SafeAreaView,
+} from 'react-native'
 import type { CategoryTypes, EmojisByCategory } from '../types'
 import { EmojiCategory } from './EmojiCategory'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { Categories } from './Categories'
 import { SearchBar } from './SearchBar'
 import { useKeyboardStore } from '../store/useKeyboardStore'
+import { ConditionalContainer } from './ConditionalContainer'
 
 export const EmojiStaticKeyboard = () => {
   const { width } = useWindowDimensions()
@@ -18,6 +26,7 @@ export const EmojiStaticKeyboard = () => {
     enableSearchBar,
     searchPhrase,
     renderList,
+    disableSafeArea,
   } = React.useContext(KeyboardContext)
   const { keyboardState } = useKeyboardStore()
   const flatListRef = React.useRef<FlatList>(null)
@@ -41,34 +50,46 @@ export const EmojiStaticKeyboard = () => {
       style={[
         styles.container,
         styles.containerShadow,
-        categoryPosition === 'top' && styles.containerReverse,
+        categoryPosition === 'top' && disableSafeArea && styles.containerReverse,
         containerStyles,
       ]}>
-      {enableSearchBar && <SearchBar />}
-      <Animated.FlatList
-        extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
-        data={renderList}
-        keyExtractor={(item: EmojisByCategory) => item.title}
-        renderItem={renderItem}
-        removeClippedSubviews={true}
-        ref={flatListRef}
-        onScrollToIndexFailed={onCategoryChangeFailed}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        scrollEventThrottle={16}
-        getItemLayout={getItemLayout}
-        scrollEnabled={false}
-        initialNumToRender={1}
-        windowSize={2}
-        maxToRenderPerBatch={1}
-      />
-      <Categories />
+      <ConditionalContainer
+        condition={!disableSafeArea}
+        container={(children) => (
+          <SafeAreaView
+            style={[styles.flex, categoryPosition === 'top' && styles.containerReverse]}>
+            {children}
+          </SafeAreaView>
+        )}>
+        <>
+          {enableSearchBar && <SearchBar />}
+          <Animated.FlatList
+            extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
+            data={renderList}
+            keyExtractor={(item: EmojisByCategory) => item.title}
+            renderItem={renderItem}
+            removeClippedSubviews={true}
+            ref={flatListRef}
+            onScrollToIndexFailed={onCategoryChangeFailed}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            pagingEnabled
+            scrollEventThrottle={16}
+            getItemLayout={getItemLayout}
+            scrollEnabled={false}
+            initialNumToRender={1}
+            windowSize={2}
+            maxToRenderPerBatch={1}
+          />
+          <Categories />
+        </>
+      </ConditionalContainer>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  flex: { flex: 1 },
   container: {
     flex: 1,
     borderRadius: 16,

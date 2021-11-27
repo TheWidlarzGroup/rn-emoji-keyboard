@@ -43,6 +43,8 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   searchBarPlaceholderColor: '#00000055',
   categoryOrder: [...CATEGORIES],
   onRequestClose: () => {},
+  categoryContainerStyles: {},
+  disableSafeArea: false,
 }
 
 export const defaultKeyboardValues: ContextValues = {

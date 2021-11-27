@@ -17,6 +17,7 @@ export const Categories = () => {
     categoryPosition,
     renderList,
     setActiveCategoryIndex,
+    categoryContainerStyles,
   } = React.useContext(KeyboardContext)
   const scrollNav = React.useRef(new Animated.Value(0)).current
   const handleScrollToCategory = React.useCallback(
@@ -57,7 +58,7 @@ export const Categories = () => {
   )
 
   const getStylesBasedOnPosition = () => {
-    const style: ViewStyle[] = [styles.navigation]
+    const style: ViewStyle[] = [styles.navigation, categoryContainerStyles]
     switch (categoryPosition) {
       case 'floating':
         style.push(styles.navigationFloating)
