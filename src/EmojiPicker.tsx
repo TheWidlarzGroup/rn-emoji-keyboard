@@ -7,6 +7,7 @@ import type { KeyboardProps } from './contexts/KeyboardContext'
 import type { EmojiType } from './types'
 import { ModalWithBackdrop } from './components/ModalWithBackdrop'
 import { getHeight } from './utils'
+import { useKeyboard } from './hooks/useKeyboard'
 
 export const EmojiPicker = ({
   onEmojiSelected,
@@ -20,15 +21,33 @@ export const EmojiPicker = ({
   const { height: screenHeight } = useWindowDimensions()
   const offsetY = React.useRef(new Animated.Value(0)).current
   const height = React.useRef(new Animated.Value(getHeight(defaultHeight, screenHeight))).current
-  const translateY = React.useRef(new Animated.Value(0)).current
+  const additionalHeight = React.useRef(new Animated.Value(0)).current
+  const { keyboardVisible, keyboardHeight } = useKeyboard()
+  const [isExpanded, setIsExpanded] = React.useState(false)
 
   React.useEffect(() => {
-    Animated.timing(translateY, {
-      toValue: open ? 0 : screenHeight,
-      useNativeDriver: true,
-      duration: 500,
-    }).start()
-  }, [open, screenHeight, translateY])
+    if (keyboardVisible && !isExpanded) {
+      Animated.timing(additionalHeight, {
+        toValue: keyboardHeight,
+        useNativeDriver: false,
+        duration: 200,
+      }).start()
+    } else {
+      Animated.timing(additionalHeight, {
+        toValue: 0,
+        useNativeDriver: false,
+        duration: 200,
+      }).start()
+    }
+  }, [
+    additionalHeight,
+    defaultHeight,
+    height,
+    isExpanded,
+    keyboardHeight,
+    keyboardVisible,
+    screenHeight,
+  ])
 
   const close = () => {
     height.setValue(getHeight(defaultHeight, screenHeight))
@@ -49,11 +68,18 @@ export const EmojiPicker = ({
       {...props}>
       <ModalWithBackdrop isOpen={open} backdropPress={close} onRequestClose={onRequestClose}>
         <>
-          {expandable && <Knob height={height} offsetY={offsetY} onClose={onClose} />}
+          {expandable && (
+            <Knob
+              height={height}
+              offsetY={offsetY}
+              onClose={onClose}
+              setIsExpanded={setIsExpanded}
+            />
+          )}
           <Animated.View
             style={[
               {
-                height: Animated.subtract(height, offsetY),
+                height: Animated.add(Animated.subtract(height, offsetY), additionalHeight),
               },
             ]}>
             <EmojiStaticKeyboard />
