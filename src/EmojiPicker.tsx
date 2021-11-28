@@ -39,15 +39,7 @@ export const EmojiPicker = ({
         duration: 200,
       }).start()
     }
-  }, [
-    additionalHeight,
-    defaultHeight,
-    height,
-    isExpanded,
-    keyboardHeight,
-    keyboardVisible,
-    screenHeight,
-  ])
+  }, [additionalHeight, isExpanded, keyboardHeight, keyboardVisible])
 
   const close = () => {
     height.setValue(getHeight(defaultHeight, screenHeight))
