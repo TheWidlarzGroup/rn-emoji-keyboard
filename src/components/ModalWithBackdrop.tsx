@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {
-  SafeAreaView,
   Modal,
   Animated,
   useWindowDimensions,
@@ -11,6 +10,7 @@ import {
 } from 'react-native'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useTimeout } from '../hooks/useTimeout'
+import { IsSafeAreaWrapper } from './ConditionalContainer'
 
 type ModalWithBackdropProps = {
   isOpen: boolean
@@ -26,7 +26,7 @@ export const ModalWithBackdrop = ({
 }: ModalWithBackdropProps & ModalProps) => {
   const { height: screenHeight } = useWindowDimensions()
   const translateY = React.useRef(new Animated.Value(screenHeight)).current
-  const { backdropColor } = React.useContext(KeyboardContext)
+  const { backdropColor, disableSafeArea } = React.useContext(KeyboardContext)
   const handleTimeout = useTimeout()
 
   React.useEffect(() => {
@@ -48,7 +48,7 @@ export const ModalWithBackdrop = ({
     <Modal visible={isOpen} animationType="fade" transparent={true} {...rest}>
       <TouchableOpacity style={styles.modalContainer} activeOpacity={1} onPress={handleClose}>
         <View style={[styles.modalContainer, { backgroundColor: backdropColor }]}>
-          <SafeAreaView style={styles.modalContainer}>
+          <IsSafeAreaWrapper style={styles.modalContainer} isSafeArea={!disableSafeArea}>
             <TouchableOpacity activeOpacity={1}>
               <Animated.View
                 style={{
@@ -57,7 +57,7 @@ export const ModalWithBackdrop = ({
                 {children}
               </Animated.View>
             </TouchableOpacity>
-          </SafeAreaView>
+          </IsSafeAreaWrapper>
         </View>
       </TouchableOpacity>
     </Modal>

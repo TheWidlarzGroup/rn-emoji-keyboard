@@ -44,6 +44,8 @@ export type KeyboardProps = {
   searchBarPlaceholderColor?: string
   categoryOrder?: CategoryTypes[]
   onRequestClose?: () => void
+  categoryContainerStyles?: ViewStyle
+  disableSafeArea?: boolean
 }
 export type ContextValues = {
   activeCategoryIndex: number
