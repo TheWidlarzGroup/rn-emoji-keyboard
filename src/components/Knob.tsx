@@ -1,5 +1,12 @@
 import * as React from 'react'
-import { Animated, useWindowDimensions, StyleSheet, View, PanResponder } from 'react-native'
+import {
+  Animated,
+  useWindowDimensions,
+  StyleSheet,
+  View,
+  PanResponder,
+  Keyboard,
+} from 'react-native'
 import { getHeight } from '../utils'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 
@@ -7,9 +14,10 @@ type KnobProps = {
   offsetY: Animated.Value
   height: Animated.Value
   onClose: () => void
+  setIsExpanded: (isExpanded: boolean) => void
 }
 
-export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
+export const Knob = ({ offsetY, height, onClose, setIsExpanded }: KnobProps) => {
   const { height: screenHeight } = useWindowDimensions()
   const { expandedHeight, defaultHeight, knobStyles } = React.useContext(KeyboardContext)
 
@@ -20,6 +28,7 @@ export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
       onMoveShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponderCapture: () => true,
 
+      onPanResponderGrant: () => Keyboard.dismiss(),
       onPanResponderMove: Animated.event([null, { dy: offsetY }], {
         useNativeDriver: false,
       }),
@@ -29,24 +38,25 @@ export const Knob = ({ offsetY, height, onClose }: KnobProps) => {
           toValue: 0,
         }).start()
         if (gestureState.dy < -50) {
+          setIsExpanded(true)
           Animated.spring(height, {
             useNativeDriver: false,
             toValue: getHeight(expandedHeight, screenHeight),
           }).start()
         } else if (gestureState.dy > 150) {
+          setIsExpanded(false)
           height.setValue(getHeight(defaultHeight, screenHeight))
           offsetY.setValue(0)
           onClose()
         } else {
+          setIsExpanded(false)
           Animated.spring(height, {
             useNativeDriver: false,
             toValue: getHeight(defaultHeight, screenHeight),
           }).start()
         }
       },
-      onShouldBlockNativeResponder: () => {
-        return true
-      },
+      onShouldBlockNativeResponder: () => true,
     })
   ).current
 
