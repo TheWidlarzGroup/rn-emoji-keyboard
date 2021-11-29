@@ -26,19 +26,13 @@ export const EmojiPicker = ({
   const [isExpanded, setIsExpanded] = React.useState(false)
 
   React.useEffect(() => {
-    if (keyboardVisible && !isExpanded) {
-      Animated.timing(additionalHeight, {
-        toValue: keyboardHeight,
-        useNativeDriver: false,
-        duration: 200,
-      }).start()
-    } else {
-      Animated.timing(additionalHeight, {
-        toValue: 0,
-        useNativeDriver: false,
-        duration: 200,
-      }).start()
-    }
+    const shouldExpandHeight = keyboardVisible && !isExpanded
+    const newAdditionalHeightValue = shouldExpandHeight ? keyboardHeight : 0
+    Animated.timing(additionalHeight, {
+      toValue: newAdditionalHeightValue,
+      useNativeDriver: false,
+      duration: 200,
+    }).start()
   }, [additionalHeight, isExpanded, keyboardHeight, keyboardVisible])
 
   const close = () => {

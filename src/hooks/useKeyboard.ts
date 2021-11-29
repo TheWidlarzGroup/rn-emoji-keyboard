@@ -16,11 +16,11 @@ export const useKeyboard = () => {
   }
 
   useEffect(() => {
-    Keyboard.addListener('keyboardWillShow', onKeyboardDidShow)
-    Keyboard.addListener('keyboardWillHide', onKeyboardDidHide)
+    const showSubscription = Keyboard.addListener('keyboardWillShow', onKeyboardDidShow)
+    const hideSubscription = Keyboard.addListener('keyboardWillHide', onKeyboardDidHide)
     return () => {
-      Keyboard.removeListener('keyboardWillShow', onKeyboardDidShow)
-      Keyboard.removeListener('keyboardWillHide', onKeyboardDidHide)
+      showSubscription.remove()
+      hideSubscription.remove()
     }
   }, [])
 
