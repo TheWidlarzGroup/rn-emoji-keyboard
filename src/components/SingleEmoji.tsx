@@ -15,7 +15,7 @@ export class SingleEmoji extends React.Component<{
     return (
       <TouchableOpacity onPress={onPress} style={styles.container}>
         <View style={styles.iconContainer}>
-          <Text style={{ fontSize: emojiSize }}>{item.emoji}</Text>
+          <Text style={[styles.emoji, { fontSize: emojiSize }]}>{item.emoji}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -25,4 +25,5 @@ export class SingleEmoji extends React.Component<{
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 8 },
   iconContainer: { justifyContent: 'center', alignItems: 'center' },
+  emoji: { color: '#000' },
 })
