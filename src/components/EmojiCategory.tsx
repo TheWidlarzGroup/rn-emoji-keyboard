@@ -75,6 +75,7 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
           <View style={categoryPosition === 'floating' ? styles.footerFloating : styles.footer} />
         )}
         windowSize={20}
+        keyboardShouldPersistTaps="handled"
       />
     </View>
   )

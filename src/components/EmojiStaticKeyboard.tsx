@@ -80,6 +80,7 @@ export const EmojiStaticKeyboard = () => {
             initialNumToRender={1}
             windowSize={2}
             maxToRenderPerBatch={1}
+            keyboardShouldPersistTaps="handled"
           />
           <Categories />
         </>
