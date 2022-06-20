@@ -52,7 +52,10 @@ export const EmojiPicker = ({
       expandable={expandable}
       defaultHeight={defaultHeight}
       {...props}>
-      <ModalWithBackdrop isOpen={open} backdropPress={close} onRequestClose={onRequestClose}>
+      <ModalWithBackdrop
+        isOpen={open}
+        backdropPress={close}
+        onRequestClose={onRequestClose || close}>
         <>
           {expandable && (
             <Knob
