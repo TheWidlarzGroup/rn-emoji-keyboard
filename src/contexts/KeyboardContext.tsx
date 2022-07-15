@@ -46,6 +46,7 @@ export type KeyboardProps = {
   onRequestClose?: () => void
   categoryContainerStyles?: ViewStyle
   disableSafeArea?: boolean
+  allowMultipleSelections?: boolean
 }
 export type ContextValues = {
   activeCategoryIndex: number
