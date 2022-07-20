@@ -29,10 +29,20 @@ static void InitializeFlipper(UIApplication *application) {
 }
 #endif
 
+#ifdef FB_SONARKIT_ENABLED
+#import <FlipperKit/FlipperClient.h>
+#import <FlipperPerformancePlugin.h>
+#endif
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  #ifdef FB_SONARKIT_ENABLED
+    FlipperClient *client = [FlipperClient sharedClient];
+    [client addPlugin:[FlipperPerformancePlugin new]];
+  #endif
+  
   #ifdef FB_SONARKIT_ENABLED
     InitializeFlipper(application);
   #endif
