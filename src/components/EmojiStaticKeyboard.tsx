@@ -15,6 +15,7 @@ import { Categories } from './Categories'
 import { SearchBar } from './SearchBar'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import { ConditionalContainer } from './ConditionalContainer'
+import { SkinTones } from './SkinTones'
 
 export const EmojiStaticKeyboard = () => {
   const { width } = useWindowDimensions()
@@ -83,6 +84,7 @@ export const EmojiStaticKeyboard = () => {
             keyboardShouldPersistTaps="handled"
           />
           <Categories />
+          <SkinTones />
         </>
       </ConditionalContainer>
     </View>

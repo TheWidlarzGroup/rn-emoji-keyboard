@@ -4,8 +4,15 @@ import { KeyboardProps, ContextValues, KeyboardContext, OnEmojiSelected } from '
 import en from '../translation/en'
 import emojisByGroup from '../assets/emojis.json'
 import { useKeyboardStore } from '../store/useKeyboardStore'
-import type { EmojiType, CategoryTypes, EmojisByCategory } from '../types'
+import type {
+  EmojiType,
+  CategoryTypes,
+  EmojisByCategory,
+  JsonEmoji,
+  ToneSelectorEmoji,
+} from '../types'
 import { CATEGORIES } from '../types'
+import { skinTonesColors } from '../utils'
 
 type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode
@@ -55,6 +62,10 @@ export const defaultKeyboardValues: ContextValues = {
   searchPhrase: '',
   setSearchPhrase: (_phrase: string) => {},
   renderList: [],
+  isToneSelectorOpened: false,
+  clearSelected: () => {},
+  selectedEmojiTones: [],
+  generateEmojiTones: (_emoji) => {},
 }
 
 export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
@@ -62,6 +73,29 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0)
   const [searchPhrase, setSearchPhrase] = React.useState('')
   const { keyboardState } = useKeyboardStore()
+  const [isToneSelectorOpened, setIsToneSelectorOpened] = React.useState(false)
+
+  const [selectedEmojiTones, setSelectedEmojiTones] = React.useState<ToneSelectorEmoji[]>([])
+
+  const generateEmojiTones = (emoji: JsonEmoji) => {
+    if (!emoji || !emoji.toneEnabled) return
+
+    const modifiedEmojis = skinTonesColors.map((tone, index) => ({
+      index: String(index),
+      emoji: emoji.emoji + tone,
+      name: emoji.name,
+      v: emoji.v,
+    }))
+
+    console.log('modifiedEmojis', modifiedEmojis[0])
+    setIsToneSelectorOpened(true)
+    setSelectedEmojiTones(modifiedEmojis)
+  }
+
+  const clearSelected = () => {
+    setIsToneSelectorOpened(false)
+    setSelectedEmojiTones([])
+  }
 
   const numberOfColumns = React.useRef<number>(
     Math.floor(width / ((props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 2))
@@ -128,6 +162,10 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     searchPhrase,
     setSearchPhrase,
     renderList,
+    isToneSelectorOpened,
+    clearSelected,
+    selectedEmojiTones,
+    generateEmojiTones,
   }
   return <KeyboardContext.Provider value={value}>{props.children}</KeyboardContext.Provider>
 })

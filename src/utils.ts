@@ -14,9 +14,20 @@ export const parseEmoji = (emoji: JsonEmoji) => ({
   name: emoji.name,
   emoji: emoji.emoji,
   unicode_version: emoji.v,
-  slug: emoji.name.replace(/ /g, '_'),
+  slug: emoji?.name?.replace(/ /g, '_'),
+  toneEnabled: emoji.toneEnabled,
 })
 
 export const getCategoryIndex = (disabledCategory: CategoryTypes[], category: CategoryTypes) => ({
   index: CATEGORIES.filter((name) => !disabledCategory.includes(name)).indexOf(category),
 })
+
+export const skinTones = {
+  light_skin_tone: '🏻',
+  medium_light_skin_tone: '🏼',
+  medium_skin_tone: '🏽',
+  medium_dark_skin_tone: '🏾',
+  dark_skin_tone: '🏿',
+}
+
+export const skinTonesColors = ['🏻', '🏼', '🏽', '🏾', '🏿']

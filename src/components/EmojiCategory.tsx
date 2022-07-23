@@ -11,6 +11,7 @@ const emptyEmoji: JsonEmoji = {
   emoji: '',
   name: 'blank emoji',
   v: '0',
+  toneEnabled: false,
 }
 
 export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategory }) => {
@@ -23,6 +24,8 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
     headerStyles,
     translation,
     categoryPosition,
+    clearSelected,
+    generateEmojiTones,
   } = React.useContext(KeyboardContext)
 
   const { setKeyboardState } = useKeyboardStore()
@@ -47,18 +50,25 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
   const handleEmojiPress = React.useCallback(
     (emoji: JsonEmoji) => {
       if (emoji.name === 'blank emoji') return
+      console.log('emoji', emoji)
       const parsedEmoji = parseEmoji(emoji)
+      clearSelected()
       onEmojiSelected(parsedEmoji)
       setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji })
     },
-    [onEmojiSelected, setKeyboardState]
+    [clearSelected, onEmojiSelected, setKeyboardState]
   )
 
   const renderItem = React.useCallback(
     (props) => (
-      <SingleEmoji {...props} onPress={() => handleEmojiPress(props.item)} emojiSize={emojiSize} />
+      <SingleEmoji
+        {...props}
+        onPress={() => handleEmojiPress(props.item)}
+        emojiSize={emojiSize}
+        onLongPress={() => generateEmojiTones(props.item)}
+      />
     ),
-    [emojiSize, handleEmojiPress]
+    [emojiSize, handleEmojiPress, generateEmojiTones]
   )
 
   return (
