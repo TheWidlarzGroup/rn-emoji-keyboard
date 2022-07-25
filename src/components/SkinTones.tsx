@@ -7,7 +7,8 @@ import type { JsonEmoji } from '../types'
 import { SingleSkinTone } from './SingleSkinTone'
 
 export const SkinTones = () => {
-  const { onEmojiSelected, clearEmojiTonesData, emojiTonesData } = React.useContext(KeyboardContext)
+  const { onEmojiSelected, clearEmojiTonesData, emojiTonesData, skinTonesContainerColor } =
+    React.useContext(KeyboardContext)
 
   const { setKeyboardState } = useKeyboardStore()
 
@@ -37,7 +38,11 @@ export const SkinTones = () => {
 
   if (!emojiTonesData?.emojis?.length) return null
   return (
-    <View style={[styles.floating, { left: posX, top: posY }]}>
+    <View
+      style={[
+        styles.floating,
+        { left: posX, top: posY, backgroundColor: skinTonesContainerColor },
+      ]}>
       <View>
         <FlatList
           data={emojiTonesData.emojis}
@@ -58,42 +63,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e3dbcd',
+
     width: 226,
+    height: 48,
     borderRadius: 8,
-  },
-  navigation: {
-    padding: 3,
-    alignItems: 'center',
-    borderColor: '#00000011',
-  },
-  navigationFloating: {
-    borderRadius: 8,
-  },
-  navigationBottom: {
-    paddingVertical: 6,
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
-    borderTopWidth: 1,
-  },
-  navigationTop: {
-    paddingTop: 12,
-    paddingBottom: 6,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-    borderBottomWidth: 1,
   },
   separator: {
     width: 1,
-    height: 48,
+    height: 38,
     backgroundColor: '#00000011',
     marginHorizontal: 4,
-  },
-  activeIndicator: {
-    position: 'absolute',
-    width: 28,
-    height: 28,
-    borderRadius: 6,
+    marginVertical: 5,
   },
   activeIndicatorContainer: {
     position: 'absolute',

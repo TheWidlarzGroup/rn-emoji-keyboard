@@ -29,6 +29,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   categoryColor: '#000000',
   activeCategoryColor: '#005b96',
   categoryContainerColor: '#e3dbcd',
+  skinTonesContainerColor: '#e3dbcd',
   activeCategoryContainerColor: '#ffffff',
   onCategoryChangeFailed: (info) => {
     console.warn(info)
@@ -86,6 +87,8 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const generateEmojiTones = (emoji: JsonEmoji, emojiIndex: number) => {
     if (!emoji || !emoji.toneEnabled) return
 
+    const EXTRA_SEARCH_TOP = props.enableSearchBar ? 50 : 0
+
     const modifiedEmojis = skinTones.map((tone) => ({
       index: tone.name,
       emoji: emoji.emoji + tone.color,
@@ -112,7 +115,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     const basicXPosition = KEYBOARD_PADDING + EMOJI_PADDING
     const position = {
       x: emojiIndexInRow === 0 ? basicXPosition : x + basicXPosition,
-      y: y * (singleEmojiWidth - EMOJI_PADDING),
+      y: y * (singleEmojiWidth - EMOJI_PADDING) + EXTRA_SEARCH_TOP,
     }
 
     setEmojiTonesData({

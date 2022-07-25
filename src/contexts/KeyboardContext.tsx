@@ -29,6 +29,7 @@ export type KeyboardProps = {
   categoryColor?: string
   activeCategoryColor?: string
   categoryContainerColor?: string
+  skinTonesContainerColor?: string
   activeCategoryContainerColor?: string
   onCategoryChangeFailed?: (info: {
     index: number
