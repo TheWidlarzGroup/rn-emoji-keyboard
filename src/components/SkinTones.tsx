@@ -6,7 +6,11 @@ import { parseEmoji } from '../utils'
 import type { JsonEmoji } from '../types'
 import { SingleSkinTone } from './SingleSkinTone'
 
-export const SkinTones = () => {
+type Props = {
+  keyboardScrollOffsetY: number
+}
+
+export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
   const { onEmojiSelected, emojiTonesData, skinTonesContainerColor } =
     React.useContext(KeyboardContext)
 
@@ -24,7 +28,7 @@ export const SkinTones = () => {
   )
 
   const renderItem = React.useCallback(
-    (props: any) => {
+    (props) => {
       return (
         <SingleSkinTone {...props} onPress={() => handleEmojiPress(props.item)} emojiSize={32} />
       )
@@ -33,7 +37,7 @@ export const SkinTones = () => {
   )
 
   const posX = emojiTonesData?.position?.x || 0
-  const posY = emojiTonesData?.position?.y || 0
+  const posY = emojiTonesData?.position?.y - keyboardScrollOffsetY || 0
 
   if (!emojiTonesData?.emojis?.length) return null
   return (

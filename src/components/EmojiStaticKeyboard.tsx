@@ -38,7 +38,12 @@ export const EmojiStaticKeyboard = () => {
     index,
   })
 
-  const renderItem = React.useCallback((props) => <EmojiCategory {...props} />, [])
+  const [keyboardScrollOffsetY, setKeyboardScrollOffsetY] = React.useState(0)
+
+  const renderItem = React.useCallback(
+    (props) => <EmojiCategory setKeyboardScrollOffsetY={setKeyboardScrollOffsetY} {...props} />,
+    []
+  )
 
   React.useEffect(() => {
     flatListRef.current?.scrollToIndex({
@@ -84,7 +89,7 @@ export const EmojiStaticKeyboard = () => {
             keyboardShouldPersistTaps="handled"
           />
           <Categories />
-          <SkinTones />
+          <SkinTones keyboardScrollOffsetY={keyboardScrollOffsetY} />
         </>
       </ConditionalContainer>
     </View>

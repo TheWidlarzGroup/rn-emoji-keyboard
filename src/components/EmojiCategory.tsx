@@ -14,7 +14,13 @@ const emptyEmoji: JsonEmoji = {
   toneEnabled: false,
 }
 
-export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategory }) => {
+export const EmojiCategory = ({
+  item: { title, data },
+  setKeyboardScrollOffsetY,
+}: {
+  item: EmojisByCategory
+  setKeyboardScrollOffsetY: React.Dispatch<React.SetStateAction<number>>
+}) => {
   const {
     onEmojiSelected,
     emojiSize,
@@ -87,6 +93,11 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
     ]
   )
 
+  const handleOnScroll = (ev: { nativeEvent: { contentOffset: { y: number } } }) => {
+    setKeyboardScrollOffsetY(ev.nativeEvent.contentOffset.y)
+    clearEmojiTonesData()
+  }
+
   return (
     <View style={[styles.container, { width: width }]}>
       {!hideHeader && <Text style={[styles.sectionTitle, headerStyles]}>{translation[title]}</Text>}
@@ -97,6 +108,7 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
         renderItem={renderItem}
         removeClippedSubviews={true}
         getItemLayout={getItemLayout}
+        onScroll={handleOnScroll}
         ListFooterComponent={() => (
           <View style={categoryPosition === 'floating' ? styles.footerFloating : styles.footer} />
         )}

@@ -72,6 +72,15 @@ export const defaultKeyboardValues: ContextValues = {
 const EMOJI_PADDING = 8
 const KEYBOARD_PADDING = 10
 
+const insert = (arr: any, index: number, newItem: any) => [
+  ...arr.slice(0, index),
+  newItem,
+  ...arr.slice(index),
+]
+
+const zeroWidthJoiner = String.fromCodePoint(0x200d)
+const variantSelector = String.fromCodePoint(0xfe0f)
+
 export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const { width } = useWindowDimensions()
   const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0)
@@ -89,14 +98,39 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
 
     const EXTRA_SEARCH_TOP = props.enableSearchBar ? 50 : 0
 
-    const modifiedEmojis = skinTones.map((tone) => ({
-      index: tone.name,
-      emoji: emoji.emoji + tone.color,
-      name: emoji.name,
-      v: emoji.v,
-    }))
+    const splittedEmoji = emoji.emoji.split('')
 
-    const singleEmojiWidth =
+    const ZWJIndex = splittedEmoji.findIndex((a) => a === zeroWidthJoiner)
+
+    const selectorIndex = splittedEmoji.findIndex((a) => a === variantSelector)
+
+    const modifiedEmojis = skinTones.map((tone) => {
+      const basicEmojiData = {
+        index: tone.name,
+        name: emoji.name,
+        v: emoji.v,
+      }
+
+      switch (true) {
+        case selectorIndex > 0:
+          return {
+            ...basicEmojiData,
+            emoji: insert(splittedEmoji, selectorIndex, tone.color).join(''),
+          }
+        case ZWJIndex > 0:
+          return {
+            ...basicEmojiData,
+            emoji: insert(splittedEmoji, ZWJIndex, tone.color).join(''),
+          }
+        default:
+          return {
+            ...basicEmojiData,
+            emoji: emoji.emoji + tone.color,
+          }
+      }
+    })
+
+    const singleEmojiSize =
       (props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 2
 
     const numOfColumns = numberOfColumns.current
@@ -107,15 +141,15 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
 
     const x =
       emojiIndexInRow < Math.floor(numOfColumns / 2)
-        ? emojiIndexInRow * singleEmojiWidth
-        : centerColumn * singleEmojiWidth
+        ? emojiIndexInRow * singleEmojiSize
+        : centerColumn * singleEmojiSize
 
     const y = emojiIndex / numOfColumns >= 1 ? Math.floor(emojiIndex / numOfColumns) : 0
 
     const basicXPosition = KEYBOARD_PADDING + EMOJI_PADDING
     const position = {
       x: emojiIndexInRow === 0 ? basicXPosition : x + basicXPosition,
-      y: y * (singleEmojiWidth - EMOJI_PADDING) + EXTRA_SEARCH_TOP,
+      y: y * (singleEmojiSize - EMOJI_PADDING) + EXTRA_SEARCH_TOP,
     }
 
     setEmojiTonesData({
