@@ -52,11 +52,10 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
       if (emoji.name === 'blank emoji') return
       console.log('emoji', emoji)
       const parsedEmoji = parseEmoji(emoji)
-      clearEmojiTonesData()
       onEmojiSelected(parsedEmoji)
       setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji })
     },
-    [clearEmojiTonesData, onEmojiSelected, setKeyboardState]
+    [onEmojiSelected, setKeyboardState]
   )
 
   const renderItem = React.useCallback(

@@ -7,7 +7,7 @@ import type { JsonEmoji } from '../types'
 import { SingleSkinTone } from './SingleSkinTone'
 
 export const SkinTones = () => {
-  const { onEmojiSelected, clearEmojiTonesData, emojiTonesData, skinTonesContainerColor } =
+  const { onEmojiSelected, emojiTonesData, skinTonesContainerColor } =
     React.useContext(KeyboardContext)
 
   const { setKeyboardState } = useKeyboardStore()
@@ -18,10 +18,9 @@ export const SkinTones = () => {
       console.log('emoji', emoji)
       const parsedEmoji = parseEmoji(emoji)
       onEmojiSelected(parsedEmoji)
-      clearEmojiTonesData()
       setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji })
     },
-    [clearEmojiTonesData, onEmojiSelected, setKeyboardState]
+    [onEmojiSelected, setKeyboardState]
   )
 
   const renderItem = React.useCallback(
