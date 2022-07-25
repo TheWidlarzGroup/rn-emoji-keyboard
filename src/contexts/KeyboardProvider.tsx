@@ -4,7 +4,13 @@ import { KeyboardProps, ContextValues, KeyboardContext, OnEmojiSelected } from '
 import en from '../translation/en'
 import emojisByGroup from '../assets/emojis.json'
 import { useKeyboardStore } from '../store/useKeyboardStore'
-import type { EmojiType, CategoryTypes, EmojisByCategory, JsonEmoji } from '../types'
+import type {
+  EmojiType,
+  CategoryTypes,
+  EmojisByCategory,
+  JsonEmoji,
+  EmojiTonesData,
+} from '../types'
 import { CATEGORIES } from '../types'
 import { skinTones } from '../utils'
 
@@ -66,11 +72,14 @@ export const defaultKeyboardValues: ContextValues = {
       x: 0,
       y: 0,
     },
+    funnelXPosition: 0,
   },
 }
 
 const EMOJI_PADDING = 8
 const KEYBOARD_PADDING = 10
+const FUNNEL_HEIGHT = 7
+const SKIN_TONE_WIDTH = 36
 
 const insert = (arr: any, index: number, newItem: any) => [
   ...arr.slice(0, index),
@@ -87,7 +96,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const [searchPhrase, setSearchPhrase] = React.useState('')
   const { keyboardState } = useKeyboardStore()
 
-  const [emojiTonesData, setEmojiTonesData] = React.useState<any>({})
+  const [emojiTonesData, setEmojiTonesData] = React.useState<EmojiTonesData>(null)
 
   const numberOfColumns = React.useRef<number>(
     Math.floor(width / ((props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 2))
@@ -139,10 +148,10 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
 
     const emojiIndexInRow = emojiIndex % numOfColumns
 
-    const sumOfPaddings = KEYBOARD_PADDING + EMOJI_PADDING
+    const sumOfPaddings = KEYBOARD_PADDING + EMOJI_PADDING / 2
 
     const x =
-      emojiIndexInRow < Math.floor(numOfColumns / 2)
+      emojiIndexInRow < centerColumn
         ? emojiIndexInRow * singleEmojiSize
         : centerColumn * singleEmojiSize - sumOfPaddings
 
@@ -150,17 +159,23 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
 
     const position = {
       x: emojiIndexInRow === 0 ? sumOfPaddings : x + sumOfPaddings,
-      y: y * (singleEmojiSize - EMOJI_PADDING) + EXTRA_SEARCH_TOP,
+      y: y * (singleEmojiSize - EMOJI_PADDING) + EXTRA_SEARCH_TOP - FUNNEL_HEIGHT,
     }
+
+    const funnelXPosition =
+      emojiIndexInRow < Math.floor(numOfColumns / 2)
+        ? SKIN_TONE_WIDTH / 2
+        : (emojiIndexInRow - centerColumn) * singleEmojiSize + (singleEmojiSize + EMOJI_PADDING) / 2
 
     setEmojiTonesData({
       emojis: modifiedEmojis,
       position,
+      funnelXPosition,
     })
   }
 
   const clearEmojiTonesData = () => {
-    setEmojiTonesData({})
+    setEmojiTonesData(null)
   }
 
   React.useEffect(() => {

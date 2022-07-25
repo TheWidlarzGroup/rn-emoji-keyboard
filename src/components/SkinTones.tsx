@@ -5,10 +5,13 @@ import { useKeyboardStore } from '../store/useKeyboardStore'
 import { parseEmoji } from '../utils'
 import type { JsonEmoji } from '../types'
 import { SingleSkinTone } from './SingleSkinTone'
+import Funnel from '../assets/Funnel'
 
 type Props = {
   keyboardScrollOffsetY: number
 }
+
+const TONES_CONTAINER_HEIGHT = 48
 
 export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
   const { onEmojiSelected, emojiTonesData, skinTonesContainerColor } =
@@ -37,7 +40,12 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
   )
 
   const posX = emojiTonesData?.position?.x || 0
-  const posY = emojiTonesData?.position?.y - keyboardScrollOffsetY || 0
+
+  const posY = !emojiTonesData?.position?.y
+    ? 0
+    : emojiTonesData?.position?.y - keyboardScrollOffsetY
+
+  const funnelXPosition = emojiTonesData?.funnelXPosition || 0
 
   if (!emojiTonesData?.emojis?.length) return null
   return (
@@ -57,6 +65,15 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
           ListHeaderComponentStyle={styles.activeIndicatorContainer}
         />
       </View>
+      <View
+        style={[
+          styles.funnelContainer,
+          {
+            left: funnelXPosition,
+          },
+        ]}>
+        <Funnel fill={skinTonesContainerColor} />
+      </View>
     </View>
   )
 }
@@ -66,10 +83,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-
     width: 226,
-    height: 48,
+    height: TONES_CONTAINER_HEIGHT,
     borderRadius: 8,
+  },
+  funnelContainer: {
+    position: 'absolute',
+    top: TONES_CONTAINER_HEIGHT,
   },
   separator: {
     width: 1,

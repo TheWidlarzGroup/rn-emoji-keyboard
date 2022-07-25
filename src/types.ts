@@ -51,3 +51,12 @@ export type EmojisByCategory = {
   title: CategoryTypes
   data: JsonEmoji[]
 }
+
+export type EmojiTonesData = {
+  emojis: ToneSelectorEmoji[]
+  position: {
+    x: number
+    y: number
+  }
+  funnelXPosition: number
+} | null
