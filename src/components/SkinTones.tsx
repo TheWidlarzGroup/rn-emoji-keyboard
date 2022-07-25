@@ -7,8 +7,7 @@ import type { JsonEmoji } from '../types'
 import { SingleSkinTone } from './SingleSkinTone'
 
 export const SkinTones = () => {
-  const { onEmojiSelected, isToneSelectorOpened, clearSelected, emojiTonesData } =
-    React.useContext(KeyboardContext)
+  const { onEmojiSelected, clearEmojiTonesData, emojiTonesData } = React.useContext(KeyboardContext)
 
   const { setKeyboardState } = useKeyboardStore()
 
@@ -18,10 +17,10 @@ export const SkinTones = () => {
       console.log('emoji', emoji)
       const parsedEmoji = parseEmoji(emoji)
       onEmojiSelected(parsedEmoji)
-      clearSelected()
+      clearEmojiTonesData()
       setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji })
     },
-    [clearSelected, onEmojiSelected, setKeyboardState]
+    [clearEmojiTonesData, onEmojiSelected, setKeyboardState]
   )
 
   const renderItem = React.useCallback(
@@ -36,7 +35,7 @@ export const SkinTones = () => {
   const posX = emojiTonesData?.position?.x || 0
   const posY = emojiTonesData?.position?.y || 0
 
-  if (!isToneSelectorOpened) return null
+  if (!emojiTonesData?.emojis?.length) return null
   return (
     <View style={[styles.floating, { left: posX, top: posY }]}>
       <View>

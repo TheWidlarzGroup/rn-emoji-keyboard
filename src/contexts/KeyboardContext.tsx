@@ -58,7 +58,7 @@ export type ContextValues = {
   setSearchPhrase: (phrase: string) => void
   renderList: EmojisByCategory[]
   isToneSelectorOpened: boolean
-  clearSelected: () => void
+  clearEmojiTonesData: () => void
   generateEmojiTones: (emoji: JsonEmoji, emojiIndex: number) => void
   emojiTonesData: { emojis: ToneSelectorEmoji[]; position: { x: number; y: number } }
 }

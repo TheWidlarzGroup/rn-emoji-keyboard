@@ -57,7 +57,7 @@ export const defaultKeyboardValues: ContextValues = {
   setSearchPhrase: (_phrase: string) => {},
   renderList: [],
   isToneSelectorOpened: false,
-  clearSelected: () => {},
+  clearEmojiTonesData: () => {},
   generateEmojiTones: (_emoji) => {},
   emojiTonesData: {
     emojis: [],
@@ -76,7 +76,6 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0)
   const [searchPhrase, setSearchPhrase] = React.useState('')
   const { keyboardState } = useKeyboardStore()
-  const [isToneSelectorOpened, setIsToneSelectorOpened] = React.useState(false)
 
   const [emojiTonesData, setEmojiTonesData] = React.useState<any>({})
 
@@ -116,15 +115,13 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
       y: y * (singleEmojiWidth - EMOJI_PADDING),
     }
 
-    setIsToneSelectorOpened(true)
     setEmojiTonesData({
       emojis: modifiedEmojis,
       position,
     })
   }
 
-  const clearSelected = () => {
-    setIsToneSelectorOpened(false)
+  const clearEmojiTonesData = () => {
     setEmojiTonesData({})
   }
 
@@ -190,8 +187,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     searchPhrase,
     setSearchPhrase,
     renderList,
-    isToneSelectorOpened,
-    clearSelected,
+    clearEmojiTonesData,
     generateEmojiTones,
     emojiTonesData,
   }
