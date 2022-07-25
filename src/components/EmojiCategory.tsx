@@ -60,15 +60,22 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
   )
 
   const renderItem = React.useCallback(
-    (props) => (
-      <SingleEmoji
-        {...props}
-        onPress={() => handleEmojiPress(props.item)}
-        emojiSize={emojiSize}
-        onLongPress={() => generateEmojiTones(props.item)}
-      />
-    ),
-    [emojiSize, handleEmojiPress, generateEmojiTones]
+    (props) => {
+      const handleLongPress = () => {
+        clearSelected()
+        generateEmojiTones(props.item, props.index)
+      }
+
+      return (
+        <SingleEmoji
+          {...props}
+          onPress={() => handleEmojiPress(props.item)}
+          emojiSize={emojiSize}
+          onLongPress={handleLongPress}
+        />
+      )
+    },
+    [emojiSize, clearSelected, generateEmojiTones, handleEmojiPress]
   )
 
   return (

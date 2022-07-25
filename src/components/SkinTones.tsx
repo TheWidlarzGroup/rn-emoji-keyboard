@@ -4,40 +4,13 @@ import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import { parseEmoji } from '../utils'
 import type { JsonEmoji } from '../types'
-import { SingleEmoji } from './SingleEmoji'
+import { SingleSkinTone } from './SingleSkinTone'
 
 export const SkinTones = () => {
-  const { selectedEmojiTones, onEmojiSelected, isToneSelectorOpened, clearSelected } =
+  const { onEmojiSelected, isToneSelectorOpened, clearSelected, emojiTonesData } =
     React.useContext(KeyboardContext)
 
   const { setKeyboardState } = useKeyboardStore()
-
-  //   const getStylesBasedOnPosition = () => {
-  //     const style: ViewStyle[] = [styles.navigation, categoryContainerStyles]
-  //     switch (categoryPosition) {
-  //       case 'floating':
-  //         style.push(styles.navigationFloating)
-  //         break
-  //       case 'top':
-  //         style.push(styles.navigationTop)
-  //         break
-  //       case 'bottom':
-  //         style.push(styles.navigationBottom)
-  //         break
-  //       default:
-  //         exhaustiveTypeCheck(categoryPosition)
-  //         break
-  //     }
-
-  //     if (
-  //       categoryContainerColor !== defaultKeyboardContext.categoryContainerColor ||
-  //       categoryPosition === 'floating'
-  //     )
-  //       style.push({
-  //         backgroundColor: categoryContainerColor,
-  //       })
-  //     return style
-  //   }
 
   const handleEmojiPress = React.useCallback(
     (emoji: JsonEmoji) => {
@@ -53,17 +26,22 @@ export const SkinTones = () => {
 
   const renderItem = React.useCallback(
     (props: any) => {
-      return <SingleEmoji {...props} onPress={() => handleEmojiPress(props.item)} emojiSize={28} />
+      return (
+        <SingleSkinTone {...props} onPress={() => handleEmojiPress(props.item)} emojiSize={32} />
+      )
     },
     [handleEmojiPress]
   )
 
+  const posX = emojiTonesData?.position?.x || 0
+  const posY = emojiTonesData?.position?.y || 0
+
   if (!isToneSelectorOpened) return null
   return (
-    <View style={styles.floating}>
+    <View style={[styles.floating, { left: posX, top: posY }]}>
       <View>
         <FlatList
-          data={selectedEmojiTones}
+          data={emojiTonesData.emojis}
           keyExtractor={(emoji) => emoji.index}
           renderItem={renderItem}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -79,12 +57,11 @@ export const SkinTones = () => {
 const styles = StyleSheet.create({
   floating: {
     position: 'absolute',
-    top: 20,
-    left: 20,
-    right: 20,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#e3dbcd',
-    width: '70%',
+    width: 226,
+    borderRadius: 8,
   },
   navigation: {
     padding: 3,
@@ -109,7 +86,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     width: 1,
-    height: 28,
+    height: 48,
     backgroundColor: '#00000011',
     marginHorizontal: 4,
   },

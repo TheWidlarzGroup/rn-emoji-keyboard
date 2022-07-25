@@ -59,8 +59,8 @@ export type ContextValues = {
   renderList: EmojisByCategory[]
   isToneSelectorOpened: boolean
   clearSelected: () => void
-  selectedEmojiTones: ToneSelectorEmoji[]
-  generateEmojiTones: (emoji: JsonEmoji) => void
+  generateEmojiTones: (emoji: JsonEmoji, emojiIndex: number) => void
+  emojiTonesData: { emojis: ToneSelectorEmoji[]; position: { x: number; y: number } }
 }
 
 export const KeyboardContext = React.createContext<Required<KeyboardProps> & ContextValues>({

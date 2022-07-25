@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import type { JsonEmoji } from '../types'
 
-export class SingleEmoji extends React.Component<{
+export class SingleSkinTone extends React.Component<{
   item: JsonEmoji
   onPress: () => void
   emojiSize: number
@@ -25,7 +25,7 @@ export class SingleEmoji extends React.Component<{
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 8 },
+  container: { flex: 1, padding: 0, justifyContent: 'center' },
   iconContainer: { justifyContent: 'center', alignItems: 'center' },
   emoji: { color: '#000' },
 })
