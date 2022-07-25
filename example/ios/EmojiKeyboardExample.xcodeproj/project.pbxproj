@@ -205,8 +205,9 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = CKHD27966K;
+						DevelopmentTeam = 23QAX5XY7P;
 						LastSwiftMigration = 1310;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -421,8 +422,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CKHD27966K;
+				DEVELOPMENT_TEAM = 23QAX5XY7P;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = EmojiKeyboardExample/Info.plist;
@@ -434,6 +437,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnativeemojikeyboard;
 				PRODUCT_NAME = EmojiKeyboardExample;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EmojiKeyboardExample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -447,8 +451,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CKHD27966K;
+				DEVELOPMENT_TEAM = 23QAX5XY7P;
 				INFOPLIST_FILE = EmojiKeyboardExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -458,6 +464,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnativeemojikeyboard;
 				PRODUCT_NAME = EmojiKeyboardExample;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EmojiKeyboardExample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

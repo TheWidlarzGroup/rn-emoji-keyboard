@@ -12,10 +12,10 @@ export class SingleSkinTone extends React.Component<{
     return false
   }
   render() {
-    const { item, emojiSize, onPress, onLongPress } = this.props
+    const { item, emojiSize, onPress } = this.props
 
     return (
-      <TouchableOpacity onPress={onPress} style={styles.container} onLongPress={onLongPress}>
+      <TouchableOpacity onPress={onPress} style={styles.container}>
         <View style={styles.iconContainer}>
           <Text style={[styles.emoji, { fontSize: emojiSize }]}>{item.emoji}</Text>
         </View>

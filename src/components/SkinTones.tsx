@@ -13,6 +13,8 @@ type Props = {
 
 const TONES_CONTAINER_HEIGHT = 48
 
+const Separator = () => <View style={styles.separator} />
+
 export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
   const { onEmojiSelected, emojiTonesData, skinTonesContainerColor } =
     React.useContext(KeyboardContext)
@@ -22,7 +24,6 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
   const handleEmojiPress = React.useCallback(
     (emoji: JsonEmoji) => {
       if (emoji.name === 'blank emoji') return
-      console.log('emoji', emoji)
       const parsedEmoji = parseEmoji(emoji)
       onEmojiSelected(parsedEmoji)
       setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji })
@@ -59,10 +60,10 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
           data={emojiTonesData.emojis}
           keyExtractor={(emoji) => emoji.index}
           renderItem={renderItem}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          ItemSeparatorComponent={Separator}
           showsHorizontalScrollIndicator={false}
-          horizontal={true}
           ListHeaderComponentStyle={styles.activeIndicatorContainer}
+          horizontal
         />
       </View>
       <View

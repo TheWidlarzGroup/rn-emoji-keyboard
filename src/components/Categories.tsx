@@ -8,6 +8,8 @@ import { exhaustiveTypeCheck } from '../utils'
 
 const CATEGORY_ELEMENT_WIDTH = 37
 
+const Separator = () => <View style={styles.separator} />
+
 export const Categories = () => {
   const {
     activeCategoryIndex,
@@ -100,7 +102,7 @@ export const Categories = () => {
           data={renderData}
           keyExtractor={(item) => item.category}
           renderItem={renderItem}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          ItemSeparatorComponent={Separator}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
           onScrollToIndexFailed={onCategoryChangeFailed}
