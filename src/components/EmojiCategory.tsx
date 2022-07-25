@@ -28,7 +28,7 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
     generateEmojiTones,
   } = React.useContext(KeyboardContext)
 
-  const { setKeyboardState } = useKeyboardStore()
+  const { setKeyboardState, keyboardState } = useKeyboardStore()
 
   const [empty, setEmpty] = React.useState<JsonEmoji[]>([])
 
@@ -65,16 +65,26 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
         generateEmojiTones(props.item, props.index)
       }
 
+      const recentlyUsed = keyboardState?.recentlyUsed || []
+      const singleEmoji = recentlyUsed?.find((emoji) => emoji.name === props.item.name)
+
       return (
         <SingleEmoji
           {...props}
+          item={singleEmoji || props.item}
           onPress={() => handleEmojiPress(props.item)}
           emojiSize={emojiSize}
           onLongPress={handleLongPress}
         />
       )
     },
-    [emojiSize, clearEmojiTonesData, generateEmojiTones, handleEmojiPress]
+    [
+      keyboardState?.recentlyUsed,
+      emojiSize,
+      clearEmojiTonesData,
+      generateEmojiTones,
+      handleEmojiPress,
+    ]
   )
 
   return (
