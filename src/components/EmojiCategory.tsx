@@ -66,12 +66,12 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
       }
 
       const recentlyUsed = keyboardState?.recentlyUsed || []
-      const singleEmoji = recentlyUsed?.find((emoji) => emoji.name === props.item.name)
+      const recentlyUsedEmoji = recentlyUsed?.find((emoji) => emoji.name === props.item.name)
 
       return (
         <SingleEmoji
           {...props}
-          item={singleEmoji || props.item}
+          item={recentlyUsedEmoji || props.item}
           onPress={() => handleEmojiPress(props.item)}
           emojiSize={emojiSize}
           onLongPress={handleLongPress}
