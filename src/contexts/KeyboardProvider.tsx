@@ -12,7 +12,7 @@ import type {
   ToneSelectorEmoji,
 } from '../types'
 import { CATEGORIES } from '../types'
-import { skinTonesColors } from '../utils'
+import { skinTones } from '../utils'
 
 type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode
@@ -80,9 +80,9 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const generateEmojiTones = (emoji: JsonEmoji) => {
     if (!emoji || !emoji.toneEnabled) return
 
-    const modifiedEmojis = skinTonesColors.map((tone, index) => ({
-      index: String(index),
-      emoji: emoji.emoji + tone,
+    const modifiedEmojis = skinTones.map((tone) => ({
+      index: tone.name,
+      emoji: emoji.emoji + tone.color,
       name: emoji.name,
       v: emoji.v,
     }))

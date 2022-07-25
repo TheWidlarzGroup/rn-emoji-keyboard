@@ -22,12 +22,25 @@ export const getCategoryIndex = (disabledCategory: CategoryTypes[], category: Ca
   index: CATEGORIES.filter((name) => !disabledCategory.includes(name)).indexOf(category),
 })
 
-export const skinTones = {
-  light_skin_tone: '🏻',
-  medium_light_skin_tone: '🏼',
-  medium_skin_tone: '🏽',
-  medium_dark_skin_tone: '🏾',
-  dark_skin_tone: '🏿',
-}
-
-export const skinTonesColors = ['🏻', '🏼', '🏽', '🏾', '🏿']
+export const skinTones = [
+  {
+    name: 'light_skin_tone',
+    color: '🏻',
+  },
+  {
+    name: 'medium_light_skin_tone',
+    color: '🏼',
+  },
+  {
+    name: 'medium_skin_tone',
+    color: '🏽',
+  },
+  {
+    name: 'medium_dark_skin_tone',
+    color: '🏾',
+  },
+  {
+    name: 'dark_skin_tone',
+    color: '🏿',
+  },
+]
