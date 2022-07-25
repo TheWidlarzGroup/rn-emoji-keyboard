@@ -139,16 +139,17 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
 
     const emojiIndexInRow = emojiIndex % numOfColumns
 
+    const sumOfPaddings = KEYBOARD_PADDING + EMOJI_PADDING
+
     const x =
       emojiIndexInRow < Math.floor(numOfColumns / 2)
         ? emojiIndexInRow * singleEmojiSize
-        : centerColumn * singleEmojiSize
+        : centerColumn * singleEmojiSize - sumOfPaddings
 
     const y = emojiIndex / numOfColumns >= 1 ? Math.floor(emojiIndex / numOfColumns) : 0
 
-    const basicXPosition = KEYBOARD_PADDING + EMOJI_PADDING
     const position = {
-      x: emojiIndexInRow === 0 ? basicXPosition : x + basicXPosition,
+      x: emojiIndexInRow === 0 ? sumOfPaddings : x + sumOfPaddings,
       y: y * (singleEmojiSize - EMOJI_PADDING) + EXTRA_SEARCH_TOP,
     }
 
