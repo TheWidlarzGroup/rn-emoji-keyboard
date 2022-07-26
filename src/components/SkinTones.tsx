@@ -11,6 +11,7 @@ type Props = {
   keyboardScrollOffsetY: number
 }
 
+export const TONES_CONTAINER_WIDTH = 226
 const TONES_CONTAINER_HEIGHT = 48
 
 const Separator = () => <View style={styles.separator} />
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
   },
   funnelContainer: {
     position: 'absolute',
-    top: TONES_CONTAINER_HEIGHT,
+    top: TONES_CONTAINER_HEIGHT - 1,
   },
   separator: {
     width: 1,

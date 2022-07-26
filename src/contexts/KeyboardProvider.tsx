@@ -13,6 +13,7 @@ import type {
 } from '../types'
 import { CATEGORIES } from '../types'
 import { skinTones } from '../utils'
+import { TONES_CONTAINER_WIDTH } from '../components/SkinTones'
 
 type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode
@@ -148,12 +149,11 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
 
     const emojiIndexInRow = emojiIndex % numOfColumns
 
-    const sumOfPaddings = KEYBOARD_PADDING + EMOJI_PADDING / 2
+    const sumOfPaddings = KEYBOARD_PADDING + EMOJI_PADDING
 
-    const x =
-      emojiIndexInRow < centerColumn
-        ? emojiIndexInRow * singleEmojiSize
-        : centerColumn * singleEmojiSize - sumOfPaddings
+    const maxXPosition = width - TONES_CONTAINER_WIDTH - sumOfPaddings * 2
+
+    const x = emojiIndexInRow < centerColumn ? emojiIndexInRow * singleEmojiSize : maxXPosition
 
     const y = emojiIndex / numOfColumns >= 1 ? Math.floor(emojiIndex / numOfColumns) : 0
 
@@ -162,10 +162,21 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
       y: y * (singleEmojiSize - EMOJI_PADDING) + EXTRA_SEARCH_TOP - FUNNEL_HEIGHT,
     }
 
+    const emojiSizeWithPadding = singleEmojiSize
+
+    const backwardIndex = Math.abs((emojiIndex % numOfColumns) + 1 - numOfColumns)
+
+    const funnelXAfterCenterColumn =
+      width -
+      KEYBOARD_PADDING -
+      singleEmojiSize -
+      maxXPosition -
+      backwardIndex * emojiSizeWithPadding
+
     const funnelXPosition =
       emojiIndexInRow < Math.floor(numOfColumns / 2)
         ? SKIN_TONE_WIDTH / 2
-        : (emojiIndexInRow - centerColumn) * singleEmojiSize + (singleEmojiSize + EMOJI_PADDING) / 2
+        : funnelXAfterCenterColumn
 
     setEmojiTonesData({
       emojis: modifiedEmojis,
