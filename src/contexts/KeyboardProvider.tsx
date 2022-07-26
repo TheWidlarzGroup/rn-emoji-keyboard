@@ -145,7 +145,10 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
 
     const numOfColumns = numberOfColumns.current
 
-    const centerColumn = Math.floor(numOfColumns / 2)
+    const halfOfColumns = numOfColumns / 2
+    const centerColumn = Number.isInteger(halfOfColumns)
+      ? halfOfColumns - 1
+      : Math.floor(halfOfColumns)
 
     const emojiIndexInRow = emojiIndex % numOfColumns
 
