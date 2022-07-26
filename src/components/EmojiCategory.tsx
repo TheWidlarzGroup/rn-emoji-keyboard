@@ -5,7 +5,7 @@ import type { EmojisByCategory, JsonEmoji } from '../types'
 import { SingleEmoji } from './SingleEmoji'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useKeyboardStore } from '../store/useKeyboardStore'
-import { parseEmoji } from '../utils'
+import { parseEmoji } from '../utils/parseEmoji'
 
 const emptyEmoji: JsonEmoji = {
   emoji: '',

@@ -12,8 +12,14 @@ import type {
   EmojiTonesData,
 } from '../types'
 import { CATEGORIES } from '../types'
-import { skinTones } from '../utils'
-import { TONES_CONTAINER_WIDTH } from '../components/SkinTones'
+import {
+  skinTones,
+  generateToneSelectorFunnelPosition,
+  generateToneSelectorPosition,
+  insertAtCertainIndex,
+  variantSelector,
+  zeroWidthJoiner,
+} from '../utils/skinToneSelectorUtils'
 
 type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode
@@ -77,20 +83,6 @@ export const defaultKeyboardValues: ContextValues = {
   },
 }
 
-const EMOJI_PADDING = 8
-const KEYBOARD_PADDING = 10
-const FUNNEL_HEIGHT = 7
-const SKIN_TONE_WIDTH = 36
-
-const insert = (arr: any, index: number, newItem: any) => [
-  ...arr.slice(0, index),
-  newItem,
-  ...arr.slice(index),
-]
-
-const zeroWidthJoiner = String.fromCodePoint(0x200d)
-const variantSelector = String.fromCodePoint(0xfe0f)
-
 export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const { width } = useWindowDimensions()
   const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0)
@@ -121,16 +113,17 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
         v: emoji.v,
       }
 
+      // Check for emojis special signs which might break tone modify
       switch (true) {
         case selectorIndex > 0:
           return {
             ...basicEmojiData,
-            emoji: insert(splittedEmoji, selectorIndex, tone.color).join(''),
+            emoji: insertAtCertainIndex(splittedEmoji, selectorIndex, tone.color).join(''),
           }
         case ZWJIndex > 0:
           return {
             ...basicEmojiData,
-            emoji: insert(splittedEmoji, ZWJIndex, tone.color).join(''),
+            emoji: insertAtCertainIndex(splittedEmoji, ZWJIndex, tone.color).join(''),
           }
         default:
           return {
@@ -143,47 +136,24 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     const singleEmojiSize =
       (props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 2
 
-    const numOfColumns = numberOfColumns.current
+    const skinTonePosition = generateToneSelectorPosition(
+      numberOfColumns.current,
+      emojiIndex,
+      width,
+      singleEmojiSize,
+      EXTRA_SEARCH_TOP
+    )
 
-    const halfOfColumns = numOfColumns / 2
-    const centerColumn = Number.isInteger(halfOfColumns)
-      ? halfOfColumns - 1
-      : Math.floor(halfOfColumns)
-
-    const emojiIndexInRow = emojiIndex % numOfColumns
-
-    const sumOfPaddings = KEYBOARD_PADDING + EMOJI_PADDING
-
-    const maxXPosition = width - TONES_CONTAINER_WIDTH - sumOfPaddings * 2
-
-    const x = emojiIndexInRow < centerColumn ? emojiIndexInRow * singleEmojiSize : maxXPosition
-
-    const y = emojiIndex / numOfColumns >= 1 ? Math.floor(emojiIndex / numOfColumns) : 0
-
-    const position = {
-      x: emojiIndexInRow === 0 ? sumOfPaddings : x + sumOfPaddings,
-      y: y * (singleEmojiSize - EMOJI_PADDING) + EXTRA_SEARCH_TOP - FUNNEL_HEIGHT,
-    }
-
-    const emojiSizeWithPadding = singleEmojiSize
-
-    const backwardIndex = Math.abs((emojiIndex % numOfColumns) + 1 - numOfColumns)
-
-    const funnelXAfterCenterColumn =
-      width -
-      KEYBOARD_PADDING -
-      singleEmojiSize -
-      maxXPosition -
-      backwardIndex * emojiSizeWithPadding
-
-    const funnelXPosition =
-      emojiIndexInRow < Math.floor(numOfColumns / 2)
-        ? SKIN_TONE_WIDTH / 2
-        : funnelXAfterCenterColumn
+    const funnelXPosition = generateToneSelectorFunnelPosition(
+      numberOfColumns.current,
+      emojiIndex,
+      width,
+      singleEmojiSize
+    )
 
     setEmojiTonesData({
       emojis: modifiedEmojis,
-      position,
+      position: skinTonePosition,
       funnelXPosition,
     })
   }
