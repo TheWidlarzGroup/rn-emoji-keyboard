@@ -115,15 +115,15 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
 
       // Check for emojis special signs which might break tone modify
       switch (true) {
-        case selectorIndex > 0:
-          return {
-            ...basicEmojiData,
-            emoji: insertAtCertainIndex(splittedEmoji, selectorIndex, tone.color).join(''),
-          }
         case ZWJIndex > 0:
           return {
             ...basicEmojiData,
             emoji: insertAtCertainIndex(splittedEmoji, ZWJIndex, tone.color).join(''),
+          }
+        case selectorIndex > 0:
+          return {
+            ...basicEmojiData,
+            emoji: insertAtCertainIndex(splittedEmoji, selectorIndex, tone.color).join(''),
           }
         default:
           return {
