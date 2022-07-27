@@ -49,14 +49,6 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
 
   const funnelXPosition = emojiTonesData?.funnelXPosition || 0
 
-  console.log('emoji y', emojiTonesData?.position?.y)
-  console.log('keyboardScrollOffsetY', keyboardScrollOffsetY)
-
-  // const newY =
-  //   emojiTonesData?.position?.y > 261 - 18
-  //     ? emojiTonesData?.position?.y - 261 - 18
-  //     : emojiTonesData?.position?.y
-
   if (!emojiTonesData?.emojis?.length) return null
   return (
     <>

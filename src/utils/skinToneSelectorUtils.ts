@@ -35,8 +35,6 @@ export const generateToneSelectorPosition = (
   // tone selector y based on emoji size and search input on the top
   const y = rowNumber * emojiHeight + extraSearchTop - FUNNEL_HEIGHT
 
-  console.log('row number', rowNumber)
-
   const position = {
     x: emojiIndexInRow === 0 ? sumOfPaddings : x + sumOfPaddings,
     y,
@@ -53,7 +51,6 @@ export const generateToneSelectorFunnelPosition = (
   const emojiIndexInRow = emojiIndex % numOfColumns
 
   const funnelXPosition =
-    // emojiIndexInRow === 0 ? sumOfPaddings : 10 + emojiIndexInRow * 59 - 12 + 25
     emojiIndexInRow === 0 ? sumOfPaddings : emojiIndexInRow * emojiWidth + sumOfPaddings
 
   return funnelXPosition
