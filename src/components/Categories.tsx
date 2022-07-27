@@ -20,13 +20,15 @@ export const Categories = () => {
     renderList,
     setActiveCategoryIndex,
     categoryContainerStyles,
+    clearEmojiTonesData,
   } = React.useContext(KeyboardContext)
   const scrollNav = React.useRef(new Animated.Value(0)).current
   const handleScrollToCategory = React.useCallback(
     (category: CategoryTypes) => {
+      clearEmojiTonesData()
       setActiveCategoryIndex(renderList.findIndex((cat) => cat.title === category))
     },
-    [renderList, setActiveCategoryIndex]
+    [renderList, setActiveCategoryIndex, clearEmojiTonesData]
   )
 
   const renderItem = React.useCallback(
