@@ -1,13 +1,12 @@
 import * as React from 'react'
 
-import { StyleSheet, View, SafeAreaView } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import type { EmojisByCategory } from '../types'
 import { EmojiCategory } from './EmojiCategory'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { Categories } from './Categories'
 import { SearchBar } from './SearchBar'
 import { useKeyboardStore } from '../store/useKeyboardStore'
-import { ConditionalContainer } from './ConditionalContainer'
 import { FlashList } from '@shopify/flash-list'
 
 export const EmojiStaticKeyboard = () => {
@@ -21,13 +20,14 @@ export const EmojiStaticKeyboard = () => {
     disableSafeArea,
   } = React.useContext(KeyboardContext)
   const { keyboardState } = useKeyboardStore()
-  const flatListRef = React.useRef<FlashList<EmojisByCategory>>(null)
+  const isCategoryPositionTop = categoryPosition === 'top'
+  const ref = React.useRef<FlashList<EmojisByCategory>>(null)
 
   const renderItem = React.useCallback((props) => <EmojiCategory {...props} />, [])
   const keyExtractor = React.useCallback((item: EmojisByCategory) => item.title, [])
 
   React.useEffect(() => {
-    flatListRef.current?.scrollToIndex({
+    ref.current?.scrollToIndex({
       index: activeCategoryIndex,
     })
   }, [activeCategoryIndex])
@@ -37,39 +37,29 @@ export const EmojiStaticKeyboard = () => {
       style={[
         styles.container,
         styles.containerShadow,
-        categoryPosition === 'top' && disableSafeArea && styles.containerReverse,
+        isCategoryPositionTop && disableSafeArea && styles.containerReverse,
         containerStyles,
       ]}>
-      <ConditionalContainer
-        condition={!disableSafeArea}
-        container={(children) => (
-          <SafeAreaView
-            style={[styles.flex, categoryPosition === 'top' && styles.containerReverse]}>
-            {children}
-          </SafeAreaView>
-        )}>
-        <>
-          {enableSearchBar && <SearchBar />}
-
-          <FlashList<EmojisByCategory>
-            ref={flatListRef}
-            extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
-            data={renderList}
-            keyExtractor={keyExtractor}
-            renderItem={renderItem}
-            removeClippedSubviews={true}
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled
-            scrollEventThrottle={16}
-            keyboardShouldPersistTaps="handled"
-            estimatedItemSize={9}
-            scrollEnabled={false}
-            horizontal
-          />
-
-          <Categories />
-        </>
-      </ConditionalContainer>
+      <View style={[styles.flex, isCategoryPositionTop && styles.containerReverse]}>
+        {enableSearchBar && <SearchBar />}
+        <FlashList<EmojisByCategory>
+          {...{
+            ref,
+            renderItem,
+            keyExtractor,
+            data: renderList,
+            extraData: [keyboardState.recentlyUsed.length, searchPhrase],
+            horizontal: true,
+            pagingEnabled: true,
+            removeClippedSubviews: true,
+            scrollEnabled: false,
+            showsHorizontalScrollIndicator: false,
+            estimatedItemSize: 300,
+            keyboardShouldPersistTaps: 'handled',
+          }}
+        />
+        <Categories />
+      </View>
     </View>
   )
 }
