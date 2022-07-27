@@ -138,5 +138,7 @@
       ]
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "@shopify/flash-list": "^1.2.0"
+  }
 }

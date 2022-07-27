@@ -8,7 +8,7 @@ import { exhaustiveTypeCheck } from '../utils'
 
 const CATEGORY_ELEMENT_WIDTH = 37
 
-export const Categories = () => {
+export const Categories = React.memo(() => {
   const {
     activeCategoryIndex,
     categoryContainerColor,
@@ -111,7 +111,7 @@ export const Categories = () => {
       </View>
     </View>
   )
-}
+})
 
 const styles = StyleSheet.create({
   floating: {
