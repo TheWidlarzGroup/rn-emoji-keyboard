@@ -13,7 +13,7 @@ const emptyEmoji: JsonEmoji = {
   v: '0',
 }
 
-export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategory }) => {
+export const EmojiCategory = React.memo(({ item: { title, data } }: { item: EmojisByCategory }) => {
   const {
     onEmojiSelected,
     emojiSize,
@@ -54,6 +54,7 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
     [onEmojiSelected, setKeyboardState]
   )
 
+  const keyExtractor = React.useCallback((_, index) => String(index), [])
   const renderItem = React.useCallback(
     (props) => (
       <SingleEmoji {...props} onPress={() => handleEmojiPress(props.item)} emojiSize={emojiSize} />
@@ -61,12 +62,13 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
     [emojiSize, handleEmojiPress]
   )
 
+  console.log({ testCl: width })
   return (
     <View style={[styles.container, { width: width }]}>
       {!hideHeader && <Text style={[styles.sectionTitle, headerStyles]}>{translation[title]}</Text>}
       <FlatList
         data={[...data, ...empty]}
-        keyExtractor={(emoji) => emoji.name}
+        keyExtractor={keyExtractor}
         numColumns={numberOfColumns}
         renderItem={renderItem}
         removeClippedSubviews={true}
@@ -79,11 +81,11 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
       />
     </View>
   )
-}
+})
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: '100%',
     paddingHorizontal: 10,
     marginTop: 6,
   },

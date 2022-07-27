@@ -1,27 +1,19 @@
 import * as React from 'react'
 
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  useWindowDimensions,
-  Animated,
-  SafeAreaView,
-} from 'react-native'
-import type { CategoryTypes, EmojisByCategory } from '../types'
+import { StyleSheet, View, SafeAreaView } from 'react-native'
+import type { EmojisByCategory } from '../types'
 import { EmojiCategory } from './EmojiCategory'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { Categories } from './Categories'
 import { SearchBar } from './SearchBar'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import { ConditionalContainer } from './ConditionalContainer'
+import { FlashList } from '@shopify/flash-list'
 
 export const EmojiStaticKeyboard = () => {
-  const { width } = useWindowDimensions()
   const {
     activeCategoryIndex,
     containerStyles,
-    onCategoryChangeFailed,
     categoryPosition,
     enableSearchBar,
     searchPhrase,
@@ -29,15 +21,10 @@ export const EmojiStaticKeyboard = () => {
     disableSafeArea,
   } = React.useContext(KeyboardContext)
   const { keyboardState } = useKeyboardStore()
-  const flatListRef = React.useRef<FlatList>(null)
-
-  const getItemLayout = (_: CategoryTypes[] | null | undefined, index: number) => ({
-    length: width,
-    offset: width * index,
-    index,
-  })
+  const flatListRef = React.useRef<FlashList<EmojisByCategory>>(null)
 
   const renderItem = React.useCallback((props) => <EmojiCategory {...props} />, [])
+  const keyExtractor = React.useCallback((item: EmojisByCategory) => item.title, [])
 
   React.useEffect(() => {
     flatListRef.current?.scrollToIndex({
@@ -63,25 +50,23 @@ export const EmojiStaticKeyboard = () => {
         )}>
         <>
           {enableSearchBar && <SearchBar />}
-          <Animated.FlatList
+
+          <FlashList<EmojisByCategory>
+            ref={flatListRef}
             extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
             data={renderList}
-            keyExtractor={(item: EmojisByCategory) => item.title}
+            keyExtractor={keyExtractor}
             renderItem={renderItem}
             removeClippedSubviews={true}
-            ref={flatListRef}
-            onScrollToIndexFailed={onCategoryChangeFailed}
-            horizontal
             showsHorizontalScrollIndicator={false}
             pagingEnabled
             scrollEventThrottle={16}
-            getItemLayout={getItemLayout}
-            scrollEnabled={false}
-            initialNumToRender={1}
-            windowSize={2}
-            maxToRenderPerBatch={1}
             keyboardShouldPersistTaps="handled"
+            estimatedItemSize={9}
+            scrollEnabled={false}
+            horizontal
           />
+
           <Categories />
         </>
       </ConditionalContainer>
