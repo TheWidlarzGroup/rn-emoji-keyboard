@@ -1,11 +1,12 @@
 import * as React from 'react'
 
-import { StyleSheet, View, Text, FlatList } from 'react-native'
 import type { EmojisByCategory, JsonEmoji } from '../types'
+import { FlashList } from '@shopify/flash-list'
+import { parseEmoji } from '../utils'
 import { SingleEmoji } from './SingleEmoji'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useKeyboardStore } from '../store/useKeyboardStore'
-import { parseEmoji } from '../utils'
+import { StyleSheet, View, Text } from 'react-native'
 
 const emptyEmoji: JsonEmoji = {
   emoji: '',
@@ -13,36 +14,21 @@ const emptyEmoji: JsonEmoji = {
   v: '0',
 }
 
-export const EmojiCategory = React.memo(({ item: { title, data } }: { item: EmojisByCategory }) => {
+export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategory }) => {
   const {
-    onEmojiSelected,
-    emojiSize,
-    numberOfColumns,
     width,
+    emojiSize,
     hideHeader,
-    headerStyles,
     translation,
+    headerStyles,
+    onEmojiSelected,
     categoryPosition,
+    numberOfColumns,
   } = React.useContext(KeyboardContext)
 
   const { setKeyboardState } = useKeyboardStore()
 
   const [empty, setEmpty] = React.useState<JsonEmoji[]>([])
-
-  React.useEffect(() => {
-    if (data.length % numberOfColumns) {
-      const fillWithEmpty = new Array(numberOfColumns - (data.length % numberOfColumns)).fill(
-        emptyEmoji
-      )
-      setEmpty(fillWithEmpty)
-    }
-  }, [numberOfColumns, data])
-
-  const getItemLayout = (_: JsonEmoji[] | null | undefined, index: number) => ({
-    length: emojiSize ? emojiSize : 0,
-    offset: emojiSize * Math.ceil(index / numberOfColumns),
-    index,
-  })
 
   const handleEmojiPress = React.useCallback(
     (emoji: JsonEmoji) => {
@@ -56,32 +42,42 @@ export const EmojiCategory = React.memo(({ item: { title, data } }: { item: Emoj
 
   const keyExtractor = React.useCallback((_, index) => String(index), [])
   const renderItem = React.useCallback(
-    (props) => (
-      <SingleEmoji {...props} onPress={() => handleEmojiPress(props.item)} emojiSize={emojiSize} />
-    ),
+    (props) => <SingleEmoji {...props} onPress={handleEmojiPress} emojiSize={emojiSize} />,
     [emojiSize, handleEmojiPress]
   )
+  const ListFooterComponent = React.useMemo(
+    () => <View style={categoryPosition === 'floating' ? styles.footerFloating : styles.footer} />,
+    [categoryPosition]
+  )
 
-  console.log({ testCl: width })
+  React.useEffect(() => {
+    if (data.length % numberOfColumns) {
+      const fillWithEmpty = new Array(numberOfColumns - (data.length % numberOfColumns)).fill(
+        emptyEmoji
+      )
+      setEmpty(fillWithEmpty)
+    }
+  }, [numberOfColumns, data])
+
   return (
     <View style={[styles.container, { width: width }]}>
       {!hideHeader && <Text style={[styles.sectionTitle, headerStyles]}>{translation[title]}</Text>}
-      <FlatList
-        data={[...data, ...empty]}
-        keyExtractor={keyExtractor}
-        numColumns={numberOfColumns}
-        renderItem={renderItem}
-        removeClippedSubviews={true}
-        getItemLayout={getItemLayout}
-        ListFooterComponent={() => (
-          <View style={categoryPosition === 'floating' ? styles.footerFloating : styles.footer} />
-        )}
-        windowSize={20}
-        keyboardShouldPersistTaps="handled"
+
+      <FlashList
+        {...{
+          data: [...data, ...empty],
+          renderItem,
+          numColumns: numberOfColumns,
+          keyExtractor,
+          ListFooterComponent,
+          estimatedItemSize: 50,
+          removeClippedSubviews: true,
+          keyboardShouldPersistTaps: 'handled',
+        }}
       />
     </View>
   )
-})
+}
 
 const styles = StyleSheet.create({
   container: {

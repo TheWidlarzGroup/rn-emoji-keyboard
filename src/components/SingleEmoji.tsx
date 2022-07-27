@@ -4,16 +4,17 @@ import type { JsonEmoji } from '../types'
 
 export class SingleEmoji extends React.Component<{
   item: JsonEmoji
-  onPress: () => void
+  onPress: (emoji: JsonEmoji) => void
   emojiSize: number
 }> {
   shouldComponentUpdate() {
     return false
   }
+
   render() {
     const { item, emojiSize, onPress } = this.props
     return (
-      <TouchableOpacity onPress={onPress} style={styles.container}>
+      <TouchableOpacity onPress={() => onPress(item)} style={styles.container}>
         <View style={styles.iconContainer}>
           <Text style={[styles.emoji, { fontSize: emojiSize }]}>{item.emoji}</Text>
         </View>

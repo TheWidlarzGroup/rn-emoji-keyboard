@@ -1,27 +1,28 @@
 import * as React from 'react'
 
-import { StyleSheet, View } from 'react-native'
 import type { EmojisByCategory } from '../types'
+import { FlashList } from '@shopify/flash-list'
+import { SearchBar } from './SearchBar'
+import { Categories } from './Categories'
 import { EmojiCategory } from './EmojiCategory'
 import { KeyboardContext } from '../contexts/KeyboardContext'
-import { Categories } from './Categories'
-import { SearchBar } from './SearchBar'
 import { useKeyboardStore } from '../store/useKeyboardStore'
-import { FlashList } from '@shopify/flash-list'
+import { StyleSheet, View } from 'react-native'
 
 export const EmojiStaticKeyboard = () => {
   const {
     activeCategoryIndex,
-    containerStyles,
     categoryPosition,
+    disableSafeArea,
     enableSearchBar,
+    containerStyles,
     searchPhrase,
     renderList,
-    disableSafeArea,
   } = React.useContext(KeyboardContext)
   const { keyboardState } = useKeyboardStore()
-  const isCategoryPositionTop = categoryPosition === 'top'
   const ref = React.useRef<FlashList<EmojisByCategory>>(null)
+
+  const isCategoryPositionTop = React.useMemo(() => categoryPosition === 'top', [categoryPosition])
 
   const renderItem = React.useCallback((props) => <EmojiCategory {...props} />, [])
   const keyExtractor = React.useCallback((item: EmojisByCategory) => item.title, [])
@@ -54,7 +55,7 @@ export const EmojiStaticKeyboard = () => {
             removeClippedSubviews: true,
             scrollEnabled: false,
             showsHorizontalScrollIndicator: false,
-            estimatedItemSize: 300,
+            estimatedItemSize: 400,
             keyboardShouldPersistTaps: 'handled',
           }}
         />
