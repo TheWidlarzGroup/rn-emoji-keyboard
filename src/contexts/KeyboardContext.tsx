@@ -9,6 +9,7 @@ import type {
   EmojisByCategory,
   JsonEmoji,
   EmojiTonesData,
+  EmojiSizes,
 } from '../types'
 
 export type OnEmojiSelected = (emoji: EmojiType) => void
@@ -60,7 +61,7 @@ export type ContextValues = {
   renderList: EmojisByCategory[]
   isToneSelectorOpened: boolean
   clearEmojiTonesData: () => void
-  generateEmojiTones: (emoji: JsonEmoji, emojiIndex: number) => void
+  generateEmojiTones: (emoji: JsonEmoji, emojiIndex: number, emojiSizes: EmojiSizes) => void
   emojiTonesData: EmojiTonesData
 }
 

@@ -60,3 +60,8 @@ export type EmojiTonesData = {
   }
   funnelXPosition: number
 } | null
+
+export type EmojiSizes = {
+  width: number
+  height: number
+}

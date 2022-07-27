@@ -65,9 +65,9 @@ export const EmojiCategory = ({
 
   const renderItem = React.useCallback(
     (props) => {
-      const handleLongPress = () => {
+      const handleLongPress = (emojiSizes: any) => () => {
         clearEmojiTonesData()
-        generateEmojiTones(props.item, props.index)
+        generateEmojiTones(props.item, props.index, emojiSizes)
       }
 
       const recentlyUsed = keyboardState?.recentlyUsed || []

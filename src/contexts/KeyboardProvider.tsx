@@ -95,7 +95,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     Math.floor(width / ((props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 2))
   )
 
-  const generateEmojiTones = (emoji: JsonEmoji, emojiIndex: number) => {
+  const generateEmojiTones = (emoji: JsonEmoji, emojiIndex: number, emojiSizes: any) => {
     if (!emoji || !emoji.toneEnabled) return
 
     const EXTRA_SEARCH_TOP = props.enableSearchBar ? 50 : 0
@@ -133,22 +133,19 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
       }
     })
 
-    const singleEmojiSize =
-      (props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 2
-
     const skinTonePosition = generateToneSelectorPosition(
       numberOfColumns.current,
       emojiIndex,
       width,
-      singleEmojiSize,
+      emojiSizes.width,
+      emojiSizes.height,
       EXTRA_SEARCH_TOP
     )
 
     const funnelXPosition = generateToneSelectorFunnelPosition(
       numberOfColumns.current,
       emojiIndex,
-      width,
-      singleEmojiSize
+      emojiSizes.width
     )
 
     setEmojiTonesData({

@@ -3,7 +3,6 @@ import { TONES_CONTAINER_WIDTH } from '../components/SkinTones'
 const EMOJI_PADDING = 8
 const KEYBOARD_PADDING = 10
 const FUNNEL_HEIGHT = 7
-const SKIN_TONE_WIDTH = 36
 
 const sumOfPaddings = KEYBOARD_PADDING + EMOJI_PADDING
 
@@ -11,7 +10,8 @@ export const generateToneSelectorPosition = (
   numOfColumns: number,
   emojiIndex: number,
   windowWidth: number,
-  singleEmojiSize: number,
+  emojiWidth: number,
+  emojiHeight: number,
   extraSearchTop: number
 ) => {
   // get column in the center to measure tone selector x position
@@ -27,13 +27,15 @@ export const generateToneSelectorPosition = (
   const maxXPosition = windowWidth - TONES_CONTAINER_WIDTH - sumOfPaddings * 2
 
   // different x position for emojis before and after center column
-  const x = emojiIndexInRow < centerColumn ? emojiIndexInRow * singleEmojiSize : maxXPosition
+  const x = emojiIndexInRow < centerColumn ? emojiIndexInRow * emojiWidth : maxXPosition
 
   // current row number
   const rowNumber = emojiIndex / numOfColumns >= 1 ? Math.floor(emojiIndex / numOfColumns) : 0
 
   // tone selector y based on emoji size and search input on the top
-  const y = rowNumber * (singleEmojiSize - EMOJI_PADDING) + extraSearchTop - FUNNEL_HEIGHT
+  const y = rowNumber * emojiHeight + extraSearchTop - FUNNEL_HEIGHT
+
+  console.log('row number', rowNumber)
 
   const position = {
     x: emojiIndexInRow === 0 ? sumOfPaddings : x + sumOfPaddings,
@@ -46,24 +48,13 @@ export const generateToneSelectorPosition = (
 export const generateToneSelectorFunnelPosition = (
   numOfColumns: number,
   emojiIndex: number,
-  windowWidth: number,
-  singleEmojiSize: number
+  emojiWidth: number
 ) => {
   const emojiIndexInRow = emojiIndex % numOfColumns
 
-  const backwardIndex = Math.abs((emojiIndex % numOfColumns) + 1 - numOfColumns)
-
-  const maxXPosition = windowWidth - TONES_CONTAINER_WIDTH - sumOfPaddings * 2
-
-  const funnelXAfterCenterColumn =
-    windowWidth -
-    KEYBOARD_PADDING -
-    singleEmojiSize -
-    maxXPosition -
-    backwardIndex * singleEmojiSize
-
   const funnelXPosition =
-    emojiIndexInRow < Math.floor(numOfColumns / 2) ? SKIN_TONE_WIDTH / 2 : funnelXAfterCenterColumn
+    // emojiIndexInRow === 0 ? sumOfPaddings : 10 + emojiIndexInRow * 59 - 12 + 25
+    emojiIndexInRow === 0 ? sumOfPaddings : emojiIndexInRow * emojiWidth + sumOfPaddings
 
   return funnelXPosition
 }

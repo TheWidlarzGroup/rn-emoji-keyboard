@@ -49,34 +49,45 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
 
   const funnelXPosition = emojiTonesData?.funnelXPosition || 0
 
+  console.log('emoji y', emojiTonesData?.position?.y)
+  console.log('keyboardScrollOffsetY', keyboardScrollOffsetY)
+
+  // const newY =
+  //   emojiTonesData?.position?.y > 261 - 18
+  //     ? emojiTonesData?.position?.y - 261 - 18
+  //     : emojiTonesData?.position?.y
+
   if (!emojiTonesData?.emojis?.length) return null
   return (
-    <View
-      style={[
-        styles.floating,
-        { left: posX, top: posY, backgroundColor: skinTonesContainerColor },
-      ]}>
-      <View>
-        <FlatList
-          data={emojiTonesData.emojis}
-          keyExtractor={(emoji) => emoji.index}
-          renderItem={renderItem}
-          ItemSeparatorComponent={Separator}
-          showsHorizontalScrollIndicator={false}
-          ListHeaderComponentStyle={styles.activeIndicatorContainer}
-          horizontal
-        />
+    <>
+      <View
+        style={[
+          styles.floating,
+          { left: posX, top: posY, backgroundColor: skinTonesContainerColor },
+        ]}>
+        <View>
+          <FlatList
+            data={emojiTonesData.emojis}
+            keyExtractor={(emoji) => emoji.index}
+            renderItem={renderItem}
+            ItemSeparatorComponent={Separator}
+            showsHorizontalScrollIndicator={false}
+            ListHeaderComponentStyle={styles.activeIndicatorContainer}
+            horizontal
+          />
+        </View>
       </View>
       <View
         style={[
           styles.funnelContainer,
           {
-            left: funnelXPosition,
+            left: funnelXPosition + 14,
+            top: posY + TONES_CONTAINER_HEIGHT - 1,
           },
         ]}>
         <Funnel fill={skinTonesContainerColor} />
       </View>
-    </View>
+    </>
   )
 }
 
