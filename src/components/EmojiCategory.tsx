@@ -14,7 +14,7 @@ const emptyEmoji: JsonEmoji = {
   v: '0',
 }
 
-export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategory }) => {
+export const EmojiCategory = React.memo(({ item: { title, data } }: { item: EmojisByCategory }) => {
   const {
     width,
     emojiSize,
@@ -77,7 +77,7 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
       />
     </View>
   )
-}
+})
 
 const styles = StyleSheet.create({
   container: {

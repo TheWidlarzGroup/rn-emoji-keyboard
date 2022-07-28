@@ -8,39 +8,39 @@ import {
   Animated,
   SafeAreaView,
 } from 'react-native'
-import type { CategoryTypes, EmojisByCategory } from '../types'
+import { SearchBar } from './SearchBar'
+import { Categories } from './Categories'
 import { EmojiCategory } from './EmojiCategory'
 import { KeyboardContext } from '../contexts/KeyboardContext'
-import { Categories } from './Categories'
-import { SearchBar } from './SearchBar'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import { ConditionalContainer } from './ConditionalContainer'
+import type { CategoryTypes, EmojisByCategory } from '../types'
 
 export const EmojiStaticKeyboard = () => {
   const { width } = useWindowDimensions()
   const {
-    activeCategoryIndex,
-    containerStyles,
-    onCategoryChangeFailed,
-    categoryPosition,
-    enableSearchBar,
-    searchPhrase,
     renderList,
+    searchPhrase,
+    enableSearchBar,
+    containerStyles,
     disableSafeArea,
+    categoryPosition,
+    activeCategoryIndex,
+    onCategoryChangeFailed,
   } = React.useContext(KeyboardContext)
   const { keyboardState } = useKeyboardStore()
-  const flatListRef = React.useRef<FlatList>(null)
+  const ref = React.useRef<FlatList>(null)
 
+  const renderItem = React.useCallback((props) => <EmojiCategory {...props} />, [])
+  const keyExtractor = React.useCallback((item: EmojisByCategory) => item.title, [])
   const getItemLayout = (_: CategoryTypes[] | null | undefined, index: number) => ({
     length: width,
     offset: width * index,
     index,
   })
 
-  const renderItem = React.useCallback((props) => <EmojiCategory {...props} />, [])
-
   React.useEffect(() => {
-    flatListRef.current?.scrollToIndex({
+    ref.current?.scrollToIndex({
       index: activeCategoryIndex,
     })
   }, [activeCategoryIndex])
@@ -64,23 +64,25 @@ export const EmojiStaticKeyboard = () => {
         <>
           {enableSearchBar && <SearchBar />}
           <Animated.FlatList
-            extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
-            data={renderList}
-            keyExtractor={(item: EmojisByCategory) => item.title}
-            renderItem={renderItem}
-            removeClippedSubviews={true}
-            ref={flatListRef}
-            onScrollToIndexFailed={onCategoryChangeFailed}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled
-            scrollEventThrottle={16}
-            getItemLayout={getItemLayout}
-            scrollEnabled={false}
-            initialNumToRender={1}
-            windowSize={2}
-            maxToRenderPerBatch={1}
-            keyboardShouldPersistTaps="handled"
+            {...{
+              ref,
+              renderItem,
+              keyExtractor,
+              getItemLayout,
+              data: renderList,
+              extraData: [keyboardState.recentlyUsed.length, searchPhrase],
+              onScrollToIndexFailed: onCategoryChangeFailed,
+              horizontal: true,
+              pagingEnabled: true,
+              scrollEnabled: false,
+              removeClippedSubviews: true,
+              showsHorizontalScrollIndicator: false,
+              windowSize: 2,
+              initialNumToRender: 1,
+              maxToRenderPerBatch: 1,
+              scrollEventThrottle: 16,
+              keyboardShouldPersistTaps: 'handled',
+            }}
           />
           <Categories />
         </>
