@@ -40,7 +40,7 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
     [onEmojiSelected, setKeyboardState]
   )
 
-  const keyExtractor = React.useCallback((_, index) => String(index), [])
+  const keyExtractor = React.useCallback((_, index) => index, [])
   const renderItem = React.useCallback(
     (props) => <SingleEmoji {...props} onPress={handleEmojiPress} emojiSize={emojiSize} />,
     [emojiSize, handleEmojiPress]

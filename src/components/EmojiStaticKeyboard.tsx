@@ -1,34 +1,46 @@
 import * as React from 'react'
 
-import type { EmojisByCategory } from '../types'
-import { FlashList } from '@shopify/flash-list'
-import { SearchBar } from './SearchBar'
-import { Categories } from './Categories'
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  useWindowDimensions,
+  Animated,
+  SafeAreaView,
+} from 'react-native'
+import type { CategoryTypes, EmojisByCategory } from '../types'
 import { EmojiCategory } from './EmojiCategory'
 import { KeyboardContext } from '../contexts/KeyboardContext'
+import { Categories } from './Categories'
+import { SearchBar } from './SearchBar'
 import { useKeyboardStore } from '../store/useKeyboardStore'
-import { StyleSheet, View } from 'react-native'
+import { ConditionalContainer } from './ConditionalContainer'
 
 export const EmojiStaticKeyboard = () => {
+  const { width } = useWindowDimensions()
   const {
     activeCategoryIndex,
-    categoryPosition,
-    disableSafeArea,
-    enableSearchBar,
     containerStyles,
+    onCategoryChangeFailed,
+    categoryPosition,
+    enableSearchBar,
     searchPhrase,
     renderList,
+    disableSafeArea,
   } = React.useContext(KeyboardContext)
   const { keyboardState } = useKeyboardStore()
-  const ref = React.useRef<FlashList<EmojisByCategory>>(null)
+  const flatListRef = React.useRef<FlatList>(null)
 
-  const isCategoryPositionTop = React.useMemo(() => categoryPosition === 'top', [categoryPosition])
+  const getItemLayout = (_: CategoryTypes[] | null | undefined, index: number) => ({
+    length: width,
+    offset: width * index,
+    index,
+  })
 
   const renderItem = React.useCallback((props) => <EmojiCategory {...props} />, [])
-  const keyExtractor = React.useCallback((item: EmojisByCategory) => item.title, [])
 
   React.useEffect(() => {
-    ref.current?.scrollToIndex({
+    flatListRef.current?.scrollToIndex({
       index: activeCategoryIndex,
     })
   }, [activeCategoryIndex])
@@ -38,29 +50,41 @@ export const EmojiStaticKeyboard = () => {
       style={[
         styles.container,
         styles.containerShadow,
-        isCategoryPositionTop && disableSafeArea && styles.containerReverse,
+        categoryPosition === 'top' && disableSafeArea && styles.containerReverse,
         containerStyles,
       ]}>
-      <View style={[styles.flex, isCategoryPositionTop && styles.containerReverse]}>
-        {enableSearchBar && <SearchBar />}
-        <FlashList<EmojisByCategory>
-          {...{
-            ref,
-            renderItem,
-            keyExtractor,
-            data: renderList,
-            extraData: [keyboardState.recentlyUsed.length, searchPhrase],
-            horizontal: true,
-            pagingEnabled: true,
-            removeClippedSubviews: true,
-            scrollEnabled: false,
-            showsHorizontalScrollIndicator: false,
-            estimatedItemSize: 400,
-            keyboardShouldPersistTaps: 'handled',
-          }}
-        />
-        <Categories />
-      </View>
+      <ConditionalContainer
+        condition={!disableSafeArea}
+        container={(children) => (
+          <SafeAreaView
+            style={[styles.flex, categoryPosition === 'top' && styles.containerReverse]}>
+            {children}
+          </SafeAreaView>
+        )}>
+        <>
+          {enableSearchBar && <SearchBar />}
+          <Animated.FlatList
+            extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
+            data={renderList}
+            keyExtractor={(item: EmojisByCategory) => item.title}
+            renderItem={renderItem}
+            removeClippedSubviews={true}
+            ref={flatListRef}
+            onScrollToIndexFailed={onCategoryChangeFailed}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            pagingEnabled
+            scrollEventThrottle={16}
+            getItemLayout={getItemLayout}
+            scrollEnabled={false}
+            initialNumToRender={1}
+            windowSize={2}
+            maxToRenderPerBatch={1}
+            keyboardShouldPersistTaps="handled"
+          />
+          <Categories />
+        </>
+      </ConditionalContainer>
     </View>
   )
 }

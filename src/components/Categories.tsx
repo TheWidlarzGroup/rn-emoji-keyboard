@@ -12,7 +12,6 @@ export const Categories = React.memo(() => {
   const {
     activeCategoryIndex,
     categoryContainerColor,
-    onCategoryChangeFailed,
     activeCategoryContainerColor,
     categoryPosition,
     renderList,
@@ -33,14 +32,9 @@ export const Categories = React.memo(() => {
     ),
     [handleScrollToCategory]
   )
-  React.useEffect(() => {
-    Animated.spring(scrollNav, {
-      toValue: activeCategoryIndex * CATEGORY_ELEMENT_WIDTH,
-      useNativeDriver: true,
-    }).start()
-  }, [activeCategoryIndex, scrollNav])
+  const keyExtractor = React.useCallback((item) => item.category, [])
 
-  const activeIndicator = React.useCallback(
+  const ListHeaderComponent = React.useCallback(
     () => (
       <Animated.View
         style={[
@@ -56,6 +50,7 @@ export const Categories = React.memo(() => {
     ),
     [activeCategoryContainerColor, scrollNav]
   )
+  const ItemSeparatorComponent = React.useCallback(() => <View style={styles.separator} />, [])
 
   const getStylesBasedOnPosition = () => {
     const style: ViewStyle[] = [styles.navigation, categoryContainerStyles]
@@ -84,7 +79,7 @@ export const Categories = React.memo(() => {
     return style
   }
 
-  const renderData = React.useMemo(() => {
+  const data = React.useMemo(() => {
     return renderList.map((category) => ({
       category: category.title,
       icon:
@@ -93,20 +88,28 @@ export const Categories = React.memo(() => {
     })) as CategoryNavigationItem[]
   }, [renderList])
 
+  React.useEffect(() => {
+    Animated.spring(scrollNav, {
+      toValue: activeCategoryIndex * CATEGORY_ELEMENT_WIDTH,
+      useNativeDriver: true,
+    }).start()
+  }, [activeCategoryIndex, scrollNav])
+
   return (
     <View style={[categoryPosition === 'floating' && styles.floating]}>
       <View style={getStylesBasedOnPosition()}>
         <FlatList
-          data={renderData}
-          keyExtractor={(item) => item.category}
-          renderItem={renderItem}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          onScrollToIndexFailed={onCategoryChangeFailed}
-          ListHeaderComponent={activeIndicator}
-          ListHeaderComponentStyle={styles.activeIndicatorContainer}
-          extraData={activeCategoryIndex}
+          {...{
+            data,
+            renderItem,
+            keyExtractor,
+            ListHeaderComponent,
+            ItemSeparatorComponent,
+            horizontal: true,
+            showsHorizontalScrollIndicator: false,
+            extraData: activeCategoryIndex,
+            ListHeaderComponentStyle: styles.activeIndicatorContainer,
+          }}
         />
       </View>
     </View>
