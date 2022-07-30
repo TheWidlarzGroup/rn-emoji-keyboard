@@ -117,18 +117,21 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     searchPhrase,
   ])
 
-  const value: Required<KeyboardProps> & ContextValues = {
-    ...defaultKeyboardContext,
-    ...defaultKeyboardValues,
-    ...props,
-    activeCategoryIndex,
-    setActiveCategoryIndex,
-    numberOfColumns: numberOfColumns.current,
-    width,
-    searchPhrase,
-    setSearchPhrase,
-    renderList,
-  }
+  const value: Required<KeyboardProps> & ContextValues = React.useMemo(
+    () => ({
+      ...defaultKeyboardContext,
+      ...defaultKeyboardValues,
+      ...props,
+      activeCategoryIndex,
+      setActiveCategoryIndex,
+      numberOfColumns: numberOfColumns.current,
+      width,
+      searchPhrase,
+      setSearchPhrase,
+      renderList,
+    }),
+    [activeCategoryIndex, props, renderList, searchPhrase, width]
+  )
   return <KeyboardContext.Provider value={value}>{props.children}</KeyboardContext.Provider>
 })
 
