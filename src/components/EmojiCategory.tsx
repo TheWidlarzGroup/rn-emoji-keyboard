@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { StyleSheet, View, Text, FlatList, Dimensions } from 'react-native'
+import { StyleSheet, View, Text, FlatList } from 'react-native'
 import type { EmojisByCategory, JsonEmoji } from '../types'
 import { SingleEmoji } from './SingleEmoji'
 import { KeyboardContext } from '../contexts/KeyboardContext'
