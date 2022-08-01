@@ -45,6 +45,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   onRequestClose: () => {},
   categoryContainerStyles: {},
   disableSafeArea: false,
+  allowMultipleSelections: false,
 }
 
 export const defaultKeyboardValues: ContextValues = {

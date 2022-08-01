@@ -16,6 +16,7 @@ export const EmojiPicker = ({
   onClose,
   expandable = defaultKeyboardContext.expandable,
   defaultHeight = defaultKeyboardContext.defaultHeight,
+  allowMultipleSelections = false,
   ...props
 }: KeyboardProps) => {
   const { height: screenHeight } = useWindowDimensions()
@@ -45,7 +46,7 @@ export const EmojiPicker = ({
     <KeyboardProvider
       onEmojiSelected={(emoji: EmojiType) => {
         onEmojiSelected(emoji)
-        close()
+        !allowMultipleSelections && close()
       }}
       open={open}
       onClose={close}
