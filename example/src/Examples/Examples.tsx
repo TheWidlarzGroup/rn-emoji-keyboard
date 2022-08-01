@@ -3,7 +3,7 @@ import { View, Button } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import type { StackScreenProps } from '@react-navigation/stack'
 
-type RootStackParamList = {
+export type RootStackParamList = {
   Examples: undefined
   Basic: undefined
   Dark: undefined
