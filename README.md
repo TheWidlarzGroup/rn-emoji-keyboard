@@ -97,6 +97,8 @@ Due to the limited translation possibilities, we only provide a few pre-defined 
 * `es` - Spanish 🇪🇸
 * `de` - German 🇩🇪
 * `pt` - Portuguese 🇧🇷
+* `ua` - Ukrainian 🇺🇦
+* `ru` - Russian 🇷🇺
 
 First import lang and use it as `translation` prop.
 ```ts
