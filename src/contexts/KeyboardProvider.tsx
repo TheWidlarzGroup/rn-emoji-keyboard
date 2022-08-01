@@ -1,34 +1,66 @@
 import * as React from 'react'
 import { useWindowDimensions } from 'react-native'
-import { KeyboardProps, ContextValues, KeyboardContext, OnEmojiSelected } from './KeyboardContext'
+import {
+  KeyboardProps,
+  ContextValues,
+  KeyboardContext,
+  OnEmojiSelected,
+  Theme,
+  Styles,
+} from './KeyboardContext'
 import en from '../translation/en'
 import emojisByGroup from '../assets/emojis.json'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import type { EmojiType, CategoryTypes, EmojisByCategory } from '../types'
 import { CATEGORIES } from '../types'
+import { deepMerge } from '../utils'
 
 type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode
   onEmojiSelected: OnEmojiSelected
 }
 
-export const defaultKeyboardContext: Required<KeyboardProps> = {
+export const emptyStyles: Styles = {
+  container: {},
+  header: {},
+  category: {
+    icon: {},
+    container: {},
+  },
+  searchBar: {
+    container: {},
+    text: {},
+  },
+  knob: {},
+}
+export const defaultTheme: Theme = {
+  backdrop: '#00000055',
+  knob: '#ffffff',
+  container: '#ffffff',
+  header: '#00000099',
+  category: {
+    icon: '#000000',
+    iconActive: '#005b96',
+    container: '#e3dbcd',
+    containerActive: '#ffffff',
+  },
+  search: {
+    text: '#000000cc',
+    placeholder: '#00000055',
+    icon: '#00000055',
+    background: '#00000011',
+  },
+}
+
+export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; styles: Styles } = {
   open: false,
   onClose: () => {},
   onEmojiSelected: (_emoji: EmojiType) => {},
   emojiSize: 28,
-  containerStyles: {},
-  knobStyles: {},
-  headerStyles: {},
   expandable: true,
   hideHeader: false,
   defaultHeight: '40%',
   expandedHeight: '80%',
-  backdropColor: '#00000055',
-  categoryColor: '#000000',
-  activeCategoryColor: '#005b96',
-  categoryContainerColor: '#e3dbcd',
-  activeCategoryContainerColor: '#ffffff',
   onCategoryChangeFailed: (info) => {
     console.warn(info)
   },
@@ -37,15 +69,12 @@ export const defaultKeyboardContext: Required<KeyboardProps> = {
   enableRecentlyUsed: false,
   categoryPosition: 'floating',
   enableSearchBar: false,
-  closeSearchColor: '#00000055',
-  searchBarStyles: {},
-  searchBarTextStyles: {},
-  searchBarPlaceholderColor: '#00000055',
   categoryOrder: [...CATEGORIES],
   onRequestClose: () => {},
-  categoryContainerStyles: {},
   disableSafeArea: false,
   allowMultipleSelections: false,
+  theme: defaultTheme,
+  styles: emptyStyles,
 }
 
 export const defaultKeyboardValues: ContextValues = {
@@ -118,10 +147,12 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     searchPhrase,
   ])
 
-  const value: Required<KeyboardProps> & ContextValues = {
+  const value: typeof defaultKeyboardContext & typeof defaultKeyboardValues = {
     ...defaultKeyboardContext,
     ...defaultKeyboardValues,
     ...props,
+    theme: props.theme ? deepMerge(defaultTheme, props.theme) : defaultTheme,
+    styles: props.styles ? deepMerge(emptyStyles, props.styles) : emptyStyles,
     activeCategoryIndex,
     setActiveCategoryIndex,
     numberOfColumns: numberOfColumns.current,

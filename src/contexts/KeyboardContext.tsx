@@ -8,26 +8,52 @@ import type {
   CategoryPosition,
   EmojisByCategory,
 } from '../types'
+import type { RecursivePartial } from '../utils'
 
 export type OnEmojiSelected = (emoji: EmojiType) => void
+
+export type Styles = {
+  container: ViewStyle
+  header: TextStyle
+  knob: ViewStyle
+  category: {
+    container: ViewStyle
+    icon: TextStyle
+  }
+  searchBar: {
+    container: ViewStyle
+    text: TextStyle
+  }
+}
+
+export type Theme = {
+  backdrop: string
+  knob: string
+  container: string
+  header: string
+  category: {
+    icon: string
+    iconActive: string
+    container: string
+    containerActive: string
+  }
+  search: {
+    background: string
+    text: string
+    placeholder: string
+    icon: string
+  }
+}
 
 export type KeyboardProps = {
   open: boolean
   onClose: () => void
   onEmojiSelected: OnEmojiSelected
   emojiSize?: number
-  containerStyles?: ViewStyle
-  knobStyles?: ViewStyle
-  headerStyles?: TextStyle
   expandable?: boolean
   hideHeader?: boolean
   defaultHeight?: number | string
   expandedHeight?: number | string
-  backdropColor?: string
-  categoryColor?: string
-  activeCategoryColor?: string
-  categoryContainerColor?: string
-  activeCategoryContainerColor?: string
   onCategoryChangeFailed?: (info: {
     index: number
     highestMeasuredFrameIndex: number
@@ -38,15 +64,12 @@ export type KeyboardProps = {
   enableRecentlyUsed?: boolean
   categoryPosition?: CategoryPosition
   enableSearchBar?: boolean
-  closeSearchColor?: string
-  searchBarStyles?: ViewStyle
-  searchBarTextStyles?: TextStyle
-  searchBarPlaceholderColor?: string
   categoryOrder?: CategoryTypes[]
   onRequestClose?: () => void
-  categoryContainerStyles?: ViewStyle
   disableSafeArea?: boolean
   allowMultipleSelections?: boolean
+  theme?: RecursivePartial<Theme>
+  styles?: RecursivePartial<Styles>
 }
 export type ContextValues = {
   activeCategoryIndex: number
@@ -58,7 +81,9 @@ export type ContextValues = {
   renderList: EmojisByCategory[]
 }
 
-export const KeyboardContext = React.createContext<Required<KeyboardProps> & ContextValues>({
+export const KeyboardContext = React.createContext<
+  Required<KeyboardProps> & ContextValues & { theme: Theme; styles: Styles }
+>({
   ...defaultKeyboardContext,
   ...defaultKeyboardValues,
 })
