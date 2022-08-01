@@ -19,7 +19,12 @@ type KnobProps = {
 
 export const Knob = ({ offsetY, height, onClose, setIsExpanded }: KnobProps) => {
   const { height: screenHeight } = useWindowDimensions()
-  const { expandedHeight, defaultHeight, knobStyles } = React.useContext(KeyboardContext)
+  const {
+    expandedHeight,
+    defaultHeight,
+    theme,
+    styles: themeStyles,
+  } = React.useContext(KeyboardContext)
 
   const panResponder = React.useRef(
     PanResponder.create({
@@ -63,7 +68,7 @@ export const Knob = ({ offsetY, height, onClose, setIsExpanded }: KnobProps) => 
   return (
     <View {...panResponder.panHandlers}>
       <View style={styles.panContainer}>
-        <Animated.View style={[styles.knob, knobStyles]} />
+        <Animated.View style={[styles.knob, { backgroundColor: theme.knob }, themeStyles.knob]} />
       </View>
     </View>
   )
@@ -80,7 +85,6 @@ const styles = StyleSheet.create({
   knob: {
     height: 6,
     width: 50,
-    backgroundColor: '#fff',
     marginBottom: 6,
     alignSelf: 'center',
     borderRadius: 4,

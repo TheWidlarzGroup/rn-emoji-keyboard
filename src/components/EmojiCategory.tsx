@@ -20,9 +20,10 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
     numberOfColumns,
     width,
     hideHeader,
-    headerStyles,
     translation,
     categoryPosition,
+    theme,
+    styles: themeStyles,
   } = React.useContext(KeyboardContext)
 
   const { setKeyboardState } = useKeyboardStore()
@@ -63,7 +64,11 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
 
   return (
     <View style={[styles.container, { width: width }]}>
-      {!hideHeader && <Text style={[styles.sectionTitle, headerStyles]}>{translation[title]}</Text>}
+      {!hideHeader && (
+        <Text style={[styles.sectionTitle, themeStyles.header, { color: theme.header }]}>
+          {translation[title]}
+        </Text>
+      )}
       <FlatList
         data={[...data, ...empty]}
         keyExtractor={(emoji) => emoji.name}
@@ -88,7 +93,6 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   sectionTitle: {
-    opacity: 0.6,
     marginTop: 12,
     marginBottom: 6,
     marginLeft: 12,
