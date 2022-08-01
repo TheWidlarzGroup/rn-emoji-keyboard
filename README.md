@@ -48,30 +48,33 @@ export default function App() {
 | enableRecentlyUsed | boolean | false | no | Enable recently used emojis in categories |
 | categoryPosition | 'floating' \| 'top' \| 'bottom' | 'floating' | no | Specify category container position |
 | enableSearchBar | boolean | false | no | Enable search bar |
-| closeSearchColor | string | "#00000055" | no | Change button (cross) color for close/cancel search |
-| searchBarStyles | ViewStyle | {} | no | Override search bar container styles |
-| searchBarTextStyles | ViewStyle | {} | no | Override search bar text styles |
-| searchBarPlaceholderColor | string | "#00000055" | no | Override search bar placeholder color |
-| headerStyles | TextStyle | {} | no | Override category name styles |
-| knobStyles | ViewStyle | {} | no | Override knob styles |
-| containerStyles | ViewStyle | {} | no | Override container styles |
 | hideHeader | boolean | false | no | Hide category names |
 | allowMultipleSelections | boolean | false | no | Allow selecting multiple emoji without dismissing keyboard |
 | expandable | boolean | true | no | Show knob and enable expand on swipe up |
 | defaultHeight | number \| string | "40%" | no | Specify collapsed container height (number is points, string is a percentage of the screen height) |
 | expandedHeight | number \| string | "80%" | no | Specify expanded container height (number is points, string is a percentage of the screen height) _works only if expandable is true_ |
-| backdropColor | string | "#00000055" | no | Change backdrop color and alpha |
-| categoryColor | string | "#000000" | no | Change category item color |
-| activeCategoryColor | string | "#005b96" | no | Change active category item color |
-| categoryContainerColor | string | "#e3dbcd" | no | Change category container color |
-| activeCategoryContainerColor | string | "#ffffff" | no | Change selected category container color |
 | onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
 | translation | CategoryTranslation | en | no | Translation object *see translation section* |
 | disabledCategories | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
 | categoryOrder | CategoryTypes[] | [] | no | Set category sequence |
 | onRequestClose | function | undefined | no | Handle onRequestClose in modal |
-| categoryContainerStyles | ViewStyle | {} | no | Override category container styles |
 | disableSafeArea | boolean | false | no | Disable safe area inside modal |
+| theme | Theme | defaultTheme | no | Custom colors theme |
+| styles | Styles | defaultStyles | no | Custom styles |
+
+[//]: # (| backdropColor | string | "#00000055" | no | Change backdrop color and alpha |)
+[//]: # (| categoryColor | string | "#000000" | no | Change category item color |)
+[//]: # (| activeCategoryColor | string | "#005b96" | no | Change active category item color |)
+[//]: # (| categoryContainerColor | string | "#e3dbcd" | no | Change category container color |)
+[//]: # (| activeCategoryContainerColor | string | "#ffffff" | no | Change selected category container color |)
+[//]: # (| searchBarPlaceholderColor | string | "#00000055" | no | Override search bar placeholder color |)
+[//]: # (| closeSearchColor | string | "#00000055" | no | Change button &#40;cross&#41; color for close/cancel search |)
+[//]: # (| searchBarStyles | ViewStyle | {} | no | Override search bar container styles |)
+[//]: # (| searchBarTextStyles | ViewStyle | {} | no | Override search bar text styles |)
+[//]: # (| headerStyles | TextStyle | {} | no | Override category name styles |)
+[//]: # (| categoryContainerStyles | ViewStyle | {} | no | Override category container styles |)
+[//]: # (| knobStyles | ViewStyle | {} | no | Override knob styles |)
+[//]: # (| containerStyles | ViewStyle | {} | no | Override container styles |)
 
 ## 📊 Comparison
 
@@ -86,6 +89,45 @@ import { EmojiKeyboard } from 'rn-emoji-keyboard';
 <EmojiKeyboard onEmojiSelected={handlePick} />
 ```
 Example about serving as static keyboard [you can find here](/example/src/Dark/Dark.tsx).
+## 🎨 Theme
+You can override color palette with custom colors using `theme` prop.
+```js
+const defaultTheme: Theme = {
+  backdrop: '#00000055',
+  knob: '#ffffff',
+  container: '#ffffff',
+  header: '#00000099',
+  category: {
+    icon: '#000000',
+    iconActive: '#005b96',
+    container: '#e3dbcd',
+    containerActive: '#ffffff',
+  },
+  search: {
+    text: '#000000cc',
+    placeholder: '#00000055',
+    icon: '#00000055',
+    background: '#00000011',
+  },
+}
+```
+## 📏 Styles
+You can also override styles to almost every element using `styles` prop in the following format.
+```js
+type Styles = {
+  container: ViewStyle
+  header: TextStyle
+  knob: ViewStyle
+  category: {
+    container: ViewStyle
+    icon: TextStyle
+  }
+  searchBar: {
+    container: ViewStyle
+    text: TextStyle
+  }
+}
+```
 ## 🇺🇸 Internationalization
 ### Pre-defined
 Due to the limited translation possibilities, we only provide a few pre-defined translations into the following languages:
@@ -147,9 +189,6 @@ You can clone the repo and run `yarn example ios` or `yarn example android` to p
 ![Preview](/example/assets/categories-bottom-preview.jpg)
 ### [Search Bar](/example/src/SearchBar/SearchBar.tsx)
 ![Preview](/example/assets/search-bar-preview.gif)
-## 📈 Future plans
-* Skin tone palette selector.
-* Write native module to display forbidden emojis on android.
 ## ⚖️ License
  **[MIT](/LICENSE)**
 ## 📝 Contribute
