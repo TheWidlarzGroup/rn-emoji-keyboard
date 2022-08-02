@@ -26,6 +26,7 @@ const Dark = () => {
         onClose={() => setIsModalOpen(false)}
         backdropColor="#16161888"
         categoryContainerColor="#252427"
+        skinTonesContainerColor="#252427"
         categoryColor="#766dfc"
         activeCategoryColor="#fff"
         activeCategoryContainerColor="#766dfc"

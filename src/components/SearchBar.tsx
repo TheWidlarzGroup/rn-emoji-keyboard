@@ -14,6 +14,7 @@ export const SearchBar = () => {
     searchBarTextStyles,
     searchBarPlaceholderColor,
     renderList,
+    clearEmojiTonesData,
   } = React.useContext(KeyboardContext)
   const inputRef = React.useRef<TextInput>(null)
 
@@ -25,6 +26,7 @@ export const SearchBar = () => {
   }
   const clearPhrase = () => {
     setSearchPhrase('')
+    clearEmojiTonesData()
     inputRef.current?.blur()
     setActiveCategoryIndex(0)
   }
@@ -38,6 +40,7 @@ export const SearchBar = () => {
         placeholder={translation.search}
         ref={inputRef}
         placeholderTextColor={searchBarPlaceholderColor}
+        onTouchEndCapture={clearEmojiTonesData}
       />
       {!!searchPhrase && (
         <TouchableOpacity onPress={clearPhrase} style={styles.button}>
