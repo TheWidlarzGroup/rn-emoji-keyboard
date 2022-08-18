@@ -54,6 +54,12 @@ const config = {
             position: 'left',
             label: 'API Reference',
           },
+          {
+            type: 'docSidebar',
+            sidebarId: 'contributions',
+            position: 'left',
+            label: 'Contributions',
+          },
 
           {
             href: 'https://github.com/TheWidlarzGroup/rn-emoji-keyboard',
