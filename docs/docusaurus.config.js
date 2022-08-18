@@ -9,7 +9,7 @@ const config = {
   title: 'RN Emoji Keyboard',
   tagline: 'React Native Emoji Keyboard',
   url: 'https://thewidlarzgroup.github.io',
-  baseUrl: '/',
+  baseUrl: '/rn-emoji-keyboard/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
