@@ -10,8 +10,10 @@ export default function Home() {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      <div className={styles.tmp}>
-        <h1>Home Page</h1>
+      <div className={styles.container}>
+        <h1>🚀 RN Emoji Keyboard</h1>
+        <h2>A lightweight, fully customizable emoji picker.</h2>
+        <h2>Designated to be user and developer friendly! 💖</h2>
       </div>
     </Layout>
   )
