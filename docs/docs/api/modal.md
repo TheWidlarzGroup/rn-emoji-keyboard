@@ -8,114 +8,116 @@ import { ApiTable } from '../../src/components/ApiTable/ApiTable.js'
 
 # Modal Mode
 
-## Props
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+## Required
 
 ### <TitleWithRequiredBadge>`open`</TitleWithRequiredBadge>
 
-Opens modal picker
+Required props which indicates whether the modal should be displayed on screen, or not.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
+### <TitleWithRequiredBadge>`onClose`</TitleWithRequiredBadge>
+
+Callback fired when the component requests to be closed.
+
+<ApiTable typeVal='() => void' defaultVal='undefined'/>
+
+### <TitleWithRequiredBadge>`onEmojiSelected`</TitleWithRequiredBadge>
+
+Callback fired when the emoji is selected.
+
+<ApiTable typeVal='(emoji:{ emoji, name, slug, unicode_version }) => void' defaultVal='undefined'/>
+
+## Optional
+
 ### `allowMultipleSelections`
 
-Allow selecting multiple emoji without dismissing keyboard
+Allow select multiple emoji without dismiss keyboard.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
 ### `categoryPosition`
 
-Specify category container position
+Allow to change the position of a container with available emoji categories.
 
 <ApiTable typeVal="'floating' | 'top' | 'bottom'" defaultVal="floating"/>
 
 ### `categoryOrder`
 
-Set category sequence
+Allow to change order of a container with available emoji categories.
 
 <ApiTable typeVal='CategoryTypes[]' defaultVal='[]'/>
 
 ### `defaultHeight`
 
-Specify collapsed container height (number is points, string is a percentage of the screen height)
+Specify collapsed container height (number is points, string is a percentage of the screen height).
 
 <ApiTable typeVal='number | string' defaultVal='40%'/>
 
 ### `disabledCategories`
 
-Hide categories by passing their slugs
+Allow to hide specific categories by passing an array with their slugs.
 
 <ApiTable typeVal='CategoryTypes[]' defaultVal='[]'/>
 
 ### `disableSafeArea`
 
-Disable safe area inside modal
+Allow to disable `SafeAreaView` inside the emoji keyboard. Look into [React Native documentation](https://reactnative.dev/docs/safeareaview) for more details about `SafeAreaView`.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
 ### `emojiSize`
 
-Custom emoji size
+Allow to set size of the single emoji.
 
 <ApiTable typeVal='number' defaultVal='28'/>
 
 ### `enableRecentlyUsed`
 
-Enable recently used emojis in categories
+Show `Recently used` category in the bar with all available categories.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
 ### `enableSearchBar`
 
-Enable search bar
+Set this `true` to reveal the search bar.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
 ### `expandable`
 
-Show knob and enable expand on swipe up
+Show knob and enable expand on swipe up.
 
 <ApiTable typeVal='boolean' defaultVal='true'/>
 
 ### `expandedHeight`
 
-Specify expanded container height (number is points, string is a percentage of the screen height) works only if expandable is true
+Specify expanded container height (number is points, string is a percentage of the screen height) works only if expandable is `true`.
 
 <ApiTable typeVal='number | string' defaultVal='80%'/>
 
 ### `hideHeader`
 
-Hide category names
+Hide labels with category names.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
-### `translation`
-
-Translation object see translation section
-
-<ApiTable typeVal='CategoryTranslation' defaultVal='en'/>
-
-## Methods
-
-### <TitleWithRequiredBadge>`onClose`</TitleWithRequiredBadge>
-
-Request close modal runs when onEmojiSelected or backdrop pressed
-
-<ApiTable typeVal='function' defaultVal='undefined'/>
-
-### <TitleWithRequiredBadge>`onEmojiSelected`</TitleWithRequiredBadge>
-
-Callback on emoji selected
-
-<ApiTable typeVal='function' defaultVal='undefined'/>
-
 ### `onCategoryChangeFailed`
 
-Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength})
+Callback fired when the category change failed.
 
-<ApiTable typeVal='function' defaultVal='warn(info)'/>
+<ApiTable typeVal='( info: {index, highestMeasuredFrameIndex, averageItemLength} ) => void' defaultVal='warn(info)'/>
 
 ### `onRequestClose`
 
 Handle onRequestClose in modal
 
-<ApiTable typeVal='function' defaultVal='undefined'/>
+<ApiTable typeVal='() => void' defaultVal='undefined'/>
+
+### `translation`
+
+Used to change the library language. Look into [internationalization section](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/documentation/internationalization) for more details.
+
+<ApiTable typeVal='CategoryTranslation' defaultVal='en'/>

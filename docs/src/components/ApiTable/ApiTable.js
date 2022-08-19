@@ -10,7 +10,7 @@ export const ApiTable = ({ typeVal, defaultVal }) => {
       </tr>
       <tr>
         <td className="ApiTable_cell">{typeVal}</td>
-        <td className="ApiTable_cell">{defaultVal}</td>
+        <td>{defaultVal}</td>
       </tr>
     </table>
   )
