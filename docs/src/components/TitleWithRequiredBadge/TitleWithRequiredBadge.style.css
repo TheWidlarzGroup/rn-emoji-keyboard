@@ -1,0 +1,9 @@
+.TitleWithRequiredBadge__badge {
+  border: 2px solid var(--ifm-color-primary-warning);
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 6px 10px;
+  color: var(--ifm-color-primary-warning);
+  margin-right: 20px;
+  font-weight: 400;
+}
