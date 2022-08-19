@@ -8,11 +8,7 @@ import { ApiTable } from '../../src/components/ApiTable/ApiTable.js'
 
 # Modal Mode
 
-### <TitleWithRequiredBadge>`onEmojiSelected`</TitleWithRequiredBadge>
-
-Callback on emoji selected
-
-<ApiTable typeVal='function' defaultVal='undefined'/>
+## Props
 
 ### <TitleWithRequiredBadge>`open`</TitleWithRequiredBadge>
 
@@ -20,11 +16,41 @@ Opens modal picker
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
-### <TitleWithRequiredBadge>`onClose`</TitleWithRequiredBadge>
+### `allowMultipleSelections`
 
-Request close modal runs when onEmojiSelected or backdrop pressed
+Allow selecting multiple emoji without dismissing keyboard
 
-<ApiTable typeVal='function' defaultVal='undefined'/>
+<ApiTable typeVal='boolean' defaultVal='false'/>
+
+### `categoryPosition`
+
+Specify category container position
+
+<ApiTable typeVal="'floating' | 'top' | 'bottom'" defaultVal="floating"/>
+
+### `categoryOrder`
+
+Set category sequence
+
+<ApiTable typeVal='CategoryTypes[]' defaultVal='[]'/>
+
+### `defaultHeight`
+
+Specify collapsed container height (number is points, string is a percentage of the screen height)
+
+<ApiTable typeVal='number | string' defaultVal='40%'/>
+
+### `disabledCategories`
+
+Hide categories by passing their slugs
+
+<ApiTable typeVal='CategoryTypes[]' defaultVal='[]'/>
+
+### `disableSafeArea`
+
+Disable safe area inside modal
+
+<ApiTable typeVal='boolean' defaultVal='false'/>
 
 ### `emojiSize`
 
@@ -38,27 +64,9 @@ Enable recently used emojis in categories
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
-### `categoryPosition`
-
-Specify category container position
-
-<ApiTable typeVal="'floating' | 'top' | 'bottom'" defaultVal="floating"/>
-
 ### `enableSearchBar`
 
 Enable search bar
-
-<ApiTable typeVal='boolean' defaultVal='false'/>
-
-### `hideHeader`
-
-Hide category names
-
-<ApiTable typeVal='boolean' defaultVal='false'/>
-
-### `allowMultipleSelections`
-
-Allow selecting multiple emoji without dismissing keyboard
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
@@ -68,23 +76,17 @@ Show knob and enable expand on swipe up
 
 <ApiTable typeVal='boolean' defaultVal='true'/>
 
-### `defaultHeight`
-
-Specify collapsed container height (number is points, string is a percentage of the screen height)
-
-<ApiTable typeVal='number | string' defaultVal='40%'/>
-
 ### `expandedHeight`
 
 Specify expanded container height (number is points, string is a percentage of the screen height) works only if expandable is true
 
 <ApiTable typeVal='number | string' defaultVal='80%'/>
 
-### `onCategoryChangeFailed`
+### `hideHeader`
 
-Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength})
+Hide category names
 
-<ApiTable typeVal='function' defaultVal='warn(info)'/>
+<ApiTable typeVal='boolean' defaultVal='false'/>
 
 ### `translation`
 
@@ -92,26 +94,28 @@ Translation object see translation section
 
 <ApiTable typeVal='CategoryTranslation' defaultVal='en'/>
 
-### `disabledCategories`
+## Methods
 
-Hide categories by passing their slugs
+### <TitleWithRequiredBadge>`onClose`</TitleWithRequiredBadge>
 
-<ApiTable typeVal='CategoryTypes[]' defaultVal='[]'/>
+Request close modal runs when onEmojiSelected or backdrop pressed
 
-### `categoryOrder`
+<ApiTable typeVal='function' defaultVal='undefined'/>
 
-Set category sequence
+### <TitleWithRequiredBadge>`onEmojiSelected`</TitleWithRequiredBadge>
 
-<ApiTable typeVal='CategoryTypes[]' defaultVal='[]'/>
+Callback on emoji selected
+
+<ApiTable typeVal='function' defaultVal='undefined'/>
+
+### `onCategoryChangeFailed`
+
+Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength})
+
+<ApiTable typeVal='function' defaultVal='warn(info)'/>
 
 ### `onRequestClose`
 
 Handle onRequestClose in modal
 
 <ApiTable typeVal='function' defaultVal='undefined'/>
-
-### `disableSafeArea`
-
-Disable safe area inside modal
-
-<ApiTable typeVal='boolean' defaultVal='false'/>
