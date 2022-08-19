@@ -14,7 +14,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
 ### <TitleWithRequiredBadge>`open`</TitleWithRequiredBadge>
 
-Required props which indicates whether the modal should be displayed on screen, or not.
+Required props which indicates whether the modal should be displayed on screen.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
@@ -26,7 +26,7 @@ Callback fired when the component requests to be closed.
 
 ### <TitleWithRequiredBadge>`onEmojiSelected`</TitleWithRequiredBadge>
 
-Callback fired when the emoji is selected.
+Callback fired when the emoji is selected. The passed function exposed an object with selected emoji data.
 
 <ApiTable typeVal='(emoji:{ emoji, name, slug, unicode_version }) => void' defaultVal='undefined'/>
 
@@ -52,7 +52,7 @@ Allow to change order of a container with available emoji categories.
 
 ### `defaultHeight`
 
-Specify collapsed container height (number is points, string is a percentage of the screen height).
+Specify collapsed container height. It can be both a number in points or a string in a percentage of the screen.
 
 <ApiTable typeVal='number | string' defaultVal='40%'/>
 
@@ -76,13 +76,13 @@ Allow to set size of the single emoji.
 
 ### `enableRecentlyUsed`
 
-Show `Recently used` category in the bar with all available categories.
+Reveal extra category with recently used emojis.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
 ### `enableSearchBar`
 
-Set this `true` to reveal the search bar.
+Reveal the search bar, used to find specific emoji.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
@@ -94,7 +94,11 @@ Show knob and enable expand on swipe up.
 
 ### `expandedHeight`
 
-Specify expanded container height (number is points, string is a percentage of the screen height) works only if expandable is `true`.
+Specify expanded container height. It can be both a number in points or a string in a percentage of the screen.
+
+:::caution
+`expandedHeight` works only if `expandable` props is set to `true`.
+:::
 
 <ApiTable typeVal='number | string' defaultVal='80%'/>
 
@@ -112,7 +116,7 @@ Callback fired when the category change failed.
 
 ### `onRequestClose`
 
-Handle onRequestClose in modal
+Callback fired when emoji keyboard is closing.
 
 <ApiTable typeVal='() => void' defaultVal='undefined'/>
 
