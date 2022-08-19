@@ -64,7 +64,11 @@ Allow to hide specific categories by passing an array with their slugs.
 
 ### `disableSafeArea`
 
-Allow to disable `SafeAreaView` inside the emoji keyboard. Look into [React Native documentation](https://reactnative.dev/docs/safeareaview) for more details about `SafeAreaView`.
+Allow to disable `SafeAreaView` inside the emoji keyboard.
+
+:::tip
+Look into [**React Native documentation**](https://reactnative.dev/docs/safeareaview) for more details about `SafeAreaView`.
+:::
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
@@ -122,6 +126,10 @@ Callback fired when emoji keyboard is closing.
 
 ### `translation`
 
-Used to change the library language. Look into [internationalization section](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/documentation/internationalization) for more details.
+Used to change the library language.
+
+:::tip
+Look into [**internationalization section**](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/documentation/internationalization) for more details about translations.
+:::
 
 <ApiTable typeVal='CategoryTranslation' defaultVal='en'/>
