@@ -2,7 +2,7 @@ import React from 'react'
 import './index.css'
 import { Link } from 'react-router-dom'
 import Layout from '@theme/Layout'
-import GithubImage from '../assets/GitHub-Mark-64px 1.svg'
+import GithubImage from '../../assets/GitHub-Mark-64px 1.svg'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
 export default function Home() {
