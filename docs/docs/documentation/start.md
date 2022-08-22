@@ -5,7 +5,7 @@ title: Getting Started
 
 # Getting Started
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+RN Emoji Keyboard is a lightweight, fully customizable emoji picker, written as React Native component (without native elements). This section will help you install RN Emoji Keyboard in your app.
 
 ## 🪄 Installation
 
