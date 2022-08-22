@@ -4,10 +4,12 @@ title: Basic
 ---
 
 :::info
-To play with examples you can clone [**the repo**](https://github.com/TheWidlarzGroup/rn-emoji-keyboard.git) and run `yarn example ios` or `yarn example android` to preview app with this examples.
+To preview app with this example, clone [**github repo**](https://github.com/TheWidlarzGroup/rn-emoji-keyboard.git) and run `yarn example ios` or `yarn example android`.
 :::
 
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+### Usage
+
+Basic usage of the emoji picker is very simple. Just import `EmojiPicker`, pass [**required props**](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/api/modal) and its ready to go.
 
 ```jsx
 import EmojiPicker from 'rn-emoji-keyboard'
