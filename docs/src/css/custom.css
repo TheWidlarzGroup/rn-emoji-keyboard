@@ -35,3 +35,14 @@
   --ifm-color-primary-white: #ffffff;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-weight: 400;
+  src: local('JetBrainsMono'), url(../../assets/fonts/JetBrainsMono-Regular.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-weight: 700;
+  src: local('JetBrainsMono'), url(../../assets/fonts/JetBrainsMono-Bold.woff2) format('woff2');
+}

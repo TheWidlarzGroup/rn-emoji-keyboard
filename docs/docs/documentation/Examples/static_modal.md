@@ -29,4 +29,4 @@ const ExampleComponent = () => {
 }
 ```
 
-![Preview](../../../assets/static-modal-preview.jpg)
+![Preview](../../../assets/img/static-modal-preview.jpg)

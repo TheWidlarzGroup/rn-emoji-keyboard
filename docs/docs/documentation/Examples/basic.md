@@ -16,13 +16,9 @@ const ExampleComponent = () => {
   // ...
 
   return (
-    <EmojiPicker
-      open={isOpen}
-      onClose={handleOnClose}
-      onEmojiSelected={handleOnEmojiSelected}
-    />
+    <EmojiPicker open={isOpen} onClose={handleOnClose} onEmojiSelected={handleOnEmojiSelected} />
   )
 }
 ```
 
-![Preview](../../../assets/light-preview.jpg)
+![Preview](../../../assets/img/light-preview.jpg)

@@ -29,7 +29,7 @@ const ExampleComponent = () => {
 }
 ```
 
-![Preview](../../../assets/translated-preview.jpg)
+![Preview](../../../assets/img/translated-preview.jpg)
 
 :::tip
 Look into [**internationalization section**](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/documentation/internationalization) for more details about translations.

@@ -19,4 +19,4 @@ const ExampleComponent = () => {
 }
 ```
 
-![Preview](../../../assets/static-preview.jpg)
+![Preview](../../../assets/img/static-preview.jpg)

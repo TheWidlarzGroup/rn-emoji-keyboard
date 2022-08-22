@@ -29,7 +29,7 @@ const ExampleComponent = () => {
 }
 ```
 
-![Preview](../../../assets/categories-top-preview.jpg)
+![Preview](../../../assets/img/categories-top-preview.jpg)
 
 ### Bottom
 
@@ -51,4 +51,4 @@ const ExampleComponent = () => {
 }
 ```
 
-![Preview](../../../assets/categories-bottom-preview.jpg)
+![Preview](../../../assets/img/categories-bottom-preview.jpg)

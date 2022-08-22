@@ -27,4 +27,4 @@ const ExampleComponent = () => {
 }
 ```
 
-![Preview](../../../assets/categories-preview.jpg)
+![Preview](../../../assets/img/categories-preview.jpg)

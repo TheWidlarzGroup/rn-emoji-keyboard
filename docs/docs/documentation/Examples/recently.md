@@ -27,4 +27,4 @@ const ExampleComponent = () => {
 }
 ```
 
-![Preview](../../../assets/enable-recently-used-preview.jpg)
+![Preview](../../../assets/img/enable-recently-used-preview.jpg)
