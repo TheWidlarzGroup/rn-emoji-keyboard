@@ -3,7 +3,7 @@ sidebar_position: 3
 title: Internationalization
 ---
 
-# 🇺🇸 Internationalization
+# 🇺Internationalization
 
 ### Pre-defined
 
@@ -29,7 +29,7 @@ import { pl } from 'rn-emoji-keyboard'
 translation = { pl }
 ```
 
-### 🏁 Own
+### Own
 
 There is possibility to pass own translation to library with the prop called `translation` like this
 

@@ -7,7 +7,7 @@ title: Getting Started
 
 RN Emoji Keyboard is a lightweight, fully customizable emoji picker, written as React Native component (without native elements). This section will help you install RN Emoji Keyboard in your app.
 
-## 🪄 Installation
+## Installation
 
 ```sh
 yarn add rn-emoji-keyboard
