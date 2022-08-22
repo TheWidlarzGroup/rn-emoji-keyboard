@@ -3,22 +3,52 @@ sidebar_position: 8
 title: Categories Position
 ---
 
-### Categories Top
+:::info
+To play with examples you can clone [**the repo**](https://github.com/TheWidlarzGroup/rn-emoji-keyboard.git) and run `yarn example ios` or `yarn example android` to preview app with this examples.
+:::
 
 It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
 
+### Top
+
 ```jsx
-//example code
+import EmojiPicker from 'rn-emoji-keyboard'
+
+const ExampleComponent = () => {
+  // ...
+
+  return (
+    <EmojiPicker
+      open={isOpen}
+      onClose={handleOnClose}
+      onEmojiSelected={handleOnEmojiSelected}
+      //  add props below
+      categoryPosition="top"
+    />
+  )
+}
 ```
 
 ![Preview](../../../assets/categories-top-preview.jpg)
 
-### Categories Bottom
-
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+### Bottom
 
 ```jsx
-//example code
+import EmojiPicker from 'rn-emoji-keyboard'
+
+const ExampleComponent = () => {
+  // ...
+
+  return (
+    <EmojiPicker
+      open={isOpen}
+      onClose={handleOnClose}
+      onEmojiSelected={handleOnEmojiSelected}
+      //  add props below
+      categoryPosition="bottom"
+    />
+  )
+}
 ```
 
 ![Preview](../../../assets/categories-bottom-preview.jpg)

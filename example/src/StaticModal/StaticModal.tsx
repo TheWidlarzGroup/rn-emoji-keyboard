@@ -25,7 +25,6 @@ const StaticModal = () => {
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         expandable={false}
-        defaultHeight="65%"
       />
     </SafeAreaView>
   )
