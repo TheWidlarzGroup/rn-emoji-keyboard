@@ -1,33 +1,42 @@
 import React from 'react'
-import Layout from '@theme/Layout'
-import styles from './index.module.css'
-import GithubImage from './GitHub-Mark-64px 1.svg'
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import './index.css'
 import { Link } from 'react-router-dom'
+import Layout from '@theme/Layout'
+import GithubImage from '../assets/GitHub-Mark-64px 1.svg'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext()
+
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      <div className={styles.home_container}>
-        <div className={styles.home_titleBox}>
-          <h1 className={styles.home_title}>🚀 RN Emoji Keyboard</h1>
-          <h2 className={styles.home_subtitle}>A lightweight, fully customizable emoji picker.</h2>
-          <div className={styles.home_textBox}>
-            <p className={styles.home_text}>Designated to be user and developer friendly! 💖</p>
+      <div className="home_container">
+        <div className="home_titleBox abstract_flex_center home_abstract_title">
+          <h1 align="center" className="home_abstract_title">
+            🚀 RN Emoji Keyboard
+          </h1>
+          <h2 align="center" className="home_subtitle home_abstract_text">
+            A lightweight, fully customizable emoji picker.
+          </h2>
+          <div className="home_textBox">
+            <p align="center" className="home_text home_abstract_text">
+              Designated to be user and developer friendly! 💖
+            </p>
           </div>
         </div>
-        <Link to="docs/documentation/about" className={styles.home_documentationBox}>
-          <span className={styles.home_title}>📄 Documentation</span>
+        <Link
+          to="docs/documentation/about"
+          className="home_documentationBox abstract_flex_center home_abstract_squareBtn">
+          <span className="home_title home_abstract_title">📄 Documentation</span>
         </Link>
         <a
           href="https://github.com/TheWidlarzGroup/rn-emoji-keyboard"
           target="_blank"
-          className={styles.home_githubBox}>
+          className="home_githubBox abstract_flex_center home_abstract_squareBtn">
           <GithubImage />
-          <span className={styles.home_githubTitle}>GitHub</span>
+          <span className="home_githubTitle home_abstract_title">GitHub</span>
         </a>
       </div>
     </Layout>
