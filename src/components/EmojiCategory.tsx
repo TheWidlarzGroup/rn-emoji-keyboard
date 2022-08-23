@@ -77,7 +77,7 @@ export const EmojiCategory = ({
         <SingleEmoji
           {...props}
           item={recentlyUsedEmoji || props.item}
-          onPress={() => handleEmojiPress(props.item)}
+          onPress={() => handleEmojiPress(recentlyUsedEmoji || props.item)}
           emojiSize={emojiSize}
           onLongPress={handleLongPress}
         />

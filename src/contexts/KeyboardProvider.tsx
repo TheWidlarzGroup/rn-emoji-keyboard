@@ -101,18 +101,14 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     const EXTRA_SEARCH_TOP = props.enableSearchBar ? 50 : 0
 
     const splittedEmoji = emoji.emoji.split('')
-
     const ZWJIndex = splittedEmoji.findIndex((a) => a === zeroWidthJoiner)
-
     const selectorIndex = splittedEmoji.findIndex((a) => a === variantSelector)
-
     const modifiedEmojis = skinTones.map((tone) => {
       const basicEmojiData = {
         index: tone.name,
         name: emoji.name,
         v: emoji.v,
       }
-
       // Check for emojis special signs which might break tone modify
       switch (true) {
         case ZWJIndex > 0:
@@ -155,9 +151,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     })
   }
 
-  const clearEmojiTonesData = () => {
-    setEmojiTonesData(null)
-  }
+  const clearEmojiTonesData = () => setEmojiTonesData(null)
 
   React.useEffect(() => {
     if (props.open) setActiveCategoryIndex(0)
