@@ -5,15 +5,22 @@ import type { EmojisByCategory, JsonEmoji } from '../types'
 import { SingleEmoji } from './SingleEmoji'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useKeyboardStore } from '../store/useKeyboardStore'
-import { parseEmoji } from '../utils'
+import { parseEmoji } from '../utils/parseEmoji'
 
 const emptyEmoji: JsonEmoji = {
   emoji: '',
   name: 'blank emoji',
   v: '0',
+  toneEnabled: false,
 }
 
-export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategory }) => {
+export const EmojiCategory = ({
+  item: { title, data },
+  setKeyboardScrollOffsetY,
+}: {
+  item: EmojisByCategory
+  setKeyboardScrollOffsetY: React.Dispatch<React.SetStateAction<number>>
+}) => {
   const {
     onEmojiSelected,
     emojiSize,
@@ -23,9 +30,11 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
     headerStyles,
     translation,
     categoryPosition,
+    clearEmojiTonesData,
+    generateEmojiTones,
   } = React.useContext(KeyboardContext)
 
-  const { setKeyboardState } = useKeyboardStore()
+  const { setKeyboardState, keyboardState } = useKeyboardStore()
 
   const [empty, setEmpty] = React.useState<JsonEmoji[]>([])
 
@@ -55,11 +64,38 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
   )
 
   const renderItem = React.useCallback(
-    (props) => (
-      <SingleEmoji {...props} onPress={() => handleEmojiPress(props.item)} emojiSize={emojiSize} />
-    ),
-    [emojiSize, handleEmojiPress]
+    (props) => {
+      const handleLongPress = (emojiSizes: any) => () => {
+        clearEmojiTonesData()
+        generateEmojiTones(props.item, props.index, emojiSizes)
+      }
+
+      const recentlyUsed = keyboardState?.recentlyUsed || []
+      const recentlyUsedEmoji = recentlyUsed?.find((emoji) => emoji.name === props.item.name)
+
+      return (
+        <SingleEmoji
+          {...props}
+          item={recentlyUsedEmoji || props.item}
+          onPress={() => handleEmojiPress(recentlyUsedEmoji || props.item)}
+          emojiSize={emojiSize}
+          onLongPress={handleLongPress}
+        />
+      )
+    },
+    [
+      keyboardState?.recentlyUsed,
+      emojiSize,
+      clearEmojiTonesData,
+      generateEmojiTones,
+      handleEmojiPress,
+    ]
   )
+
+  const handleOnScroll = (ev: { nativeEvent: { contentOffset: { y: number } } }) => {
+    setKeyboardScrollOffsetY(ev.nativeEvent.contentOffset.y)
+    clearEmojiTonesData()
+  }
 
   return (
     <View style={[styles.container, { width: width }]}>
@@ -71,6 +107,7 @@ export const EmojiCategory = ({ item: { title, data } }: { item: EmojisByCategor
         renderItem={renderItem}
         removeClippedSubviews={true}
         getItemLayout={getItemLayout}
+        onScroll={handleOnScroll}
         ListFooterComponent={() => (
           <View style={categoryPosition === 'floating' ? styles.footerFloating : styles.footer} />
         )}

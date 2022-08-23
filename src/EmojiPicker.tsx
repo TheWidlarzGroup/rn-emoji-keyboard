@@ -6,7 +6,7 @@ import { defaultKeyboardContext, KeyboardProvider } from './contexts/KeyboardPro
 import type { KeyboardProps } from './contexts/KeyboardContext'
 import type { EmojiType } from './types'
 import { ModalWithBackdrop } from './components/ModalWithBackdrop'
-import { getHeight } from './utils'
+import { getHeight } from './utils/getHeight'
 import { useKeyboard } from './hooks/useKeyboard'
 
 export const EmojiPicker = ({

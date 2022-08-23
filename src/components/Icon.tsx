@@ -12,7 +12,7 @@ import Search from '../assets/Search'
 import Close from '../assets/Close'
 import Clock from '../assets/Clock'
 import type { IconNames } from '../types'
-import { exhaustiveTypeCheck } from '../utils'
+import { exhaustiveTypeCheck } from '../utils/exhaustiveTypeCheck'
 import QuestionMark from '../assets/QuestionMark'
 
 export const Icon = ({
