@@ -9,6 +9,7 @@ for (const [key, value] of Object.entries(json)) {
       emoji: emoji.emoji,
       name: emoji.name,
       v: emoji.unicode_version,
+      toneEnabled: emoji.skin_tone_support,
     }))
   newArray.push({
     title: key.replace(/ & /g, '_').replace(/ /g, '_').toLocaleLowerCase(),

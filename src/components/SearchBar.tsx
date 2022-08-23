@@ -12,6 +12,7 @@ export const SearchBar = () => {
     renderList,
     theme,
     styles: themeStyles,
+    clearEmojiTonesData,
   } = React.useContext(KeyboardContext)
   const inputRef = React.useRef<TextInput>(null)
 
@@ -23,6 +24,7 @@ export const SearchBar = () => {
   }
   const clearPhrase = () => {
     setSearchPhrase('')
+    clearEmojiTonesData()
     inputRef.current?.blur()
     setActiveCategoryIndex(0)
   }
@@ -40,6 +42,7 @@ export const SearchBar = () => {
         onChangeText={handleSearch}
         placeholder={translation.search}
         ref={inputRef}
+        onTouchEndCapture={clearEmojiTonesData}
         placeholderTextColor={theme.search.placeholder}
       />
       {!!searchPhrase && (

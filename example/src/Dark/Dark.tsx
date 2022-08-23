@@ -29,6 +29,7 @@ const Dark = () => {
           knob: '#766dfc',
           container: '#282829',
           header: '#fff',
+          skinTonesContainer: '#252427',
           category: {
             icon: '#766dfc',
             iconActive: '#fff',

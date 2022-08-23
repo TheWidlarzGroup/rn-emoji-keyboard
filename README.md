@@ -142,6 +142,7 @@ Due to the limited translation possibilities, we only provide a few pre-defined 
 * `pt` - Portuguese 🇧🇷
 * `ua` - Ukrainian 🇺🇦
 * `ru` - Russian 🇷🇺
+* `vi` - Vietnamese 🇻🇳
 
 First import lang and use it as `translation` prop.
 ```ts

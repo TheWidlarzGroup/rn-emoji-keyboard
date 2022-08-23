@@ -7,7 +7,7 @@ import {
   PanResponder,
   Keyboard,
 } from 'react-native'
-import { getHeight } from '../utils'
+import { getHeight } from '../utils/getHeight'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 
 type KnobProps = {

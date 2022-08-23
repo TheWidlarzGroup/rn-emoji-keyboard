@@ -7,8 +7,11 @@ import type {
   CategoryTypes,
   CategoryPosition,
   EmojisByCategory,
+  JsonEmoji,
+  EmojiTonesData,
+  EmojiSizes,
 } from '../types'
-import type { RecursivePartial } from '../utils'
+import type { RecursivePartial } from '../utils/deepMerge'
 
 export type OnEmojiSelected = (emoji: EmojiType) => void
 
@@ -31,6 +34,7 @@ export type Theme = {
   knob: string
   container: string
   header: string
+  skinTonesContainer: string
   category: {
     icon: string
     iconActive: string
@@ -79,6 +83,10 @@ export type ContextValues = {
   searchPhrase: string
   setSearchPhrase: (phrase: string) => void
   renderList: EmojisByCategory[]
+  isToneSelectorOpened: boolean
+  clearEmojiTonesData: () => void
+  generateEmojiTones: (emoji: JsonEmoji, emojiIndex: number, emojiSizes: EmojiSizes) => void
+  emojiTonesData: EmojiTonesData
 }
 
 export const KeyboardContext = React.createContext<
