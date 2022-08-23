@@ -5,10 +5,18 @@ title: Static Mode
 
 # Static Mode
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+The library gives you the possibility to choose from two modes: modal or static. This section refers to the static mode (for modal mode, see: [static section](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/api/modal))
+
+To apply the static mode in your app, use a named import from `rn-emoji-keyboard`
+
+```ts
+import { EmojiKeyboard } from 'rn-emoji-keyboard'
+```
+
+For props, please refer to the modal mode section.
 
 :::info
-Static mode has exactly same properties as modal mode. The only difference is that props responsible for modal behaviour are disable here. Therefore, you cannot use following:
+The static mode has the same properties as the modal mode. The main difference is that props responsible for modal behaviour are disabled here. Therefore, you cannot use following:
 
 - `open`
 - `onClose`

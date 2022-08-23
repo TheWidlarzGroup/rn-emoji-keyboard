@@ -8,7 +8,13 @@ import { ApiTable } from '../../src/components/ApiTable/ApiTable.js'
 
 # Modal Mode
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+The library gives you the possibility to choose from two modes: modal or static. This section refers to the modal mode (for static mode, see: [static section](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/api/static))
+
+To apply the modal mode in your app, use a default import from `rn-emoji-keyboard`
+
+```ts
+import EmojiKeyboard from 'rn-emoji-keyboard'
+```
 
 ## Required
 
