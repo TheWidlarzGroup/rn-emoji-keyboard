@@ -8,7 +8,7 @@ To preview app with this example, clone [**github repo**](https://github.com/The
 :::
 
 If you want to change the position of a picker, just use `categoryPosition` props with the appropriate value.
-For more information about avaible props check [**API Reference section**](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/api/modal).
+For more information about avaible props check [**API Reference section**](/docs/api/modal).
 
 ### Top
 

@@ -8,7 +8,7 @@ import { ApiTable } from '../../src/components/ApiTable/ApiTable.js'
 
 # Modal Mode
 
-The library gives you the possibility to choose from two modes: modal or static. This section refers to the modal mode (for static mode, see: [static section](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/api/static))
+The library gives you the possibility to choose from two modes: modal or static. This section refers to the modal mode (for static mode, see: [static section](/docs/api/static))
 
 To apply the modal mode in your app, use a default import from `rn-emoji-keyboard`
 
@@ -135,7 +135,7 @@ Callback fired when emoji keyboard is closing.
 Used to change the library language.
 
 :::tip
-Look into [**internationalization section**](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/documentation/internationalization) for more details about translations.
+Look into [**internationalization section**](/docs/documentation/internationalization) for more details about translations.
 :::
 
 <ApiTable typeVal='CategoryTranslation' defaultVal='en'/>

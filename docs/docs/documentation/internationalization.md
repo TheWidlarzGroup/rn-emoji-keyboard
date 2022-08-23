@@ -48,5 +48,5 @@ translation={{
 ```
 
 :::info
-_If you have written a translation into your language, we strongly encourage you to create a Pull Request and add your language to the package, following the [**contributions section**](http://localhost:3000/rn-emoji-keyboard/docs/contributions/trnaslations)._
+_If you have written a translation into your language, we strongly encourage you to create a Pull Request and add your language to the package, following the [**contributions section**](/docs/contributions/translations)._
 :::

@@ -8,7 +8,7 @@ To preview app with this example, clone [**github repo**](https://github.com/The
 :::
 
 :::tip
-If you want to add custom translation or want to get more information about translations check [**internationalization section**](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/documentation/internationalization).
+If you want to add custom translation or want to get more information about translations check [**internationalization section**](/docs/documentation/internationalization).
 :::
 
 ### Usage

@@ -9,7 +9,7 @@ To preview app with this example, clone [**github repo**](https://github.com/The
 
 ### Usage
 
-If you want to disable specific categories use the `disabledCategories` props. It's a simple, pass to it an array with names of categories that you want to disable. For more information about avaible props check [**API Reference section**](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/api/modal).
+If you want to disable specific categories use the `disabledCategories` props. It's a simple, pass to it an array with names of categories that you want to disable. For more information about avaible props check [**API Reference section**](/docs/api/modal).
 
 ```jsx
 import EmojiPicker from 'rn-emoji-keyboard'

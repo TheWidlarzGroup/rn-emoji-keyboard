@@ -5,7 +5,7 @@ title: Static Mode
 
 # Static Mode
 
-The library gives you the possibility to choose from two modes: modal or static. This section refers to the static mode (for modal mode, see: [static section](https://github.com/TheWidlarzGroup/rn-emoji-keyboard/docs/api/modal))
+The library gives you the possibility to choose from two modes: modal or static. This section refers to the static mode (for modal mode, see: [modal section](/docs/api/modal))
 
 To apply the static mode in your app, use a named import from `rn-emoji-keyboard`
 
