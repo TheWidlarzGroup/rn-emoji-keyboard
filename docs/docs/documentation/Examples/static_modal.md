@@ -11,7 +11,7 @@ To preview app with this example, clone [**github repo**](https://github.com/The
 
 ### Usage
 
-If you need emoji picker to be not stretchable (without knob), nothing easier. Use `expandable` props and set it to `false`. Thats all.
+If you need emoji picker to be not expandable (without knob), nothing easier. Use `expandable` props and set it to `false`. Thats all.
 
 ```jsx
 import EmojiPicker from 'rn-emoji-keyboard'

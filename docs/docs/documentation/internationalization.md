@@ -29,7 +29,7 @@ import { pl } from 'rn-emoji-keyboard'
 translation = { pl }
 ```
 
-### Own
+### Customised
 
 There is possibility to pass own translation to library with the prop called `translation` like this
 
