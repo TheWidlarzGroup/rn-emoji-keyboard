@@ -23,12 +23,17 @@ export type JsonEmoji = {
   emoji: string
   name: string
   v: string
+  toneEnabled: boolean
 }
+
+export type ToneSelectorEmoji = Omit<JsonEmoji, 'toneEnabled'> & { index: string }
+
 export type EmojiType = {
   emoji: string
   name: string
   slug: string
   unicode_version: string
+  toneEnabled: boolean
 }
 
 export type CategoryPosition = 'floating' | 'top' | 'bottom'
@@ -45,4 +50,18 @@ export type CategoryTranslation = {
 export type EmojisByCategory = {
   title: CategoryTypes
   data: JsonEmoji[]
+}
+
+export type EmojiTonesData = {
+  emojis: ToneSelectorEmoji[]
+  position: {
+    x: number
+    y: number
+  }
+  funnelXPosition: number
+} | null
+
+export type EmojiSizes = {
+  width: number
+  height: number
 }

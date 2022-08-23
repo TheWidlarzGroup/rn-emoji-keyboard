@@ -7,6 +7,9 @@ import type {
   CategoryTypes,
   CategoryPosition,
   EmojisByCategory,
+  JsonEmoji,
+  EmojiTonesData,
+  EmojiSizes,
 } from '../types'
 
 export type OnEmojiSelected = (emoji: EmojiType) => void
@@ -27,6 +30,7 @@ export type KeyboardProps = {
   categoryColor?: string
   activeCategoryColor?: string
   categoryContainerColor?: string
+  skinTonesContainerColor?: string
   activeCategoryContainerColor?: string
   onCategoryChangeFailed?: (info: {
     index: number
@@ -46,6 +50,7 @@ export type KeyboardProps = {
   onRequestClose?: () => void
   categoryContainerStyles?: ViewStyle
   disableSafeArea?: boolean
+  allowMultipleSelections?: boolean
 }
 export type ContextValues = {
   activeCategoryIndex: number
@@ -55,6 +60,10 @@ export type ContextValues = {
   searchPhrase: string
   setSearchPhrase: (phrase: string) => void
   renderList: EmojisByCategory[]
+  isToneSelectorOpened: boolean
+  clearEmojiTonesData: () => void
+  generateEmojiTones: (emoji: JsonEmoji, emojiIndex: number, emojiSizes: EmojiSizes) => void
+  emojiTonesData: EmojiTonesData
 }
 
 export const KeyboardContext = React.createContext<Required<KeyboardProps> & ContextValues>({

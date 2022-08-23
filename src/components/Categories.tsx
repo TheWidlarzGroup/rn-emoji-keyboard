@@ -4,9 +4,11 @@ import { defaultKeyboardContext } from '../contexts/KeyboardProvider'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { CATEGORIES_NAVIGATION, CategoryNavigationItem, CategoryTypes } from '../types'
 import { CategoryItem } from './CategoryItem'
-import { exhaustiveTypeCheck } from '../utils'
+import { exhaustiveTypeCheck } from '../utils/exhaustiveTypeCheck'
 
 const CATEGORY_ELEMENT_WIDTH = 37
+
+const Separator = () => <View style={styles.separator} />
 
 export const Categories = () => {
   const {
@@ -18,13 +20,15 @@ export const Categories = () => {
     renderList,
     setActiveCategoryIndex,
     categoryContainerStyles,
+    clearEmojiTonesData,
   } = React.useContext(KeyboardContext)
   const scrollNav = React.useRef(new Animated.Value(0)).current
   const handleScrollToCategory = React.useCallback(
     (category: CategoryTypes) => {
+      clearEmojiTonesData()
       setActiveCategoryIndex(renderList.findIndex((cat) => cat.title === category))
     },
-    [renderList, setActiveCategoryIndex]
+    [renderList, setActiveCategoryIndex, clearEmojiTonesData]
   )
 
   const renderItem = React.useCallback(
@@ -100,7 +104,7 @@ export const Categories = () => {
           data={renderData}
           keyExtractor={(item) => item.category}
           renderItem={renderItem}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          ItemSeparatorComponent={Separator}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
           onScrollToIndexFailed={onCategoryChangeFailed}

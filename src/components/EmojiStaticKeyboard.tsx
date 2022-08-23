@@ -15,6 +15,7 @@ import { Categories } from './Categories'
 import { SearchBar } from './SearchBar'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import { ConditionalContainer } from './ConditionalContainer'
+import { SkinTones } from './SkinTones'
 
 export const EmojiStaticKeyboard = React.memo(
   () => {
@@ -41,7 +42,12 @@ export const EmojiStaticKeyboard = React.memo(
       [width]
     )
 
-    const renderItem = React.useCallback((props) => <EmojiCategory {...props} />, [])
+    const [keyboardScrollOffsetY, setKeyboardScrollOffsetY] = React.useState(0)
+
+    const renderItem = React.useCallback(
+      (props) => <EmojiCategory setKeyboardScrollOffsetY={setKeyboardScrollOffsetY} {...props} />,
+      []
+    )
 
     React.useEffect(() => {
       flatListRef.current?.scrollToIndex({
@@ -84,10 +90,11 @@ export const EmojiStaticKeyboard = React.memo(
               getItemLayout={getItemLayout}
               scrollEnabled={false}
               initialNumToRender={1}
-              maxToRenderPerBatch={3}
+              maxToRenderPerBatch={1}
               keyboardShouldPersistTaps="handled"
             />
             <Categories />
+            <SkinTones keyboardScrollOffsetY={keyboardScrollOffsetY} />
           </>
         </ConditionalContainer>
       </View>

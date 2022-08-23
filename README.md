@@ -56,6 +56,7 @@ export default function App() {
 | knobStyles | ViewStyle | {} | no | Override knob styles |
 | containerStyles | ViewStyle | {} | no | Override container styles |
 | hideHeader | boolean | false | no | Hide category names |
+| allowMultipleSelections | boolean | false | no | Allow selecting multiple emoji without dismissing keyboard |
 | expandable | boolean | true | no | Show knob and enable expand on swipe up |
 | defaultHeight | number \| string | "40%" | no | Specify collapsed container height (number is points, string is a percentage of the screen height) |
 | expandedHeight | number \| string | "80%" | no | Specify expanded container height (number is points, string is a percentage of the screen height) _works only if expandable is true_ |
@@ -97,6 +98,9 @@ Due to the limited translation possibilities, we only provide a few pre-defined 
 * `es` - Spanish 🇪🇸
 * `de` - German 🇩🇪
 * `pt` - Portuguese 🇧🇷
+* `ua` - Ukrainian 🇺🇦
+* `ru` - Russian 🇷🇺
+* `vi` - Vietnamese 🇻🇳
 
 First import lang and use it as `translation` prop.
 ```ts

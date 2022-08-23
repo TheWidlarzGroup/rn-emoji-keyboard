@@ -6,7 +6,7 @@ import { defaultKeyboardContext, KeyboardProvider } from './contexts/KeyboardPro
 import type { KeyboardProps } from './contexts/KeyboardContext'
 import type { EmojiType } from './types'
 import { ModalWithBackdrop } from './components/ModalWithBackdrop'
-import { getHeight } from './utils'
+import { getHeight } from './utils/getHeight'
 import { useKeyboard } from './hooks/useKeyboard'
 
 export const EmojiPicker = ({
@@ -16,6 +16,7 @@ export const EmojiPicker = ({
   onClose,
   expandable = defaultKeyboardContext.expandable,
   defaultHeight = defaultKeyboardContext.defaultHeight,
+  allowMultipleSelections = false,
   ...props
 }: KeyboardProps) => {
   const { height: screenHeight } = useWindowDimensions()
@@ -45,7 +46,7 @@ export const EmojiPicker = ({
     <KeyboardProvider
       onEmojiSelected={(emoji: EmojiType) => {
         onEmojiSelected(emoji)
-        close()
+        !allowMultipleSelections && close()
       }}
       open={open}
       onClose={close}
