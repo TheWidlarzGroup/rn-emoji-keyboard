@@ -1,59 +1,38 @@
 import * as React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, GestureResponderEvent } from 'react-native'
 import type { EmojiSizes, JsonEmoji } from '../types'
 
 type Props = {
   item: JsonEmoji
-  onPress: () => void
   emojiSize: number
-  onLongPress: (emojiSizes: EmojiSizes) => () => void
+  index: number
+  onPress: (emoji: JsonEmoji) => void
+  onLongPress: (emoji: JsonEmoji, emojiIndex: number, emojiSizes: EmojiSizes) => void
 }
-
-export class SingleEmoji extends React.Component<Props, EmojiSizes> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      width: 0,
-      height: 0,
-    }
-  }
-  shouldComponentUpdate() {
-    return false
-  }
-
-  onLayout(width: EmojiSizes['width'], height: EmojiSizes['height']) {
-    this.setState({
-      width: width,
-      height: height,
-    })
-  }
-
-  render() {
-    const { item, emojiSize, onPress, onLongPress } = this.props
-
-    const handleLongPress = () => {
-      const emojiSizes = {
-        width: this.state.width,
-        height: this.state.height,
-      }
-      onLongPress(emojiSizes)()
+export const SingleEmoji = React.memo(
+  (p: Props) => {
+    const handlePress = () => p.onPress(p.item)
+    const handleLongPress = (e: GestureResponderEvent) => {
+      // @ts-ignore
+      e.target.measure((_x, _y, width, height) => {
+        p.onLongPress(p.item, p.index, { width, height })
+      })
     }
     return (
       <TouchableOpacity
-        onPress={onPress}
-        style={styles.container}
+        onPress={handlePress}
         onLongPress={handleLongPress}
-        onLayout={(e) => this.onLayout(e.nativeEvent.layout.width, e.nativeEvent.layout.height)}>
-        <View style={styles.iconContainer}>
-          <Text style={[styles.emoji, { fontSize: emojiSize }]}>{item.emoji}</Text>
+        style={styles.container}>
+        <View pointerEvents={'none'}>
+          <Text style={[styles.emoji, { fontSize: p.emojiSize }]}>{p.item.emoji}</Text>
         </View>
       </TouchableOpacity>
     )
-  }
-}
+  },
+  () => true
+)
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 8 },
-  iconContainer: { justifyContent: 'center', alignItems: 'center' },
+  container: { flex: 1, padding: 8, justifyContent: 'center', alignItems: 'center' },
   emoji: { color: '#000' },
 })

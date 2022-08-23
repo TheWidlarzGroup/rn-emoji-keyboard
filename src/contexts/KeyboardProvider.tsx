@@ -20,6 +20,7 @@ import {
   variantSelector,
   zeroWidthJoiner,
 } from '../utils/skinToneSelectorUtils'
+import { useCallback } from 'react'
 
 type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode
@@ -96,61 +97,64 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     Math.floor(width / ((props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 2))
   )
 
-  const generateEmojiTones = (emoji: JsonEmoji, emojiIndex: number, emojiSizes: any) => {
-    if (!emoji || !emoji.toneEnabled) return
+  const generateEmojiTones = useCallback(
+    (emoji: JsonEmoji, emojiIndex: number, emojiSizes: any) => {
+      if (!emoji || !emoji.toneEnabled) return
 
-    const EXTRA_SEARCH_TOP = props.enableSearchBar ? 50 : 0
+      const EXTRA_SEARCH_TOP = props.enableSearchBar ? 50 : 0
 
-    const splittedEmoji = emoji.emoji.split('')
-    const ZWJIndex = splittedEmoji.findIndex((a) => a === zeroWidthJoiner)
-    const selectorIndex = splittedEmoji.findIndex((a) => a === variantSelector)
-    const modifiedEmojis = skinTones.map((tone) => {
-      const basicEmojiData = {
-        index: tone.name,
-        name: emoji.name,
-        v: emoji.v,
-      }
-      // Check for emojis special signs which might break tone modify
-      switch (true) {
-        case ZWJIndex > 0:
-          return {
-            ...basicEmojiData,
-            emoji: insertAtCertainIndex(splittedEmoji, ZWJIndex, tone.color).join(''),
-          }
-        case selectorIndex > 0:
-          return {
-            ...basicEmojiData,
-            emoji: insertAtCertainIndex(splittedEmoji, selectorIndex, tone.color).join(''),
-          }
-        default:
-          return {
-            ...basicEmojiData,
-            emoji: emoji.emoji + tone.color,
-          }
-      }
-    })
+      const splittedEmoji = emoji.emoji.split('')
+      const ZWJIndex = splittedEmoji.findIndex((a) => a === zeroWidthJoiner)
+      const selectorIndex = splittedEmoji.findIndex((a) => a === variantSelector)
+      const modifiedEmojis = skinTones.map((tone) => {
+        const basicEmojiData = {
+          index: tone.name,
+          name: emoji.name,
+          v: emoji.v,
+        }
+        // Check for emojis special signs which might break tone modify
+        switch (true) {
+          case ZWJIndex > 0:
+            return {
+              ...basicEmojiData,
+              emoji: insertAtCertainIndex(splittedEmoji, ZWJIndex, tone.color).join(''),
+            }
+          case selectorIndex > 0:
+            return {
+              ...basicEmojiData,
+              emoji: insertAtCertainIndex(splittedEmoji, selectorIndex, tone.color).join(''),
+            }
+          default:
+            return {
+              ...basicEmojiData,
+              emoji: emoji.emoji + tone.color,
+            }
+        }
+      })
 
-    const skinTonePosition = generateToneSelectorPosition(
-      numberOfColumns.current,
-      emojiIndex,
-      width,
-      emojiSizes.width,
-      emojiSizes.height,
-      EXTRA_SEARCH_TOP
-    )
+      const skinTonePosition = generateToneSelectorPosition(
+        numberOfColumns.current,
+        emojiIndex,
+        width,
+        emojiSizes.width,
+        emojiSizes.height,
+        EXTRA_SEARCH_TOP
+      )
 
-    const funnelXPosition = generateToneSelectorFunnelPosition(
-      numberOfColumns.current,
-      emojiIndex,
-      emojiSizes.width
-    )
+      const funnelXPosition = generateToneSelectorFunnelPosition(
+        numberOfColumns.current,
+        emojiIndex,
+        emojiSizes.width
+      )
 
-    setEmojiTonesData({
-      emojis: modifiedEmojis,
-      position: skinTonePosition,
-      funnelXPosition,
-    })
-  }
+      setEmojiTonesData({
+        emojis: modifiedEmojis,
+        position: skinTonePosition,
+        funnelXPosition,
+      })
+    },
+    [props.enableSearchBar, width]
+  )
 
   const clearEmojiTonesData = () => setEmojiTonesData(null)
 
@@ -206,21 +210,32 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     searchPhrase,
   ])
 
-  const value: Required<KeyboardProps> & ContextValues = {
-    ...defaultKeyboardContext,
-    ...defaultKeyboardValues,
-    ...props,
-    activeCategoryIndex,
-    setActiveCategoryIndex,
-    numberOfColumns: numberOfColumns.current,
-    width,
-    searchPhrase,
-    setSearchPhrase,
-    renderList,
-    clearEmojiTonesData,
-    generateEmojiTones,
-    emojiTonesData,
-  }
+  const value: Required<KeyboardProps> & ContextValues = React.useMemo(
+    () => ({
+      ...defaultKeyboardContext,
+      ...defaultKeyboardValues,
+      ...props,
+      activeCategoryIndex,
+      setActiveCategoryIndex,
+      numberOfColumns: numberOfColumns.current,
+      width,
+      searchPhrase,
+      setSearchPhrase,
+      renderList,
+      clearEmojiTonesData,
+      generateEmojiTones,
+      emojiTonesData,
+    }),
+    [
+      activeCategoryIndex,
+      emojiTonesData,
+      generateEmojiTones,
+      props,
+      renderList,
+      searchPhrase,
+      width,
+    ]
+  )
   return <KeyboardContext.Provider value={value}>{props.children}</KeyboardContext.Provider>
 })
 
