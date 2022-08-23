@@ -17,8 +17,7 @@ const TONES_CONTAINER_HEIGHT = 48
 const Separator = () => <View style={styles.separator} />
 
 export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
-  const { onEmojiSelected, emojiTonesData, skinTonesContainerColor } =
-    React.useContext(KeyboardContext)
+  const { onEmojiSelected, emojiTonesData, theme } = React.useContext(KeyboardContext)
 
   const { setKeyboardState } = useKeyboardStore()
 
@@ -55,7 +54,7 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
       <View
         style={[
           styles.floating,
-          { left: posX, top: posY, backgroundColor: skinTonesContainerColor },
+          { left: posX, top: posY, backgroundColor: theme.skinTonesContainer },
         ]}>
         <View>
           <FlatList
@@ -77,7 +76,7 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
             top: posY + TONES_CONTAINER_HEIGHT - 1,
           },
         ]}>
-        <Funnel fill={skinTonesContainerColor} />
+        <Funnel fill={theme.skinTonesContainer} />
       </View>
     </>
   )

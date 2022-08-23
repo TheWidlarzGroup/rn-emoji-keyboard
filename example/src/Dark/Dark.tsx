@@ -24,15 +24,19 @@ const Dark = () => {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        backdropColor="#16161888"
-        categoryContainerColor="#252427"
-        skinTonesContainerColor="#252427"
-        categoryColor="#766dfc"
-        activeCategoryColor="#fff"
-        activeCategoryContainerColor="#766dfc"
-        knobStyles={styles.knobStyles}
-        containerStyles={styles.containerStyles}
-        headerStyles={styles.headerStyles}
+        theme={{
+          backdrop: '#16161888',
+          knob: '#766dfc',
+          container: '#282829',
+          header: '#fff',
+          skinTonesContainer: '#252427',
+          category: {
+            icon: '#766dfc',
+            iconActive: '#fff',
+            container: '#252427',
+            containerActive: '#766dfc',
+          },
+        }}
       />
     </SafeAreaView>
   )
@@ -48,16 +52,6 @@ const styles = StyleSheet.create({
     margin: 64,
     fontSize: 18,
     color: '#fff',
-  },
-  knobStyles: {
-    backgroundColor: '#766dfc',
-  },
-  containerStyles: {
-    backgroundColor: '#282829',
-  },
-  headerStyles: {
-    color: '#fff',
-    fontSize: 16,
   },
 })
 

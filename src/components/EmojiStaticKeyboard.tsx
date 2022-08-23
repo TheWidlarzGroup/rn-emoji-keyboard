@@ -22,13 +22,14 @@ export const EmojiStaticKeyboard = React.memo(
     const { width } = useWindowDimensions()
     const {
       activeCategoryIndex,
-      containerStyles,
       onCategoryChangeFailed,
       categoryPosition,
       enableSearchBar,
       searchPhrase,
       renderList,
       disableSafeArea,
+      theme,
+      styles: themeStyles,
     } = React.useContext(KeyboardContext)
     const { keyboardState } = useKeyboardStore()
     const flatListRef = React.useRef<FlatList>(null)
@@ -63,7 +64,8 @@ export const EmojiStaticKeyboard = React.memo(
           styles.container,
           styles.containerShadow,
           categoryPosition === 'top' && disableSafeArea && styles.containerReverse,
-          containerStyles,
+          themeStyles.container,
+          { backgroundColor: theme.container },
         ]}>
         <ConditionalContainer
           condition={!disableSafeArea}
@@ -108,7 +110,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderRadius: 16,
-    backgroundColor: '#fff',
   },
   containerReverse: { flexDirection: 'column-reverse' },
   containerShadow: {

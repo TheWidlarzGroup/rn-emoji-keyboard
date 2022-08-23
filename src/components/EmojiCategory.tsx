@@ -28,11 +28,12 @@ export const EmojiCategory = React.memo(
       numberOfColumns,
       width,
       hideHeader,
-      headerStyles,
       translation,
       categoryPosition,
       clearEmojiTonesData,
       generateEmojiTones,
+      theme,
+      styles: themeStyles,
     } = React.useContext(KeyboardContext)
 
     const { setKeyboardState, keyboardState } = useKeyboardStore()
@@ -100,7 +101,9 @@ export const EmojiCategory = React.memo(
     return (
       <View style={[styles.container, { width }]}>
         {!hideHeader && (
-          <Text style={[styles.sectionTitle, headerStyles]}>{translation[title]}</Text>
+          <Text style={[styles.sectionTitle, themeStyles.header, { color: theme.header }]}>
+            {translation[title]}
+          </Text>
         )}
         <FlatList
           data={[...data, ...empty]}
@@ -131,7 +134,6 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   sectionTitle: {
-    opacity: 0.6,
     marginTop: 12,
     marginBottom: 6,
     marginLeft: 12,

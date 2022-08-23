@@ -16,7 +16,10 @@ const Static = () => {
         <Text style={styles.text}>Result: {result}</Text>
       </View>
       <View style={styles.container}>
-        <EmojiKeyboard onEmojiSelected={handlePick} containerStyles={styles.keyboardContainer} />
+        <EmojiKeyboard
+          onEmojiSelected={handlePick}
+          styles={{ container: styles.keyboardContainer }}
+        />
       </View>
     </SafeAreaView>
   )
