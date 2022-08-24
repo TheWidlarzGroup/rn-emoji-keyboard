@@ -19,7 +19,7 @@ or
 npm install rn-emoji-keyboard
 ```
 
-## ⚡️ Usage
+## Usage
 
 ```js
 import EmojiPicker from 'rn-emoji-keyboard'
