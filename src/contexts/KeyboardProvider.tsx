@@ -5,20 +5,14 @@ import {
   ContextValues,
   KeyboardContext,
   OnEmojiSelected,
-  Theme,
-  Styles,
+  defaultKeyboardContext,
+  defaultKeyboardValues,
+  defaultTheme,
+  emptyStyles,
 } from './KeyboardContext'
-import en from '../translation/en'
 import emojisByGroup from '../assets/emojis.json'
 import { useKeyboardStore } from '../store/useKeyboardStore'
-import type {
-  EmojiType,
-  CategoryTypes,
-  EmojisByCategory,
-  JsonEmoji,
-  EmojiTonesData,
-} from '../types'
-import { CATEGORIES } from '../types'
+import type { CategoryTypes, EmojisByCategory, JsonEmoji, EmojiTonesData } from '../types'
 import {
   skinTones,
   generateToneSelectorFunnelPosition,
@@ -32,85 +26,6 @@ import { deepMerge } from '../utils/deepMerge'
 type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode
   onEmojiSelected: OnEmojiSelected
-}
-
-export const emptyStyles: Styles = {
-  container: {},
-  header: {},
-  category: {
-    icon: {},
-    container: {},
-  },
-  searchBar: {
-    container: {},
-    text: {},
-  },
-  knob: {},
-}
-export const defaultTheme: Theme = {
-  backdrop: '#00000055',
-  knob: '#ffffff',
-  container: '#ffffff',
-  header: '#00000099',
-  skinTonesContainer: '#e3dbcd',
-  category: {
-    icon: '#000000',
-    iconActive: '#005b96',
-    container: '#e3dbcd',
-    containerActive: '#ffffff',
-  },
-  search: {
-    text: '#000000cc',
-    placeholder: '#00000055',
-    icon: '#00000055',
-    background: '#00000011',
-  },
-}
-
-export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; styles: Styles } = {
-  open: false,
-  onClose: () => {},
-  onEmojiSelected: (_emoji: EmojiType) => {},
-  emojiSize: 28,
-  expandable: true,
-  hideHeader: false,
-  defaultHeight: '40%',
-  expandedHeight: '80%',
-  onCategoryChangeFailed: (info) => {
-    console.warn(info)
-  },
-  translation: en,
-  disabledCategories: [],
-  enableRecentlyUsed: false,
-  categoryPosition: 'floating',
-  enableSearchBar: false,
-  categoryOrder: [...CATEGORIES],
-  onRequestClose: () => {},
-  disableSafeArea: false,
-  allowMultipleSelections: false,
-  theme: defaultTheme,
-  styles: emptyStyles,
-}
-
-export const defaultKeyboardValues: ContextValues = {
-  activeCategoryIndex: 0,
-  setActiveCategoryIndex: () => {},
-  numberOfColumns: 5,
-  width: 0,
-  searchPhrase: '',
-  setSearchPhrase: (_phrase: string) => {},
-  renderList: [],
-  isToneSelectorOpened: false,
-  clearEmojiTonesData: () => {},
-  generateEmojiTones: (_emoji) => {},
-  emojiTonesData: {
-    emojis: [],
-    position: {
-      x: 0,
-      y: 0,
-    },
-    funnelXPosition: 0,
-  },
 }
 
 export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
