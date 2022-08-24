@@ -23,7 +23,7 @@ const Basic = () => {
       <EmojiPicker
         onEmojiSelected={handlePick}
         open={isModalOpen}
-        // onClose={() => setIsModalOpen(false)}
+        onClose={() => setIsModalOpen(false)}
       />
     </SafeAreaView>
   )
