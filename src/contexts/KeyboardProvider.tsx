@@ -1,60 +1,20 @@
 import * as React from 'react'
 import { useWindowDimensions } from 'react-native'
-import { KeyboardProps, ContextValues, KeyboardContext, OnEmojiSelected } from './KeyboardContext'
-import en from '../translation/en'
+import {
+  KeyboardProps,
+  ContextValues,
+  KeyboardContext,
+  OnEmojiSelected,
+  defaultKeyboardContext,
+  defaultKeyboardValues,
+} from './KeyboardContext'
 import emojisByGroup from '../assets/emojis.json'
 import { useKeyboardStore } from '../store/useKeyboardStore'
-import type { EmojiType, CategoryTypes, EmojisByCategory } from '../types'
-import { CATEGORIES } from '../types'
+import type { CategoryTypes, EmojisByCategory } from '../types'
 
 type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode
   onEmojiSelected: OnEmojiSelected
-}
-
-export const defaultKeyboardContext: Required<KeyboardProps> = {
-  open: false,
-  onClose: () => {},
-  onEmojiSelected: (_emoji: EmojiType) => {},
-  emojiSize: 28,
-  containerStyles: {},
-  knobStyles: {},
-  headerStyles: {},
-  expandable: true,
-  hideHeader: false,
-  defaultHeight: '40%',
-  expandedHeight: '80%',
-  backdropColor: '#00000055',
-  categoryColor: '#000000',
-  activeCategoryColor: '#005b96',
-  categoryContainerColor: '#e3dbcd',
-  activeCategoryContainerColor: '#ffffff',
-  onCategoryChangeFailed: (info) => {
-    console.warn(info)
-  },
-  translation: en,
-  disabledCategories: [],
-  enableRecentlyUsed: false,
-  categoryPosition: 'floating',
-  enableSearchBar: false,
-  closeSearchColor: '#00000055',
-  searchBarStyles: {},
-  searchBarTextStyles: {},
-  searchBarPlaceholderColor: '#00000055',
-  categoryOrder: [...CATEGORIES],
-  onRequestClose: () => {},
-  categoryContainerStyles: {},
-  disableSafeArea: false,
-}
-
-export const defaultKeyboardValues: ContextValues = {
-  activeCategoryIndex: 0,
-  setActiveCategoryIndex: () => {},
-  numberOfColumns: 5,
-  width: 0,
-  searchPhrase: '',
-  setSearchPhrase: (_phrase: string) => {},
-  renderList: [],
 }
 
 export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
