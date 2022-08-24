@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/rn-emoji-keyboard/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'favicon.ico',
   organizationName: 'thewidlarzgroup',
   projectName: 'rn-emoji-keyboard',
 
