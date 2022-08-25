@@ -25,9 +25,7 @@ To find out more about the modal mode, see [here](/docs/api/modal).
 
 The library supports skintone modifiers by default from 1.0.0 version. After a long press on certain emojis, panel with multiple options appears.
 
-### Performance
-
-We put a lot of effort into optimising and improving performance of the library.
+We put a lot of effort into optimising and improving performance of this library.
 The library's current score (based on RN-Perf Monitor plugin for Flipper): 90
 
 ### Learning resources
