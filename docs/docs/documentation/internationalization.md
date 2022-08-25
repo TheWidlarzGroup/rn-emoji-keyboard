@@ -18,6 +18,7 @@ Due to the limited translation possibilities, we only provide a few pre-defined 
 - `es` - Spanish 🇪🇸
 - `de` - German 🇩🇪
 - `pt` - Portuguese 🇧🇷
+- `vi` - Vietnamese 🇻🇳
 
 First import lang and use it as `translation` prop.
 
