@@ -2,7 +2,7 @@ import 'react-native-gesture-handler'
 import * as React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import Examples from './Examples/Examples'
+import Examples, { RootStackParamList } from './Examples/Examples'
 import Basic from './Basic/Basic'
 import Dark from './Dark/Dark'
 import Translated from './Translated/Translated'
@@ -14,7 +14,7 @@ import TopCategory from './TopCategory/TopCategory'
 import BottomCategory from './BottomCategory/BottomCategory'
 import SearchBar from './SearchBar/SearchBar'
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator<RootStackParamList>()
 export default () => {
   return (
     <NavigationContainer>

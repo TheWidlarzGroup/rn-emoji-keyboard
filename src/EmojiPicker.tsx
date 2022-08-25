@@ -2,11 +2,12 @@ import * as React from 'react'
 import { Animated, useWindowDimensions } from 'react-native'
 import { EmojiStaticKeyboard } from './components/EmojiStaticKeyboard'
 import { Knob } from './components/Knob'
-import { defaultKeyboardContext, KeyboardProvider } from './contexts/KeyboardProvider'
+import { KeyboardProvider } from './contexts/KeyboardProvider'
 import type { KeyboardProps } from './contexts/KeyboardContext'
+import { defaultKeyboardContext } from './contexts/KeyboardContext'
 import type { EmojiType } from './types'
 import { ModalWithBackdrop } from './components/ModalWithBackdrop'
-import { getHeight } from './utils'
+import { getHeight } from './utils/getHeight'
 import { useKeyboard } from './hooks/useKeyboard'
 
 export const EmojiPicker = ({
@@ -16,6 +17,7 @@ export const EmojiPicker = ({
   onClose,
   expandable = defaultKeyboardContext.expandable,
   defaultHeight = defaultKeyboardContext.defaultHeight,
+  allowMultipleSelections = false,
   ...props
 }: KeyboardProps) => {
   const { height: screenHeight } = useWindowDimensions()
@@ -45,7 +47,7 @@ export const EmojiPicker = ({
     <KeyboardProvider
       onEmojiSelected={(emoji: EmojiType) => {
         onEmojiSelected(emoji)
-        close()
+        !allowMultipleSelections && close()
       }}
       open={open}
       onClose={close}

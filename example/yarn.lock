@@ -3679,6 +3679,11 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.7.0, react-is@^16.8.1, react-
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-native-flipper-performance-plugin@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-flipper-performance-plugin/-/react-native-flipper-performance-plugin-0.3.1.tgz#969aea65eb6e6504ee29caab7bf546c75322f817"
+  integrity sha512-NDf5VCTqYPUUihvmW5A/scJbjHWZpAxC9FE1kfgFCPsHENjH9EVJxk+7XlLN608dEtHOtZdcWY0HZZT8XLjr6Q==
+
 react-native-gesture-handler@^1.10.3:
   version "1.10.3"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.10.3.tgz#942bbf2963bbf49fa79593600ee9d7b5dab3cfc0"

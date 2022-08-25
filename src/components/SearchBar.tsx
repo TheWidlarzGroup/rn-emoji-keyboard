@@ -9,11 +9,10 @@ export const SearchBar = () => {
     setSearchPhrase,
     translation,
     setActiveCategoryIndex,
-    closeSearchColor,
-    searchBarStyles,
-    searchBarTextStyles,
-    searchBarPlaceholderColor,
     renderList,
+    theme,
+    styles: themeStyles,
+    clearEmojiTonesData,
   } = React.useContext(KeyboardContext)
   const inputRef = React.useRef<TextInput>(null)
 
@@ -25,27 +24,34 @@ export const SearchBar = () => {
   }
   const clearPhrase = () => {
     setSearchPhrase('')
+    clearEmojiTonesData()
     inputRef.current?.blur()
     setActiveCategoryIndex(0)
   }
 
   return (
-    <View style={[styles.container, searchBarStyles]}>
+    <View
+      style={[
+        styles.container,
+        themeStyles.searchBar.container,
+        { backgroundColor: theme.search.background },
+      ]}>
       <TextInput
-        style={[styles.input, searchBarTextStyles]}
+        style={[styles.input, themeStyles.searchBar.text, { color: theme.search.text }]}
         value={searchPhrase}
         onChangeText={handleSearch}
         placeholder={translation.search}
         ref={inputRef}
-        placeholderTextColor={searchBarPlaceholderColor}
+        onTouchEndCapture={clearEmojiTonesData}
+        placeholderTextColor={theme.search.placeholder}
       />
       {!!searchPhrase && (
         <TouchableOpacity onPress={clearPhrase} style={styles.button}>
           <Icon
             iconName={'Close'}
             isActive={true}
-            normalColor={closeSearchColor}
-            activeColor={closeSearchColor}
+            normalColor={theme.search.icon}
+            activeColor={theme.search.icon}
           />
         </TouchableOpacity>
       )}

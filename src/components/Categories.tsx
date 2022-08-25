@@ -1,30 +1,33 @@
 import * as React from 'react'
 import { Animated, FlatList, StyleSheet, View, ViewStyle } from 'react-native'
-import { defaultKeyboardContext } from '../contexts/KeyboardProvider'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { CATEGORIES_NAVIGATION, CategoryNavigationItem, CategoryTypes } from '../types'
 import { CategoryItem } from './CategoryItem'
-import { exhaustiveTypeCheck } from '../utils'
+import { exhaustiveTypeCheck } from '../utils/exhaustiveTypeCheck'
+import { defaultTheme } from '../contexts/KeyboardContext'
 
 const CATEGORY_ELEMENT_WIDTH = 37
+
+const Separator = () => <View style={styles.separator} />
 
 export const Categories = () => {
   const {
     activeCategoryIndex,
-    categoryContainerColor,
     onCategoryChangeFailed,
-    activeCategoryContainerColor,
     categoryPosition,
     renderList,
     setActiveCategoryIndex,
-    categoryContainerStyles,
+    clearEmojiTonesData,
+    theme,
+    styles: themeStyles,
   } = React.useContext(KeyboardContext)
   const scrollNav = React.useRef(new Animated.Value(0)).current
   const handleScrollToCategory = React.useCallback(
     (category: CategoryTypes) => {
+      clearEmojiTonesData()
       setActiveCategoryIndex(renderList.findIndex((cat) => cat.title === category))
     },
-    [renderList, setActiveCategoryIndex]
+    [renderList, setActiveCategoryIndex, clearEmojiTonesData]
   )
 
   const renderItem = React.useCallback(
@@ -46,19 +49,17 @@ export const Categories = () => {
         style={[
           styles.activeIndicator,
           {
-            backgroundColor: activeCategoryContainerColor,
-          },
-          {
+            backgroundColor: theme.category.containerActive,
             transform: [{ translateX: scrollNav }],
           },
         ]}
       />
     ),
-    [activeCategoryContainerColor, scrollNav]
+    [theme.category.containerActive, scrollNav]
   )
 
   const getStylesBasedOnPosition = () => {
-    const style: ViewStyle[] = [styles.navigation, categoryContainerStyles]
+    const style: ViewStyle[] = [styles.navigation, themeStyles.category.container]
     switch (categoryPosition) {
       case 'floating':
         style.push(styles.navigationFloating)
@@ -75,11 +76,11 @@ export const Categories = () => {
     }
 
     if (
-      categoryContainerColor !== defaultKeyboardContext.categoryContainerColor ||
+      theme.category.container !== defaultTheme.category.container ||
       categoryPosition === 'floating'
     )
       style.push({
-        backgroundColor: categoryContainerColor,
+        backgroundColor: theme.category.container,
       })
     return style
   }
@@ -100,7 +101,7 @@ export const Categories = () => {
           data={renderData}
           keyExtractor={(item) => item.category}
           renderItem={renderItem}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          ItemSeparatorComponent={Separator}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
           onScrollToIndexFailed={onCategoryChangeFailed}

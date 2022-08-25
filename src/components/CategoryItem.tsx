@@ -11,8 +11,7 @@ type CategoryItemProps = {
 }
 
 export const CategoryItem = ({ item, index, handleScrollToCategory }: CategoryItemProps) => {
-  const { activeCategoryIndex, categoryColor, activeCategoryColor, setActiveCategoryIndex } =
-    React.useContext(KeyboardContext)
+  const { activeCategoryIndex, theme, setActiveCategoryIndex } = React.useContext(KeyboardContext)
 
   const handleSelect = () => {
     handleScrollToCategory(item.category)
@@ -25,8 +24,8 @@ export const CategoryItem = ({ item, index, handleScrollToCategory }: CategoryIt
         <Icon
           iconName={item.icon}
           isActive={activeCategoryIndex === index}
-          normalColor={categoryColor}
-          activeColor={activeCategoryColor}
+          normalColor={theme.category.icon}
+          activeColor={theme.category.iconActive}
         />
       </View>
     </TouchableOpacity>

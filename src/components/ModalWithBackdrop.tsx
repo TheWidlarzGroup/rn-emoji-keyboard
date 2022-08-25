@@ -26,7 +26,7 @@ export const ModalWithBackdrop = ({
 }: ModalWithBackdropProps & ModalProps) => {
   const { height: screenHeight } = useWindowDimensions()
   const translateY = React.useRef(new Animated.Value(screenHeight)).current
-  const { backdropColor, disableSafeArea } = React.useContext(KeyboardContext)
+  const { theme, disableSafeArea } = React.useContext(KeyboardContext)
   const handleTimeout = useTimeout()
 
   React.useEffect(() => {
@@ -46,8 +46,11 @@ export const ModalWithBackdrop = ({
 
   return (
     <Modal visible={isOpen} animationType="fade" transparent={true} {...rest}>
-      <TouchableOpacity style={styles.modalContainer} activeOpacity={1} onPress={handleClose}>
-        <View style={[styles.modalContainer, { backgroundColor: backdropColor }]}>
+      <TouchableOpacity
+        style={[styles.modalContainer, { backgroundColor: theme.backdrop }]}
+        activeOpacity={1}
+        onPress={handleClose}>
+        <View style={[styles.modalContainer, { backgroundColor: theme.backdrop }]}>
           <IsSafeAreaWrapper style={styles.modalContainer} isSafeArea={!disableSafeArea}>
             <TouchableOpacity activeOpacity={1}>
               <Animated.View
