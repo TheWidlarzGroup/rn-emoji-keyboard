@@ -4,7 +4,7 @@ import { KeyboardContext } from '../contexts/KeyboardContext'
 import { CATEGORIES_NAVIGATION, CategoryNavigationItem, CategoryTypes } from '../types'
 import { CategoryItem } from './CategoryItem'
 import { exhaustiveTypeCheck } from '../utils/exhaustiveTypeCheck'
-import { defaultTheme } from '../contexts/KeyboardProvider'
+import { defaultTheme } from '../contexts/KeyboardContext'
 
 const CATEGORY_ELEMENT_WIDTH = 37
 
