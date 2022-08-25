@@ -15,6 +15,7 @@ const config = {
   favicon: 'favicon.ico',
   organizationName: 'thewidlarzgroup',
   projectName: 'rn-emoji-keyboard',
+  trailingSlash: false,
 
   presets: [
     [
