@@ -1,4 +1,4 @@
-<p align="center">  
+<p align="center">
     <img alt="rn-emoji-keyboard" src="./src/assets/rocket.png" />
 </p>
 <p align="center" >
@@ -28,7 +28,7 @@ yarn add rn-emoji-keyboard
 
 ## 📖 Documentation
 
-Check the docs here [Click](http://localhost:3000/rn-emoji-keyboard/)
+Check the docs here [Click](https://thewidlarzgroup.github.io/rn-emoji-keyboard/)
 
 - [Getting Started](https://thewidlarzgroup.github.io/rn-emoji-keyboard/docs/documentation/start)
 - [Internationalization](https://thewidlarzgroup.github.io/rn-emoji-keyboard/docs/documentation/internationalization)
