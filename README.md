@@ -1,196 +1,66 @@
-# 🚀 rn-emoji-keyboard
-A lightweight, fully customizable emoji picker, written as React Native component (without native elements). Designated to be user and developer friendly! 💖
+<p align="center">  
+    <img alt="rn-emoji-keyboard" src="./src/assets/rocket.png" />
+</p>
+<p align="center" >
+  Lightweight, fully customizable emoji keyboard,<br />
+  written as a React Native component (without native elements).<br />
+  Designated to be user and developer friendly! 💖 <br/>
+  <a href="https://github.com/TheWidlarzGroup/rn-emoji-keyboard">rn-emoji-keyboard</a>
+</p>
 
-![Preview](/example/assets/preview-small.gif)
+---
+
+![Build status - typescript compile](https://img.shields.io/github/workflow/status/TheWidlarzGroup/rn-emoji-keyboard/TypeScript)
+![License badge](https://img.shields.io/npm/l/rn-emoji-keyboard)
+
+![Latest, released version](https://img.shields.io/github/v/release/TheWidlarzGroup/rn-emoji-keyboard)
+
+![Date of latest commit](https://img.shields.io/github/last-commit/TheWidlarzGroup/rn-emoji-keyboard)
+![Number of contributors](https://img.shields.io/github/contributors/TheWidlarzGroup/rn-emoji-keyboard)
+
+---
 
 ## 🪄 Installation
+
 ```sh
 yarn add rn-emoji-keyboard
 ```
-or
-```sh
-npm install rn-emoji-keyboard
-```
-## ⚡️ Usage
+
+## 📖 Documentation
+
+Check the docs here [Click](http://localhost:3000/rn-emoji-keyboard/)
+
+- [Getting Started](https://thewidlarzgroup.github.io/rn-emoji-keyboard/docs/documentation/start)
+- [Internationalization](https://thewidlarzgroup.github.io/rn-emoji-keyboard/docs/documentation/internationalization)
+- [Basic Usage](https://thewidlarzgroup.github.io/rn-emoji-keyboard/docs/documentation/Examples/basic)
+- [API Reference](https://thewidlarzgroup.github.io/rn-emoji-keyboard/docs/api/modal)
+- [Contributions](https://thewidlarzgroup.github.io/rn-emoji-keyboard/docs/contributions/translations)
+
+## ⚡️ Example
+
+![Preview](/example/assets/preview-small.gif)
 
 ```js
-import EmojiPicker from 'rn-emoji-keyboard';
+import EmojiPicker from 'rn-emoji-keyboard'
 
 export default function App() {
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [isOpen, setIsOpen] = React.useState<boolean>(false)
 
-  const handlePick = (emojiObject: EmojiType) => {
-    console.log(emojiObject);
-    /* example emojiObject = {
-        "emoji": "❤️",
-        "name": "red heart",
-        "slug": "red_heart",
-        "unicode_version": "0.6",
-      }
-    */
-  };
-
-  return (
-    <EmojiPicker
-      onEmojiSelected={handlePick}
-      open={isOpen}
-      onClose={() => setIsOpen(false)} />
-  )
+  return <EmojiPicker onEmojiSelected={handlePick} open={isOpen} onClose={() => setIsOpen(false)} />
 }
 ```
-## ⚙️ Accepted props (current implemented)
-| Name | Type | Default Value | Required | Description |
-|---|---|---|---|---|
-| onEmojiSelected | function | undefined | yes | Callback on emoji selected |
-| open | boolean | false | yes | Opens modal picker |
-| onClose | function | undefined | yes | Request close modal *runs when onEmojiSelected or backdrop pressed* |
-| emojiSize | number | 28 | no | Custom emoji size |
-| enableRecentlyUsed | boolean | false | no | Enable recently used emojis in categories |
-| categoryPosition | 'floating' \| 'top' \| 'bottom' | 'floating' | no | Specify category container position |
-| enableSearchBar | boolean | false | no | Enable search bar |
-| hideHeader | boolean | false | no | Hide category names |
-| allowMultipleSelections | boolean | false | no | Allow selecting multiple emoji without dismissing keyboard |
-| expandable | boolean | true | no | Show knob and enable expand on swipe up |
-| defaultHeight | number \| string | "40%" | no | Specify collapsed container height (number is points, string is a percentage of the screen height) |
-| expandedHeight | number \| string | "80%" | no | Specify expanded container height (number is points, string is a percentage of the screen height) _works only if expandable is true_ |
-| onCategoryChangeFailed | function | warn(info) | no | Callback on category change failed (info: {index, highestMeasuredFrameIndex, averageItemLength}) |
-| translation | CategoryTranslation | en | no | Translation object *see translation section* |
-| disabledCategories | CategoryTypes[] | [] | no | Hide categories by passing their slugs |
-| categoryOrder | CategoryTypes[] | [] | no | Set category sequence |
-| onRequestClose | function | undefined | no | Handle onRequestClose in modal |
-| disableSafeArea | boolean | false | no | Disable safe area inside modal |
-| theme | Theme | defaultTheme | no | Custom colors theme |
-| styles | Styles | defaultStyles | no | Custom styles |
 
-[//]: # (| backdropColor | string | "#00000055" | no | Change backdrop color and alpha |)
-[//]: # (| categoryColor | string | "#000000" | no | Change category item color |)
-[//]: # (| activeCategoryColor | string | "#005b96" | no | Change active category item color |)
-[//]: # (| categoryContainerColor | string | "#e3dbcd" | no | Change category container color |)
-[//]: # (| activeCategoryContainerColor | string | "#ffffff" | no | Change selected category container color |)
-[//]: # (| searchBarPlaceholderColor | string | "#00000055" | no | Override search bar placeholder color |)
-[//]: # (| closeSearchColor | string | "#00000055" | no | Change button &#40;cross&#41; color for close/cancel search |)
-[//]: # (| searchBarStyles | ViewStyle | {} | no | Override search bar container styles |)
-[//]: # (| searchBarTextStyles | ViewStyle | {} | no | Override search bar text styles |)
-[//]: # (| headerStyles | TextStyle | {} | no | Override category name styles |)
-[//]: # (| categoryContainerStyles | ViewStyle | {} | no | Override category container styles |)
-[//]: # (| knobStyles | ViewStyle | {} | no | Override knob styles |)
-[//]: # (| containerStyles | ViewStyle | {} | no | Override container styles |)
-
-## 📊 Comparison
-
-![comparison table](/example/assets/table-comparison-small.png)
-
-## 🖼 Usage as static
-```js
-import { EmojiKeyboard } from 'rn-emoji-keyboard';
-
-// ...
-
-<EmojiKeyboard onEmojiSelected={handlePick} />
-```
-Example about serving as static keyboard [you can find here](/example/src/Dark/Dark.tsx).
-## 🎨 Theme
-You can override color palette with custom colors using `theme` prop.
-```js
-const defaultTheme: Theme = {
-  backdrop: '#00000055',
-  knob: '#ffffff',
-  container: '#ffffff',
-  header: '#00000099',
-  category: {
-    icon: '#000000',
-    iconActive: '#005b96',
-    container: '#e3dbcd',
-    containerActive: '#ffffff',
-  },
-  search: {
-    text: '#000000cc',
-    placeholder: '#00000055',
-    icon: '#00000055',
-    background: '#00000011',
-  },
-}
-```
-## 📏 Styles
-You can also override styles to almost every element using `styles` prop in the following format.
-```js
-type Styles = {
-  container: ViewStyle
-  header: TextStyle
-  knob: ViewStyle
-  category: {
-    container: ViewStyle
-    icon: TextStyle
-  }
-  searchBar: {
-    container: ViewStyle
-    text: TextStyle
-  }
-}
-```
-## 🇺🇸 Internationalization
-### Pre-defined
-Due to the limited translation possibilities, we only provide a few pre-defined translations into the following languages:
-* `en` - English 🇺🇸
-* `pl` - Polish 🇵🇱
-* `fr` - French 🇫🇷
-* `it` - Italian 🇮🇹
-* `ko` - Korean 🇰🇷
-* `id` - Indonesian 🇲🇨
-* `es` - Spanish 🇪🇸
-* `de` - German 🇩🇪
-* `pt` - Portuguese 🇧🇷
-* `ua` - Ukrainian 🇺🇦
-* `ru` - Russian 🇷🇺
-* `vi` - Vietnamese 🇻🇳
-
-First import lang and use it as `translation` prop.
-```ts
-import { pl } from 'rn-emoji-keyboard';
-
-// ...
-
-translation={pl}
-```
-### 🏁 Own
-There is possibility to pass own translation to library with the prop called `translation` like this
-```ts
-translation={{
-  smileys_emotion: 'Smileys & Emotion',
-  people_body: 'People & Body',
-  animals_nature: 'Animals & Nature',
-  food_drink: 'Food & Drink',
-  travel_places: 'Travel & Places',
-  activities: 'Activities',
-  objects: 'Objects',
-  symbols: 'Symbols',
-  flags: 'Flags',
-}}
-```
-*If you have written a translation into your language, we strongly encourage you to create a Pull Request and add your language to the package, following the example of other langs.*
-## 🎉 Examples
-You can clone the repo and run `yarn example ios` or `yarn example android` to preview app with this examples.
-### [Basic](/example/src/Basic/Basic.tsx)
-![Preview](/example/assets/light-preview.jpg)
-### [Dark](/example/src/Dark/Dark.tsx)
-![Preview](/example/assets/dark-preview.jpg)
-### [Translated](/example/src/Translated/Translated.tsx)
-![Preview](/example/assets/translated-preview.jpg)
-### [Disabled Categories](/example/src/DisabledCategories/DisabledCategories.tsx)
-![Preview](/example/assets/categories-preview.jpg)
-### [Static Modal (without knob)](/example/src/StaticModal/StaticModal.tsx)
-![Preview](/example/assets/static-modal-preview.jpg)
-### [Static](/example/src/Static/Static.tsx)
-![Preview](/example/assets/static-preview.jpg)
-### [Recently used](/example/src/EnableRecently/EnableRecently.tsx)
-![Preview](/example/assets/enable-recently-used-preview.jpg)
-### [Categories Top](/example/src/TopCategory/TopCategory.tsx)
-![Preview](/example/assets/categories-top-preview.jpg)
-### [Categories Bottom](/example/src/BottomCategory/BottomCategory.tsx)
-![Preview](/example/assets/categories-bottom-preview.jpg)
-### [Search Bar](/example/src/SearchBar/SearchBar.tsx)
-![Preview](/example/assets/search-bar-preview.gif)
 ## ⚖️ License
- **[MIT](/LICENSE)**
+
+**[MIT](/LICENSE)**
+
 ## 📝 Contribute
+
 If you want to contribute read the [CONTRIBUTING.md](/CONTRIBUTING.md) guide.
+
+## 🏢 Built with ♥️ and ⌨️ at TheWidlarzGroup
+
+Built at TheWidlarzGroup - the group of React Native Developers and Designers who has built this project for you.
+If you like it -> give it a star!
+
+E-mail if you have any questions or just want to talk <hello@thewidlarzgroup.com>
