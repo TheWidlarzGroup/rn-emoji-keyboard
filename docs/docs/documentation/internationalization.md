@@ -19,6 +19,7 @@ Due to the limited translation possibilities, we only provide a few pre-defined 
 - `de` - German 🇩🇪
 - `pt` - Portuguese 🇧🇷
 - `vi` - Vietnamese 🇻🇳
+- `ja` - Japanese 🇯🇵
 
 First import lang and use it as `translation` prop.
 
