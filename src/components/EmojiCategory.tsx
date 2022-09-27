@@ -125,12 +125,8 @@ export const EmojiCategory = React.memo(
     )
   },
   (prevProps, nextProps) => {
-    if (nextProps.item.title !== 'search') {
-      return true
-    }
-    if (prevProps.item.data.length !== nextProps.item.data.length) {
-      return false
-    }
+    if (nextProps.item.title !== 'search') return true
+    if (prevProps.item.data.length !== nextProps.item.data.length) return false
     return (
       prevProps.item.data.map((d) => d.name).join() ===
       nextProps.item.data.map((d) => d.name).join()
