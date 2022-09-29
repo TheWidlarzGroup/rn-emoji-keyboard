@@ -64,7 +64,7 @@ export type KeyboardProps = {
     highestMeasuredFrameIndex: number
     averageItemLength: number
   }) => void
-  translation?: CategoryTranslation
+  translation: CategoryTranslation | undefined
   disabledCategories?: CategoryTypes[]
   enableRecentlyUsed?: boolean
   categoryPosition?: CategoryPosition
@@ -135,7 +135,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; s
   onCategoryChangeFailed: (info) => {
     console.warn(info)
   },
-  // translation: en,
+  translation: en ? en : undefined,
   disabledCategories: [],
   enableRecentlyUsed: false,
   categoryPosition: 'floating',
