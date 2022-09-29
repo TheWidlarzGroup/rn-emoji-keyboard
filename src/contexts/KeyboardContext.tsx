@@ -135,7 +135,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; s
   onCategoryChangeFailed: (info) => {
     console.warn(info)
   },
-  translation: en,
+  // translation: en,
   disabledCategories: [],
   enableRecentlyUsed: false,
   categoryPosition: 'floating',
