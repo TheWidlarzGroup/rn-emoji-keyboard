@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.reactnativeemojikeyboard.BuildConfig;
-import com.reactnativeemojikeyboard.newarchitecture.components.MainComponentsRegistry;
-import com.reactnativeemojikeyboard.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.example.reactnativeemojikeyboard.BuildConfig;
+import com.example.reactnativeemojikeyboard.newarchitecture.components.MainComponentsRegistry;
+import com.example.reactnativeemojikeyboard.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 /**
