@@ -96,6 +96,12 @@ Reveal the search bar, used to find specific emoji.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
+### `enableSearchAnimation`
+
+Allow to turn off FlatList scrolling animation when search results are updated.
+
+<ApiTable typeVal='boolean' defaultVal='true'/>
+
 ### `expandable`
 
 Show knob and enable expand on swipe up.
