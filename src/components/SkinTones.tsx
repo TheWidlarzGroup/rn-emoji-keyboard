@@ -32,7 +32,7 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
   )
 
   const renderItem = React.useCallback(
-    (props) => {
+    (props: any) => {
       return (
         <SingleSkinTone {...props} onPress={() => handleEmojiPress(props.item)} emojiSize={32} />
       )

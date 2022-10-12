@@ -46,7 +46,9 @@ export const EmojiStaticKeyboard = React.memo(
     const [keyboardScrollOffsetY, setKeyboardScrollOffsetY] = React.useState(0)
 
     const renderItem = React.useCallback(
-      (props) => <EmojiCategory setKeyboardScrollOffsetY={setKeyboardScrollOffsetY} {...props} />,
+      (props: any) => (
+        <EmojiCategory setKeyboardScrollOffsetY={setKeyboardScrollOffsetY} {...props} />
+      ),
       []
     )
 
@@ -72,12 +74,12 @@ export const EmojiStaticKeyboard = React.memo(
           container={(children) => (
             <SafeAreaView
               style={[styles.flex, categoryPosition === 'top' && styles.containerReverse]}>
-              {children}
+              {children as any}
             </SafeAreaView>
           )}>
           <>
             {enableSearchBar && <SearchBar />}
-            <Animated.FlatList
+            <Animated.FlatList<any>
               extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
               data={renderList}
               keyExtractor={keyExtractor}

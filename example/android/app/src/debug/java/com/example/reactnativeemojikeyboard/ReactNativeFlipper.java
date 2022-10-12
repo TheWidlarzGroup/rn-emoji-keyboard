@@ -48,7 +48,7 @@ public class ReactNativeFlipper {
       ReactContext reactContext = reactInstanceManager.getCurrentReactContext();
       if (reactContext == null) {
         reactInstanceManager.addReactInstanceEventListener(
-            new ReactInstanceManager.ReactInstanceEventListener() {
+            new ReactInstanceEventListener() {
               @Override
               public void onReactContextInitialized(ReactContext reactContext) {
                 reactInstanceManager.removeReactInstanceEventListener(this);

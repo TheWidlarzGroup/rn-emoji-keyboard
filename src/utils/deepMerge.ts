@@ -1,8 +1,6 @@
-export type RecursivePartial<T> = Partial<
-  {
-    [P in keyof T]: T[P] extends object ? Partial<T[P]> : T[P]
-  }
->
+export type RecursivePartial<T> = Partial<{
+  [P in keyof T]: T[P] extends object ? Partial<T[P]> : T[P]
+}>
 
 const objectKeys = <T extends object>(obj: T) => Object.keys(obj) as (keyof T)[]
 
