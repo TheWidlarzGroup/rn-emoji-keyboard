@@ -75,7 +75,7 @@ export type KeyboardProps = {
   allowMultipleSelections?: boolean
   theme?: RecursivePartial<Theme>
   styles?: RecursivePartial<Styles>
-  disableSearchAnimation?: boolean
+  enableSearchAnimation?: boolean
 }
 export type ContextValues = {
   activeCategoryIndex: number
@@ -147,7 +147,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; s
   allowMultipleSelections: false,
   theme: defaultTheme,
   styles: emptyStyles,
-  disableSearchAnimation: false,
+  enableSearchAnimation: true,
 }
 
 export const defaultKeyboardValues: ContextValues = {
