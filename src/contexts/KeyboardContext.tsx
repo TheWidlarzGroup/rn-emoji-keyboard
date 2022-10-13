@@ -1,6 +1,6 @@
 import * as React from 'react'
 import type { TextStyle, ViewStyle } from 'react-native'
-import { en } from 'rn-emoji-keyboard'
+import en from '../translation/en'
 import {
   CategoryTranslation,
   EmojiType,
