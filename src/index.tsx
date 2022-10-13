@@ -15,7 +15,8 @@ import vi from './translation/vi'
 import cs from './translation/cs'
 import ja from './translation/ja'
 import tr from './translation/tr'
+import no from './translation/no'
 
-export { en, pl, ko, it, fr, id, es, de, pt, ru, ua, vi, cs, ja, tr }
+export { en, pl, ko, it, fr, id, es, de, pt, ru, ua, vi, cs, ja, tr, no }
 
 export default EmojiPicker
