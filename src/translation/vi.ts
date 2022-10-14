@@ -1,6 +1,6 @@
 import type { CategoryTranslation } from '../types'
 
-export const vi: CategoryTranslation = {
+const vi: CategoryTranslation = {
   recently_used: 'Dùng gần đây',
   smileys_emotion: 'Mặt cười & Cảm xúc',
   people_body: 'Người & Thân hình',

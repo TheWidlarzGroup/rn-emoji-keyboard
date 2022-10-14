@@ -1,6 +1,6 @@
 import type { CategoryTranslation } from '../types'
 
-export const ko: CategoryTranslation = {
+const ko: CategoryTranslation = {
   recently_used: '최근 사용',
   smileys_emotion: '스마일리',
   people_body: '사람 및 신체',
