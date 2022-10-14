@@ -30,7 +30,8 @@ export const EmojiStaticKeyboard = React.memo(
       disableSafeArea,
       theme,
       styles: themeStyles,
-      enableSearchAnimation,
+      shouldAnimateScroll,
+      enableCategoryChangeAnimation,
     } = React.useContext(KeyboardContext)
     const { keyboardState } = useKeyboardStore()
     const flatListRef = React.useRef<FlatList>(null)
@@ -54,9 +55,9 @@ export const EmojiStaticKeyboard = React.memo(
     React.useEffect(() => {
       flatListRef.current?.scrollToIndex({
         index: activeCategoryIndex,
-        animated: enableSearchAnimation,
+        animated: shouldAnimateScroll && enableCategoryChangeAnimation,
       })
-    }, [activeCategoryIndex, enableSearchAnimation])
+    }, [activeCategoryIndex, enableCategoryChangeAnimation, shouldAnimateScroll])
 
     const keyExtractor = React.useCallback((item: EmojisByCategory) => item.title, [])
 

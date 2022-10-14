@@ -31,6 +31,7 @@ type ProviderProps = Partial<KeyboardProps> & {
 export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const { width } = useWindowDimensions()
   const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0)
+  const [shouldAnimateScroll, setShouldAnimateScroll] = React.useState(true)
   const [searchPhrase, setSearchPhrase] = React.useState('')
   const { keyboardState } = useKeyboardStore()
 
@@ -170,6 +171,8 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
       clearEmojiTonesData,
       generateEmojiTones,
       emojiTonesData,
+      shouldAnimateScroll,
+      setShouldAnimateScroll,
     }),
     [
       activeCategoryIndex,
@@ -178,6 +181,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
       props,
       renderList,
       searchPhrase,
+      shouldAnimateScroll,
       width,
     ]
   )
