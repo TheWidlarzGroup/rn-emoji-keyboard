@@ -96,6 +96,13 @@ Reveal the search bar, used to find specific emoji.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
+### `enableCategoryChangeAnimation`
+
+Allow to turn off FlatList scrolling animation when category is changed.
+Setting this to false will also overwrite `enableSearchAnimation` value.
+
+<ApiTable typeVal='boolean' defaultVal='true'/>
+
 ### `enableSearchAnimation`
 
 Allow to turn off FlatList scrolling animation when search results are updated.
