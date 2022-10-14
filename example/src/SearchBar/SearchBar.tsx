@@ -24,6 +24,7 @@ const SearchBar = () => {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        enableSearchBar
       />
     </SafeAreaView>
   )
