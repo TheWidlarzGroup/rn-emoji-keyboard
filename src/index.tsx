@@ -16,8 +16,9 @@ import cs from './translation/cs'
 import ja from './translation/ja'
 import tr from './translation/tr'
 import no from './translation/no'
+import ro from './translation/ro'
 
 export { EmojiKeyboard }
-export { en, pl, ko, it, fr, id, es, de, pt, ru, ua, vi, cs, ja, tr, no }
+export { en, pl, ko, it, fr, id, es, de, pt, ru, ua, vi, cs, ja, tr, no, ro }
 
 export default EmojiPicker
