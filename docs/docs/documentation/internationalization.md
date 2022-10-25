@@ -23,6 +23,7 @@ Due to the limited translation possibilities, we only provide a few pre-defined 
 - `ja` - Japanese 🇯🇵
 - `tr` - Turkish 🇹🇷
 - `no` - Norwegian 🇳🇴
+- `ro` - Romanian 🇷🇴
 
 First import lang and use it as `translation` prop.
 
