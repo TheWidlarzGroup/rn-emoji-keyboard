@@ -21,15 +21,13 @@ export const SearchBar = () => {
 
   const handleSearch = (text: string) => {
     setSearchPhrase(text)
+
     if (text === '') {
       setActiveCategoryIndex(0)
-      const animationTimeout = setTimeout(
-        () => setShouldAnimateScroll(enableCategoryChangeAnimation),
-        0
-      )
-      clearTimeout(animationTimeout)
+      setShouldAnimateScroll(enableCategoryChangeAnimation)
       return
     }
+
     const searchIndex = renderList.findIndex((cat) => cat.title === 'search')
     if (searchIndex !== -1) {
       setActiveCategoryIndex(searchIndex)
