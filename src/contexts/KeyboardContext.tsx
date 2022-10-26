@@ -75,6 +75,8 @@ export type KeyboardProps = {
   allowMultipleSelections?: boolean
   theme?: RecursivePartial<Theme>
   styles?: RecursivePartial<Styles>
+  enableSearchAnimation?: boolean
+  enableCategoryChangeAnimation?: boolean
 }
 export type ContextValues = {
   activeCategoryIndex: number
@@ -88,6 +90,8 @@ export type ContextValues = {
   clearEmojiTonesData: () => void
   generateEmojiTones: (emoji: JsonEmoji, emojiIndex: number, emojiSizes: EmojiSizes) => void
   emojiTonesData: EmojiTonesData
+  shouldAnimateScroll: boolean
+  setShouldAnimateScroll: (value: boolean) => void
 }
 
 export const emptyStyles: Styles = {
@@ -146,6 +150,8 @@ export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; s
   allowMultipleSelections: false,
   theme: defaultTheme,
   styles: emptyStyles,
+  enableSearchAnimation: true,
+  enableCategoryChangeAnimation: true,
 }
 
 export const defaultKeyboardValues: ContextValues = {
@@ -167,6 +173,8 @@ export const defaultKeyboardValues: ContextValues = {
     },
     funnelXPosition: 0,
   },
+  shouldAnimateScroll: true,
+  setShouldAnimateScroll: (_value: boolean) => {},
 }
 
 export const KeyboardContext = React.createContext<
