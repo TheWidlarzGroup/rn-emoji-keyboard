@@ -19,12 +19,13 @@ export const SearchBar = () => {
   } = React.useContext(KeyboardContext)
   const inputRef = React.useRef<TextInput>(null)
 
-  const handleSearch = (text: string) => {
+  const handleSearch = async (text: string) => {
     setSearchPhrase(text)
 
     if (text === '') {
-      setActiveCategoryIndex(0)
+      await setActiveCategoryIndex(0)
       setShouldAnimateScroll(enableCategoryChangeAnimation)
+
       return
     }
 
