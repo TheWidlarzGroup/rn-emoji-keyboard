@@ -1,6 +1,6 @@
 import type { CategoryTranslation } from '../types'
 
-export const no: CategoryTranslation = {
+const no: CategoryTranslation = {
   recently_used: 'Ofte brukt',
   smileys_emotion: 'Smilefjes og personer',
   people_body: 'Personer og kropper',
