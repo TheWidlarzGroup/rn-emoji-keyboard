@@ -13,6 +13,7 @@ const EnableRecently = () => {
     setResult(emoji.emoji)
     setIsModalOpen((prev) => !prev)
   }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Result: {result}</Text>

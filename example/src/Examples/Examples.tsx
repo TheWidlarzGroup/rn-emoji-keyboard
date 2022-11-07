@@ -12,6 +12,7 @@ export type RootStackParamList = {
   StaticModal: undefined
   Static: undefined
   EnableRecently: undefined
+  EnableRecentlyWithPersistence: undefined
   TopCategory: undefined
   BottomCategory: undefined
   SearchBar: undefined
@@ -37,6 +38,10 @@ const Examples = ({ navigation }: Props) => {
         <Button title="Static Component" onPress={() => navigation.navigate('Static')} />
         <Button
           title="Enable recently used"
+          onPress={() => navigation.navigate('EnableRecently')}
+        />
+        <Button
+          title="Enable recently used with persistence"
           onPress={() => navigation.navigate('EnableRecently')}
         />
         <Button title="Category Top" onPress={() => navigation.navigate('TopCategory')} />
