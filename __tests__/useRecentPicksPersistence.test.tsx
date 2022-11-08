@@ -38,13 +38,6 @@ describe('useRecentPickPersistence tests', () => {
 
   it('should trigger onStateChange when global state change', async () => {
     const onStateChangeMock = jest.fn()
-    const addedEmoji = {
-      emoji: '🥒',
-      name: 'cucumber',
-      toneEnabled: false,
-      v: '3.0',
-    }
-
     renderHook(() =>
       useRecentPicksPersistence({
         initialization: async () => [],
@@ -59,11 +52,21 @@ describe('useRecentPickPersistence tests', () => {
     act(() => {
       result.current.setKeyboardState({
         type: 'RECENT_EMOJI_ADD',
-        payload: addedEmoji,
+        payload: testData[1],
       })
     })
 
-    expect(result.current.keyboardState.recentlyUsed[0]).toStrictEqual(addedEmoji)
-    expect(onStateChangeMock).toHaveBeenCalledWith([addedEmoji])
+    expect(result.current.keyboardState.recentlyUsed).toStrictEqual([testData[1]])
+    expect(onStateChangeMock).toHaveBeenCalledWith([testData[1]])
+
+    act(() => {
+      result.current.setKeyboardState({
+        type: 'RECENT_EMOJI_ADD',
+        payload: testData[0],
+      })
+    })
+
+    expect(result.current.keyboardState.recentlyUsed).toStrictEqual(testData)
+    expect(onStateChangeMock).toHaveBeenCalledWith(testData)
   })
 })
