@@ -6,6 +6,7 @@ import type { StackScreenProps } from '@react-navigation/stack'
 export type RootStackParamList = {
   Examples: undefined
   Basic: undefined
+  CategoryChangeGesture: undefined
   Dark: undefined
   Translated: undefined
   DisabledCategories: undefined
@@ -24,6 +25,10 @@ const Examples = ({ navigation }: Props) => {
     <SafeAreaView>
       <View>
         <Button title="Basic" onPress={() => navigation.navigate('Basic')} />
+        <Button
+          title="Category Change Gesture"
+          onPress={() => navigation.navigate('CategoryChangeGesture')}
+        />
         <Button title="Dark" onPress={() => navigation.navigate('Dark')} />
         <Button title="Translated" onPress={() => navigation.navigate('Translated')} />
         <Button

@@ -7,6 +7,8 @@ import {
   useWindowDimensions,
   Animated,
   SafeAreaView,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
 } from 'react-native'
 import type { CategoryTypes, EmojisByCategory } from '../types'
 import { EmojiCategory } from './EmojiCategory'
@@ -22,7 +24,9 @@ export const EmojiStaticKeyboard = React.memo(
     const { width } = useWindowDimensions()
     const {
       activeCategoryIndex,
+      setActiveCategoryIndex,
       onCategoryChangeFailed,
+      enableCategoryChangeGesture,
       categoryPosition,
       enableSearchBar,
       searchPhrase,
@@ -61,6 +65,14 @@ export const EmojiStaticKeyboard = React.memo(
 
     const keyExtractor = React.useCallback((item: EmojisByCategory) => item.title, [])
 
+    const handleScroll = React.useCallback(
+      (el: NativeSyntheticEvent<NativeScrollEvent>) => {
+        const index = el.nativeEvent.contentOffset.x / width
+        if (Number.isInteger(index)) setActiveCategoryIndex(index)
+      },
+      [setActiveCategoryIndex, width]
+    )
+
     return (
       <View
         style={[
@@ -93,9 +105,10 @@ export const EmojiStaticKeyboard = React.memo(
               pagingEnabled
               scrollEventThrottle={16}
               getItemLayout={getItemLayout}
-              scrollEnabled={false}
+              scrollEnabled={enableCategoryChangeGesture}
               initialNumToRender={1}
               maxToRenderPerBatch={1}
+              onScroll={handleScroll}
               keyboardShouldPersistTaps="handled"
             />
             <Categories />

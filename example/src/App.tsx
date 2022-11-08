@@ -13,6 +13,7 @@ import EnableRecently from './EnableRecently/EnableRecently'
 import TopCategory from './TopCategory/TopCategory'
 import BottomCategory from './BottomCategory/BottomCategory'
 import SearchBar from './SearchBar/SearchBar'
+import CategoryChangeGesture from './Basic/CategoryChangeGesture'
 
 const Stack = createStackNavigator<RootStackParamList>()
 export default () => {
@@ -28,6 +29,7 @@ export default () => {
         <Stack.Screen name="BottomCategory" component={BottomCategory} />
         <Stack.Screen name="Translated" component={Translated} />
         <Stack.Screen name="DisabledCategories" component={DisabledCategories} />
+        <Stack.Screen name="CategoryChangeGesture" component={CategoryChangeGesture} />
         <Stack.Screen name="StaticModal" component={StaticModal} />
         <Stack.Screen name="Static" component={Static} />
       </Stack.Navigator>
