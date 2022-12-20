@@ -35,6 +35,9 @@ export const EmojiCategory = React.memo(
       generateEmojiTones,
       theme,
       styles: themeStyles,
+      currentlySelectedEmojis,
+      selectedEmojiStyle,
+      selectedEmojiCallback,
     } = React.useContext(KeyboardContext)
 
     const { setKeyboardState, keyboardState } = useKeyboardStore()
@@ -65,8 +68,16 @@ export const EmojiCategory = React.memo(
         const parsedEmoji = parseEmoji(emoji)
         onEmojiSelected(parsedEmoji)
         setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji })
+        const isSelected = currentlySelectedEmojis.includes(emoji.name)
+
+        if (isSelected) {
+          selectedEmojiCallback?.(parsedEmoji)
+          return true
+        } else {
+          return false
+        }
       },
-      [onEmojiSelected, setKeyboardState]
+      [currentlySelectedEmojis, onEmojiSelected, setKeyboardState, selectedEmojiCallback]
     )
 
     const handleEmojiLongPress = React.useCallback(
@@ -87,6 +98,9 @@ export const EmojiCategory = React.memo(
       (props: ListRenderItemInfo<JsonEmoji>) => {
         const recentlyUsed = keyboardState?.recentlyUsed || []
         const recentlyUsedEmoji = recentlyUsed?.find((emoji) => emoji.name === props.item.name)
+
+        const isSelected = currentlySelectedEmojis.includes(props.item.name)
+
         return (
           <SingleEmoji
             {...props}
@@ -94,10 +108,18 @@ export const EmojiCategory = React.memo(
             emojiSize={emojiSize}
             onPress={handleEmojiPress}
             onLongPress={handleEmojiLongPress}
+            selectedEmojiStyle={isSelected ? selectedEmojiStyle : {}}
           />
         )
       },
-      [emojiSize, handleEmojiLongPress, handleEmojiPress, keyboardState?.recentlyUsed]
+      [
+        currentlySelectedEmojis,
+        emojiSize,
+        handleEmojiLongPress,
+        handleEmojiPress,
+        keyboardState?.recentlyUsed,
+        selectedEmojiStyle,
+      ]
     )
     const handleOnScroll = (ev: { nativeEvent: { contentOffset: { y: number } } }) => {
       setKeyboardScrollOffsetY(ev.nativeEvent.contentOffset.y)
