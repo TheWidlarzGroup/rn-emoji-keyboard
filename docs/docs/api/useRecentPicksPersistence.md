@@ -31,8 +31,8 @@ To ensure smooth experience we recommend that you use it as high as possible in 
 
 ### <TitleWithRequiredBadge>`initialization`</TitleWithRequiredBadge>
 
-This propery is used at the very beginning to restore previous state.
+This property is used at the very beginning to restore previous state.
 
 ### <TitleWithRequiredBadge>`onStateChange`</TitleWithRequiredBadge>
 
-This propery is used every time when user selects emoji and keyboard has enabled `enableRecentlyUsed` props
+This property is used every time when user selects emoji and keyboard has enabled `enableRecentlyUsed` props
