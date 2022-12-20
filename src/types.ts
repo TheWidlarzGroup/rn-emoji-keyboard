@@ -67,5 +67,5 @@ export type EmojiSizes = {
 }
 export type RecentPicksPersistenceConfig = {
   initialization: () => Promise<JsonEmoji[]>
-  onStateChange: (nextState: Readonly<JsonEmoji[]>) => void | Promise<void>
+  onStateChange: (nextState: Readonly<JsonEmoji['name'][]>) => void | Promise<void>
 }
