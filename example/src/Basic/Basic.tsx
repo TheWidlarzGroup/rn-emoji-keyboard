@@ -19,6 +19,7 @@ const Basic = () => {
   const handleRemoveFromCurrentlySelected = (emoji: EmojiType) => {
     console.log('removed emoji', emoji.name)
     setCurrentlySelected((prev) => prev.filter((a) => a !== emoji.name))
+    setResult('')
   }
 
   return (

@@ -26,6 +26,7 @@ export const SingleEmoji = React.memo(
         p.onLongPress(p.item, p.index, { width, height })
       })
     }
+
     return (
       <TouchableOpacity
         onPress={handlePress}

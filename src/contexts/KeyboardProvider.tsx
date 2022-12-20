@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useWindowDimensions } from 'react-native'
+import { useWindowDimensions, ViewStyle } from 'react-native'
 import {
   KeyboardProps,
   ContextValues,
@@ -22,6 +22,7 @@ import {
   zeroWidthJoiner,
 } from '../utils/skinToneSelectorUtils'
 import { deepMerge } from '../utils/deepMerge'
+import { DISSALLOWED_STYLES } from '../utils/disallowedSelectedEmojiStyles'
 
 type ProviderProps = Partial<KeyboardProps> & {
   children: React.ReactNode
@@ -155,6 +156,26 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     searchPhrase,
   ])
 
+  const selectedEmojiStyle = React.useMemo(() => {
+    const styles = props.selectedEmojiStyle
+      ? (Object.keys(props.selectedEmojiStyle) as unknown as Record<
+          keyof ViewStyle,
+          string | number
+        >[])
+      : {}
+
+    return Array.isArray(styles)
+      ? styles
+          .filter((key: keyof ViewStyle) => !DISSALLOWED_STYLES.includes(key))
+          .reduce((obj: any, key: keyof ViewStyle) => {
+            if (!props.selectedEmojiStyle) return obj
+
+            obj[key] = props.selectedEmojiStyle[key]
+            return obj
+          }, {})
+      : {}
+  }, [props.selectedEmojiStyle])
+
   const value: typeof defaultKeyboardContext & ContextValues = React.useMemo(
     () => ({
       ...defaultKeyboardContext,
@@ -174,6 +195,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
       emojiTonesData,
       shouldAnimateScroll,
       setShouldAnimateScroll,
+      selectedEmojiStyle,
     }),
     [
       activeCategoryIndex,
@@ -184,6 +206,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
       searchPhrase,
       shouldAnimateScroll,
       width,
+      selectedEmojiStyle,
     ]
   )
   return <KeyboardContext.Provider value={value}>{props.children}</KeyboardContext.Provider>
