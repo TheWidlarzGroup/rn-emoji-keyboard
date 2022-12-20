@@ -18,9 +18,10 @@ import ja from './translation/ja'
 import tr from './translation/tr'
 import no from './translation/no'
 import ro from './translation/ro'
+import np from './translation/np'
 
 export { EmojiKeyboard }
 export { useRecentPicksPersistence }
-export { en, pl, ko, it, fr, id, es, de, pt, ru, ua, vi, cs, ja, tr, no, ro }
+export { en, pl, ko, it, fr, id, es, de, pt, ru, ua, vi, cs, ja, tr, no, ro, np }
 
 export default EmojiPicker
