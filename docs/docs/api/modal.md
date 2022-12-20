@@ -33,6 +33,7 @@ Callback fired when the component is to be closed.
 ### <TitleWithRequiredBadge>`onEmojiSelected`</TitleWithRequiredBadge>
 
 Callback fired when the emoji is selected. The passed function expose an object with selected emoji data.
+It returns boolean indicating whether pressed emoji is already selected or not.
 
 <ApiTable typeVal='(emoji:{ emoji, name, slug, unicode_version }) => void' defaultVal='undefined'/>
 
@@ -158,3 +159,26 @@ Look into [**internationalization section**](/docs/documentation/internationaliz
 :::
 
 <ApiTable typeVal='CategoryTranslation' defaultVal='en'/>
+
+### `currentlySelectedEmojis`
+
+Array of currently selected emojis. It must contain emoji's name.
+
+<ApiTable typeVal='emoji.name[]' defaultVal='[]'/>
+
+### `selectedEmojiStyle`
+
+Styles for currently selected emojis.
+
+:::caution
+Emoji resizing styles such as margin, padding, height and width are disabled to prevent layout breaks.  
+Keep in mind that too wide border-radius can also be problematic.
+:::
+
+<ApiTable typeVal='ViewStyle' defaultVal='{}'/>
+
+### `selectedEmojiCallback`
+
+Callback fired when currently selected emoji is pressed.
+
+<ApiTable typeVal='(_emoji: EmojiType) => void' defaultVal='undefined'/>
