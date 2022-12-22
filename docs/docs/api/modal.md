@@ -103,6 +103,12 @@ Setting this to false will also overwrite `enableSearchAnimation` value.
 
 <ApiTable typeVal='boolean' defaultVal='true'/>
 
+### `enableCategoryChangeGesture`
+
+Allow to use horizontal swipe gesture to change emoji category
+
+<ApiTable typeVal='boolean' defaultVal='true'/>
+
 ### `enableSearchAnimation`
 
 Allow to turn off FlatList scrolling animation when search results are updated.
