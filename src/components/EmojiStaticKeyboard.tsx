@@ -71,10 +71,7 @@ export const EmojiStaticKeyboard = React.memo(
     const handleScroll = React.useCallback(
       (el: NativeSyntheticEvent<NativeScrollEvent>) => {
         const index = el.nativeEvent.contentOffset.x / width
-        Animated.spring(scrollNav, {
-          toValue: index * CATEGORY_ELEMENT_WIDTH,
-          useNativeDriver: true,
-        }).start()
+        scrollNav.setValue(index * CATEGORY_ELEMENT_WIDTH)
         if (Number.isInteger(index)) setActiveCategoryIndex(index)
       },
       [scrollNav, setActiveCategoryIndex, width]
