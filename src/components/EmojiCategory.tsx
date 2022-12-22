@@ -117,7 +117,7 @@ export const EmojiCategory = React.memo(
             <View style={categoryPosition === 'floating' ? styles.footerFloating : styles.footer} />
           )}
           initialNumToRender={10}
-          windowSize={10}
+          windowSize={16}
           maxToRenderPerBatch={5}
           keyboardShouldPersistTaps="handled"
         />
