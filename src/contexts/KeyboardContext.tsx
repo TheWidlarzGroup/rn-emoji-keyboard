@@ -154,7 +154,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; s
   styles: emptyStyles,
   enableSearchAnimation: true,
   enableCategoryChangeAnimation: true,
-  enableCategoryChangeGesture: false,
+  enableCategoryChangeGesture: true,
 }
 
 export const defaultKeyboardValues: ContextValues = {

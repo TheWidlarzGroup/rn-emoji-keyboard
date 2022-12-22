@@ -107,7 +107,7 @@ Setting this to false will also overwrite `enableSearchAnimation` value.
 
 Allow to use horizontal swipe gesture to change emoji category
 
-<ApiTable typeVal='boolean' defaultVal='false'/>
+<ApiTable typeVal='boolean' defaultVal='true'/>
 
 ### `enableSearchAnimation`
 
