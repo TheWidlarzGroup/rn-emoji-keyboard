@@ -1,10 +1,14 @@
 import { useEffect } from 'react'
-import { DevSettings } from 'react-native'
+import { DevSettings, NativeModules } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const useDebugMenu = () => {
   useEffect(() => {
-    DevSettings.addMenuItem('Clear Async Storage', () => AsyncStorage.clear)
+    const clearAndReload = () => {
+      AsyncStorage.clear().then(() => NativeModules.DevSettings.reload())
+    }
+
+    DevSettings.addMenuItem('Clear Async Storage', clearAndReload)
   }, [])
 
   return {}
