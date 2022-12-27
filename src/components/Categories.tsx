@@ -10,7 +10,11 @@ const CATEGORY_ELEMENT_WIDTH = 37
 
 const Separator = () => <View style={styles.separator} />
 
-export const Categories = () => {
+type Props = {
+  scrollNav?: Animated.Value
+}
+
+export const Categories = (p: Props) => {
   const {
     activeCategoryIndex,
     onCategoryChangeFailed,
@@ -60,12 +64,12 @@ export const Categories = () => {
           styles.activeIndicator,
           {
             backgroundColor: theme.category.containerActive,
-            transform: [{ translateX: scrollNav }],
+            transform: [{ translateX: p.scrollNav || scrollNav }],
           },
         ]}
       />
     ),
-    [theme.category.containerActive, scrollNav]
+    [theme.category.containerActive, scrollNav, p.scrollNav]
   )
 
   const getStylesBasedOnPosition = () => {
