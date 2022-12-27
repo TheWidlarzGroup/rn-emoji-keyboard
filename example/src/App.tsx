@@ -13,16 +13,21 @@ import EnableRecently from './EnableRecently/EnableRecently'
 import TopCategory from './TopCategory/TopCategory'
 import BottomCategory from './BottomCategory/BottomCategory'
 import SearchBar from './SearchBar/SearchBar'
+import { useDebugMenu } from './useDebugMenu'
+import EnableRecentlyPersistence from './EnableRecently/EnableRecently-persistence'
 import CategoryChangeGesture from './Basic/CategoryChangeGesture'
 
 const Stack = createStackNavigator<RootStackParamList>()
 export default () => {
+  useDebugMenu()
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Examples" component={Examples} />
         <Stack.Screen name="Basic" component={Basic} />
         <Stack.Screen name="EnableRecently" component={EnableRecently} />
+        <Stack.Screen name="EnableRecentlyWithPersistence" component={EnableRecentlyPersistence} />
         <Stack.Screen name="SearchBar" component={SearchBar} />
         <Stack.Screen name="Dark" component={Dark} />
         <Stack.Screen name="TopCategory" component={TopCategory} />

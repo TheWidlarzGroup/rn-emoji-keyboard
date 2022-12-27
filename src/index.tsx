@@ -1,5 +1,6 @@
 import { EmojiPicker } from './EmojiPicker'
 import { EmojiKeyboard } from './EmojiKeyboard'
+import { useRecentPicksPersistence } from './hooks/useRecentPicksPersistence'
 import en from './translation/en'
 import pl from './translation/pl'
 import ko from './translation/ko'
@@ -20,6 +21,7 @@ import ro from './translation/ro'
 import np from './translation/np'
 
 export { EmojiKeyboard }
+export { useRecentPicksPersistence }
 export { en, pl, ko, it, fr, id, es, de, pt, ru, ua, vi, cs, ja, tr, no, ro, np }
 
 export default EmojiPicker

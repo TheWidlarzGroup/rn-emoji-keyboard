@@ -1419,6 +1419,13 @@
   optionalDependencies:
     node-notifier "^8.0.0"
 
+"@jest/schemas@^29.0.0":
+  version "29.0.0"
+  resolved "https://registry.npmjs.org/@jest/schemas/-/schemas-29.0.0.tgz#5f47f5994dd4ef067fb7b4188ceac45f77fe952a"
+  integrity sha512-3Ab5HgYIIAnS0HjqJHQYZS+zXc4tUmTmBH3z83ajI6afXp8X3ZtdLX+nXx+I7LNkJD7uN9LAVhgnjDgZa2z0kA==
+  dependencies:
+    "@sinclair/typebox" "^0.24.1"
+
 "@jest/source-map@^24.9.0":
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/@jest/source-map/-/source-map-24.9.0.tgz#0e263a94430be4b41da683ccc1e6bffe2a191714"
@@ -1794,6 +1801,11 @@
     conventional-recommended-bump "^6.1.0"
     prepend-file "^2.0.0"
 
+"@sinclair/typebox@^0.24.1":
+  version "0.24.51"
+  resolved "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.24.51.tgz#645f33fe4e02defe26f2f5c0410e1c094eac7f5f"
+  integrity sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
@@ -1831,6 +1843,13 @@
   integrity sha512-PyRA9sm1Yayuj5OIoJ1hGt2YISX45w9WcFbh6ddT0Z/0yaFxOtGLInr4jUfU1EAFVs0Yfyfev4RNwBlUaHdlDQ==
   dependencies:
     defer-to-connect "^2.0.0"
+
+"@testing-library/react-native@^11.4.0":
+  version "11.4.0"
+  resolved "https://registry.npmjs.org/@testing-library/react-native/-/react-native-11.4.0.tgz#66546d4c2dd3af82d1ce0ada2c1a9ab0706bc27a"
+  integrity sha512-Pw1T3QoRyoPlnbDPI7pJCRChX/HquEVk6b9XfUuO/LrLJpqAOtZQDYz67eVJfVlhIlTu7hesm57ikIabOWKSlg==
+  dependencies:
+    pretty-format "^29.0.0"
 
 "@tootallnate/once@1":
   version "1.1.2"
@@ -2300,6 +2319,11 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   integrity sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==
   dependencies:
     color-convert "^2.0.1"
+
+ansi-styles@^5.0.0:
+  version "5.2.0"
+  resolved "https://registry.npmjs.org/ansi-styles/-/ansi-styles-5.2.0.tgz#07449690ad45777d1924ac2abb2fc8895dba836b"
+  integrity sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==
 
 ansi-wrap@0.1.0, ansi-wrap@^0.1.0:
   version "0.1.0"
@@ -7592,6 +7616,15 @@ pretty-format@^26.0.0, pretty-format@^26.6.2:
     ansi-styles "^4.0.0"
     react-is "^17.0.1"
 
+pretty-format@^29.0.0:
+  version "29.2.1"
+  resolved "https://registry.npmjs.org/pretty-format/-/pretty-format-29.2.1.tgz#86e7748fe8bbc96a6a4e04fa99172630907a9611"
+  integrity sha512-Y41Sa4aLCtKAXvwuIpTvcFBkyeYp2gdFWzXGA+ZNES3VwURIB165XO/z7CjETwzCCS53MjW/rLMyyqEnTtaOfA==
+  dependencies:
+    "@jest/schemas" "^29.0.0"
+    ansi-styles "^5.0.0"
+    react-is "^18.0.0"
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -7728,7 +7761,7 @@ react-devtools-core@^4.6.0:
     shell-quote "^1.6.1"
     ws "^7"
 
-react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4:
+react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
@@ -7737,6 +7770,11 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-is@^18.0.0:
+  version "18.2.0"
+  resolved "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
+  integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
 react-native-builder-bob@^0.18.0:
   version "0.18.1"
@@ -7810,6 +7848,16 @@ react-refresh@^0.4.0:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.4.3.tgz#966f1750c191672e76e16c2efa569150cc73ab53"
   integrity sha512-Hwln1VNuGl/6bVwnd0Xdn1e84gT/8T9aYNL+HAKDArLCS7LWjwr7StE30IEYbIkx0Vi3vs+coQxe+SQDbGbbpA==
+
+react-test-renderer@16.13.1:
+  version "16.13.1"
+  resolved "https://registry.npmjs.org/react-test-renderer/-/react-test-renderer-16.13.1.tgz#de25ea358d9012606de51e012d9742e7f0deabc1"
+  integrity sha512-Sn2VRyOK2YJJldOqoh8Tn/lWQ+ZiKhyZTPtaO0Q6yNj+QDbmRkVFap6pZPy3YQk8DScRDfyqm/KxKYP9gCMRiQ==
+  dependencies:
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    react-is "^16.8.6"
+    scheduler "^0.19.1"
 
 react@16.13.1:
   version "16.13.1"
@@ -8244,7 +8292,7 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-scheduler@0.19.1:
+scheduler@0.19.1, scheduler@^0.19.1:
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
   integrity sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==
