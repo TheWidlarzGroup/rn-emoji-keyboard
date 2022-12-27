@@ -57,7 +57,7 @@ describe('useRecentPickPersistence tests', () => {
     })
 
     expect(result.current.keyboardState.recentlyUsed).toStrictEqual([testData[1]])
-    expect(onStateChangeMock).toHaveBeenCalledWith([testData[1].name])
+    expect(onStateChangeMock).toHaveBeenCalledWith([testData[1]])
 
     act(() => {
       result.current.setKeyboardState({
@@ -68,7 +68,6 @@ describe('useRecentPickPersistence tests', () => {
 
     expect(result.current.keyboardState.recentlyUsed).toStrictEqual(testData)
 
-    const testDataNames = testData.map((emoji) => emoji.name)
-    expect(onStateChangeMock).toHaveBeenCalledWith(testDataNames)
+    expect(onStateChangeMock).toHaveBeenCalledWith(testData)
   })
 })

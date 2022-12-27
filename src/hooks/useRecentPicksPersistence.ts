@@ -6,8 +6,7 @@ import type { RecentPicksPersistenceConfig } from '../types'
 export const useRecentPicksPersistence = (config: RecentPicksPersistenceConfig) => {
   useEffect(() => {
     const onChangeWrapper = (nextState: KeyboardState) => {
-      const emojisNames = nextState.recentlyUsed.map((emoji) => emoji.name)
-      config.onStateChange(emojisNames)
+      config.onStateChange(nextState.recentlyUsed)
     }
 
     const initialize = async () => {

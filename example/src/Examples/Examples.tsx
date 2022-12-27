@@ -47,7 +47,7 @@ const Examples = ({ navigation }: Props) => {
         />
         <Button
           title="Enable recently used with persistence"
-          onPress={() => navigation.navigate('EnableRecently')}
+          onPress={() => navigation.navigate('EnableRecentlyWithPersistence')}
         />
         <Button title="Category Top" onPress={() => navigation.navigate('TopCategory')} />
         <Button title="Category Bottom" onPress={() => navigation.navigate('BottomCategory')} />
