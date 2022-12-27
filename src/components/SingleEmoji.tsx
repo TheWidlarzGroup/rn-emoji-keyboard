@@ -42,6 +42,14 @@ export const SingleEmoji = React.memo(
 )
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 4, margin: 4, justifyContent: 'center', alignItems: 'center' },
+  container: {
+    flex: 1,
+    paddingHorizontal: 2,
+    paddingVertical: 4,
+    marginHorizontal: 6,
+    marginVertical: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   emoji: { color: '#000' },
 })
