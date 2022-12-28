@@ -6,6 +6,7 @@ import {
   StyleSheet,
   GestureResponderEvent,
   ViewStyle,
+  StyleProp,
 } from 'react-native'
 import type { EmojiSizes, JsonEmoji } from '../types'
 
@@ -15,7 +16,8 @@ type Props = {
   index: number
   onPress: (emoji: JsonEmoji) => void
   onLongPress: (emoji: JsonEmoji, emojiIndex: number, emojiSizes: EmojiSizes) => void
-  selectedEmojiStyle?: ViewStyle
+  selectedEmojiStyle?: StyleProp<ViewStyle>
+  isSelected?: boolean
 }
 export const SingleEmoji = React.memo(
   (p: Props) => {
@@ -38,7 +40,7 @@ export const SingleEmoji = React.memo(
       </TouchableOpacity>
     )
   },
-  () => true
+  (prevProps, nextProps) => prevProps.isSelected === nextProps.isSelected
 )
 
 const styles = StyleSheet.create({
