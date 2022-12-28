@@ -17,13 +17,9 @@ const SelectedEmojis = () => {
   const handlePick = (emoji: EmojiType) => {
     console.log(emoji)
     setResult(emoji.emoji)
-    setIsModalOpen((prev) => !prev)
-    setCurrentlySelected((prev) => [...prev, { name: emoji.name, emoji: emoji.emoji }])
-  }
-
-  const handleRemoveFromCurrentlySelected = (emoji: EmojiType) => {
-    console.log('removed emoji', emoji.name)
-    setCurrentlySelected((prev) => prev.filter((a) => a.name !== emoji.name))
+    if (emoji.alreadySelected)
+      setCurrentlySelected((prev) => prev.filter((a) => a.name !== emoji.name))
+    else setCurrentlySelected((prev) => [...prev, { name: emoji.name, emoji: emoji.emoji }])
   }
 
   const currSelectedEmojis = currentlySelected.map((a) => a.emoji)
@@ -41,9 +37,8 @@ const SelectedEmojis = () => {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        currentlySelectedEmojis={currSelectedNames}
-        selectedEmojiStyle={styles.selectedEmojiStyle}
-        selectedEmojiCallback={handleRemoveFromCurrentlySelected}
+        selectedEmojis={currSelectedNames}
+        allowMultipleSelections
       />
     </SafeAreaView>
   )
@@ -57,10 +52,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 64,
     fontSize: 18,
-  },
-  selectedEmojiStyle: {
-    borderRadius: 25,
-    backgroundColor: '#cccccc',
   },
 })
 

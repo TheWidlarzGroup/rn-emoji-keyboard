@@ -9,28 +9,24 @@ To preview app with this example, clone [**github repo**](https://github.com/The
 
 ### Usage
 
-To use this feature you have to pass a currentlySelectedEmoji array with emojis names.  
-By default currently selected emojis don't have any extra styles. This customizable with the selectedEmojiStyle prop.
-We have disabled styles that change the width or height of the emoji to prevent layout breaks.  
-You are also able to pass selectedEmojiCallback prop which will be invoked when currently selected emoji is pressed.
+To use this feature you have to pass a [selectedEmojis](/docs/api/modal#selectedemojis) array with emoji names.
+When you provide selectedEmojis array, `onEmojiSelected` callback will also return `alreadySelected` boolean indicating whether pressed emoji was already selected or not.
 
 ```jsx
 import EmojiPicker from 'rn-emoji-keyboard'
 
 const ExampleComponent = () => {
   // ...
-  const [currentlySelectedEmojis, seCurrentlySelectedEmojis] = useState([])
+  const [currentlySelectedEmojis, setCurrentlySelectedEmojis] = useState([])
 
   const handleOnEmojiSelected = (emoji: EmojiType) => {
     //..Your on select logic
 
-    // Add pressed emoji to the currently selected array
-    setCurrentlySelectedEmojis((prev) => [...prev, emoji.name])
-  }
+    // Remove or add pressed emoji to the currently selected array
+    if (emoji.alreadySelected)
+      setCurrentlySelected((prev) => prev.filter((a) => a !== emoji.name))
+    else setCurrentlySelected((prev) => [...prev, emoji.name])
 
-  const handleAlreadySelectedEmojiPress = (emoji: emojiType) => {
-    // Remove pressed emoji from the currently selected array
-    setCurrentlySelectedEmojis((prev) => prev.filter((emojiName) => emojiName !== emoji.name))
   }
 
   return (
@@ -38,11 +34,7 @@ const ExampleComponent = () => {
       open={isOpen}
       onClose={handleOnClose}
       onEmojiSelected={handleOnEmojiSelected}
-      currentlySelectedEmojis={currentlySelected}
-      selectedEmojiStyle={{
-        borderRadius: 25,
-        backgroundColor: '#cccccc',
-      }}
+      selectedEmojis={currentlySelected}
     />
   )
 }
