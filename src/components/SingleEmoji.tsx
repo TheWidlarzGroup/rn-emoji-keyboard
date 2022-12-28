@@ -19,6 +19,7 @@ type Props = {
   selectedEmojiStyle?: StyleProp<ViewStyle>
   isSelected?: boolean
 }
+
 export const SingleEmoji = React.memo(
   (p: Props) => {
     const handlePress = () => p.onPress(p.item)
@@ -33,8 +34,8 @@ export const SingleEmoji = React.memo(
       <TouchableOpacity
         onPress={handlePress}
         onLongPress={handleLongPress}
-        style={[styles.container, p.selectedEmojiStyle]}>
-        <View pointerEvents={'none'}>
+        style={styles.container}>
+        <View pointerEvents={'none'} style={[styles.emojiWrapper, p.selectedEmojiStyle]}>
           <Text style={[styles.emoji, { fontSize: p.emojiSize }]}>{p.item.emoji}</Text>
         </View>
       </TouchableOpacity>
@@ -46,12 +47,12 @@ export const SingleEmoji = React.memo(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 2,
-    paddingVertical: 4,
-    marginHorizontal: 6,
-    marginVertical: 4,
+    padding: 4,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  emojiWrapper: {
+    padding: 4,
   },
   emoji: { color: '#000' },
 })
