@@ -28,7 +28,7 @@
     "prepare": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
-    "pods": "cd example && cd ios && USE_FABRIC=1 RCT_NEW_ARCH_ENABLED=1 pod install --quiet",
+    "pods": "cd example && cd ios && USE_FABRIC=1 RCT_NEW_ARCH_ENABLED=1 pod install --silent",
     "bootstrap": "yarn example && yarn && yarn pods",
     "generateIcons": "node ./scripts/generateIcons.js"
   },
