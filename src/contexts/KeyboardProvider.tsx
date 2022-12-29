@@ -55,6 +55,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
           index: tone.name,
           name: emoji.name,
           v: emoji.v,
+          toneEnabled: true,
         }
         // Check for emojis special signs which might break tone modify
         switch (true) {
