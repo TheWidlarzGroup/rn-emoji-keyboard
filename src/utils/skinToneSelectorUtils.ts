@@ -85,26 +85,21 @@ export const skinTones = [
   {
     name: 'light_skin_tone',
     color: '🏻',
-    code: String.fromCodePoint(0x1f3fb),
   },
   {
     name: 'medium_light_skin_tone',
     color: '🏼',
-    code: String.fromCodePoint(0x1f3fc),
   },
   {
     name: 'medium_skin_tone',
     color: '🏽',
-    code: String.fromCodePoint(0x1f3fd),
   },
   {
     name: 'medium_dark_skin_tone',
     color: '🏾',
-    code: String.fromCodePoint(0x1f3fe),
   },
   {
     name: 'dark_skin_tone',
     color: '🏿',
-    code: String.fromCodePoint(0x1f3ff),
   },
 ]
