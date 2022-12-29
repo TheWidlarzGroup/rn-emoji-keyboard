@@ -13,14 +13,27 @@ export const SearchBar = () => {
     theme,
     styles: themeStyles,
     clearEmojiTonesData,
+    enableSearchAnimation,
+    setShouldAnimateScroll,
+    enableCategoryChangeAnimation,
   } = React.useContext(KeyboardContext)
   const inputRef = React.useRef<TextInput>(null)
 
-  const handleSearch = (text: string) => {
+  const handleSearch = async (text: string) => {
     setSearchPhrase(text)
-    if (text === '') return setActiveCategoryIndex(0)
+
+    if (text === '') {
+      await setActiveCategoryIndex(0)
+      setShouldAnimateScroll(enableCategoryChangeAnimation)
+
+      return
+    }
+
     const searchIndex = renderList.findIndex((cat) => cat.title === 'search')
-    if (searchIndex !== -1) setActiveCategoryIndex(searchIndex)
+    if (searchIndex !== -1) {
+      setActiveCategoryIndex(searchIndex)
+      setShouldAnimateScroll(enableSearchAnimation)
+    }
   }
   const clearPhrase = () => {
     setSearchPhrase('')

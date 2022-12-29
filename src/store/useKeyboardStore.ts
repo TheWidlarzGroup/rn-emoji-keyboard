@@ -6,12 +6,12 @@ let globalKeyboardState: KeyboardState = {
   recentlyUsed: [],
 }
 
-type KeyboardStateSetter = () => any
-const keyboardStateListeners = new Set<KeyboardStateSetter>()
+type KeyboardStateSetter = (nextState: Readonly<KeyboardState>) => void
+export const keyboardStateListeners = new Set<KeyboardStateSetter>()
 
 const setKeyboardState = (action: KeyboardAction) => {
   globalKeyboardState = keyboardReducer(globalKeyboardState, action)
-  keyboardStateListeners.forEach((listener) => listener())
+  keyboardStateListeners.forEach((listener) => listener(globalKeyboardState))
 }
 
 export const useKeyboardStore = () => {
@@ -27,3 +27,5 @@ export const useKeyboardStore = () => {
 
   return { keyboardState, setKeyboardState }
 }
+
+useKeyboardStore.setKeyboardState = setKeyboardState

@@ -379,11 +379,13 @@ PODS:
     - React-jsi (= 0.70.2)
     - React-logger (= 0.70.2)
     - React-perflogger (= 0.70.2)
+  - RNCAsyncStorage (1.17.11):
+    - React-Core
   - RNCMaskedView (0.1.11):
     - React
-  - RNGestureHandler (2.7.1):
+  - RNGestureHandler (2.8.0):
     - React-Core
-  - RNReanimated (3.0.0-rc.3):
+  - RNReanimated (2.13.0):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -410,10 +412,10 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.18.0):
+  - RNScreens (3.18.2):
     - React-Core
     - React-RCTImage
-  - RNSVG (13.4.0):
+  - RNSVG (13.6.0):
     - React-Core
   - SocketRocket (0.6.0)
   - Yoga (1.14.0)
@@ -481,6 +483,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -577,6 +580,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
   RNGestureHandler:
@@ -639,11 +644,12 @@ SPEC CHECKSUMS:
   React-RCTVibration: 89e2cbea456ac5ec623943661d00e4dc45fe74b9
   React-runtimeexecutor: 80065f60af4f4b05603661070c8622bb3740bf16
   ReactCommon: 1209130f460e4aa9d255ddc75fa0a827ebf93dfb
+  RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
-  RNGestureHandler: b7a872907ee289ada902127f2554fa1d2c076122
-  RNReanimated: 27326889ad55f01069ed8a5b6d15f937a82bcc73
-  RNScreens: f3230dd008a7d0ce5c0a8bc78ff12cf2315bda24
-  RNSVG: 07dbd870b0dcdecc99b3a202fa37c8ca163caec2
+  RNGestureHandler: 62232ba8f562f7dea5ba1b3383494eb5bf97a4d3
+  RNReanimated: ce445c233a6ff5600223484a88ad5704945d972a
+  RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
+  RNSVG: 3a79c0c4992213e4f06c08e62730c5e7b9e4dc17
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 043f8eb97345d0171f27fead4d1849cacf0472a5
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a

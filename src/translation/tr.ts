@@ -1,6 +1,6 @@
 import type { CategoryTranslation } from '../types'
 
-export const en: CategoryTranslation = {
+const tr: CategoryTranslation = {
   recently_used: 'Son zamanlarda kullanılan',
   smileys_emotion: 'Suratlar & Duygular',
   people_body: 'İnsanlar & Bedenler',
@@ -13,4 +13,4 @@ export const en: CategoryTranslation = {
   flags: 'Bayraklar',
   search: 'Ara',
 }
-export default en
+export default tr

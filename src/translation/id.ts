@@ -1,6 +1,6 @@
 import type { CategoryTranslation } from '../types'
 
-export const id: CategoryTranslation = {
+const id: CategoryTranslation = {
   recently_used: 'Baru saja digunakan',
   smileys_emotion: 'Tersenyum & Emosi',
   people_body: 'Orang & Tubuh',

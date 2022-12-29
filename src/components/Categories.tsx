@@ -10,7 +10,11 @@ const CATEGORY_ELEMENT_WIDTH = 37
 
 const Separator = () => <View style={styles.separator} />
 
-export const Categories = () => {
+type Props = {
+  scrollNav?: Animated.Value
+}
+
+export const Categories = (p: Props) => {
   const {
     activeCategoryIndex,
     onCategoryChangeFailed,
@@ -20,14 +24,23 @@ export const Categories = () => {
     clearEmojiTonesData,
     theme,
     styles: themeStyles,
+    enableCategoryChangeAnimation,
+    setShouldAnimateScroll,
   } = React.useContext(KeyboardContext)
   const scrollNav = React.useRef(new Animated.Value(0)).current
   const handleScrollToCategory = React.useCallback(
     (category: CategoryTypes) => {
       clearEmojiTonesData()
       setActiveCategoryIndex(renderList.findIndex((cat) => cat.title === category))
+      setShouldAnimateScroll(enableCategoryChangeAnimation)
     },
-    [renderList, setActiveCategoryIndex, clearEmojiTonesData]
+    [
+      clearEmojiTonesData,
+      setActiveCategoryIndex,
+      renderList,
+      setShouldAnimateScroll,
+      enableCategoryChangeAnimation,
+    ]
   )
 
   const renderItem = React.useCallback(
@@ -36,6 +49,7 @@ export const Categories = () => {
     ),
     [handleScrollToCategory]
   )
+
   React.useEffect(() => {
     Animated.spring(scrollNav, {
       toValue: activeCategoryIndex * CATEGORY_ELEMENT_WIDTH,
@@ -50,12 +64,12 @@ export const Categories = () => {
           styles.activeIndicator,
           {
             backgroundColor: theme.category.containerActive,
-            transform: [{ translateX: scrollNav }],
+            transform: [{ translateX: p.scrollNav || scrollNav }],
           },
         ]}
       />
     ),
-    [theme.category.containerActive, scrollNav]
+    [theme.category.containerActive, scrollNav, p.scrollNav]
   )
 
   const getStylesBasedOnPosition = () => {

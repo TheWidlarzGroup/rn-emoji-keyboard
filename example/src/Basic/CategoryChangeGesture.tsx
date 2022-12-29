@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import EmojiPicker from 'rn-emoji-keyboard'
 import type { EmojiType } from 'src/types'
 
-const EnableRecently = () => {
+const CategoryChangeGesture = () => {
   const [result, setResult] = React.useState<string>()
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
 
@@ -13,7 +13,6 @@ const EnableRecently = () => {
     setResult(emoji.emoji)
     setIsModalOpen((prev) => !prev)
   }
-
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Result: {result}</Text>
@@ -22,10 +21,10 @@ const EnableRecently = () => {
       </TouchableOpacity>
 
       <EmojiPicker
+        enableCategoryChangeGesture
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        enableRecentlyUsed
       />
     </SafeAreaView>
   )
@@ -42,4 +41,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default EnableRecently
+export default CategoryChangeGesture

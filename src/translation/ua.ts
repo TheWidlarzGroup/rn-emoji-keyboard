@@ -1,6 +1,7 @@
 import type { CategoryTranslation } from '../types'
 
 const ua: CategoryTranslation = {
+  recently_used: 'Недавні',
   smileys_emotion: 'Смайли',
   people_body: 'Люди',
   animals_nature: 'Тварини та природа',
@@ -11,7 +12,5 @@ const ua: CategoryTranslation = {
   symbols: 'Символи',
   flags: 'Прапори',
   search: 'Пошук емодзі',
-  recently_used: 'Недавні',
 }
-
 export default ua

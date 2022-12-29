@@ -22,6 +22,9 @@ Due to the limited translation possibilities, we only provide a few pre-defined 
 - `cs` - Czech 🇨🇿
 - `ja` - Japanese 🇯🇵
 - `tr` - Turkish 🇹🇷
+- `no` - Norwegian 🇳🇴
+- `ro` - Romanian 🇷🇴
+- `np` - Nepali 🇳🇵
 
 First import lang and use it as `translation` prop.
 

@@ -1,6 +1,7 @@
 import type { CategoryTranslation } from '../types'
 
 const ru: CategoryTranslation = {
+  recently_used: 'Недавние',
   smileys_emotion: 'Смайлы',
   people_body: 'Люди',
   animals_nature: 'Животные и природа',
@@ -11,7 +12,5 @@ const ru: CategoryTranslation = {
   symbols: 'Символы',
   flags: 'Флаги',
   search: 'Поиск емодзи',
-  recently_used: 'Недавние',
 }
-
 export default ru

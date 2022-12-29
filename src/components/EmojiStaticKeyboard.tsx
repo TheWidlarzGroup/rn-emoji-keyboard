@@ -7,6 +7,8 @@ import {
   useWindowDimensions,
   Animated,
   SafeAreaView,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
 } from 'react-native'
 import type { CategoryTypes, EmojisByCategory } from '../types'
 import { EmojiCategory } from './EmojiCategory'
@@ -17,12 +19,16 @@ import { useKeyboardStore } from '../store/useKeyboardStore'
 import { ConditionalContainer } from './ConditionalContainer'
 import { SkinTones } from './SkinTones'
 
+const CATEGORY_ELEMENT_WIDTH = 37
+
 export const EmojiStaticKeyboard = React.memo(
   () => {
     const { width } = useWindowDimensions()
     const {
       activeCategoryIndex,
+      setActiveCategoryIndex,
       onCategoryChangeFailed,
+      enableCategoryChangeGesture,
       categoryPosition,
       enableSearchBar,
       searchPhrase,
@@ -30,6 +36,8 @@ export const EmojiStaticKeyboard = React.memo(
       disableSafeArea,
       theme,
       styles: themeStyles,
+      shouldAnimateScroll,
+      enableCategoryChangeAnimation,
     } = React.useContext(KeyboardContext)
     const { keyboardState } = useKeyboardStore()
     const flatListRef = React.useRef<FlatList>(null)
@@ -55,10 +63,21 @@ export const EmojiStaticKeyboard = React.memo(
     React.useEffect(() => {
       flatListRef.current?.scrollToIndex({
         index: activeCategoryIndex,
+        animated: shouldAnimateScroll && enableCategoryChangeAnimation,
       })
-    }, [activeCategoryIndex])
+    }, [activeCategoryIndex, enableCategoryChangeAnimation, shouldAnimateScroll])
 
     const keyExtractor = React.useCallback((item: EmojisByCategory) => item.title, [])
+    const scrollNav = React.useRef(new Animated.Value(0)).current
+
+    const handleScroll = React.useCallback(
+      (el: NativeSyntheticEvent<NativeScrollEvent>) => {
+        const index = el.nativeEvent.contentOffset.x / width
+        scrollNav.setValue(index * CATEGORY_ELEMENT_WIDTH)
+        if (Number.isInteger(index)) setActiveCategoryIndex(index)
+      },
+      [scrollNav, setActiveCategoryIndex, width]
+    )
 
     return (
       <View
@@ -92,12 +111,13 @@ export const EmojiStaticKeyboard = React.memo(
               pagingEnabled
               scrollEventThrottle={16}
               getItemLayout={getItemLayout}
-              scrollEnabled={false}
+              scrollEnabled={enableCategoryChangeGesture}
               initialNumToRender={1}
               maxToRenderPerBatch={1}
+              onScroll={handleScroll}
               keyboardShouldPersistTaps="handled"
             />
-            <Categories />
+            <Categories scrollNav={enableCategoryChangeGesture ? scrollNav : undefined} />
             <SkinTones keyboardScrollOffsetY={keyboardScrollOffsetY} />
           </>
         </ConditionalContainer>
