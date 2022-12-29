@@ -45,7 +45,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     (emoji: JsonEmoji, emojiIndex: number, emojiSizes: any) => {
       if (!emoji || !emoji.toneEnabled) return
 
-      const EXTRA_SEARCH_TOP = props.enableSearchBar ? 50 : 0
+      const EXTRA_SEARCH_TOP = props.enableSearchBar || props.categoryPosition === 'top' ? 50 : 0
 
       const splittedEmoji = emoji.emoji.split('')
       const ZWJIndex = splittedEmoji.findIndex((a) => a === zeroWidthJoiner)
@@ -98,7 +98,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
         funnelXPosition,
       })
     },
-    [props.enableSearchBar, width]
+    [props.categoryPosition, props.enableSearchBar, width]
   )
 
   const clearEmojiTonesData = () => setEmojiTonesData(null)
