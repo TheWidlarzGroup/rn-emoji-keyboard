@@ -63,6 +63,7 @@ export const EmojiCategory = React.memo(
     const handleEmojiPress = React.useCallback(
       (emoji: JsonEmoji) => {
         if (emoji.name === 'blank emoji') return
+        clearEmojiTonesData()
         const parsedEmoji = parseEmoji(emoji)
         setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji })
         if (Array.isArray(selectedEmojis))
@@ -72,7 +73,7 @@ export const EmojiCategory = React.memo(
           })
         onEmojiSelected(parsedEmoji)
       },
-      [selectedEmojis, onEmojiSelected, setKeyboardState]
+      [selectedEmojis, onEmojiSelected, setKeyboardState, clearEmojiTonesData]
     )
 
     const handleEmojiLongPress = React.useCallback(
