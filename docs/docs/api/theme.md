@@ -5,11 +5,7 @@ title: Theme
 
 import { ApiTable } from '../../src/components/ApiTable/ApiTable.js'
 
-In this library you are able to use your own styles for every component. It allows user to easily match colours with the rest of the application. Of course it means that's using a dark mode is very convenient.
-
-:::tip
-To ensure smooth experience we recommend that you use it as high as possible in the React structure. eg. App.tsx file
-:::
+This props is supposed to be used for theming as it only allows to change colors of the components and text. It allows user to easily match colors with the rest of the application. Of course it means that's using a dark mode is very convenient. If you want deeper styles customization checkout the **styles** prop.
 
 ### `theme`
 
