@@ -110,7 +110,6 @@ export const EmojiCategory = React.memo(
           keyExtractor={keyExtractor}
           numColumns={numberOfColumns}
           renderItem={renderItem}
-          removeClippedSubviews={true}
           getItemLayout={getItemLayout}
           onScroll={handleOnScroll}
           ListFooterComponent={() => (
