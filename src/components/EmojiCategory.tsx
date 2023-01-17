@@ -6,6 +6,7 @@ import { SingleEmoji } from './SingleEmoji'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import { parseEmoji } from '../utils/parseEmoji'
+import { removeSkinToneModifier } from '../utils/skinToneSelectorUtils'
 
 const emptyEmoji: JsonEmoji = {
   emoji: '',
@@ -71,7 +72,13 @@ export const EmojiCategory = React.memo(
     const handleEmojiLongPress = React.useCallback(
       (emoji: JsonEmoji, emojiIndex: number, emojiSizes: EmojiSizes) => {
         clearEmojiTonesData()
-        generateEmojiTones(emoji, emojiIndex, emojiSizes)
+
+        const emojiWithoutTone = {
+          ...emoji,
+          emoji: removeSkinToneModifier(emoji.emoji),
+        }
+
+        generateEmojiTones(emojiWithoutTone, emojiIndex, emojiSizes)
       },
       [clearEmojiTonesData, generateEmojiTones]
     )

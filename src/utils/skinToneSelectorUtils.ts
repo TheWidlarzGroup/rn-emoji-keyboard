@@ -65,6 +65,22 @@ export const insertAtCertainIndex = (arr: string[], index: number, newItem: stri
 export const zeroWidthJoiner = String.fromCodePoint(0x200d)
 export const variantSelector = String.fromCodePoint(0xfe0f)
 
+export const skinToneCodes = [
+  String.fromCodePoint(0x1f3fb),
+  String.fromCodePoint(0x1f3fc),
+  String.fromCodePoint(0x1f3fe),
+  String.fromCodePoint(0x1f3fd),
+  String.fromCodePoint(0x1f3ff),
+]
+
+export const removeSkinToneModifier = (emoji: string) => {
+  let emojiCopy = emoji
+  for (let i = 0; i < skinToneCodes.length; i++) {
+    emojiCopy = emojiCopy.replace(skinToneCodes[i], '')
+  }
+  return emojiCopy
+}
+
 export const skinTones = [
   {
     name: 'light_skin_tone',

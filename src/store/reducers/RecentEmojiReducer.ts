@@ -35,4 +35,4 @@ export default function recentEmojiReducer(
 }
 
 const filterEmoji = (state: RecentEmojiState, emoji: JsonEmoji) =>
-  state.recentlyUsed.filter((usedEmoji) => usedEmoji.emoji !== emoji.emoji)
+  state.recentlyUsed.filter((usedEmoji) => usedEmoji.name !== emoji.name)
