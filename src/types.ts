@@ -34,6 +34,7 @@ export type EmojiType = {
   slug: string
   unicode_version: string
   toneEnabled: boolean
+  alreadySelected?: boolean
 }
 
 export type CategoryPosition = 'floating' | 'top' | 'bottom'

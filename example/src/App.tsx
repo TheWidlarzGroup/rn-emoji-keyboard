@@ -16,6 +16,7 @@ import SearchBar from './SearchBar/SearchBar'
 import { useDebugMenu } from './useDebugMenu'
 import EnableRecentlyPersistence from './EnableRecently/EnableRecently-persistence'
 import CategoryChangeGesture from './Basic/CategoryChangeGesture'
+import SelectedEmojis from './SelectedEmojis/SelectedEmojis'
 
 const Stack = createStackNavigator<RootStackParamList>()
 export default () => {
@@ -37,6 +38,7 @@ export default () => {
         <Stack.Screen name="CategoryChangeGesture" component={CategoryChangeGesture} />
         <Stack.Screen name="StaticModal" component={StaticModal} />
         <Stack.Screen name="Static" component={Static} />
+        <Stack.Screen name="SelectedEmojis" component={SelectedEmojis} />
       </Stack.Navigator>
     </NavigationContainer>
   )

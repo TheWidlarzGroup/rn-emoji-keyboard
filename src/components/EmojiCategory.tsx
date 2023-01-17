@@ -35,6 +35,7 @@ export const EmojiCategory = React.memo(
       generateEmojiTones,
       theme,
       styles: themeStyles,
+      selectedEmojis,
     } = React.useContext(KeyboardContext)
 
     const { setKeyboardState, keyboardState } = useKeyboardStore()
@@ -62,11 +63,17 @@ export const EmojiCategory = React.memo(
     const handleEmojiPress = React.useCallback(
       (emoji: JsonEmoji) => {
         if (emoji.name === 'blank emoji') return
+        clearEmojiTonesData()
         const parsedEmoji = parseEmoji(emoji)
-        onEmojiSelected(parsedEmoji)
         setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji })
+        if (Array.isArray(selectedEmojis))
+          return onEmojiSelected({
+            ...parsedEmoji,
+            alreadySelected: selectedEmojis.includes(emoji.name),
+          })
+        onEmojiSelected(parsedEmoji)
       },
-      [onEmojiSelected, setKeyboardState]
+      [selectedEmojis, onEmojiSelected, setKeyboardState, clearEmojiTonesData]
     )
 
     const handleEmojiLongPress = React.useCallback(
@@ -87,17 +94,38 @@ export const EmojiCategory = React.memo(
       (props: ListRenderItemInfo<JsonEmoji>) => {
         const recentlyUsed = keyboardState?.recentlyUsed || []
         const recentlyUsedEmoji = recentlyUsed?.find((emoji) => emoji.name === props.item.name)
+
+        const isSelected = selectedEmojis && selectedEmojis.includes(props.item.name)
+
         return (
           <SingleEmoji
             {...props}
+            isSelected={isSelected}
             item={recentlyUsedEmoji || props.item}
             emojiSize={emojiSize}
             onPress={handleEmojiPress}
             onLongPress={handleEmojiLongPress}
+            selectedEmojiStyle={
+              isSelected
+                ? [
+                    styles.selectedEmoji,
+                    { backgroundColor: theme.emoji.selected },
+                    themeStyles.emoji.selected,
+                  ]
+                : {}
+            }
           />
         )
       },
-      [emojiSize, handleEmojiLongPress, handleEmojiPress, keyboardState?.recentlyUsed]
+      [
+        keyboardState?.recentlyUsed,
+        selectedEmojis,
+        emojiSize,
+        handleEmojiPress,
+        handleEmojiLongPress,
+        theme.emoji.selected,
+        themeStyles.emoji.selected,
+      ]
     )
     const handleOnScroll = (ev: { nativeEvent: { contentOffset: { y: number } } }) => {
       setKeyboardScrollOffsetY(ev.nativeEvent.contentOffset.y)
@@ -153,4 +181,5 @@ const styles = StyleSheet.create({
   },
   footer: { height: 8 },
   footerFloating: { height: 70 },
+  selectedEmoji: { borderRadius: 25 },
 })

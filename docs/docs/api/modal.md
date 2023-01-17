@@ -8,7 +8,7 @@ import { ApiTable } from '../../src/components/ApiTable/ApiTable.js'
 
 # Modal Mode
 
-The library gives you the possibility to choose from two modes: modal or static. This section refers to the modal mode (for static mode, see: [static section](/docs/api/static))
+The library gives you the possibility to choose from two modes: modal or static. This section refers to the modal mode (for static mode, see [static section](/docs/api/static))
 
 To apply the modal mode in your app, use a default import from `rn-emoji-keyboard`
 
@@ -33,8 +33,9 @@ Callback fired when the component is to be closed.
 ### <TitleWithRequiredBadge>`onEmojiSelected`</TitleWithRequiredBadge>
 
 Callback fired when the emoji is selected. The passed function expose an object with selected emoji data.
+It also returns `alreadySelected` boolean indicating whether pressed emoji is already selected or not (see [selectedEmojis](#selectedemojis)).
 
-<ApiTable typeVal='(emoji:{ emoji, name, slug, unicode_version }) => void' defaultVal='undefined'/>
+<ApiTable typeVal='(emoji: { emoji, name, slug, unicode_version, alreadySelected }) => void' defaultVal='undefined'/>
 
 ## Optional
 
@@ -148,6 +149,12 @@ Callback fired when the category change failed.
 Callback fired when emoji keyboard is closing.
 
 <ApiTable typeVal='() => void' defaultVal='undefined'/>
+
+### `selectedEmojis`
+
+Array of currently selected emojis. It must contain emoji's name.
+
+<ApiTable typeVal='emoji.name[]' defaultVal='undefined'/>
 
 ### `translation`
 
