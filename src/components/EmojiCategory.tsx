@@ -6,6 +6,7 @@ import { SingleEmoji } from './SingleEmoji'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import { parseEmoji } from '../utils/parseEmoji'
+import { removeSkinToneModifier } from '../utils/skinToneSelectorUtils'
 
 const emptyEmoji: JsonEmoji = {
   emoji: '',
@@ -34,6 +35,7 @@ export const EmojiCategory = React.memo(
       generateEmojiTones,
       theme,
       styles: themeStyles,
+      selectedEmojis,
     } = React.useContext(KeyboardContext)
 
     const { setKeyboardState, keyboardState } = useKeyboardStore()
@@ -61,17 +63,29 @@ export const EmojiCategory = React.memo(
     const handleEmojiPress = React.useCallback(
       (emoji: JsonEmoji) => {
         if (emoji.name === 'blank emoji') return
+        clearEmojiTonesData()
         const parsedEmoji = parseEmoji(emoji)
-        onEmojiSelected(parsedEmoji)
         setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji })
+        if (Array.isArray(selectedEmojis))
+          return onEmojiSelected({
+            ...parsedEmoji,
+            alreadySelected: selectedEmojis.includes(emoji.name),
+          })
+        onEmojiSelected(parsedEmoji)
       },
-      [onEmojiSelected, setKeyboardState]
+      [selectedEmojis, onEmojiSelected, setKeyboardState, clearEmojiTonesData]
     )
 
     const handleEmojiLongPress = React.useCallback(
       (emoji: JsonEmoji, emojiIndex: number, emojiSizes: EmojiSizes) => {
         clearEmojiTonesData()
-        generateEmojiTones(emoji, emojiIndex, emojiSizes)
+
+        const emojiWithoutTone = {
+          ...emoji,
+          emoji: removeSkinToneModifier(emoji.emoji),
+        }
+
+        generateEmojiTones(emojiWithoutTone, emojiIndex, emojiSizes)
       },
       [clearEmojiTonesData, generateEmojiTones]
     )
@@ -80,17 +94,38 @@ export const EmojiCategory = React.memo(
       (props: ListRenderItemInfo<JsonEmoji>) => {
         const recentlyUsed = keyboardState?.recentlyUsed || []
         const recentlyUsedEmoji = recentlyUsed?.find((emoji) => emoji.name === props.item.name)
+
+        const isSelected = selectedEmojis && selectedEmojis.includes(props.item.name)
+
         return (
           <SingleEmoji
             {...props}
+            isSelected={isSelected}
             item={recentlyUsedEmoji || props.item}
             emojiSize={emojiSize}
             onPress={handleEmojiPress}
             onLongPress={handleEmojiLongPress}
+            selectedEmojiStyle={
+              isSelected
+                ? [
+                    styles.selectedEmoji,
+                    { backgroundColor: theme.emoji.selected },
+                    themeStyles.emoji.selected,
+                  ]
+                : {}
+            }
           />
         )
       },
-      [emojiSize, handleEmojiLongPress, handleEmojiPress, keyboardState?.recentlyUsed]
+      [
+        keyboardState?.recentlyUsed,
+        selectedEmojis,
+        emojiSize,
+        handleEmojiPress,
+        handleEmojiLongPress,
+        theme.emoji.selected,
+        themeStyles.emoji.selected,
+      ]
     )
     const handleOnScroll = (ev: { nativeEvent: { contentOffset: { y: number } } }) => {
       setKeyboardScrollOffsetY(ev.nativeEvent.contentOffset.y)
@@ -110,7 +145,6 @@ export const EmojiCategory = React.memo(
           keyExtractor={keyExtractor}
           numColumns={numberOfColumns}
           renderItem={renderItem}
-          removeClippedSubviews={true}
           getItemLayout={getItemLayout}
           onScroll={handleOnScroll}
           ListFooterComponent={() => (
@@ -147,4 +181,5 @@ const styles = StyleSheet.create({
   },
   footer: { height: 8 },
   footerFloating: { height: 70 },
+  selectedEmoji: { borderRadius: 25 },
 })

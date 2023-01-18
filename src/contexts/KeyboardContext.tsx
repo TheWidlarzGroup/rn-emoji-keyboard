@@ -28,6 +28,9 @@ export type Styles = {
     container: ViewStyle
     text: TextStyle
   }
+  emoji: {
+    selected: ViewStyle
+  }
 }
 
 export type Theme = {
@@ -47,6 +50,9 @@ export type Theme = {
     text: string
     placeholder: string
     icon: string
+  }
+  emoji: {
+    selected: string
   }
 }
 
@@ -77,7 +83,7 @@ export type KeyboardProps = {
   styles?: RecursivePartial<Styles>
   enableSearchAnimation?: boolean
   enableCategoryChangeAnimation?: boolean
-
+  selectedEmojis?: string[] | false
   enableCategoryChangeGesture?: boolean
 }
 export type ContextValues = {
@@ -108,6 +114,9 @@ export const emptyStyles: Styles = {
     text: {},
   },
   knob: {},
+  emoji: {
+    selected: {},
+  },
 }
 export const defaultTheme: Theme = {
   backdrop: '#00000055',
@@ -127,6 +136,9 @@ export const defaultTheme: Theme = {
     icon: '#00000055',
     background: '#00000011',
   },
+  emoji: {
+    selected: '#e3dbcd',
+  },
 }
 
 export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; styles: Styles } = {
@@ -138,9 +150,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; s
   hideHeader: false,
   defaultHeight: '40%',
   expandedHeight: '80%',
-  onCategoryChangeFailed: (info) => {
-    console.warn(info)
-  },
+  onCategoryChangeFailed: (info) => console.warn(info),
   translation: en,
   disabledCategories: [],
   enableRecentlyUsed: false,
@@ -154,6 +164,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; s
   styles: emptyStyles,
   enableSearchAnimation: true,
   enableCategoryChangeAnimation: true,
+  selectedEmojis: false,
   enableCategoryChangeGesture: true,
 }
 
