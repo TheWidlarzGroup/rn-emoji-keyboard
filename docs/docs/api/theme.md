@@ -5,7 +5,7 @@ title: Theme
 
 import { ApiTable } from '../../src/components/ApiTable/ApiTable.js'
 
-This props is supposed to be used for theming as it only allows to change colors of the components and text. It allows user to easily match colors with the rest of the application. Of course it means that's using a dark mode is very convenient. If you want deeper styles customization checkout the **styles** prop.
+This prop is supposed to be used for theming as it only allows to change colors of the components and text. It allows you to easily match colors with the rest of the application. Of course, it means that using a dark mode is very convenient. If you want deeper styles customization checkout the [styles](/docs/api/styles) prop.
 
 ### `theme`
 
@@ -13,10 +13,10 @@ This is the name of property that has every component styles inside.
 
 <ApiTable typeVal='Record<string, string | object>' defaultVal='defaultTheme'/>
 
-### `Here is the full list of theme properties`
+## Full list of theme properties
 
 :::tip
-You don't have to pass new styles for every component. The omitted ones will use default values.  
+You don't have to pass new styles for every component. The omitted ones will use default values.
 These props won't work outside of theme prop.
 :::
 
@@ -81,5 +81,17 @@ Works only with enableSearchBar prop set to true
 - **placeholder** - color of the search bar placeholder text. Default is #00000055
 - **icon** - color of the search bar icon. Default is #00000055
 - **background** - background-color of the search bar. Default is #00000011
+
+<ApiTable typeVal='Object' defaultVal='See above'/>
+
+### `emoji`
+
+Set emoji component styles:
+
+:::caution
+Works only with selectedEmojis prop. See [selectedEmojis](/docs/api/modal#selectedemojis)
+:::
+
+- **selected** - color of the selected emoji background. Default is #e3dbcd
 
 <ApiTable typeVal='Object' defaultVal='See above'/>

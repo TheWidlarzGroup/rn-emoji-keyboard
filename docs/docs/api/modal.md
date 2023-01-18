@@ -149,6 +149,22 @@ Callback fired when emoji keyboard is closing.
 
 <ApiTable typeVal='() => void' defaultVal='undefined'/>
 
+### `styles`
+
+Change styles of every component.
+
+:::tip
+Look into [**styles**](/docs/api/styles) for more details.
+:::
+
+### `theme`
+
+Change colors of the components and text.
+
+:::tip
+Look into [**theme**](/docs/api/theme) for more details.
+:::
+
 ### `translation`
 
 Change the library language.
