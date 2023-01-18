@@ -156,6 +156,22 @@ Array of currently selected emojis. It must contain emoji's name.
 
 <ApiTable typeVal='emoji.name[]' defaultVal='undefined'/>
 
+### `styles`
+
+Change styles of every component.
+
+:::tip
+Look into [**styles**](/docs/api/styles) for more details.
+:::
+
+### `theme`
+
+Change colors of the components and text.
+
+:::tip
+Look into [**theme**](/docs/api/theme) for more details.
+:::
+
 ### `translation`
 
 Change the library language.
