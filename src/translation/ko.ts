@@ -2,7 +2,7 @@ import type { CategoryTranslation } from '../types'
 
 const ko: CategoryTranslation = {
   recently_used: '최근 사용',
-  smileys_emotion: '스마일리',
+  smileys_emotion: '이모티콘',
   people_body: '사람 및 신체',
   animals_nature: '동물 및 자연',
   food_drink: '음식 및 음료',
