@@ -10,7 +10,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from 'react-native'
-import type { CategoryTypes, EmojisByCategory } from '../types'
+import type { EmojisByCategory } from '../types'
 import { EmojiCategory } from './EmojiCategory'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { Categories } from './Categories'
@@ -43,7 +43,7 @@ export const EmojiStaticKeyboard = React.memo(
     const flatListRef = React.useRef<FlatList>(null)
 
     const getItemLayout = React.useCallback(
-      (_: CategoryTypes[] | null | undefined, index: number) => ({
+      (_: EmojisByCategory[] | null | undefined, index: number) => ({
         length: width,
         offset: width * index,
         index,
@@ -96,7 +96,7 @@ export const EmojiStaticKeyboard = React.memo(
           )}>
           <>
             {enableSearchBar && <SearchBar />}
-            <Animated.FlatList
+            <Animated.FlatList<EmojisByCategory>
               extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
               data={renderList}
               keyExtractor={keyExtractor}
