@@ -181,7 +181,7 @@ Look into [**internationalization section**](/docs/documentation/internationaliz
 :::
 
 #### `sourceInfo`
-send the context of the presses emoji component like id
+send the context of the pressed component like id.
 
 
 <ApiTable typeVal='CategoryTranslation' defaultVal='en'/>
