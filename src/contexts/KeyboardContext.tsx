@@ -14,7 +14,7 @@ import {
 } from '../types'
 import type { RecursivePartial } from '../utils/deepMerge'
 
-export type OnEmojiSelected = (emoji: EmojiType) => void
+export type OnEmojiSelected = (emoji: EmojiType, sourceInfo?: any) => void
 
 export type Styles = {
   container: ViewStyle
