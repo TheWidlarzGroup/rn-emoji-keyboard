@@ -33,7 +33,7 @@ Callback fired when the component is to be closed.
 ### <TitleWithRequiredBadge>`onEmojiSelected`</TitleWithRequiredBadge>
 
 Callback fired when the emoji is selected. The passed function expose an object with selected emoji data.
-It also returns `alreadySelected` boolean indicating whether pressed emoji is already selected or not (see [selectedEmojis](#selectedemojis)). 'sourceInfo' will returned as second argument to get the pressed compoent information
+It also returns `alreadySelected` boolean indicating whether pressed emoji is already selected or not (see [selectedEmojis](#selectedemojis)). 'sourceInfo' will returned as second argument to get the pressed component information
 
 <ApiTable typeVal='(emoji: { emoji, name, slug, unicode_version, alreadySelected }) => void' defaultVal='undefined'/>
 
