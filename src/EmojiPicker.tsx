@@ -45,13 +45,8 @@ export const EmojiPicker = ({
 
   return (
     <KeyboardProvider
-<<<<<<< Updated upstream
-      onEmojiSelected={(emoji: EmojiType) => {
-        onEmojiSelected(emoji)
-=======
       onEmojiSelected={(emoji: EmojiType, sourceInfo: any) => {
         onEmojiSelected(emoji, sourceInfo)
->>>>>>> Stashed changes
         !allowMultipleSelections && close()
       }}
       open={open}
