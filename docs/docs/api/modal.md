@@ -33,7 +33,7 @@ Callback fired when the component is to be closed.
 ### <TitleWithRequiredBadge>`onEmojiSelected`</TitleWithRequiredBadge>
 
 Callback fired when the emoji is selected. The passed function expose an object with selected emoji data.
-It also returns `alreadySelected` boolean indicating whether pressed emoji is already selected or not (see [selectedEmojis](#selectedemojis)). 'sourceInfo' will returned as second argument to get the pressed component information
+It also returns `alreadySelected` boolean indicating whether pressed emoji is already selected or not (see [selectedEmojis](#selectedemojis)). 'sourceInfo' will returned as the second argument to help identify which emoji component have changed.
 
 <ApiTable typeVal='(emoji: { emoji, name, slug, unicode_version, alreadySelected }) => void' defaultVal='undefined'/>
 
@@ -181,7 +181,7 @@ Look into [**internationalization section**](/docs/documentation/internationaliz
 :::
 
 #### `sourceInfo`
-send the context of the pressed component like id.
+sourceInfo help identify which emoji component have changed, specified like key. will be return in `onEmojiSelected` callback.
 
 
 <ApiTable typeVal='CategoryTranslation' defaultVal='en'/>
