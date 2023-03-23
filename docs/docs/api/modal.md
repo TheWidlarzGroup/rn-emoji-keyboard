@@ -181,7 +181,7 @@ Look into [**internationalization section**](/docs/documentation/internationaliz
 :::
 
 #### `sourceInfo`
-sourceInfo help identify which emoji component have changed, specified like key. will be return in `onEmojiSelected` callback.
+Help identify which emoji component have changed, specified like key. will be return in `onEmojiSelected` callback.
 
 
 <ApiTable typeVal='CategoryTranslation' defaultVal='en'/>
