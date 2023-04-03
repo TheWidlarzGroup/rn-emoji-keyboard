@@ -46,7 +46,7 @@ export const EmojiPicker = ({
 
   return (
     <KeyboardProvider
-      onEmojiSelected={(emoji: EmojiType, sourceInfo: any) => {
+      onEmojiSelected={(emoji: EmojiType) => {
         onEmojiSelected(emoji, sourceInfo)
         !allowMultipleSelections && close()
       }}
