@@ -59,6 +59,7 @@ export type Theme = {
 export type KeyboardProps = {
   open: boolean
   onClose: () => void
+  sourceInfo?: any
   onEmojiSelected: OnEmojiSelected
   emojiSize?: number
   expandable?: boolean
@@ -166,6 +167,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; s
   enableCategoryChangeAnimation: true,
   selectedEmojis: false,
   enableCategoryChangeGesture: true,
+  sourceInfo: null
 }
 
 export const defaultKeyboardValues: ContextValues = {
