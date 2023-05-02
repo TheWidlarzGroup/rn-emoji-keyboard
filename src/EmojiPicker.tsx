@@ -24,7 +24,7 @@ export const EmojiPicker = ({
   const offsetY = React.useRef(new Animated.Value(0)).current
   const height = React.useRef(new Animated.Value(getHeight(defaultHeight, screenHeight))).current
   const additionalHeight = React.useRef(new Animated.Value(0)).current
-  const { keyboardVisible, keyboardHeight } = useKeyboard()
+  const { keyboardVisible, keyboardHeight } = useKeyboard(open)
   const [isExpanded, setIsExpanded] = React.useState(false)
 
   React.useEffect(() => {

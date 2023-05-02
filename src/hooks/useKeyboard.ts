@@ -1,28 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Keyboard, KeyboardEvent } from 'react-native'
 
-export const useKeyboard = () => {
+export const useKeyboard = (isOpen: boolean) => {
   const [keyboardVisible, setKeyboardVisible] = useState(false)
   const [keyboardHeight, setKeyboardHeight] = useState(0)
 
-  function onKeyboardDidShow(e: KeyboardEvent) {
-    setKeyboardHeight(e.endCoordinates.height)
-    setKeyboardVisible(true)
-  }
+  const onKeyboardWillShow = useCallback(
+    (e: KeyboardEvent) => {
+      if (!isOpen) return
+      setKeyboardHeight(e.endCoordinates.height)
+      setKeyboardVisible(true)
+    },
+    [isOpen]
+  )
 
-  function onKeyboardDidHide() {
+  const onKeyboardWillHide = useCallback(() => {
     setKeyboardHeight(0)
     setKeyboardVisible(false)
-  }
+  }, [])
 
   useEffect(() => {
-    const showSubscription = Keyboard.addListener('keyboardWillShow', onKeyboardDidShow)
-    const hideSubscription = Keyboard.addListener('keyboardWillHide', onKeyboardDidHide)
+    const showSubscription = Keyboard.addListener('keyboardWillShow', onKeyboardWillShow)
+    const hideSubscription = Keyboard.addListener('keyboardWillHide', onKeyboardWillHide)
     return () => {
       showSubscription.remove()
       hideSubscription.remove()
     }
-  }, [])
+  }, [onKeyboardWillHide, onKeyboardWillShow])
 
   return { keyboardVisible, keyboardHeight }
 }
