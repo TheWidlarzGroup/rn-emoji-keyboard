@@ -63,6 +63,7 @@ export const EmojiStaticKeyboard = React.memo(
         index: activeCategoryIndex,
         animated: shouldAnimateScroll && enableCategoryChangeAnimation,
       })
+      setKeyboardScrollOffsetY(0)
     }, [activeCategoryIndex, enableCategoryChangeAnimation, shouldAnimateScroll])
 
     const keyExtractor = React.useCallback((item: EmojisByCategory) => item.title, [])
