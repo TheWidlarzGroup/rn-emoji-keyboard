@@ -26,7 +26,7 @@ export const ModalWithBackdrop = ({
 }: ModalWithBackdropProps & ModalProps) => {
   const { height: screenHeight } = useWindowDimensions()
   const translateY = React.useRef(new Animated.Value(screenHeight)).current
-  const { theme, disableSafeArea } = React.useContext(KeyboardContext)
+  const { theme, disableSafeArea, closeModalAnimationType } = React.useContext(KeyboardContext)
   const handleTimeout = useTimeout()
 
   React.useEffect(() => {
@@ -37,15 +37,19 @@ export const ModalWithBackdrop = ({
   }, [isOpen, screenHeight, translateY])
 
   const handleClose = () => {
-    Animated.spring(translateY, {
-      toValue: screenHeight,
-      useNativeDriver: true,
-    }).start()
+    if (closeModalAnimationType !== 'fade') {
+      Animated.spring(translateY, {
+        toValue: screenHeight,
+        useNativeDriver: true,
+      }).start()
+    }
     handleTimeout(() => backdropPress(), 200)
   }
 
+  const animationType = closeModalAnimationType === 'slide' ? 'none' : 'fade'
+
   return (
-    <Modal visible={isOpen} animationType="fade" transparent={true} {...rest}>
+    <Modal visible={isOpen} animationType={animationType} transparent={true} {...rest}>
       <TouchableOpacity
         style={[styles.modalContainer, { backgroundColor: theme.backdrop }]}
         activeOpacity={1}

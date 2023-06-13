@@ -85,6 +85,7 @@ export type KeyboardProps = {
   enableCategoryChangeAnimation?: boolean
   selectedEmojis?: string[] | false
   enableCategoryChangeGesture?: boolean
+  closeModalAnimationType?: 'mixed' | 'slide' | 'fade'
 }
 export type ContextValues = {
   activeCategoryIndex: number
@@ -166,6 +167,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; s
   enableCategoryChangeAnimation: true,
   selectedEmojis: false,
   enableCategoryChangeGesture: true,
+  closeModalAnimationType: 'mixed',
 }
 
 export const defaultKeyboardValues: ContextValues = {
