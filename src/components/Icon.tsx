@@ -1,19 +1,8 @@
 import * as React from 'react'
-import Flag from '../assets/Flag'
-import Football from '../assets/Football'
-import Lightbulb from '../assets/Lightbulb'
-import Pizza from '../assets/Pizza'
-import Plane from '../assets/Plane'
-import Smile from '../assets/Smile'
-import Trees from '../assets/Trees'
-import Ban from '../assets/Ban'
-import Users from '../assets/Users'
-import Search from '../assets/Search'
-import Close from '../assets/Close'
-import Clock from '../assets/Clock'
+
 import type { IconNames } from '../types'
 import { exhaustiveTypeCheck } from '../utils/exhaustiveTypeCheck'
-import QuestionMark from '../assets/QuestionMark'
+import PngIcon from '../assets/PngIcon'
 
 export const Icon = ({
   iconName,
@@ -29,31 +18,31 @@ export const Icon = ({
   const color = isActive ? activeColor : normalColor
   switch (iconName) {
     case 'Smile':
-      return <Smile fill={color} />
+      return <PngIcon fill={color} source={require('../assets/smile.png')} />
     case 'Trees':
-      return <Trees fill={color} />
+      return <PngIcon fill={color} source={require('../assets/trees.png')} />
     case 'Pizza':
-      return <Pizza fill={color} />
+      return <PngIcon fill={color} source={require('../assets/pizza.png')} />
     case 'Plane':
-      return <Plane fill={color} />
+      return <PngIcon fill={color} source={require('../assets/plane.png')} />
     case 'Football':
-      return <Football fill={color} />
+      return <PngIcon fill={color} source={require('../assets/football.png')} />
     case 'Lightbulb':
-      return <Lightbulb fill={color} />
+      return <PngIcon fill={color} source={require('../assets/lightbulb.png')} />
     case 'Flag':
-      return <Flag fill={color} />
+      return <PngIcon fill={color} source={require('../assets/flag.png')} />
     case 'Ban':
-      return <Ban fill={color} />
+      return <PngIcon fill={color} source={require('../assets/ban.png')} />
     case 'Users':
-      return <Users fill={color} />
+      return <PngIcon fill={color} source={require('../assets/users.png')} />
     case 'Search':
-      return <Search fill={color} />
+      return <PngIcon fill={color} source={require('../assets/search.png')} />
     case 'Close':
-      return <Close fill={color} />
+      return <PngIcon fill={color} source={require('../assets/close.png')} />
     case 'Clock':
-      return <Clock fill={color} />
+      return <PngIcon fill={color} source={require('../assets/clock.png')} />
     case 'QuestionMark':
-      return <QuestionMark fill={color} />
+      return <PngIcon fill={color} source={require('../assets/questionMark.png')} />
     default:
       exhaustiveTypeCheck(iconName)
       return null
