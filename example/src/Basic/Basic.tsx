@@ -24,12 +24,6 @@ const Basic = () => {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        theme={{
-          category: {
-            icon: 'green',
-            iconActive: 'red',
-          },
-        }}
       />
     </SafeAreaView>
   )
