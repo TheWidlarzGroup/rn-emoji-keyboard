@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
   },
   funnelContainer: {
     position: 'absolute',
-    top: TONES_CONTAINER_HEIGHT - 1,
   },
   separator: {
     width: 1,
