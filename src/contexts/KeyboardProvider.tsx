@@ -104,6 +104,10 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const clearEmojiTonesData = () => setEmojiTonesData(null)
 
   React.useEffect(() => {
+    clearEmojiTonesData()
+  }, [activeCategoryIndex])
+
+  React.useEffect(() => {
     if (props.open) setActiveCategoryIndex(0)
     setSearchPhrase('')
     clearEmojiTonesData()

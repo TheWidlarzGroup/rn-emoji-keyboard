@@ -20,7 +20,6 @@ export const Categories = (p: Props) => {
     onCategoryChangeFailed,
     categoryPosition,
     renderList,
-    clearEmojiTonesData,
     theme,
     styles: themeStyles,
     enableCategoryChangeAnimation,
@@ -29,9 +28,8 @@ export const Categories = (p: Props) => {
 
   const scrollNav = React.useRef(new Animated.Value(0)).current
   const handleScrollToCategory = React.useCallback(() => {
-    clearEmojiTonesData()
     setShouldAnimateScroll(enableCategoryChangeAnimation)
-  }, [clearEmojiTonesData, setShouldAnimateScroll, enableCategoryChangeAnimation])
+  }, [setShouldAnimateScroll, enableCategoryChangeAnimation])
 
   const renderItem = React.useCallback(
     ({ item, index }: { item: CategoryNavigationItem; index: number }) => (

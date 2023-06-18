@@ -63,6 +63,7 @@ export const EmojiStaticKeyboard = React.memo(
         index: activeCategoryIndex,
         animated: shouldAnimateScroll && enableCategoryChangeAnimation,
       })
+      setKeyboardScrollOffsetY(0)
     }, [activeCategoryIndex, enableCategoryChangeAnimation, shouldAnimateScroll])
 
     const keyExtractor = React.useCallback((item: EmojisByCategory) => item.title, [])
@@ -72,9 +73,16 @@ export const EmojiStaticKeyboard = React.memo(
       (el: NativeSyntheticEvent<NativeScrollEvent>) => {
         const index = el.nativeEvent.contentOffset.x / width
         scrollNav.setValue(index * CATEGORY_ELEMENT_WIDTH)
-        if (Number.isInteger(index)) setActiveCategoryIndex(index)
       },
-      [scrollNav, setActiveCategoryIndex, width]
+      [scrollNav, width]
+    )
+
+    const onScrollEnd = React.useCallback(
+      (el: NativeSyntheticEvent<NativeScrollEvent>) => {
+        const index = el.nativeEvent.contentOffset.x / width
+        setActiveCategoryIndex(Math.round(index))
+      },
+      [setActiveCategoryIndex, width]
     )
 
     return (
@@ -114,6 +122,7 @@ export const EmojiStaticKeyboard = React.memo(
               maxToRenderPerBatch={1}
               onScroll={handleScroll}
               keyboardShouldPersistTaps="handled"
+              onMomentumScrollEnd={onScrollEnd}
             />
             <Categories scrollNav={enableCategoryChangeGesture ? scrollNav : undefined} />
             <SkinTones keyboardScrollOffsetY={keyboardScrollOffsetY} />
