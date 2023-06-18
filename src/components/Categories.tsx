@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Animated, FlatList, StyleSheet, View, ViewStyle } from 'react-native'
 import { KeyboardContext } from '../contexts/KeyboardContext'
-import { CATEGORIES_NAVIGATION, CategoryNavigationItem, CategoryTypes } from '../types'
+import { CATEGORIES_NAVIGATION, CategoryNavigationItem } from '../types'
 import { CategoryItem } from './CategoryItem'
 import { exhaustiveTypeCheck } from '../utils/exhaustiveTypeCheck'
 import { defaultTheme } from '../contexts/KeyboardContext'
@@ -20,28 +20,16 @@ export const Categories = (p: Props) => {
     onCategoryChangeFailed,
     categoryPosition,
     renderList,
-    setActiveCategoryIndex,
-    clearEmojiTonesData,
     theme,
     styles: themeStyles,
     enableCategoryChangeAnimation,
     setShouldAnimateScroll,
   } = React.useContext(KeyboardContext)
+
   const scrollNav = React.useRef(new Animated.Value(0)).current
-  const handleScrollToCategory = React.useCallback(
-    (category: CategoryTypes) => {
-      clearEmojiTonesData()
-      setActiveCategoryIndex(renderList.findIndex((cat) => cat.title === category))
-      setShouldAnimateScroll(enableCategoryChangeAnimation)
-    },
-    [
-      clearEmojiTonesData,
-      setActiveCategoryIndex,
-      renderList,
-      setShouldAnimateScroll,
-      enableCategoryChangeAnimation,
-    ]
-  )
+  const handleScrollToCategory = React.useCallback(() => {
+    setShouldAnimateScroll(enableCategoryChangeAnimation)
+  }, [setShouldAnimateScroll, enableCategoryChangeAnimation])
 
   const renderItem = React.useCallback(
     ({ item, index }: { item: CategoryNavigationItem; index: number }) => (

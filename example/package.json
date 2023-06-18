@@ -6,7 +6,8 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start"
+    "start": "react-native start",
+    "ios:ip12": "react-native run-ios --simulator='iPhone 12'"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.10",
@@ -25,6 +26,7 @@
     "@babel/core": "^7.12.10",
     "@babel/runtime": "^7.12.5",
     "babel-plugin-module-resolver": "^4.0.0",
-    "metro-react-native-babel-preset": "^0.64.0"
+    "metro-react-native-babel-preset": "^0.64.0",
+    "patch-package": "^7.0.0"
   }
 }
