@@ -3,10 +3,10 @@ sidebar_position: 6
 title: Emojis Data JSON
 ---
 
-The library gives you the possibility to import .JSON file with all emojis currently available in it.
+The library gives you the possibility to import .JSON file with all emojis currently available in it. And also pass your own set of emojis. Keep in mind that your own emojis must follow our structure and types.
 
 ```ts
-import { EmojisData } from 'rn-emoji-keyboard'
+import { emojisByGroup } from 'rn-emoji-keyboard'
 ```
 
 Here is the EmojisData structure explained as Typescript code
@@ -21,10 +21,10 @@ type EmojiType = {
   alreadySelected?: boolean
 }
 
-type SingleCategory = {
-  title: string
-  data: EmojiType[]
+type EmojisByCategory = {
+  title: CategoryTypes
+  data: JsonEmoji[]
 }
 
-type EmojisData = SingleCategory[]
+const emojisByGroup: EmojisByCategory[]
 ```

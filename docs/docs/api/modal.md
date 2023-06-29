@@ -18,6 +18,16 @@ import EmojiKeyboard from 'rn-emoji-keyboard'
 
 ## Required
 
+### <TitleWithRequiredBadge>`emojisByGroup`</TitleWithRequiredBadge>
+
+Set of emojis that can be displayed in the app. You can pass your own emojis or use the one that we have prepared.
+
+```ts
+import { emojisByGroup } from 'rn-emoji-keyboard'
+```
+
+<ApiTable typeVal='EmojisByCategory[]' defaultVal='undefined'/>
+
 ### <TitleWithRequiredBadge>`open`</TitleWithRequiredBadge>
 
 Required props which indicates whether the modal should be displayed on the screen.
