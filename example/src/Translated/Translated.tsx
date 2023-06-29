@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import EmojiPicker, { pl } from 'rn-emoji-keyboard'
+import EmojiPicker, { pl, emojisByGroup } from 'rn-emoji-keyboard'
 import type { EmojiType } from 'src/types'
 
 const Translated = () => {
@@ -25,6 +25,7 @@ const Translated = () => {
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         translation={pl}
+        emojisByGroup={emojisByGroup}
       />
     </SafeAreaView>
   )
