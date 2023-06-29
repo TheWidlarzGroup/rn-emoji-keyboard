@@ -25,6 +25,6 @@ import type { EmojisByCategory } from './types'
 export { EmojiKeyboard }
 export { useRecentPicksPersistence }
 export { en, pl, ko, it, fr, id, es, de, pt, ru, ua, vi, cs, ja, tr, no, ro, np }
-export const emojisByGroup: EmojisByCategory[] = EmojisData as any
+export const emojisByGroup = EmojisData as EmojisByCategory[]
 
 export default EmojiPicker
