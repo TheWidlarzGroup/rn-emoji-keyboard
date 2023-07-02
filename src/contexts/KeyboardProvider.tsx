@@ -9,7 +9,6 @@ import {
   defaultTheme,
   emptyStyles,
 } from './KeyboardContext'
-import emojisByGroup from '../assets/emojis.json'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import type { CategoryTypes, EmojisByCategory, JsonEmoji, EmojiTonesData } from '../types'
 import {
