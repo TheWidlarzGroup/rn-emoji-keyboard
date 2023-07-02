@@ -3,8 +3,8 @@ import { EmojiStaticKeyboard } from './components/EmojiStaticKeyboard'
 import { KeyboardProvider } from './contexts/KeyboardProvider'
 import type { KeyboardProps } from './contexts/KeyboardContext'
 
-type EmojiKeyboardProps = Omit<Partial<KeyboardProps>, 'open' | 'onClose' | 'emojisByGroup'> &
-  Pick<KeyboardProps, 'onEmojiSelected' | 'customEmojisByGroup'>
+type EmojiKeyboardProps = Omit<Partial<KeyboardProps>, 'open' | 'onClose'> &
+  Pick<KeyboardProps, 'onEmojiSelected'>
 
 export const EmojiKeyboard = (props: EmojiKeyboardProps) => {
   return (
