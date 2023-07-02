@@ -5,7 +5,7 @@ import EmojiPicker, { emojisByGroup } from 'rn-emoji-keyboard'
 
 import type { EmojiType, EmojisByCategory } from 'src/types'
 
-const customEmojis = () => {
+const getCustomEmojis = () => {
   const newEmojiSet: EmojisByCategory[] = []
   for (const [, value] of Object.entries(emojisByGroup)) {
     const newData = value.data.filter((emoji) => parseFloat(emoji.v) === 11)
@@ -37,7 +37,7 @@ const CustomEmojisData = () => {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        customEmojisByGroup={customEmojis()}
+        customEmojisByGroup={getCustomEmojis()}
       />
     </SafeAreaView>
   )
