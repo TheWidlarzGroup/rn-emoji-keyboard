@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { StyleSheet, View, Text, FlatList, ListRenderItemInfo } from 'react-native'
+import { StyleSheet, View, Text, FlatList, type ListRenderItemInfo } from 'react-native'
 import type { EmojisByCategory, EmojiSizes, JsonEmoji } from '../types'
 import { SingleEmoji } from './SingleEmoji'
 import { KeyboardContext } from '../contexts/KeyboardContext'
@@ -45,7 +45,7 @@ export const EmojiCategory = React.memo(
     React.useEffect(() => {
       if (data.length % numberOfColumns) {
         const fillWithEmpty = new Array(numberOfColumns - (data.length % numberOfColumns)).fill(
-          emptyEmoji
+          emptyEmoji,
         )
         setEmpty(fillWithEmpty)
       }
@@ -57,7 +57,7 @@ export const EmojiCategory = React.memo(
         offset: emojiSize * Math.ceil(index / numberOfColumns),
         index,
       }),
-      [emojiSize, numberOfColumns]
+      [emojiSize, numberOfColumns],
     )
 
     const handleEmojiPress = React.useCallback(
@@ -73,7 +73,7 @@ export const EmojiCategory = React.memo(
           })
         onEmojiSelected(parsedEmoji)
       },
-      [selectedEmojis, onEmojiSelected, setKeyboardState, clearEmojiTonesData]
+      [selectedEmojis, onEmojiSelected, setKeyboardState, clearEmojiTonesData],
     )
 
     const handleEmojiLongPress = React.useCallback(
@@ -87,7 +87,7 @@ export const EmojiCategory = React.memo(
 
         generateEmojiTones(emojiWithoutTone, emojiIndex, emojiSizes)
       },
-      [clearEmojiTonesData, generateEmojiTones]
+      [clearEmojiTonesData, generateEmojiTones],
     )
 
     const renderItem = React.useCallback(
@@ -125,7 +125,7 @@ export const EmojiCategory = React.memo(
         handleEmojiLongPress,
         theme.emoji.selected,
         themeStyles.emoji.selected,
-      ]
+      ],
     )
     const handleOnScroll = (ev: { nativeEvent: { contentOffset: { y: number } } }) => {
       setKeyboardScrollOffsetY(ev.nativeEvent.contentOffset.y)
@@ -165,7 +165,7 @@ export const EmojiCategory = React.memo(
       prevProps.item.data.map((d) => d.name).join() ===
       nextProps.item.data.map((d) => d.name).join()
     )
-  }
+  },
 )
 
 const styles = StyleSheet.create({

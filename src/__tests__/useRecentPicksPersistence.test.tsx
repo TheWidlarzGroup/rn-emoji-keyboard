@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react-native'
-import { useRecentPicksPersistence } from '../src/hooks/useRecentPicksPersistence'
-import { useKeyboardStore } from '../src/store/useKeyboardStore'
-import { delay } from '../src/utils/delay'
+import { useRecentPicksPersistence } from '../hooks/useRecentPicksPersistence'
+import { useKeyboardStore } from '../store/useKeyboardStore'
+import { delay } from '../utils/delay'
 
 describe('useRecentPickPersistence tests', () => {
   const testData = [
@@ -26,7 +26,7 @@ describe('useRecentPickPersistence tests', () => {
       useRecentPicksPersistence({
         initialization: async () => testData,
         onStateChange: jest.fn(),
-      })
+      }),
     )
 
     await delay(0)
@@ -42,7 +42,7 @@ describe('useRecentPickPersistence tests', () => {
       useRecentPicksPersistence({
         initialization: async () => [],
         onStateChange: onStateChangeMock,
-      })
+      }),
     )
 
     await delay(0)
@@ -52,7 +52,7 @@ describe('useRecentPickPersistence tests', () => {
     act(() => {
       result.current.setKeyboardState({
         type: 'RECENT_EMOJI_ADD',
-        payload: testData[1],
+        payload: testData[1]!,
       })
     })
 
@@ -62,7 +62,7 @@ describe('useRecentPickPersistence tests', () => {
     act(() => {
       result.current.setKeyboardState({
         type: 'RECENT_EMOJI_ADD',
-        payload: testData[0],
+        payload: testData[0]!,
       })
     })
 

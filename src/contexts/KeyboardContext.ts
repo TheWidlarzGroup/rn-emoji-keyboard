@@ -1,7 +1,7 @@
 import * as React from 'react'
 import type { TextStyle, ViewStyle } from 'react-native'
 import en from '../translation/en'
-import {
+import type {
   CategoryTranslation,
   EmojiType,
   CategoryTypes,
@@ -10,8 +10,8 @@ import {
   JsonEmoji,
   EmojiTonesData,
   EmojiSizes,
-  CATEGORIES,
 } from '../types'
+import { CATEGORIES } from '../types'
 import type { RecursivePartial } from '../utils/deepMerge'
 import emojisByCategory from '../assets/emojis.json'
 
@@ -143,7 +143,10 @@ export const defaultTheme: Theme = {
   },
 }
 
-export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; styles: Styles } = {
+export const defaultKeyboardContext: Required<KeyboardProps> & {
+  theme: Theme
+  styles: Styles
+} = {
   open: false,
   onClose: () => {},
   onEmojiSelected: (_emoji: EmojiType) => {},

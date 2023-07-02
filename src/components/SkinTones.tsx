@@ -5,7 +5,7 @@ import { useKeyboardStore } from '../store/useKeyboardStore'
 import { parseEmoji } from '../utils/parseEmoji'
 import type { JsonEmoji } from '../types'
 import { SingleSkinTone } from './SingleSkinTone'
-import Funnel from '../assets/Funnel'
+import { Funnel } from '../assets/funnel'
 
 type Props = {
   keyboardScrollOffsetY: number
@@ -28,7 +28,7 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
       onEmojiSelected(parsedEmoji)
       setKeyboardState({ type: 'RECENT_EMOJI_ADD', payload: emoji })
     },
-    [onEmojiSelected, setKeyboardState]
+    [onEmojiSelected, setKeyboardState],
   )
 
   const renderItem = React.useCallback(
@@ -37,7 +37,7 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
         <SingleSkinTone {...props} onPress={() => handleEmojiPress(props.item)} emojiSize={32} />
       )
     },
-    [handleEmojiPress]
+    [handleEmojiPress],
   )
 
   const posX = emojiTonesData?.position?.x || 0
@@ -55,7 +55,8 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
         style={[
           styles.floating,
           { left: posX, top: posY, backgroundColor: theme.skinTonesContainer },
-        ]}>
+        ]}
+      >
         <View>
           <FlatList
             data={emojiTonesData.emojis}
@@ -75,7 +76,8 @@ export const SkinTones = ({ keyboardScrollOffsetY }: Props) => {
             left: funnelXPosition + 14,
             top: posY + TONES_CONTAINER_HEIGHT - 1,
           },
-        ]}>
+        ]}
+      >
         <Funnel fill={theme.skinTonesContainer} />
       </View>
     </>

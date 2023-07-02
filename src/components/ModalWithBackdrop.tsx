@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  ModalProps,
+  type ModalProps,
 } from 'react-native'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useTimeout } from '../hooks/useTimeout'
@@ -49,14 +49,16 @@ export const ModalWithBackdrop = ({
       <TouchableOpacity
         style={[styles.modalContainer, { backgroundColor: theme.backdrop }]}
         activeOpacity={1}
-        onPress={handleClose}>
+        onPress={handleClose}
+      >
         <View style={[styles.modalContainer, { backgroundColor: theme.backdrop }]}>
           <IsSafeAreaWrapper style={styles.modalContainer} isSafeArea={!disableSafeArea}>
             <TouchableOpacity activeOpacity={1}>
               <Animated.View
                 style={{
                   transform: [{ translateY }],
-                }}>
+                }}
+              >
                 {children}
               </Animated.View>
             </TouchableOpacity>

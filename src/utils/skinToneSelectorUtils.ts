@@ -12,7 +12,7 @@ export const generateToneSelectorPosition = (
   windowWidth: number,
   emojiWidth: number,
   emojiHeight: number,
-  extraSearchTop: number
+  extraSearchTop: number,
 ) => {
   // get column in the center to measure tone selector x position
   const halfOfColumns = numOfColumns / 2
@@ -46,7 +46,7 @@ export const generateToneSelectorPosition = (
 export const generateToneSelectorFunnelPosition = (
   numOfColumns: number,
   emojiIndex: number,
-  emojiWidth: number
+  emojiWidth: number,
 ) => {
   const emojiIndexInRow = emojiIndex % numOfColumns
 
@@ -76,7 +76,8 @@ export const skinToneCodes = [
 export const removeSkinToneModifier = (emoji: string) => {
   let emojiCopy = emoji
   for (let i = 0; i < skinToneCodes.length; i++) {
-    emojiCopy = emojiCopy.replace(skinToneCodes[i], '')
+    // FIXME: typescript skinToneCodes[i] is not assignable to parameter of type string
+    emojiCopy = emojiCopy.replace(skinToneCodes[i]!, '')
   }
   return emojiCopy
 }

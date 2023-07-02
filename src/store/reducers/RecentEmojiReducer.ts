@@ -12,7 +12,7 @@ export type RecentEmojiAction =
 
 export default function recentEmojiReducer(
   state: RecentEmojiState,
-  action: RecentEmojiAction
+  action: RecentEmojiAction,
 ): RecentEmojiState {
   switch (action.type) {
     case 'RECENT_EMOJI_INIT':

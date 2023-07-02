@@ -1,4 +1,4 @@
-import { MutableRefObject, useCallback, useEffect, useRef } from 'react'
+import { type MutableRefObject, useCallback, useEffect, useRef } from 'react'
 
 export const useTimeout = () => {
   const timeoutRef = useRef(null) as MutableRefObject<ReturnType<typeof setTimeout> | null>

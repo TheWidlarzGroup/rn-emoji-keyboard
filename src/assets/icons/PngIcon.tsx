@@ -1,6 +1,5 @@
 import * as React from 'react'
-
-import { Image, ImageSourcePropType } from 'react-native'
+import { Image, type ImageSourcePropType } from 'react-native'
 
 type Props = {
   fill: string

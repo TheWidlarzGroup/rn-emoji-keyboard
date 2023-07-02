@@ -4,9 +4,9 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  GestureResponderEvent,
-  ViewStyle,
-  StyleProp,
+  type GestureResponderEvent,
+  type ViewStyle,
+  type StyleProp,
 } from 'react-native'
 import type { EmojiSizes, JsonEmoji } from '../types'
 
@@ -34,14 +34,15 @@ export const SingleEmoji = React.memo(
       <TouchableOpacity
         onPress={handlePress}
         onLongPress={handleLongPress}
-        style={styles.container}>
+        style={styles.container}
+      >
         <View pointerEvents={'none'} style={[styles.emojiWrapper, p.selectedEmojiStyle]}>
           <Text style={[styles.emoji, { fontSize: p.emojiSize }]}>{p.item.emoji}</Text>
         </View>
       </TouchableOpacity>
     )
   },
-  (prevProps, nextProps) => prevProps.isSelected === nextProps.isSelected
+  (prevProps, nextProps) => prevProps.isSelected === nextProps.isSelected,
 )
 
 const styles = StyleSheet.create({

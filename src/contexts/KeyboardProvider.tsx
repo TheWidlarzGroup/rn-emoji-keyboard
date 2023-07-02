@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useWindowDimensions } from 'react-native'
 import {
-  KeyboardProps,
-  ContextValues,
+  type KeyboardProps,
+  type ContextValues,
   KeyboardContext,
   defaultKeyboardContext,
   defaultKeyboardValues,
@@ -36,7 +36,9 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const [emojiTonesData, setEmojiTonesData] = React.useState<EmojiTonesData>(null)
 
   const numberOfColumns = React.useRef<number>(
-    Math.floor(width / ((props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 2))
+    Math.floor(
+      width / ((props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 2),
+    ),
   )
 
   const generateEmojiTones = React.useCallback(
@@ -81,13 +83,13 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
         width,
         emojiSizes.width,
         emojiSizes.height,
-        EXTRA_SEARCH_TOP
+        EXTRA_SEARCH_TOP,
       )
 
       const funnelXPosition = generateToneSelectorFunnelPosition(
         numberOfColumns.current,
         emojiIndex,
-        emojiSizes.width
+        emojiSizes.width,
       )
 
       setEmojiTonesData({
@@ -96,7 +98,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
         funnelXPosition,
       })
     },
-    [props.categoryPosition, props.enableSearchBar, width]
+    [props.categoryPosition, props.enableSearchBar, width],
   )
 
   const clearEmojiTonesData = () => setEmojiTonesData(null)
@@ -137,7 +139,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
               emoji?.keywords &&
               emoji.keywords.length > 0 &&
               emoji.keywords.some((keyword) =>
-                keyword.toLowerCase().includes(searchPhrase.toLowerCase())
+                keyword.toLowerCase().includes(searchPhrase.toLowerCase()),
               )
 
             return (
@@ -150,10 +152,10 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     }
     if (props.categoryOrder) {
       const orderedData = props.categoryOrder.flatMap((name) =>
-        data.filter((el) => el.title === name)
+        data.filter((el) => el.title === name),
       )
       const restData = data.filter(
-        (el) => !props?.categoryOrder?.includes(el.title as CategoryTypes)
+        (el) => !props?.categoryOrder?.includes(el.title as CategoryTypes),
       )
       data = [...orderedData, ...restData]
     }
@@ -197,7 +199,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
       searchPhrase,
       shouldAnimateScroll,
       width,
-    ]
+    ],
   )
   return <KeyboardContext.Provider value={value}>{props.children}</KeyboardContext.Provider>
 })
