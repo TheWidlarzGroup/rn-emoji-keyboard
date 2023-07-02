@@ -12,9 +12,7 @@
 
 ![Build status - typescript compile](https://img.shields.io/github/actions/workflow/status/TheWidlarzGroup/rn-emoji-keyboard/tsc.yml?branch=master)
 ![License badge](https://img.shields.io/npm/l/rn-emoji-keyboard)
-
 ![Latest, released version](https://img.shields.io/github/v/release/TheWidlarzGroup/rn-emoji-keyboard)
-
 ![Date of latest commit](https://img.shields.io/github/last-commit/TheWidlarzGroup/rn-emoji-keyboard)
 ![Number of contributors](https://img.shields.io/github/contributors/TheWidlarzGroup/rn-emoji-keyboard)
 
