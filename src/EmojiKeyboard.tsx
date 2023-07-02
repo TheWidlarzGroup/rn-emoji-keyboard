@@ -4,11 +4,11 @@ import { KeyboardProvider } from './contexts/KeyboardProvider'
 import type { KeyboardProps } from './contexts/KeyboardContext'
 
 type EmojiKeyboardProps = Omit<Partial<KeyboardProps>, 'open' | 'onClose' | 'emojisByGroup'> &
-  Pick<KeyboardProps, 'onEmojiSelected' | 'emojisByGroup'>
+  Pick<KeyboardProps, 'onEmojiSelected' | 'customEmojisByGroup'>
 
 export const EmojiKeyboard = (props: EmojiKeyboardProps) => {
   return (
-    <KeyboardProvider {...props} open={true} onClose={() => {}} emojisByGroup={props.emojisByGroup}>
+    <KeyboardProvider {...props} open={true} onClose={() => {}}>
       <EmojiStaticKeyboard />
     </KeyboardProvider>
   )

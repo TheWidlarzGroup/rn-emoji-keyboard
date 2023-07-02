@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import EmojiPicker, { emojisByGroup } from 'rn-emoji-keyboard'
+import EmojiPicker from 'rn-emoji-keyboard'
 import type { EmojiType } from 'src/types'
 
 const CategoryChangeGesture = () => {
@@ -25,7 +25,6 @@ const CategoryChangeGesture = () => {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        emojisByGroup={emojisByGroup}
       />
     </SafeAreaView>
   )

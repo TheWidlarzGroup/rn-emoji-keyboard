@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { EmojiKeyboard, emojisByGroup } from 'rn-emoji-keyboard'
+import { EmojiKeyboard } from 'rn-emoji-keyboard'
 import type { EmojiType } from 'src/types'
 
 const Static = () => {
@@ -20,7 +20,6 @@ const Static = () => {
         <EmojiKeyboard
           onEmojiSelected={handlePick}
           styles={{ container: styles.keyboardContainer }}
-          emojisByGroup={emojisByGroup}
         />
       </View>
     </SafeAreaView>
