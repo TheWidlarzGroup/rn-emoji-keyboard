@@ -14,7 +14,7 @@ It's possible to pass your own set of emojis. You have to keep in mind that type
 ```jsx
 import EmojiPicker, { emojisByGroup } from 'rn-emoji-keyboard'
 
-import type { EmojiType, EmojisByCategory } from 'src/types'
+import type { EmojisByCategory } from 'src/types'
 
 const getCustomEmojis = () => {
   const newEmojiSet: EmojisByCategory[] = []
