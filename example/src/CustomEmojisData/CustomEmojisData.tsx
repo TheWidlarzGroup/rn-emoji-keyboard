@@ -1,11 +1,23 @@
 import * as React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import EmojiPicker from 'rn-emoji-keyboard'
+import EmojiPicker, { emojisByCategory } from 'rn-emoji-keyboard'
 
-import type { EmojiType } from 'src/types'
+import type { EmojiType, EmojisByCategory } from 'src/types'
 
-const Basic = () => {
+const getCustomEmojis = () => {
+  const newEmojiSet: EmojisByCategory[] = []
+  for (const [, value] of Object.entries(emojisByCategory)) {
+    const newData = value.data.filter((emoji) => parseFloat(emoji.v) === 11)
+    newEmojiSet.push({
+      title: value.title,
+      data: newData,
+    })
+  }
+  return newEmojiSet
+}
+
+const CustomEmojisData = () => {
   const [result, setResult] = React.useState<string>()
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
 
@@ -25,6 +37,7 @@ const Basic = () => {
         onEmojiSelected={handlePick}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        emojisByCategory={getCustomEmojis()}
       />
     </SafeAreaView>
   )
@@ -41,4 +54,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Basic
+export default CustomEmojisData

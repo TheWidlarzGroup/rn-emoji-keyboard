@@ -13,6 +13,7 @@ import {
   CATEGORIES,
 } from '../types'
 import type { RecursivePartial } from '../utils/deepMerge'
+import emojisByCategory from '../assets/emojis.json'
 
 export type OnEmojiSelected = (emoji: EmojiType) => void
 
@@ -85,6 +86,7 @@ export type KeyboardProps = {
   enableCategoryChangeAnimation?: boolean
   selectedEmojis?: string[] | false
   enableCategoryChangeGesture?: boolean
+  emojisByCategory?: EmojisByCategory[]
 }
 export type ContextValues = {
   activeCategoryIndex: number
@@ -166,6 +168,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> & { theme: Theme; s
   enableCategoryChangeAnimation: true,
   selectedEmojis: false,
   enableCategoryChangeGesture: true,
+  emojisByCategory: emojisByCategory as EmojisByCategory[],
 }
 
 export const defaultKeyboardValues: ContextValues = {

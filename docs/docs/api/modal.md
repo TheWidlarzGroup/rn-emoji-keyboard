@@ -79,6 +79,20 @@ Look into [**React Native documentation**](https://reactnative.dev/docs/safearea
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
+### `emojisByCategory`
+
+Set of emojis that can be displayed in the app. You can pass your own emojis set or use the one that we have prepared.
+
+:::info
+Read more about [**Emojis Data**](/docs/api/emojisData)
+:::
+
+```ts
+import { emojisByCategory } from 'rn-emoji-keyboard'
+```
+
+<ApiTable typeVal='EmojisByCategory[]' defaultVal="emojisByCategory"/>
+
 ### `emojiSize`
 
 Set size of the single emoji.

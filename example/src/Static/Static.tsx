@@ -10,6 +10,7 @@ const Static = () => {
   const handlePick = (emoji: EmojiType) => {
     setResult(emoji.emoji)
   }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>

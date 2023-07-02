@@ -18,6 +18,7 @@ export type RootStackParamList = {
   BottomCategory: undefined
   SearchBar: undefined
   SelectedEmojis: undefined
+  CustomEmojisData: undefined
 }
 
 type Props = StackScreenProps<RootStackParamList, 'Examples'>
@@ -54,6 +55,10 @@ const Examples = ({ navigation }: Props) => {
         <Button title="Category Bottom" onPress={() => navigation.navigate('BottomCategory')} />
         <Button title="Search Bar" onPress={() => navigation.navigate('SearchBar')} />
         <Button title="Selected Emojis" onPress={() => navigation.navigate('SelectedEmojis')} />
+        <Button
+          title="Custom Emojis Data"
+          onPress={() => navigation.navigate('CustomEmojisData')}
+        />
       </View>
     </SafeAreaView>
   )

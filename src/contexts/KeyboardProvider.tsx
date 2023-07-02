@@ -4,13 +4,11 @@ import {
   KeyboardProps,
   ContextValues,
   KeyboardContext,
-  OnEmojiSelected,
   defaultKeyboardContext,
   defaultKeyboardValues,
   defaultTheme,
   emptyStyles,
 } from './KeyboardContext'
-import emojisByGroup from '../assets/emojis.json'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import type { CategoryTypes, EmojisByCategory, JsonEmoji, EmojiTonesData } from '../types'
 import {
@@ -23,10 +21,10 @@ import {
 } from '../utils/skinToneSelectorUtils'
 import { deepMerge } from '../utils/deepMerge'
 
-type ProviderProps = Partial<KeyboardProps> & {
-  children: React.ReactNode
-  onEmojiSelected: OnEmojiSelected
-}
+type ProviderProps = Partial<KeyboardProps> &
+  Pick<KeyboardProps, 'onEmojiSelected'> & {
+    children: React.ReactNode
+  }
 
 export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   const { width } = useWindowDimensions()
@@ -114,7 +112,8 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
   }, [props.open])
 
   const renderList = React.useMemo(() => {
-    let data = emojisByGroup.filter((category) => {
+    const emojisByCategory = props.emojisByCategory || defaultKeyboardContext.emojisByCategory
+    let data = emojisByCategory.filter((category) => {
       const title = category.title as CategoryTypes
       if (props.disabledCategories) return !props.disabledCategories.includes(title)
       return true
@@ -128,7 +127,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     if (props.enableSearchBar) {
       data.push({
         title: 'search' as CategoryTypes,
-        data: emojisByGroup
+        data: emojisByCategory
           .map((group) => group.data)
           .flat()
           .filter((emoji) => {
@@ -156,6 +155,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     props.enableSearchBar,
     props.categoryOrder,
     props.disabledCategories,
+    props.emojisByCategory,
     searchPhrase,
   ])
 

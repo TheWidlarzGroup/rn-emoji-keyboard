@@ -19,9 +19,12 @@ import tr from './translation/tr'
 import no from './translation/no'
 import ro from './translation/ro'
 import np from './translation/np'
+import EmojisData from './assets/emojis.json'
+import type { EmojisByCategory } from './types'
 
 export { EmojiKeyboard }
 export { useRecentPicksPersistence }
 export { en, pl, ko, it, fr, id, es, de, pt, ru, ua, vi, cs, ja, tr, no, ro, np }
+export const emojisByCategory = EmojisData as EmojisByCategory[]
 
 export default EmojiPicker
