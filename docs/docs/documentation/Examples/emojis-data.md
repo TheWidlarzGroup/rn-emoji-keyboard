@@ -12,13 +12,12 @@ To preview app with this example, clone [**github repo**](https://github.com/The
 It's possible to pass your own set of emojis. You have to keep in mind that types and category titles must match the ones that we are using. In the example you can see custom emojis set that contains only emojis with unicode version === 11.
 
 ```jsx
-import EmojiPicker, { emojisByGroup } from 'rn-emoji-keyboard'
-
+import EmojiPicker, { emojisByCategory } from 'rn-emoji-keyboard'
 import type { EmojisByCategory } from 'src/types'
 
 const getCustomEmojis = () => {
   const newEmojiSet: EmojisByCategory[] = []
-  for (const [, value] of Object.entries(emojisByGroup)) {
+  for (const [, value] of Object.entries(emojisByCategory)) {
     const newData = value.data.filter((emoji) => parseFloat(emoji.v) === 11)
     newEmojiSet.push({
       title: value.title,
@@ -36,7 +35,7 @@ const ExampleComponent = () => {
       open={isOpen}
       onClose={handleOnClose}
       onEmojiSelected={handleOnEmojiSelected}
-      customEmojisByGroup={getCustomEmojis()}
+      emojisByCategory={getCustomEmojis()}
     />
   )
 }

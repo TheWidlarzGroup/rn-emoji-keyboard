@@ -39,16 +39,6 @@ It also returns `alreadySelected` boolean indicating whether pressed emoji is al
 
 ## Optional
 
-### `customEmojisByGroup`
-
-Set of emojis that can be displayed in the app. You can pass your own emojis or use the one that we have prepared.
-
-```ts
-import { emojisByGroup } from 'rn-emoji-keyboard'
-```
-
-<ApiTable typeVal='EmojisByCategory[]' defaultVal='null'/>
-
 ### `allowMultipleSelections`
 
 Allow select multiple emoji without dismiss keyboard.
@@ -88,6 +78,20 @@ Look into [**React Native documentation**](https://reactnative.dev/docs/safearea
 :::
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
+
+### `emojisByCategory`
+
+Set of emojis that can be displayed in the app. You can pass your own emojis set or use the one that we have prepared.
+
+:::info
+Read more about [**Emojis Data**](/docs/api/emojisData)
+:::
+
+```ts
+import { emojisByCategory } from 'rn-emoji-keyboard'
+```
+
+<ApiTable typeVal='EmojisByCategory[]' defaultVal="emojisByCategory"/>
 
 ### `emojiSize`
 
