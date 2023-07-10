@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  Platform,
 } from 'react-native'
 import type { EmojisByCategory } from '../types'
 import { EmojiCategory } from './EmojiCategory'
@@ -20,6 +21,7 @@ import { ConditionalContainer } from './ConditionalContainer'
 import { SkinTones } from './SkinTones'
 
 const CATEGORY_ELEMENT_WIDTH = 37
+const isAndroid = Platform.OS === 'android'
 
 export const EmojiStaticKeyboard = React.memo(
   () => {
@@ -109,7 +111,7 @@ export const EmojiStaticKeyboard = React.memo(
               data={renderList}
               keyExtractor={keyExtractor}
               renderItem={renderItem}
-              removeClippedSubviews={true}
+              removeClippedSubviews={isAndroid}
               ref={flatListRef}
               onScrollToIndexFailed={onCategoryChangeFailed}
               horizontal
