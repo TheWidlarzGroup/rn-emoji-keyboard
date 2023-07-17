@@ -24,6 +24,7 @@ export type JsonEmoji = {
   name: string
   v: string
   toneEnabled: boolean
+  keywords?: string[]
 }
 
 export type ToneSelectorEmoji = Omit<JsonEmoji, 'toneEnabled'> & { index: string }

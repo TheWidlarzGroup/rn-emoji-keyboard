@@ -132,9 +132,18 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
           .flat()
           .filter((emoji) => {
             if (searchPhrase.length < 2) return false
+
+            const isInKeywords =
+              emoji?.keywords &&
+              emoji.keywords.length > 0 &&
+              emoji.keywords.some((keyword) =>
+                keyword.toLowerCase().includes(searchPhrase.toLowerCase())
+              )
+
             return (
               emoji.name.toLowerCase().includes(searchPhrase.toLowerCase()) ||
-              emoji.emoji.toLowerCase().includes(searchPhrase)
+              emoji.emoji.toLowerCase().includes(searchPhrase) ||
+              isInKeywords
             )
           }),
       })
