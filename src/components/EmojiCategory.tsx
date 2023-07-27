@@ -7,6 +7,7 @@ import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import { parseEmoji } from '../utils/parseEmoji'
 import { removeSkinToneModifier } from '../utils/skinToneSelectorUtils'
+import { useKeyboard } from '../hooks/useKeyboard'
 
 const emptyEmoji: JsonEmoji = {
   emoji: '',
@@ -37,6 +38,10 @@ export const EmojiCategory = React.memo(
       styles: themeStyles,
       selectedEmojis,
     } = React.useContext(KeyboardContext)
+
+    const { keyboardHeight } = useKeyboard(true)
+
+    const contentContainerStyle = { paddingBottom: keyboardHeight }
 
     const { setKeyboardState, keyboardState } = useKeyboardStore()
 
@@ -154,6 +159,7 @@ export const EmojiCategory = React.memo(
           windowSize={16}
           maxToRenderPerBatch={5}
           keyboardShouldPersistTaps="handled"
+          contentContainerStyle={contentContainerStyle}
         />
       </View>
     )
