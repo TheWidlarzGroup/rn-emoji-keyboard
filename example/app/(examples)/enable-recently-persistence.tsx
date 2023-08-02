@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import EnableRecently from './enable-recently'
 
 const STORAGE_KEY = 'RN-EMOJI-KEYBOARD_RECENT'
-const EnableRecentlyWithPersistence = () => {
+export default function () {
   useRecentPicksPersistence({
     initialization: () =>
       AsyncStorage.getItem(STORAGE_KEY).then((item) => JSON.parse(item || '[]')),
@@ -13,5 +13,3 @@ const EnableRecentlyWithPersistence = () => {
 
   return <EnableRecently />
 }
-
-export default EnableRecentlyWithPersistence

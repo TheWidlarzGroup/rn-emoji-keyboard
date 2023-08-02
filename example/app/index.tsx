@@ -1,24 +1,34 @@
-import { Link } from 'expo-router'
 import * as React from 'react'
 
 import { StyleSheet, View } from 'react-native'
+import { Link } from 'example/src/components/Link'
+import { Stack } from 'expo-router'
+
+export const screens = {
+  '/basic': 'Basic',
+  '/category-top': 'Category Top',
+  '/category-bottom': 'Category Bottom',
+  '/emoji-data': 'Custom Emojis Data',
+  '/dark': 'Dark theme',
+  '/disabled-categories': 'Disabled Categories',
+  '/enable-recently': 'Recently used',
+  '/enable-recently-persistence': 'Recently used with persistence',
+  '/static-modal': 'Static Modal (without knob)',
+  '/static': 'Static Component',
+  '/search': 'Search Bar',
+  '/selected-emojis': 'Selected Emojis',
+  '/translated': 'Translated',
+} as const
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Link href="/basic">Home</Link>
-      <Link href="/dark">Dark</Link>
-      <Link href="/translated">Translated</Link>
-      <Link href="/disabled-categories">Disabled Categories</Link>
-      <Link href="/static-modal">Static Modal (without knob)</Link>
-      <Link href="/static">Static Component</Link>
-      <Link href="/enable-recently">Enable recently used</Link>
-      <Link href="/enable-recently-persistence">Enable recently used with persistence</Link>
-      <Link href="/category-top">Category Top</Link>
-      <Link href="/category-bottom">Category Bottom</Link>
-      <Link href="/search">Search Bar</Link>
-      <Link href="/selected-emojis">Selected Emojis</Link>
-      <Link href="/emoji-data">Custom Emojis Data</Link>
+      <Stack.Screen options={{ title: 'Home' }} />
+      {Object.keys(screens).map((key) => (
+        <Link href={key} key={key}>
+          {screens[key as keyof typeof screens]}
+        </Link>
+      ))}
     </View>
   )
 }
@@ -28,10 +38,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
   },
 })
