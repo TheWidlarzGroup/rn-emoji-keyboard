@@ -6,12 +6,12 @@ jobs:
   tsc:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14
-      - uses: c-hive/gha-yarn-cache@v1
-      - name: Install node modules
+          node-version: 18
+          cache: yarn
+      - name: Install dependencies
         run: yarn
-      - name: typescript
-        run: yarn typescript
+      - name: typecheck
+        run: yarn typecheck
