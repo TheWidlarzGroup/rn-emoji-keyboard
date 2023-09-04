@@ -76,8 +76,9 @@ export const skinToneCodes = [
 export const removeSkinToneModifier = (emoji: string) => {
   let emojiCopy = emoji
   for (let i = 0; i < skinToneCodes.length; i++) {
-    // FIXME: typescript skinToneCodes[i] is not assignable to parameter of type string
-    emojiCopy = emojiCopy.replace(skinToneCodes[i]!, '')
+    const skinTone = skinToneCodes[i]
+
+    emojiCopy = skinTone ? emojiCopy.replace(skinTone, '') : emojiCopy
   }
   return emojiCopy
 }
