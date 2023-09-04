@@ -12,11 +12,11 @@ export const CATEGORIES_NAVIGATION = [
   { icon: 'Search', category: 'search' },
 ] as const
 
-export type IconNames = typeof CATEGORIES_NAVIGATION[number]['icon']
-export type CategoryTypes = typeof CATEGORIES_NAVIGATION[number]['category']
+export type IconNames = (typeof CATEGORIES_NAVIGATION)[number]['icon']
+export type CategoryTypes = (typeof CATEGORIES_NAVIGATION)[number]['category']
 
 export const CATEGORIES: readonly CategoryTypes[] = CATEGORIES_NAVIGATION.map(
-  ({ category }) => category
+  ({ category }) => category,
 )
 
 export type JsonEmoji = {
@@ -27,7 +27,9 @@ export type JsonEmoji = {
   keywords?: string[]
 }
 
-export type ToneSelectorEmoji = Omit<JsonEmoji, 'toneEnabled'> & { index: string }
+export type ToneSelectorEmoji = Omit<JsonEmoji, 'toneEnabled'> & {
+  index: string
+}
 
 export type EmojiType = {
   emoji: string

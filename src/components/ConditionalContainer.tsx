@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react'
-import { SafeAreaView, View, ViewProps } from 'react-native'
+import React, { type ReactNode } from 'react'
+import { SafeAreaView, View, type ViewProps } from 'react-native'
 
 type ConditionalContainerTypes = {
   children: ReactNode

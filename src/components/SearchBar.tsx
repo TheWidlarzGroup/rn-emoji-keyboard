@@ -48,7 +48,8 @@ export const SearchBar = () => {
         styles.container,
         themeStyles.searchBar.container,
         { backgroundColor: theme.search.background },
-      ]}>
+      ]}
+    >
       <TextInput
         style={[styles.input, themeStyles.searchBar.text, { color: theme.search.text }]}
         value={searchPhrase}

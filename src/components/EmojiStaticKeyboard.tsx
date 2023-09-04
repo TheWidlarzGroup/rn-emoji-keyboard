@@ -7,9 +7,9 @@ import {
   useWindowDimensions,
   Animated,
   SafeAreaView,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
   Platform,
+  type NativeScrollEvent,
+  type NativeSyntheticEvent,
 } from 'react-native'
 import type { EmojisByCategory } from '../types'
 import { EmojiCategory } from './EmojiCategory'
@@ -50,14 +50,14 @@ export const EmojiStaticKeyboard = React.memo(
         offset: width * index,
         index,
       }),
-      [width]
+      [width],
     )
 
     const [keyboardScrollOffsetY, setKeyboardScrollOffsetY] = React.useState(0)
 
     const renderItem = React.useCallback(
       (props) => <EmojiCategory setKeyboardScrollOffsetY={setKeyboardScrollOffsetY} {...props} />,
-      []
+      [],
     )
 
     React.useEffect(() => {
@@ -76,7 +76,7 @@ export const EmojiStaticKeyboard = React.memo(
         const index = el.nativeEvent.contentOffset.x / width
         scrollNav.setValue(index * CATEGORY_ELEMENT_WIDTH)
       },
-      [scrollNav, width]
+      [scrollNav, width],
     )
 
     const onScrollEnd = React.useCallback(
@@ -84,7 +84,7 @@ export const EmojiStaticKeyboard = React.memo(
         const index = el.nativeEvent.contentOffset.x / width
         setActiveCategoryIndex(Math.round(index))
       },
-      [setActiveCategoryIndex, width]
+      [setActiveCategoryIndex, width],
     )
 
     return (
@@ -95,15 +95,18 @@ export const EmojiStaticKeyboard = React.memo(
           categoryPosition === 'top' && disableSafeArea && styles.containerReverse,
           themeStyles.container,
           { backgroundColor: theme.container },
-        ]}>
+        ]}
+      >
         <ConditionalContainer
           condition={!disableSafeArea}
           container={(children) => (
             <SafeAreaView
-              style={[styles.flex, categoryPosition === 'top' && styles.containerReverse]}>
+              style={[styles.flex, categoryPosition === 'top' && styles.containerReverse]}
+            >
               {children}
             </SafeAreaView>
-          )}>
+          )}
+        >
           <>
             {enableSearchBar && <SearchBar />}
             <Animated.FlatList<EmojisByCategory>
@@ -133,7 +136,7 @@ export const EmojiStaticKeyboard = React.memo(
       </View>
     )
   },
-  () => true
+  () => true,
 )
 
 const styles = StyleSheet.create({

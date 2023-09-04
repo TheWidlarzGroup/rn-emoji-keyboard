@@ -11,7 +11,8 @@ export default function Home() {
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      description="Description will go into a meta tag in <head />"
+    >
       <div className="home_container">
         <div className="home_titleBox abstract_flex_center home_abstract_title">
           <h1 align="center" className="home_abstract_title">
@@ -28,13 +29,15 @@ export default function Home() {
         </div>
         <Link
           to="docs/documentation/about"
-          className="home_documentationBox abstract_flex_center home_abstract_squareBtn">
+          className="home_documentationBox abstract_flex_center home_abstract_squareBtn"
+        >
           <span className="home_title home_abstract_title">📄 Documentation</span>
         </Link>
         <a
           href="https://github.com/TheWidlarzGroup/rn-emoji-keyboard"
           target="_blank"
-          className="home_githubBox abstract_flex_center home_abstract_squareBtn">
+          className="home_githubBox abstract_flex_center home_abstract_squareBtn"
+        >
           <GithubImage />
           <span className="home_githubTitle home_abstract_title">GitHub</span>
         </a>

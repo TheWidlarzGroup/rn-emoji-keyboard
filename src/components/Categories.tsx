@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Animated, FlatList, StyleSheet, View, ViewStyle } from 'react-native'
+import { Animated, FlatList, StyleSheet, View, type ViewStyle } from 'react-native'
 import { KeyboardContext } from '../contexts/KeyboardContext'
-import { CATEGORIES_NAVIGATION, CategoryNavigationItem } from '../types'
+import { CATEGORIES_NAVIGATION, type CategoryNavigationItem } from '../types'
 import { CategoryItem } from './CategoryItem'
 import { exhaustiveTypeCheck } from '../utils/exhaustiveTypeCheck'
 import { defaultTheme } from '../contexts/KeyboardContext'
@@ -35,7 +35,7 @@ export const Categories = (p: Props) => {
     ({ item, index }: { item: CategoryNavigationItem; index: number }) => (
       <CategoryItem item={item} index={index} handleScrollToCategory={handleScrollToCategory} />
     ),
-    [handleScrollToCategory]
+    [handleScrollToCategory],
   )
 
   React.useEffect(() => {
@@ -57,7 +57,7 @@ export const Categories = (p: Props) => {
         ]}
       />
     ),
-    [theme.category.containerActive, scrollNav, p.scrollNav]
+    [theme.category.containerActive, scrollNav, p.scrollNav],
   )
 
   const getStylesBasedOnPosition = () => {

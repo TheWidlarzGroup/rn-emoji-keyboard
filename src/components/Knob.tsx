@@ -62,7 +62,7 @@ export const Knob = ({ offsetY, height, onClose, setIsExpanded }: KnobProps) => 
         }
       },
       onShouldBlockNativeResponder: () => true,
-    })
+    }),
   ).current
 
   return (
