@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="rn-emoji-keyboard" src="./src/assets/rocket.png" />
+    <img alt="rn-emoji-keyboard" src="./docs/assets/icon/rocket.png" />
 </p>
 <p align="center" >
   Lightweight, fully customizable emoji keyboard,<br />
