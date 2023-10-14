@@ -37,7 +37,7 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
 
   const numberOfColumns = React.useRef<number>(
     Math.floor(
-      width / ((props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 2),
+      width / ((props.emojiSize ? props.emojiSize : defaultKeyboardContext.emojiSize) * 1.5),
     ),
   )
 

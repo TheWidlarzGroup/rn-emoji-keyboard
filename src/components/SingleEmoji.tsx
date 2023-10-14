@@ -48,12 +48,12 @@ export const SingleEmoji = React.memo(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 4,
+    padding: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
   emojiWrapper: {
-    padding: 4,
+    padding: 1,
   },
   emoji: { color: '#000' },
 })
