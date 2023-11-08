@@ -93,6 +93,7 @@ export type ContextValues = {
   setActiveCategoryIndex: (index: number) => void
   numberOfColumns: number
   width: number
+  setWidth: (width: number) => void
   searchPhrase: string
   setSearchPhrase: (phrase: string) => void
   renderList: EmojisByCategory[]
@@ -179,6 +180,7 @@ export const defaultKeyboardValues: ContextValues = {
   setActiveCategoryIndex: () => {},
   numberOfColumns: 5,
   width: 0,
+  setWidth: (_width: number) => {},
   searchPhrase: '',
   setSearchPhrase: (_phrase: string) => {},
   renderList: [],

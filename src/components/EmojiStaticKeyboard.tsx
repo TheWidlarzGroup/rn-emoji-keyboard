@@ -4,7 +4,6 @@ import {
   StyleSheet,
   View,
   FlatList,
-  useWindowDimensions,
   Animated,
   SafeAreaView,
   Platform,
@@ -25,7 +24,6 @@ const isAndroid = Platform.OS === 'android'
 
 export const EmojiStaticKeyboard = React.memo(
   () => {
-    const { width } = useWindowDimensions()
     const {
       activeCategoryIndex,
       setActiveCategoryIndex,
@@ -40,6 +38,8 @@ export const EmojiStaticKeyboard = React.memo(
       styles: themeStyles,
       shouldAnimateScroll,
       enableCategoryChangeAnimation,
+      width,
+      setWidth,
     } = React.useContext(KeyboardContext)
     const { keyboardState } = useKeyboardStore()
     const flatListRef = React.useRef<FlatList>(null)
@@ -96,6 +96,7 @@ export const EmojiStaticKeyboard = React.memo(
           themeStyles.container,
           { backgroundColor: theme.container },
         ]}
+        onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
       >
         <ConditionalContainer
           condition={!disableSafeArea}
