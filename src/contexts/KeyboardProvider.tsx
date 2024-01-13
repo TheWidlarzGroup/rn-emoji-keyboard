@@ -43,6 +43,8 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
     ),
   )
 
+  // On initial render we want to display only emojis that are visible right away after keyboard open
+  // Rest of emojis are loaded after user interaction with keyboard
   const calculateMinimalEmojisAmountToDisplay = () => {
     const defaultHeight = props.defaultHeight || defaultKeyboardContext.defaultHeight
     const emojiSize = props.emojiSize || defaultKeyboardContext.emojiSize
