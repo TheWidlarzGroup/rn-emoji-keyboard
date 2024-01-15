@@ -1,13 +1,20 @@
 import * as React from 'react'
 
 import { StyleSheet, View, Text, FlatList, type ListRenderItemInfo } from 'react-native'
-import type { EmojisByCategory, EmojiSizes, JsonEmoji } from '../types'
+import {
+  CATEGORIES,
+  type CategoryPosition,
+  type EmojisByCategory,
+  type EmojiSizes,
+  type JsonEmoji,
+} from '../types'
 import { SingleEmoji } from './SingleEmoji'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import { parseEmoji } from '../utils/parseEmoji'
 import { removeSkinToneModifier } from '../utils/skinToneSelectorUtils'
 import { useKeyboard } from '../hooks/useKeyboard'
+import { InteractionManager } from 'react-native'
 
 const emptyEmoji: JsonEmoji = {
   emoji: '',
@@ -16,13 +23,19 @@ const emptyEmoji: JsonEmoji = {
   toneEnabled: false,
 }
 
+const ListFooterComponent = ({ categoryPosition }: { categoryPosition: CategoryPosition }) => (
+  <View style={categoryPosition === 'floating' ? styles.footerFloating : styles.footer} />
+)
+
 export const EmojiCategory = React.memo(
   ({
     item: { title, data },
     setKeyboardScrollOffsetY,
+    activeCategoryIndex,
   }: {
     item: EmojisByCategory
     setKeyboardScrollOffsetY: React.Dispatch<React.SetStateAction<number>>
+    activeCategoryIndex: number
   }) => {
     const {
       onEmojiSelected,
@@ -37,6 +50,7 @@ export const EmojiCategory = React.memo(
       theme,
       styles: themeStyles,
       selectedEmojis,
+      minimalEmojisAmountToDisplay,
     } = React.useContext(KeyboardContext)
 
     const { keyboardHeight } = useKeyboard(true)
@@ -55,15 +69,6 @@ export const EmojiCategory = React.memo(
         setEmpty(fillWithEmpty)
       }
     }, [numberOfColumns, data])
-
-    const getItemLayout = React.useCallback(
-      (_: JsonEmoji[] | null | undefined, index: number) => ({
-        length: emojiSize ? emojiSize : 0,
-        offset: emojiSize * Math.ceil(index / numberOfColumns),
-        index,
-      }),
-      [emojiSize, numberOfColumns],
-    )
 
     const handleEmojiPress = React.useCallback(
       (emoji: JsonEmoji) => {
@@ -132,11 +137,37 @@ export const EmojiCategory = React.memo(
         themeStyles.emoji.selected,
       ],
     )
+
     const handleOnScroll = (ev: { nativeEvent: { contentOffset: { y: number } } }) => {
       setKeyboardScrollOffsetY(ev.nativeEvent.contentOffset.y)
       clearEmojiTonesData()
     }
+
     const keyExtractor = React.useCallback((item: JsonEmoji) => item.name, [])
+
+    const [maxIndex, setMaxIndex] = React.useState(0)
+
+    // with InteractionManager we can show emojis after interaction is finished
+    // It helps with delay during category change animation
+    InteractionManager.runAfterInteractions(() => {
+      if (maxIndex === 0 && data.length) {
+        setMaxIndex(minimalEmojisAmountToDisplay)
+      }
+    })
+
+    const onEndReached = () => {
+      if (maxIndex <= data.length) {
+        setMaxIndex(data.length)
+      }
+    }
+
+    React.useEffect(() => {
+      if (CATEGORIES[activeCategoryIndex] !== title) {
+        setMaxIndex(0)
+      }
+    }, [activeCategoryIndex, title])
+
+    const flatListData = data.slice(0, maxIndex)
 
     return (
       <View style={[styles.container, { width }]}>
@@ -145,28 +176,33 @@ export const EmojiCategory = React.memo(
             {translation[title]}
           </Text>
         )}
-        <FlatList
-          data={[...data, ...empty]}
-          keyExtractor={keyExtractor}
-          numColumns={numberOfColumns}
-          renderItem={renderItem}
-          getItemLayout={getItemLayout}
-          onScroll={handleOnScroll}
-          ListFooterComponent={() => (
-            <View style={categoryPosition === 'floating' ? styles.footerFloating : styles.footer} />
-          )}
-          initialNumToRender={10}
-          windowSize={16}
-          maxToRenderPerBatch={5}
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={contentContainerStyle}
-        />
+        {flatListData.length === 0 ? null : (
+          <FlatList
+            data={[...flatListData, ...empty]}
+            onEndReached={onEndReached}
+            onEndReachedThreshold={0.3}
+            keyExtractor={keyExtractor}
+            numColumns={numberOfColumns}
+            renderItem={renderItem}
+            onScroll={handleOnScroll}
+            ListFooterComponent={<ListFooterComponent categoryPosition={categoryPosition} />}
+            initialNumToRender={10}
+            windowSize={16}
+            maxToRenderPerBatch={5}
+            keyboardShouldPersistTaps="handled"
+            contentContainerStyle={contentContainerStyle}
+            scrollEventThrottle={16}
+          />
+        )}
       </View>
     )
   },
   (prevProps, nextProps) => {
+    if (prevProps.activeCategoryIndex !== nextProps.activeCategoryIndex) return false
     if (nextProps.item.title !== 'search') return true
+
     if (prevProps.item.data.length !== nextProps.item.data.length) return false
+
     return (
       prevProps.item.data.map((d) => d.name).join() ===
       nextProps.item.data.map((d) => d.name).join()

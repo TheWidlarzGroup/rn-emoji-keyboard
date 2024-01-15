@@ -103,6 +103,7 @@ export type ContextValues = {
   emojiTonesData: EmojiTonesData
   shouldAnimateScroll: boolean
   setShouldAnimateScroll: (value: boolean) => void
+  minimalEmojisAmountToDisplay: number
 }
 
 export const emptyStyles: Styles = {
@@ -197,6 +198,7 @@ export const defaultKeyboardValues: ContextValues = {
   },
   shouldAnimateScroll: true,
   setShouldAnimateScroll: (_value: boolean) => {},
+  minimalEmojisAmountToDisplay: 50,
 }
 
 export const KeyboardContext = React.createContext<
