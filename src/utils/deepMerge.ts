@@ -9,6 +9,7 @@ export const deepMerge = <T extends object>(source: T, additional: RecursivePart
   objectKeys(additional).forEach((key) => {
     if (key && additional[key] && typeof additional[key] === 'object') {
       result[key] = deepMerge(
+        // @ts-ignore
         source[key],
         // @ts-ignore
         additional[key],
