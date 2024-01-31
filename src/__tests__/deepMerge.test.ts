@@ -7,6 +7,7 @@ describe('deepMerge tests', () => {
     emoji: {
       selected: '#fff',
     },
+    category: undefined,
   }
   const newStyles = {
     container: { backgroundColor: '#000' },
@@ -36,6 +37,25 @@ describe('deepMerge tests', () => {
       emoji: {
         ...emptyStyles.emoji,
         selected: newStyles.emoji.selected,
+      },
+    })
+  })
+
+  it('should merge theme properly with undefined as property', () => {
+    const themeWithUndefined = {
+      ...newTheme,
+      search: { text: undefined },
+    }
+    expect(deepMerge(defaultTheme, themeWithUndefined)).toStrictEqual({
+      ...defaultTheme,
+      container: newTheme.container,
+      emoji: {
+        ...defaultTheme.emoji,
+        selected: newTheme.emoji.selected,
+      },
+      search: {
+        ...defaultTheme.search,
+        text: undefined,
       },
     })
   })

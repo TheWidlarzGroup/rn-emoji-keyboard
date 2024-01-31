@@ -16,6 +16,7 @@ export const deepMerge = <T extends Record<K, any>, K extends keyof T>(
     ) {
       result[key] = deepMerge(source[key], additional[key] as RecursivePartial<T[K]>)
     } else {
+      if (typeof source[key] === 'object' && additional[key] === undefined) return
       result[key] = additional[key] as T[K]
     }
   })
