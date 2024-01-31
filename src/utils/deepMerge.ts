@@ -1,21 +1,24 @@
 export type RecursivePartial<T> = Partial<{
-  [P in keyof T]: T[P] extends object ? Partial<T[P]> : T[P]
+  [P in keyof T]: T[P] extends Record<string, any> ? RecursivePartial<T[P]> : T[P]
 }>
 
-const objectKeys = <T extends object>(obj: T) => Object.keys(obj) as (keyof T)[]
+const objectKeys = <T extends Record<string, any>>(obj: T) => Object.keys(obj) as (keyof T)[]
 
-export const deepMerge = <T extends object>(source: T, additional: RecursivePartial<T>): T => {
-  const result = { ...source }
-  objectKeys(additional).forEach((key) => {
-    if (key && additional[key] && typeof additional[key] === 'object') {
-      result[key] = deepMerge(
-        source[key],
-        // @ts-ignore
-        additional[key],
-      ) as unknown as T[typeof key]
+export const deepMerge = <T extends Record<K, any>, K extends keyof T>(
+  source: T,
+  additional: RecursivePartial<T>,
+): T => {
+  const result: T = { ...source }
+  ;(objectKeys(additional) as K[]).forEach((key) => {
+    if (
+      key in source &&
+      key in additional &&
+      typeof source[key] === 'object' &&
+      typeof additional[key] === 'object'
+    ) {
+      result[key] = deepMerge(source[key], additional[key] as RecursivePartial<T[K]>)
     } else {
-      // @ts-ignore
-      result[key] = additional[key]
+      result[key] = additional[key] as T[K]
     }
   })
   return result
