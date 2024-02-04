@@ -6,12 +6,13 @@ import { CategoryItem } from './CategoryItem'
 import { exhaustiveTypeCheck } from '../utils/exhaustiveTypeCheck'
 import { defaultTheme } from '../contexts/KeyboardContext'
 
-const CATEGORY_ELEMENT_WIDTH = 37
+export const CATEGORY_ELEMENT_WIDTH = 37
 
 const Separator = () => <View style={styles.separator} />
 
 type Props = {
   scrollNav?: Animated.Value
+  scrollEmojiCategoryListToIndex: (index: number) => void
 }
 
 export const Categories = (p: Props) => {
@@ -27,9 +28,13 @@ export const Categories = (p: Props) => {
   } = React.useContext(KeyboardContext)
 
   const scrollNav = React.useRef(new Animated.Value(0)).current
-  const handleScrollToCategory = React.useCallback(() => {
-    setShouldAnimateScroll(enableCategoryChangeAnimation)
-  }, [setShouldAnimateScroll, enableCategoryChangeAnimation])
+  const handleScrollToCategory = React.useCallback(
+    (index: number) => {
+      setShouldAnimateScroll(enableCategoryChangeAnimation)
+      p.scrollEmojiCategoryListToIndex(index)
+    },
+    [setShouldAnimateScroll, enableCategoryChangeAnimation, p],
+  )
 
   const renderItem = React.useCallback(
     ({ item, index }: { item: CategoryNavigationItem; index: number }) => (
