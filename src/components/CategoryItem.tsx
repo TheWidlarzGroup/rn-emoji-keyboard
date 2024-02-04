@@ -1,20 +1,20 @@
 import * as React from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { KeyboardContext } from '../contexts/KeyboardContext'
-import type { CategoryNavigationItem, CategoryTypes } from '../types'
+import type { CategoryNavigationItem } from '../types'
 import { Icon } from './Icon'
 
 type CategoryItemProps = {
   item: CategoryNavigationItem
   index: number
-  handleScrollToCategory: (category: CategoryTypes) => void
+  handleScrollToCategory: (index: number) => void
 }
 
 export const CategoryItem = ({ item, index, handleScrollToCategory }: CategoryItemProps) => {
   const { activeCategoryIndex, theme, setActiveCategoryIndex } = React.useContext(KeyboardContext)
 
   const handleSelect = () => {
-    handleScrollToCategory(item.category)
+    handleScrollToCategory(index)
     setActiveCategoryIndex(index)
   }
 
