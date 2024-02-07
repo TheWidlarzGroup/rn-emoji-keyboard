@@ -139,7 +139,9 @@ export const EmojiStaticKeyboard = React.memo(
           )}
         >
           <>
-            {enableSearchBar && <SearchBar />}
+            {enableSearchBar && (
+              <SearchBar scrollEmojiCategoryListToIndex={scrollEmojiCategoryListToIndex} />
+            )}
             <Animated.FlatList<EmojisByCategory>
               extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
               data={renderList}
