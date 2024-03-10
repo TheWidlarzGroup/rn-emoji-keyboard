@@ -46,3 +46,34 @@
   font-weight: 700;
   src: local('JetBrainsMono'), url(../../assets/fonts/JetBrainsMono-Bold.woff2) format('woff2');
 }
+
+.gallery {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.gallery img {
+  width: 32%;
+  margin-right: 2%;
+}
+
+.gallery img:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    flex-direction: column;
+  }
+  .gallery img {
+    width: 100%;
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+
+  .gallery img:last-child {
+    margin-right: 0;
+  }
+}

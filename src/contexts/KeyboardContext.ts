@@ -52,6 +52,12 @@ export type Theme = {
     placeholder: string
     icon: string
   }
+  customButton: {
+    icon: string
+    iconPressed: string
+    background: string
+    backgroundPressed: string
+  }
   emoji: {
     selected: string
   }
@@ -76,6 +82,8 @@ export type KeyboardProps = {
   enableRecentlyUsed?: boolean
   categoryPosition?: CategoryPosition
   enableSearchBar?: boolean
+  enableCustomButton?: boolean
+  onCustomButtonPress?: () => void
   categoryOrder?: CategoryTypes[]
   onRequestClose?: () => void
   disableSafeArea?: boolean
@@ -140,6 +148,12 @@ export const defaultTheme: Theme = {
     icon: '#00000055',
     background: '#00000011',
   },
+  customButton: {
+    icon: '#000000',
+    iconPressed: '#005b96',
+    background: '#00000011',
+    backgroundPressed: '#00000016',
+  },
   emoji: {
     selected: '#e3dbcd',
   },
@@ -163,6 +177,8 @@ export const defaultKeyboardContext: Required<KeyboardProps> & {
   enableRecentlyUsed: false,
   categoryPosition: 'floating',
   enableSearchBar: false,
+  enableCustomButton: false,
+  onCustomButtonPress: () => {},
   categoryOrder: [...CATEGORIES],
   onRequestClose: () => {},
   disableSafeArea: false,

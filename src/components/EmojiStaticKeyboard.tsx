@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import {
   StyleSheet,
   View,
@@ -18,6 +17,7 @@ import { SearchBar } from './SearchBar'
 import { useKeyboardStore } from '../store/useKeyboardStore'
 import { ConditionalContainer } from './ConditionalContainer'
 import { SkinTones } from './SkinTones'
+import { CustomButton } from './CustomButton'
 
 const CATEGORY_ELEMENT_WIDTH = 37
 const isAndroid = Platform.OS === 'android'
@@ -31,6 +31,7 @@ export const EmojiStaticKeyboard = React.memo(
       enableCategoryChangeGesture,
       categoryPosition,
       enableSearchBar,
+      enableCustomButton,
       searchPhrase,
       renderList,
       disableSafeArea,
@@ -38,6 +39,7 @@ export const EmojiStaticKeyboard = React.memo(
       styles: themeStyles,
       shouldAnimateScroll,
       enableCategoryChangeAnimation,
+      onCustomButtonPress,
       width,
       setWidth,
     } = React.useContext(KeyboardContext)
@@ -134,7 +136,18 @@ export const EmojiStaticKeyboard = React.memo(
           )}
         >
           <>
-            {enableSearchBar && <SearchBar />}
+            <View
+              style={
+                categoryPosition === 'top'
+                  ? [styles.searchContainer, { marginBottom: 16 }]
+                  : styles.searchContainer
+              }
+            >
+              {enableSearchBar && <SearchBar />}
+              {enableCustomButton && (
+                <CustomButton customButtonPressHandler={onCustomButtonPress} />
+              )}
+            </View>
             <Animated.FlatList<EmojisByCategory>
               extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
               data={renderList}
@@ -170,6 +183,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderRadius: 16,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   containerReverse: { flexDirection: 'column-reverse' },
   containerShadow: {

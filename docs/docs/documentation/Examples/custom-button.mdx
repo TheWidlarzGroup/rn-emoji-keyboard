@@ -1,0 +1,46 @@
+---
+sidebar_position: 13
+title: Custom Button
+---
+
+import preview1 from '../../../assets/img/custom-button-preview-1.png'
+import preview2 from '../../../assets/img/custom-button-preview-2.png'
+import preview3 from '../../../assets/img/custom-button-preview-3.png'
+
+:::info
+To preview app with this example, clone [**github repo**](https://github.com/TheWidlarzGroup/rn-emoji-keyboard.git) and run `yarn example ios` or `yarn example android`.
+:::
+
+### Usage
+
+We've introduced a custom button feature to provide you with the flexibility to add your unique functionality to our interface. This feature allows you to, for example, add a function that deletes the previously used emoji, enhancing user interaction based on your application's specific needs.
+
+If you want to reveal the custom button, pass `enableCustomButton` prop. After that, use the `onCustomButtonPress` callback to define the specific action you want the custom button to perform.
+
+If search bar is enabled, custom button shows next to it.
+
+```jsx
+import EmojiPicker from 'rn-emoji-keyboard'
+
+const ExampleComponent = () => {
+  // ...
+
+  return (
+    <EmojiPicker
+      open={isOpen}
+      onClose={handleOnClose}
+      onEmojiSelected={handleOnEmojiSelected}
+      //  add props below
+      enableSearchBar
+      enableCustomButton
+      onCustomButtonPress={() => deleteLastEmoji()}
+    />
+  )
+}
+```
+
+<div className="gallery">
+  <img src={preview1} alt="First Image" />
+  <img src={preview2} alt="Second Image" />
+  <img src={preview3} alt="Third Image" />
+</div>

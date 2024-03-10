@@ -35,6 +35,7 @@ export const SearchBar = () => {
       setShouldAnimateScroll(enableSearchAnimation)
     }
   }
+
   const clearPhrase = () => {
     setSearchPhrase('')
     clearEmojiTonesData()
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
     borderColor: '#00000011',
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
   },
   input: {
     paddingVertical: 8,
