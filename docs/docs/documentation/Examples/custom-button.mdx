@@ -13,11 +13,16 @@ To preview app with this example, clone [**github repo**](https://github.com/The
 
 ### Usage
 
-We've introduced a custom button feature to provide you with the flexibility to add your unique functionality to our interface. This feature allows you to, for example, add a function that deletes the previously used emoji, enhancing user interaction based on your application's specific needs.
+We've introduced a custom button feature to provide you with the flexibility to add your unique functionality to our interface.
 
-If you want to reveal the custom button, pass `enableCustomButton` prop. After that, use the `onCustomButtonPress` callback to define the specific action you want the custom button to perform.
+The `customButton` prop allows you to inject custom buttons into the `EmojiPicker` component, enabling additional functionalities or actions within the emoji picker interface. This flexible prop accepts an array of React elements, allowing for multiple custom buttons to be specified.
 
-If search bar is enabled, custom button shows next to it.
+To use the `customButton` prop, pass an array of React components that you wish to render as buttons within the emoji picker. Each component must be assigned a unique key prop to help React identify which items have changed, are being added, or are removed.
+
+If search bar is enabled, custom buttons shows next to it.
+
+The `DeleteButton` is a pre-designed component that can be used within the `EmojiPicker` as part of the customButton prop array. You can add `customButtonPressHandler` prop with a function that will be called when the DeleteButton is pressed. This allows you to define the specific action that should occur on press, such as deleting an emoji from the input field.
+Also add `style` prop with an object that allows for customizing the styles of different parts of the DeleteButton. This prop enables the adjustment of the container and button component styles, as well as the normal and active colors of the icon.
 
 ```jsx
 import EmojiPicker from 'rn-emoji-keyboard'
@@ -27,13 +32,25 @@ const ExampleComponent = () => {
 
   return (
     <EmojiPicker
-      open={isOpen}
-      onClose={handleOnClose}
-      onEmojiSelected={handleOnEmojiSelected}
-      //  add props below
+      onEmojiSelected={handlePick}
+      open={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
       enableSearchBar
-      enableCustomButton
-      onCustomButtonPress={() => deleteLastEmoji()}
+      customButton={[
+        <DeleteButton
+          key="deleteButton"
+          customButtonPressHandler={deleteLastEmoji}
+          style={{
+            containerStyle: {},
+            buttonStyle: {
+              borderRadius: 100,
+              padding: 10,
+            },
+          }}
+        />,
+      ]}
+      allowMultipleSelections
+      categoryPosition="top"
     />
   )
 }

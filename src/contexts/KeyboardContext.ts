@@ -82,8 +82,7 @@ export type KeyboardProps = {
   enableRecentlyUsed?: boolean
   categoryPosition?: CategoryPosition
   enableSearchBar?: boolean
-  enableCustomButton?: boolean
-  onCustomButtonPress?: () => void
+  customButton?: React.ReactNode[]
   categoryOrder?: CategoryTypes[]
   onRequestClose?: () => void
   disableSafeArea?: boolean
@@ -177,8 +176,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> & {
   enableRecentlyUsed: false,
   categoryPosition: 'floating',
   enableSearchBar: false,
-  enableCustomButton: false,
-  onCustomButtonPress: () => {},
+  customButton: [],
   categoryOrder: [...CATEGORIES],
   onRequestClose: () => {},
   disableSafeArea: false,

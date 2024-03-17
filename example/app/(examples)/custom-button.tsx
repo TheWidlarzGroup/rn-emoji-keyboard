@@ -2,6 +2,7 @@ import { Button } from 'example/src/components/Button'
 import React from 'react'
 import { Results } from 'example/src/components/Results'
 import EmojiPicker, { type EmojiType } from 'rn-emoji-keyboard'
+import { DeleteButton } from '../../../src/components/DeleteButton'
 
 export default function () {
   const [result, setResult] = React.useState<string>()
@@ -31,10 +32,21 @@ export default function () {
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         enableSearchBar
-        enableCustomButton
-        onCustomButtonPress={() => deleteLastEmoji()}
+        customButton={[
+          <DeleteButton
+            key="deleteButton"
+            customButtonPressHandler={deleteLastEmoji}
+            style={{
+              containerStyle: {},
+              buttonStyle: {
+                borderRadius: 100,
+                padding: 10,
+              },
+            }}
+          />,
+        ]}
         allowMultipleSelections
-        categoryPosition="bottom"
+        categoryPosition="top"
       />
     </>
   )

@@ -15,7 +15,6 @@ export const EmojiPicker = ({
   onRequestClose,
   open,
   onClose,
-  onCustomButtonPress,
   expandable = defaultKeyboardContext.expandable,
   defaultHeight = defaultKeyboardContext.defaultHeight,
   allowMultipleSelections = false,
@@ -52,7 +51,6 @@ export const EmojiPicker = ({
       }}
       open={open}
       onClose={close}
-      onCustomButtonPress={onCustomButtonPress}
       expandable={expandable}
       defaultHeight={defaultHeight}
       {...props}
