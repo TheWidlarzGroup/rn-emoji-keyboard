@@ -76,6 +76,7 @@ export type KeyboardProps = {
   enableRecentlyUsed?: boolean
   categoryPosition?: CategoryPosition
   enableSearchBar?: boolean
+  hideSearchBarClearIcon?: boolean
   categoryOrder?: CategoryTypes[]
   onRequestClose?: () => void
   disableSafeArea?: boolean
@@ -163,6 +164,7 @@ export const defaultKeyboardContext: Required<KeyboardProps> & {
   enableRecentlyUsed: false,
   categoryPosition: 'floating',
   enableSearchBar: false,
+  hideSearchBarClearIcon: false,
   categoryOrder: [...CATEGORIES],
   onRequestClose: () => {},
   disableSafeArea: false,
