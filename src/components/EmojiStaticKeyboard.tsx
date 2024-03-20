@@ -30,7 +30,7 @@ export const EmojiStaticKeyboard = React.memo(
       enableCategoryChangeGesture,
       categoryPosition,
       enableSearchBar,
-      customButton,
+      customButtons,
       searchPhrase,
       renderList,
       disableSafeArea,
@@ -142,7 +142,7 @@ export const EmojiStaticKeyboard = React.memo(
               }
             >
               {enableSearchBar && <SearchBar />}
-              {customButton}
+              {customButtons}
             </View>
             <Animated.FlatList<EmojisByCategory>
               extraData={[keyboardState.recentlyUsed.length, searchPhrase]}

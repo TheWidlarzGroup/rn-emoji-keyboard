@@ -1,46 +1,49 @@
 import React from 'react'
-import { View, Pressable, StyleSheet, type StyleProp, type ViewStyle } from 'react-native'
+import {
+  View,
+  Pressable,
+  StyleSheet,
+  type StyleProp,
+  type ViewStyle,
+  type PressableProps,
+} from 'react-native'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { Icon } from './Icon'
 
-type DeleteButtonStyles = {
+type CustomButtonType = {
   containerStyle?: StyleProp<ViewStyle>
-  buttonStyle?: StyleProp<ViewStyle> | ((state: { pressed: boolean }) => StyleProp<ViewStyle>)
   iconNormalColor?: string
   iconActiveColor?: string
-}
+} & PressableProps
 
-type CustomButtonType = {
-  customButtonPressHandler?: () => void
-  style?: DeleteButtonStyles
-}
-
-export const DeleteButton = ({ customButtonPressHandler, style }: CustomButtonType) => {
+export const DeleteButton = ({
+  containerStyle,
+  iconNormalColor,
+  iconActiveColor,
+  ...pressableProps
+}: CustomButtonType) => {
   const { theme } = React.useContext(KeyboardContext)
   return (
-    <View style={[styles.buttonContainer, style?.containerStyle]}>
+    <View style={[styles.buttonContainer, containerStyle]}>
       <Pressable
-        onPress={customButtonPressHandler}
         style={({ pressed }) => [
           {
             backgroundColor: pressed
               ? theme.customButton.backgroundPressed
               : theme.customButton.background,
-            padding: 10,
+            padding: 8,
             borderRadius: 100,
           },
           styles.button,
-          typeof style?.buttonStyle === 'function'
-            ? style.buttonStyle({ pressed })
-            : style?.buttonStyle,
         ]}
+        {...pressableProps}
       >
         {({ pressed }) => (
           <Icon
             iconName="Backspace"
             isActive={pressed}
-            normalColor={style?.iconNormalColor || theme.customButton.icon}
-            activeColor={style?.iconActiveColor || theme.customButton.iconPressed}
+            normalColor={iconNormalColor || theme.customButton.icon}
+            activeColor={iconActiveColor || theme.customButton.iconPressed}
           />
         )}
       </Pressable>
@@ -54,6 +57,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   button: {
     justifyContent: 'center',

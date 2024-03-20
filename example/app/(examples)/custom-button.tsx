@@ -32,21 +32,21 @@ export default function () {
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         enableSearchBar
-        customButton={[
+        customButtons={[
           <DeleteButton
             key="deleteButton"
-            customButtonPressHandler={deleteLastEmoji}
-            style={{
-              containerStyle: {},
-              buttonStyle: {
-                borderRadius: 100,
-                padding: 10,
-              },
-            }}
+            onPress={deleteLastEmoji}
+            style={({ pressed }) => ({
+              backgroundColor: pressed ? '#000' : '#e1e1e1',
+              padding: 10,
+              borderRadius: 100,
+            })}
+            iconNormalColor="#000"
+            iconActiveColor="#fff"
           />,
         ]}
         allowMultipleSelections
-        categoryPosition="top"
+        categoryPosition="bottom"
       />
     </>
   )
