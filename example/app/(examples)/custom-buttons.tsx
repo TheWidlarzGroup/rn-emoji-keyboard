@@ -46,7 +46,7 @@ export default function () {
           />,
         ]}
         allowMultipleSelections
-        categoryPosition="bottom"
+        categoryPosition="top"
       />
     </>
   )

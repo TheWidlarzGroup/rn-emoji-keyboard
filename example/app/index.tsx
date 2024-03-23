@@ -17,7 +17,7 @@ export const screens = {
   '/search': 'Search Bar',
   '/selected-emojis': 'Selected Emojis',
   '/translated': 'Translated',
-  '/custom-button': 'Custom Button',
+  '/custom-buttons': 'Custom Button',
 } as const
 
 export default function App() {

@@ -111,6 +111,18 @@ Reveal the search bar, used to find specific emoji.
 
 <ApiTable typeVal='boolean' defaultVal='false'/>
 
+### `hideSearchBarClearIcon`
+
+Hide the search bar clear icon inside the search input.
+
+<ApiTable typeVal='boolean' defaultVal='false'/>
+
+### `customButtons`
+
+Inject custom buttons into the component.
+
+<ApiTable typeVal='React.ReactNode' defaultVal='null'/>
+
 ### `enableCategoryChangeAnimation`
 
 Allow to turn off FlatList scrolling animation when category is changed.
