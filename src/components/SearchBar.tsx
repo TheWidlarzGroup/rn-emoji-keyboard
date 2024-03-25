@@ -11,6 +11,7 @@ export const SearchBar = ({ scrollEmojiCategoryListToIndex }: SearchBarProps) =>
   const {
     searchPhrase,
     setSearchPhrase,
+    hideSearchBarClearIcon,
     translation,
     setActiveCategoryIndex,
     renderList,
@@ -23,11 +24,11 @@ export const SearchBar = ({ scrollEmojiCategoryListToIndex }: SearchBarProps) =>
   } = React.useContext(KeyboardContext)
   const inputRef = React.useRef<TextInput>(null)
 
-  const handleSearch = async (text: string) => {
+  const handleSearch = (text: string) => {
     setSearchPhrase(text)
 
     if (text === '') {
-      await setActiveCategoryIndex(0)
+      setActiveCategoryIndex(0)
       scrollEmojiCategoryListToIndex(0)
       setShouldAnimateScroll(enableCategoryChangeAnimation)
 
@@ -45,8 +46,10 @@ export const SearchBar = ({ scrollEmojiCategoryListToIndex }: SearchBarProps) =>
   const clearPhrase = () => {
     setSearchPhrase('')
     clearEmojiTonesData()
-    inputRef.current?.blur()
     setActiveCategoryIndex(0)
+    setTimeout(() => {
+      inputRef.current?.blur()
+    }, 0)
     scrollEmojiCategoryListToIndex(0)
   }
 
@@ -67,7 +70,7 @@ export const SearchBar = ({ scrollEmojiCategoryListToIndex }: SearchBarProps) =>
         onTouchEndCapture={clearEmojiTonesData}
         placeholderTextColor={theme.search.placeholder}
       />
-      {!!searchPhrase && (
+      {!hideSearchBarClearIcon && !!searchPhrase && (
         <TouchableOpacity onPress={clearPhrase} style={styles.button}>
           <Icon
             iconName={'Close'}
