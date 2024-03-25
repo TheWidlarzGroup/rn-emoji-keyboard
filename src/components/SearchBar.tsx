@@ -3,7 +3,11 @@ import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { KeyboardContext } from '../contexts/KeyboardContext'
 import { Icon } from './Icon'
 
-export const SearchBar = () => {
+type SearchBarProps = {
+  scrollEmojiCategoryListToIndex: (index: number) => void
+}
+
+export const SearchBar = ({ scrollEmojiCategoryListToIndex }: SearchBarProps) => {
   const {
     searchPhrase,
     setSearchPhrase,
@@ -25,6 +29,7 @@ export const SearchBar = () => {
 
     if (text === '') {
       setActiveCategoryIndex(0)
+      scrollEmojiCategoryListToIndex(0)
       setShouldAnimateScroll(enableCategoryChangeAnimation)
 
       return
@@ -33,6 +38,7 @@ export const SearchBar = () => {
     const searchIndex = renderList.findIndex((cat) => cat.title === 'search')
     if (searchIndex !== -1) {
       setActiveCategoryIndex(searchIndex)
+      scrollEmojiCategoryListToIndex(searchIndex)
       setShouldAnimateScroll(enableSearchAnimation)
     }
   }
@@ -43,6 +49,7 @@ export const SearchBar = () => {
     setTimeout(() => {
       inputRef.current?.blur()
     }, 0)
+    scrollEmojiCategoryListToIndex(0)
   }
 
   return (
