@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import {
   StyleSheet,
   View,
@@ -30,6 +29,7 @@ export const EmojiStaticKeyboard = React.memo(
       enableCategoryChangeGesture,
       categoryPosition,
       enableSearchBar,
+      customButtons,
       searchPhrase,
       renderList,
       disableSafeArea,
@@ -139,9 +139,18 @@ export const EmojiStaticKeyboard = React.memo(
           )}
         >
           <>
-            {enableSearchBar && (
-              <SearchBar scrollEmojiCategoryListToIndex={scrollEmojiCategoryListToIndex} />
-            )}
+            <View
+              style={
+                categoryPosition === 'top'
+                  ? [styles.searchContainer, { marginBottom: 16 }]
+                  : styles.searchContainer
+              }
+            >
+              {enableSearchBar && (
+                <SearchBar scrollEmojiCategoryListToIndex={scrollEmojiCategoryListToIndex} />
+              )}
+              {customButtons}
+            </View>
             <Animated.FlatList<EmojisByCategory>
               extraData={[keyboardState.recentlyUsed.length, searchPhrase]}
               data={renderList}
@@ -180,6 +189,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderRadius: 16,
+  },
+  searchContainer: {
+    paddingHorizontal: 16,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   containerReverse: { flexDirection: 'column-reverse' },
   containerShadow: {

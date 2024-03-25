@@ -42,6 +42,7 @@ export const SearchBar = ({ scrollEmojiCategoryListToIndex }: SearchBarProps) =>
       setShouldAnimateScroll(enableSearchAnimation)
     }
   }
+
   const clearPhrase = () => {
     setSearchPhrase('')
     clearEmojiTonesData()
@@ -86,12 +87,13 @@ export const SearchBar = ({ scrollEmojiCategoryListToIndex }: SearchBarProps) =>
 const styles = StyleSheet.create({
   container: {
     marginTop: 16,
-    marginHorizontal: 16,
+    marginRight: 8,
     borderRadius: 100,
     borderWidth: 1,
     borderColor: '#00000011',
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
   },
   input: {
     paddingVertical: 8,

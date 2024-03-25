@@ -10,7 +10,7 @@ export const Icon = ({
   normalColor,
   activeColor,
 }: {
-  iconName: IconNames | 'Close' | 'QuestionMark'
+  iconName: IconNames | 'Close' | 'QuestionMark' | 'Backspace'
   isActive: boolean
   normalColor: string
   activeColor: string
@@ -43,6 +43,8 @@ export const Icon = ({
       return <PngIcon fill={color} source={require('../assets/icons/clock.png')} />
     case 'QuestionMark':
       return <PngIcon fill={color} source={require('../assets/icons/questionMark.png')} />
+    case 'Backspace':
+      return <PngIcon fill={color} source={require('../assets/icons/backspace.png')} />
     default:
       exhaustiveTypeCheck(iconName)
       return null
