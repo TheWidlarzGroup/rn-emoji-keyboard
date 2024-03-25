@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import { StyleSheet, View } from 'react-native'
 import { Link } from 'example/src/components/Link'
 import { Stack } from 'expo-router'
@@ -18,6 +17,7 @@ export const screens = {
   '/search': 'Search Bar',
   '/selected-emojis': 'Selected Emojis',
   '/translated': 'Translated',
+  '/custom-buttons': 'Custom Button',
 } as const
 
 export default function App() {
