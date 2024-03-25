@@ -25,6 +25,7 @@ Due to the limited translation possibilities, we only provide a few pre-defined 
 - `no` - Norwegian 🇳🇴
 - `ro` - Romanian 🇷🇴
 - `np` - Nepali 🇳🇵
+- `se` - Swedish 🇸🇪
 
 First import lang and use it as `translation` prop.
 
