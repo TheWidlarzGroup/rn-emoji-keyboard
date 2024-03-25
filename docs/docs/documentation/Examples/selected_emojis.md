@@ -13,7 +13,7 @@ To use this feature you have to pass a [selectedEmojis](/docs/api/modal#selected
 When you provide selectedEmojis array, `onEmojiSelected` callback will also return `alreadySelected` boolean indicating whether pressed emoji was already selected or not.
 
 ```jsx
-import EmojiPicker, { EmojiType } from 'rn-emoji-keyboard';
+import EmojiPicker, { type EmojiType } from 'rn-emoji-keyboard';
 
 const ExampleComponent = () => {
   // ...
