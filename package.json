@@ -47,7 +47,7 @@
   "bugs": {
     "url": "https://github.com/TheWidlarzGroup/rn-emoji-keyboard/issues"
   },
-  "homepage": "https://github.com/TheWidlarzGroup/rn-emoji-keyboard#readme",
+  "homepage": "https://thewidlarzgroup.github.io/rn-emoji-keyboard",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
