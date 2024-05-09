@@ -22,7 +22,7 @@ npm install rn-emoji-keyboard
 ## Usage
 
 ```js
-import EmojiPicker from 'rn-emoji-keyboard'
+import EmojiPicker, { type EmojiType } from 'rn-emoji-keyboard'
 
 export default function App() {
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
