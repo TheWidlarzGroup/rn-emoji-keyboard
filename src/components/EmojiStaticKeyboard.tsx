@@ -42,6 +42,7 @@ export const EmojiStaticKeyboard = React.memo(
     } = React.useContext(KeyboardContext)
     const { keyboardState } = useKeyboardStore()
     const flatListRef = React.useRef<FlatList>(null)
+    const hasMomentumBegan = React.useRef(false)
 
     const getItemLayout = React.useCallback(
       (_: EmojisByCategory[] | null | undefined, index: number) => ({
@@ -109,10 +110,18 @@ export const EmojiStaticKeyboard = React.memo(
       [scrollNav, width],
     )
 
-    const onScrollEnd = React.useCallback(
+    const onMomentumScrollBegin = React.useCallback(() => {
+      hasMomentumBegan.current = true
+    }, [])
+
+    const onMomentumScrollEnd = React.useCallback(
       (el: NativeSyntheticEvent<NativeScrollEvent>) => {
+        if (!hasMomentumBegan.current) return
+
         const index = el.nativeEvent.contentOffset.x / width
         setActiveCategoryIndex(Math.round(index))
+
+        hasMomentumBegan.current = false
       },
       [setActiveCategoryIndex, width],
     )
@@ -169,7 +178,8 @@ export const EmojiStaticKeyboard = React.memo(
               maxToRenderPerBatch={1}
               onScroll={handleScroll}
               keyboardShouldPersistTaps="handled"
-              onMomentumScrollEnd={onScrollEnd}
+              onMomentumScrollBegin={onMomentumScrollBegin}
+              onMomentumScrollEnd={onMomentumScrollEnd}
             />
             <Categories
               scrollEmojiCategoryListToIndex={scrollEmojiCategoryListToIndex}
