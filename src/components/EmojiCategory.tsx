@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { StyleSheet, View, Text, FlatList, type ListRenderItemInfo } from 'react-native'
 import {
-  CATEGORIES,
   type CategoryPosition,
   type EmojisByCategory,
   type EmojiSizes,
@@ -31,7 +30,6 @@ export const EmojiCategory = React.memo(
   ({
     item: { title, data },
     setKeyboardScrollOffsetY,
-    activeCategoryIndex,
   }: {
     item: EmojisByCategory
     setKeyboardScrollOffsetY: React.Dispatch<React.SetStateAction<number>>
@@ -58,6 +56,8 @@ export const EmojiCategory = React.memo(
     const contentContainerStyle = { paddingBottom: keyboardHeight }
 
     const { setKeyboardState, keyboardState } = useKeyboardStore()
+
+    const initialRender = React.useRef(false)
 
     const [empty, setEmpty] = React.useState<JsonEmoji[]>([])
 
@@ -145,7 +145,7 @@ export const EmojiCategory = React.memo(
 
     const keyExtractor = React.useCallback((item: JsonEmoji) => item.name, [])
 
-    const [maxIndex, setMaxIndex] = React.useState(0)
+    const [maxIndex, setMaxIndex] = React.useState(minimalEmojisAmountToDisplay)
 
     // with InteractionManager we can show emojis after interaction is finished
     // It helps with delay during category change animation
@@ -155,17 +155,24 @@ export const EmojiCategory = React.memo(
       }
     })
 
+    // To prevent situation with zero maxIndex on next picker openings
+    React.useEffect(() => {
+      if (initialRender.current) return
+
+      initialRender.current = true
+      const task = requestAnimationFrame(() => {
+        if (maxIndex === 0 && data.length) {
+          setMaxIndex(minimalEmojisAmountToDisplay)
+        }
+      })
+      return () => cancelAnimationFrame(task)
+    }, [data.length, maxIndex, minimalEmojisAmountToDisplay])
+
     const onEndReached = () => {
       if (maxIndex <= data.length) {
         setMaxIndex(data.length)
       }
     }
-
-    React.useEffect(() => {
-      if (CATEGORIES[activeCategoryIndex] !== title) {
-        setMaxIndex(0)
-      }
-    }, [activeCategoryIndex, title])
 
     const flatListData = data.slice(0, maxIndex)
 

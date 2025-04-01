@@ -1,5 +1,6 @@
 import { EmojiPicker } from './EmojiPicker'
 import { EmojiKeyboard } from './EmojiKeyboard'
+export { DeleteButton } from './components/DeleteButton'
 import { useRecentPicksPersistence } from './hooks/useRecentPicksPersistence'
 import en from './translation/en'
 import pl from './translation/pl'
