@@ -63,6 +63,7 @@
     "@types/react-native": "0.70.0",
     "commitlint": "^17.0.2",
     "del-cli": "^5.0.0",
+    "emojilib": "^3.0.10",
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -75,8 +76,7 @@
     "react-test-renderer": "18.2.0",
     "release-it": "^15.0.0",
     "typescript": "^5.0.2",
-    "unicode-emoji-json": "0.4.0",
-    "emojilib": "^3.0.10"
+    "unicode-emoji-json": "^0.8.0"
   },
   "resolutions": {
     "@types/react": "17.0.21"
