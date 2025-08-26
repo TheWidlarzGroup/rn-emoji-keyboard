@@ -58,6 +58,7 @@ export const EmojiPicker = ({
       <ModalWithBackdrop
         isOpen={open}
         backdropPress={close}
+        supportedOrientations={['landscape']}
         onRequestClose={onRequestClose || close}
       >
         <>
