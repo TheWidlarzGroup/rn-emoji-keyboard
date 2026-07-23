@@ -15,9 +15,7 @@ import {
   skinTones,
   generateToneSelectorFunnelPosition,
   generateToneSelectorPosition,
-  insertAtCertainIndex,
-  variantSelector,
-  zeroWidthJoiner,
+  applySkinTone,
 } from '../utils/skinToneSelectorUtils'
 import { deepMerge } from '../utils/deepMerge'
 
@@ -71,35 +69,13 @@ export const KeyboardProvider: React.FC<ProviderProps> = React.memo((props) => {
 
       const EXTRA_SEARCH_TOP = props.enableSearchBar || props.categoryPosition === 'top' ? 50 : 0
 
-      const splittedEmoji = emoji.emoji.split('')
-      const ZWJIndex = splittedEmoji.findIndex((a) => a === zeroWidthJoiner)
-      const selectorIndex = splittedEmoji.findIndex((a) => a === variantSelector)
-      const modifiedEmojis = skinTones.map((tone) => {
-        const basicEmojiData = {
-          index: tone.name,
-          name: emoji.name,
-          v: emoji.v,
-          toneEnabled: true,
-        }
-        // Check for emojis special signs which might break tone modify
-        switch (true) {
-          case ZWJIndex > 0:
-            return {
-              ...basicEmojiData,
-              emoji: insertAtCertainIndex(splittedEmoji, ZWJIndex, tone.color).join(''),
-            }
-          case selectorIndex > 0:
-            return {
-              ...basicEmojiData,
-              emoji: insertAtCertainIndex(splittedEmoji, selectorIndex, tone.color).join(''),
-            }
-          default:
-            return {
-              ...basicEmojiData,
-              emoji: emoji.emoji + tone.color,
-            }
-        }
-      })
+      const modifiedEmojis = skinTones.map((tone) => ({
+        index: tone.name,
+        name: emoji.name,
+        v: emoji.v,
+        toneEnabled: true,
+        emoji: applySkinTone(emoji.emoji, tone.color),
+      }))
 
       const skinTonePosition = generateToneSelectorPosition(
         numberOfColumns.current,

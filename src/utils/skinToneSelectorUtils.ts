@@ -83,6 +83,30 @@ export const removeSkinToneModifier = (emoji: string) => {
   return emojiCopy
 }
 
+// Applies a Fitzpatrick skin-tone modifier to a base emoji, producing a
+// canonical Unicode sequence.
+//
+// The modifier is inserted before a ZWJ (so it tones the leading component of
+// a ZWJ sequence), and *replaces* a variation selector (VS16, U+FE0F) rather
+// than following it: the modifier already forces emoji presentation, so a
+// trailing VS16 is non-conformant and can fail strict emoji validation (e.g.
+// index-pointing-up with a tone must be 261D 1F3FE, not 261D 1F3FE FE0F).
+export const applySkinTone = (emoji: string, tone: string) => {
+  const parts = emoji.split('')
+
+  const zwjIndex = parts.findIndex((a) => a === zeroWidthJoiner)
+  if (zwjIndex > 0) {
+    return insertAtCertainIndex(parts, zwjIndex, tone).join('')
+  }
+
+  const selectorIndex = parts.findIndex((a) => a === variantSelector)
+  if (selectorIndex > 0) {
+    return [...parts.slice(0, selectorIndex), tone, ...parts.slice(selectorIndex + 1)].join('')
+  }
+
+  return emoji + tone
+}
+
 export const skinTones = [
   {
     name: 'light_skin_tone',
