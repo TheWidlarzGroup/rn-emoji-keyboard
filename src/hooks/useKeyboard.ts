@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Keyboard, type KeyboardEvent } from 'react-native'
+import { Keyboard, Platform, type KeyboardEvent } from 'react-native'
 
 export const useKeyboard = (isOpen: boolean) => {
   const [keyboardVisible, setKeyboardVisible] = useState(false)
   const [keyboardHeight, setKeyboardHeight] = useState(0)
 
-  const onKeyboardWillShow = useCallback(
+  const onKeyboardShow = useCallback(
     (e: KeyboardEvent) => {
       if (!isOpen) return
       setKeyboardHeight(e.endCoordinates.height)
@@ -20,13 +20,19 @@ export const useKeyboard = (isOpen: boolean) => {
   }, [])
 
   useEffect(() => {
-    const showSubscription = Keyboard.addListener('keyboardWillShow', onKeyboardWillShow)
-    const hideSubscription = Keyboard.addListener('keyboardWillHide', onKeyboardWillHide)
+    const showEvent = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow'
+
+    const hideEvent = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide'
+
+    const showSubscription = Keyboard.addListener(showEvent, onKeyboardShow)
+
+    const hideSubscription = Keyboard.addListener(hideEvent, onKeyboardWillHide)
+
     return () => {
       showSubscription.remove()
       hideSubscription.remove()
     }
-  }, [onKeyboardWillHide, onKeyboardWillShow])
+  }, [onKeyboardWillHide, onKeyboardShow])
 
   return { keyboardVisible, keyboardHeight }
 }
