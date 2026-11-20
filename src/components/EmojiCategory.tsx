@@ -14,7 +14,6 @@ import { useKeyboardStore } from '../store/useKeyboardStore'
 import { parseEmoji } from '../utils/parseEmoji'
 import { removeSkinToneModifier } from '../utils/skinToneSelectorUtils'
 import { useKeyboard } from '../hooks/useKeyboard'
-import { InteractionManager } from 'react-native'
 
 const emptyEmoji: JsonEmoji = {
   emoji: '',
@@ -147,13 +146,14 @@ export const EmojiCategory = React.memo(
 
     const [maxIndex, setMaxIndex] = React.useState(0)
 
-    // with InteractionManager we can show emojis after interaction is finished
-    // It helps with delay during category change animation
-    InteractionManager.runAfterInteractions(() => {
-      if (maxIndex === 0 && data.length) {
-        setMaxIndex(minimalEmojisAmountToDisplay)
-      }
-    })
+    // Show the first emojis after the render, so the category change animation isn't delayed.
+    // setTimeout because React Native 0.87 removed InteractionManager, browsers have no
+    // setImmediate and Safari has no requestIdleCallback.
+    React.useEffect(() => {
+      if (maxIndex !== 0 || !data.length) return
+      const timeout = setTimeout(() => setMaxIndex(minimalEmojisAmountToDisplay))
+      return () => clearTimeout(timeout)
+    }, [maxIndex, data.length, minimalEmojisAmountToDisplay])
 
     const onEndReached = () => {
       if (maxIndex <= data.length) {
